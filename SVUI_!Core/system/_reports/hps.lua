@@ -29,6 +29,14 @@ local L = SV.L
 local Reports = SV.Reports;
 --[[ 
 ########################################################## 
+UTILS
+##########################################################
+]]--
+local function round(num, idp)
+  return string.format("%." .. (idp or 0) .. "f", num)
+end
+--[[ 
+########################################################## 
 HPS STATS
 ##########################################################
 ]]--
@@ -84,7 +92,8 @@ Report.OnEvent = function(self, event, ...)
 			if data.thistime == 0 then data.thistime = newTime end
 			data.lasttime = data.thistime
 			data.totaltime = newTime - data.thistime
-			data.lastamount = data.lastamount + (lastHealAmount - overHeal)
+			-- JV 20161019: For some reason this was lastamount + (...) which meant that it was over counting since lastamount wasn't necessarily 0
+			data.lastamount =  (lastHealAmount - overHeal)
 			data.totalamount = data.totalamount + data.lastamount
 			data.overamount = data.overamount + overHeal
 		end
@@ -100,7 +109,7 @@ Report.OnEvent = function(self, event, ...)
 		local HPS = (data.totalamount) / (data.totaltime)
 		self.text:SetFormattedText(TEXT_PATTERN1, HEX_COLOR, HPS)
 		self.TText = "HPS:"
-		self.TText2 = HPS
+		self.TText2 = round(HPS,4)
 	end
 end
 
@@ -118,7 +127,7 @@ Report.OnClick = function(self, button)
 		local HPS = (data.totalamount) / (data.totaltime)
 		self.text:SetFormattedText(TEXT_PATTERN1, HEX_COLOR, HPS)
 		self.TText = "HPS:"
-		self.TText2 = HPS
+		self.TText2 = round(HPS,4)
 	end
 end
 

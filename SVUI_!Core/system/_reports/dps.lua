@@ -26,6 +26,14 @@ GET ADDON DATA
 local SV = select(2, ...)
 local L = SV.L
 local Reports = SV.Reports;
+--[[
+########################################################## 
+UTILS
+##########################################################
+]]--
+local function round(num, idp)
+  return string.format("%." .. (idp or 0) .. "f", num)
+end
 --[[ 
 ########################################################## 
 DPS STATS
@@ -108,7 +116,7 @@ Report.OnEvent = function(self, event, ...)
 		local DPS = (data.totalamount) / (data.totaltime)
 		self.text:SetFormattedText(TEXT_PATTERN1, HEX_COLOR, DPS)
 		self.TText = "DPS:"
-		self.TText2 = DPS
+		self.TText2 = round(DPS,4)
 	end
 end
 
@@ -126,7 +134,7 @@ Report.OnClick = function(self, button)
 		local DPS = (data.totalamount) / (data.totaltime)
 		self.text:SetFormattedText(TEXT_PATTERN1, HEX_COLOR, DPS)
 		self.TText = "DPS:"
-		self.TText2 = DPS
+		self.TText2 = round(DPS,4)
 	end
 end
 
