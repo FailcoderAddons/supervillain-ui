@@ -8,7 +8,7 @@
 ## X-SVUIName: Track-O-Matic
 ## X-SVUISchema: TrackOMatic
 ## X-Email: munglunch@gmail.com
-## X-Website: http://www.supervillainui.com
+
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: All Rights Reserved
 ## X-Category: Interface Enhancements

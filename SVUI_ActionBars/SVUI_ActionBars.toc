@@ -9,7 +9,7 @@
 ## X-SVUISchema: ActionBars
 ## X-Embeds: LibActionButton-1.0
 ## X-Email: munglunch@gmail.com
-## X-Website: http://www.supervillainui.com
+
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: MIT
 

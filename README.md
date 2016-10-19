@@ -1,6 +1,6 @@
 # SuperVillain UI
 
-Custom World of Warcraft User Interface
+Custom World of Warcraft User Interface with a comic book feel.
 
 ### Compatibility
 
