@@ -18,7 +18,7 @@ SuperVillain UI is designed to work with the latest live expansion of World of W
 * Post bugs (yes, there are still plenty :>) here: https://github.com/failcoder/supervillain-ui/Issues
 
 ## Communications
-If you're looking for the most up to date information about what's happening with this fan update of SVUI, Mentalo commands you to (please) join the authors (and other SuperVillains) on Discord: https://discord.gg/4VJdSsc
+If you're looking for the most up to date information about what's happening with SuperVillain UI, Mentalo commands you to (please) join the authors (and other SuperVillains) on Discord: https://discord.gg/4VJdSsc
 
 ### Notes
 * Please be thorough when posting issues
@@ -30,4 +30,4 @@ If you are looking for the most current release version (non-development) you ca
 ## License
 
 SuperVillain UI is licensed under the The MIT License.
-Copyright (c) 2010-2016, Failcoder (Steve Jackson), Joe Vaughan.
+Copyright (c) 2010-2016, Failcoder (Steve Jackson), joev (Joe Vaughan).
