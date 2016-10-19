@@ -146,14 +146,16 @@ local Reposition = function(self)
 	local cat = bar.Cat;
 	local size = (height - 4)
 	for i = 1, max do
-		cat[i]:ClearAllPoints()
-		cat[i]:SetSize(size, size)
-		cat[i].Icon:ClearAllPoints()
-		cat[i].Icon:SetAllPoints(cat[i])
-		if i==1 then
-			cat[i]:SetPoint("LEFT", cat)
-		else
-			cat[i]:SetPoint("LEFT", cat[i - 1], "RIGHT", -2, 0)
+		if cat[i] then
+			cat[i]:ClearAllPoints()
+			cat[i]:SetSize(size, size)
+			cat[i].Icon:ClearAllPoints()
+			cat[i].Icon:SetAllPoints(cat[i])
+			if i==1 then
+				cat[i]:SetPoint("LEFT", cat)
+			else
+				cat[i]:SetPoint("LEFT", cat[i - 1], "RIGHT", -2, 0)
+			end
 		end
 	end
 end
@@ -322,17 +324,19 @@ function MOD:CreateClassBar(playerFrame)
 	local max = MAX_COMBO_POINTS;
 	local size = 20
 	for i = 1, max do
-		local cpoint = CreateFrame('Frame',nil,cat)
-		cpoint:SetSize(size,size)
+		if cat[i] then
+			local cpoint = CreateFrame('Frame',nil,cat)
+			cpoint:SetSize(size,size)
 
-		local icon = cpoint:CreateTexture(nil,"OVERLAY",nil,1)
-		icon:SetSize(size,size)
-		icon:SetPoint("CENTER")
-		icon:SetBlendMode("BLEND")
-		icon:SetTexture(comboTextures[random(1,3)])
-		cpoint.Icon = icon
+			local icon = cpoint:CreateTexture(nil,"OVERLAY",nil,1)
+			icon:SetSize(size,size)
+			icon:SetPoint("CENTER")
+			icon:SetBlendMode("BLEND")
+			icon:SetTexture(comboTextures[random(1,3)])
+			cpoint.Icon = icon
 
-		cat[i] = cpoint
+			cat[i] = cpoint
+		end
 	end
 	cat.PointShow = ShowPoint;
 	cat.PointHide = HidePoint;

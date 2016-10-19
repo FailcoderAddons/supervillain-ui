@@ -121,17 +121,19 @@ local Reposition = function(self)
 		bar.PointHide = HidePoint;
 	else
 		for i = 1, max do
-			points[i].FX:SetAlpha(1)
-			points[i]:ClearAllPoints()
-			points[i]:SetSize(height, height)
-			points[i].Icon:SetTexture(EMPTY_TEXTURE)
-			if(points[i].Blood) then
-				points[i].Blood:SetTexture(EMPTY_TEXTURE)
-			end
-			if i==1 then
-				points[i]:SetPoint("LEFT", points)
-			else
-				points[i]:SetPoint("LEFT", points[i - 1], "RIGHT", -8, 0)
+			if points[i] then
+				points[i].FX:SetAlpha(1)
+				points[i]:ClearAllPoints()
+				points[i]:SetSize(height, height)
+				points[i].Icon:SetTexture(EMPTY_TEXTURE)
+				if(points[i].Blood) then
+					points[i].Blood:SetTexture(EMPTY_TEXTURE)
+				end
+				if i==1 then
+					points[i]:SetPoint("LEFT", points)
+				else
+					points[i]:SetPoint("LEFT", points[i - 1], "RIGHT", -8, 0)
+				end
 			end
 		end
 		bar.PointShow = ShowPoint;

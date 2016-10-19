@@ -146,7 +146,13 @@ do
         local map = {}
         local mapName = GetMapInfo();
         local id = GetCurrentMapAreaID();
-        local numFloors = GetNumDungeonMapLevels();
+        -- JV: GetNumDungeonMapLevels now returns a list of ids for floors instead of count. 
+        local numFloors = 0
+        local dungeonLevels = { GetNumDungeonMapLevels() };
+        for id, floorNum in ipairs(dungeonLevels) do 
+            numFloors = numFloors + 1
+        end
+
         map.mapName = mapName;
         map.cont = (GetCurrentMapContinent()) or -100;
         map.zone = (GetCurrentMapZone()) or -100;

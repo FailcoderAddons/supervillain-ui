@@ -342,11 +342,12 @@ local function MiscStyles()
 
 		hooksecurefunc("MasterLooterFrame_Show", _hook_MasterLootFrame_OnShow)
 
-		BonusRollFrame:RemoveTextures()
-		SV.API:Set("Alert", BonusRollFrame)
-		BonusRollFrame.PromptFrame.Icon:SetTexCoord(unpack(_G.SVUI_ICON_COORDS))
-		BonusRollFrame.PromptFrame.Timer.Bar:SetTexture(SV.media.statusbar.default)
-		BonusRollFrame.PromptFrame.Timer.Bar:SetVertexColor(0.1, 1, 0.1)
+		-- JV - 20161002: This is causing BonusRoll Frame not to show. Removed until I can figure out what's going wrong.
+		-- BonusRollFrame:RemoveTextures()
+		-- SV.API:Set("Alert", BonusRollFrame)
+		-- BonusRollFrame.PromptFrame.Icon:SetTexCoord(unpack(_G.SVUI_ICON_COORDS))
+		-- BonusRollFrame.PromptFrame.Timer.Bar:SetTexture(SV.media.statusbar.default)
+		-- BonusRollFrame.PromptFrame.Timer.Bar:SetVertexColor(0.1, 1, 0.1)
 	end
 
 	if(SV.db.Skins.blizzard.losscontrol) then

@@ -61,6 +61,15 @@ AceConfigDialog:SetDefaultSize(SV.NameID, GUIWidth, 651);
 
 SVUIOptions.FilterOptionGroups = {};
 SVUIOptions.FilterOptionSpells = {};
+
+--Debug
+local Debug
+if AdiDebug then
+	Debug = AdiDebug:GetSink("SVUIOptions")
+else
+	Debug = function() end
+end
+
 --[[
 ##########################################################
 INIT OPTIONS
@@ -1051,6 +1060,37 @@ local function GetGearSetList()
 	return t
 end
 
+local function GetGearSpecs()
+	local argt = {
+		enable = {
+			type = "toggle",
+			order = 1,
+			name = L["Enable"],
+			desc = L["Enable/Disable auto swapping gear sets when switching specializations."],
+			get = function(key) return SV.db.Gear.specialization.enable end,
+			set = function(key, value) SV.db.Gear.specialization.enable = value; SV:UpdateGearInfo() end
+		},
+	}
+	local numSpecs = GetNumSpecializations()
+
+	if numSpecs then
+		for i=1,numSpecs do
+			local _, sname = GetSpecializationInfo(i)
+			argt[sname] = {
+				type = "select",
+				order = i+1,
+				name = sname,
+				desc = L["Choose the equipment set to use for your "]..sname..L[" specialization."],
+				disabled = function() return not SV.db.Gear.specialization.enable end,
+				values = GetGearSetList(),
+				get = function(e) return SV.db.Gear.specialization[sname] end,
+				set = function(e,value) SV.db.Gear.specialization[sname] = value; SV:UpdateGearInfo() end
+			}
+		end
+	end
+	return argt
+end
+
 SV.Options.args.Core.args.Gear = {
 	order = 3,
 	type = 'group',
@@ -1076,36 +1116,7 @@ SV.Options.args.Core.args.Gear = {
 			name = L["Specialization"],
 			guiInline = true,
 			disabled = function() return GetNumEquipmentSets() == 0 end,
-			args = {
-				enable = {
-					type = "toggle",
-					order = 1,
-					name = L["Enable"],
-					desc = L["Enable/Disable auto swapping gear sets when switching specializations."],
-					get = function(key) return SV.db.Gear.specialization.enable end,
-					set = function(key, value) SV.db.Gear.specialization.enable = value; SV:UpdateGearInfo() end
-				},
-				primary = {
-					type = "select",
-					order = 2,
-					name = L["Primary Gear Set"],
-					desc = L["Choose the equipment set to use for your primary specialization."],
-					disabled = function() return not SV.db.Gear.specialization.enable end,
-					values = GetGearSetList(),
-					get = function(e) return SV.db.Gear.specialization.primary end,
-					set = function(e,value) SV.db.Gear.specialization.primary = value; SV:UpdateGearInfo() end
-				},
-				secondary = {
-					type = "select",
-					order = 3,
-					name = L["Secondary Gear Set"],
-					desc = L["Choose the equipment set to use for your secondary specialization."],
-					disabled = function() return not SV.db.Gear.specialization.enable end,
-					values = GetGearSetList(),
-					get = function(e) return SV.db.Gear.specialization.secondary end,
-					set = function(e,value) SV.db.Gear.specialization.secondary = value; SV:UpdateGearInfo() end
-				}
-			}
+			args = GetGearSpecs();
 		},
 		battleground = {
 			order = 3,

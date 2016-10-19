@@ -676,7 +676,7 @@ EventFunc["START_LOOT_ROLL"] = function(rollID, rollTime)
 	rollFrame.status:SetValue(rollTime)
 	rollFrame:SetPoint("CENTER",WorldFrame,"CENTER")
 	rollFrame:Show()
-	AlertFrame_FixAnchors()
+	-- Gone in Legion. AlertFrame_FixAnchors()
 	AutoGreed(rollID, quality, canBreak, bindOnPickUp)
 end
 EventFunc["LOOT_READY"] = function(autoLoot)
@@ -802,6 +802,8 @@ local BailOut_TaxiTimer, BailOut_EarlyLandingRequested;
 local SVUI_BailOut = CreateFrame("Button", "SVUI_BailOut", UIParent)
 SVUI_BailOut:SetSize(50, 50)
 SVUI_BailOut:SetPoint("TOP", SVUI_DockTopCenter, "BOTTOM", 0, -10)
+-- JV - 20160923: This is showing sometimes when it shouldn't so make sure it's hidden by default
+SVUI_BailOut:Hide()
 
 local function UpdateTaxiBailOut()
 	if(not UnitOnTaxi("player")) then
@@ -1021,7 +1023,7 @@ local function SetOverrides()
 	HelpOpenTicketButton:SetPoint("TOPRIGHT", Minimap, "TOPRIGHT")
 
 	NewHook(VehicleSeatIndicator, "SetPoint", Vehicle_OnSetPoint)
-	VehicleSeatIndicator:SetPoint("TOPLEFT", MinimapCluster, "TOPLEFT", 2, 2)
+	-- May be taining MinimapCluster -- VehicleSeatIndicator:SetPoint("TOPLEFT", MinimapCluster, "TOPLEFT", 2, 2)
 
 	SVUI_WorldStateHolder:SetSize(200, 45)
 	SV:NewAnchor(SVUI_WorldStateHolder, L["Capture Bars"])
@@ -1042,6 +1044,7 @@ local function SetOverrides()
 		local size = SVUI_Player:GetHeight()
 		SVUI_BailOut:SetSize(size, size)
 		SVUI_BailOut:SetPoint("TOPLEFT", SVUI_Player, "TOPRIGHT", 4, 0)
+		SVUI_BailOut:Hide()
 	end
 	SVUI_BailOut:SetNormalTexture(SV.media.icon.exitIcon)
 	SVUI_BailOut:SetPushedTexture(SV.media.icon.exitIcon)
@@ -1052,7 +1055,7 @@ local function SetOverrides()
 	SVUI_BailOut:RegisterEvent("UNIT_ENTERED_VEHICLE")
  	SVUI_BailOut:RegisterEvent("UNIT_EXITED_VEHICLE")
  	SVUI_BailOut:RegisterEvent("VEHICLE_UPDATE")
- 	SVUI_BailOut:RegisterEvent("PLAYER_ENTERING_WORLD")
+ 	--SVUI_BailOut:RegisterEvent("PLAYER_ENTERING_WORLD")
  	SVUI_BailOut:SetScript("OnEvent", BailOut_OnEvent)
  	NewHook("TakeTaxiNode", BailOut_OnHook)
 	SV:NewAnchor(SVUI_BailOut, L["Bail Out"])

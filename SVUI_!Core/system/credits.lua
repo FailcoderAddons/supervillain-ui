@@ -20,6 +20,7 @@ local PRINTED_TEMPLATE = [[
 |cffff9900SUPERVILLAIN CREDITS:|r
 |cff4f4f4f---------------------------------------------|r
 |cffff9900CREATED BY:|r  Failcoder
+|cffff9900MAINTAINED BY:|r  joev
 |cff4f4f4f---------------------------------------------|r
 |cffff9900CODE GRANTS BY:|r  Azilroka, Sortokk, Kkthnx
 |cff4f4f4f---------------------------------------------|r
@@ -93,14 +94,14 @@ SV.Credits["investors"] = {
   "BloodEagle", "Egbert", "Jerry Ferguson", "Hyti", "Elton",
   "James Watson", "Lathron", "Adam Vargas", "Daphne", "Dave (Naméra)",
   "Soulkrusher-Shu-Halo", "Talirrine", "Gaeline", "Malinche", "StealthyMangos",
-  "Monger", "JoeyMagz",
+  "Monger", "JoeyMagz", "joev",
   "Cherep2267", "Ravensongs", "Huggiedabear", "Titatotemaar", "Mahga"
 };
 
 SV.Credits["contributors"] = {
   "Azilroka", "Sortokk", "Kkthnx", "Vyntrox", "Mydraal", "Profitz",
   "AlleyKat", "Quokka", "Duugu", "Zork", "Haleth", "P3lim",
-  "Haste", "Totalpackage", "Kryso", "Thepilli", "Phanx"
+  "Haste", "Totalpackage", "Kryso", "Thepilli", "Phanx", "Abu"
 };
 
 SV.Credits["community"] = {
@@ -109,7 +110,7 @@ SV.Credits["community"] = {
   "Xarioth", "AtomicKiller", "Meljen", "Moondoggy", "Stormblade",
   "Schreibstift", "Anj", "Risien", "Cromax", "Nitro_Turtle",
   "Shinzou", "Autolykus", "Taotao", "ColorsGaming", "Necroo", "Panser (TradeChat)",
-  "Synnistry", "MetaGoblin", "Panda Co Live!"
+  "Synnistry", "MetaGoblin", "Panda Co Live!", "klepp0906"
 };
 
 local LIST_PATTERN = "    %s\n        %s\n            %s\n                %s";

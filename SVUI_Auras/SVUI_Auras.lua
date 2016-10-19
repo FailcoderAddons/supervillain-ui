@@ -60,6 +60,13 @@ local LSM = _G.LibStub("LibSharedMedia-3.0")
 local MOD = SV.Auras;
 if(not MOD) then return end;
 
+local Debug
+if AdiDebug then
+	Debug = AdiDebug:GetSink("Auras")
+else
+	Debug = function() end
+end
+
 MOD.Holder = CreateFrame("Frame", "SVUI_AurasAnchor", UIParent)
 MOD.HyperBuffFrame = CreateFrame('Frame', 'SVUI_ConsolidatedBuffs', UIParent)
 --[[
@@ -378,8 +385,8 @@ do
 			UpdateConsolidatedReminder()
 		else
 			MOD.HyperBuffFrame:Hide()
-			BuffFrame:UnregisterEvent("UNIT_AURA")
-			MOD:UnregisterEvent("UNIT_AURA")
+			--BuffFrame:UnregisterEvent("UNIT_AURA")
+			--MOD:UnregisterEvent("UNIT_AURA")
 			MOD:UnregisterEvent("GROUP_ROSTER_UPDATE")
 			MOD:UnregisterEvent("PLAYER_SPECIALIZATION_CHANGED")
 		end
@@ -466,6 +473,7 @@ function MOD:UpdateAuraHeader(auraHeader, auraType)
 	local showBy = db.showBy
 
 	if(auraType == "buffs") then
+		Debug("consolidateTo - ",SV.db.Auras.hyperBuffsEnabled == true and 1 or 0)
 		auraHeader:SetAttribute("consolidateTo", SV.db.Auras.hyperBuffsEnabled == true and 1 or 0)
 		auraHeader:SetAttribute("weaponTemplate", ("SVUI_AuraTemplate%d"):format(db.size))
 	end
@@ -607,6 +615,7 @@ function MOD:Load()
 	end
 	]]--
 	if(SV.db.Auras.aurasEnabled) then
+		Debug("Auras enabled")
 		BuffFrame:Die()
 		TemporaryEnchantFrame:Die()
 		InterfaceOptionsFrameCategoriesButton12:SetScale(0.0001)

@@ -60,6 +60,15 @@ local SV = _G['SVUI']
 local L = SV.L
 local MOD = SV.Auras;
 if(not MOD) then return end;
+
+--Debug
+local Debug
+if AdiDebug then
+	Debug = AdiDebug:GetSink("Auras")
+else
+	Debug = function() end
+end
+
 --[[
 ##########################################################
 LOCAL VARS
@@ -120,7 +129,9 @@ local PROC_UNIT_AURA = function(self, event, unit)
 	local lastIndex = 1;
 
 	while true do
+
 		name, _, texture, count, _, duration, expiration, caster, _, _, spellID = UnitAura(unit, index, filter)
+
 		if not name then
 			if filter == "HELPFUL" then
 				filter = "HARMFUL"

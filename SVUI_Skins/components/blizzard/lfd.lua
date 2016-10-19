@@ -452,7 +452,7 @@ local function LFDFrameStyle()
       LFRBrowseFrameRefreshButton:SetStyle("Button")
       LFRBrowseFrameInviteButton:SetStyle("Button")
       LFRBrowseFrameSendMessageButton:SetStyle("Button")
-      LFRQueueFrameSpecificListScrollFrame.styled = true
+      LFRQueueFrameSpecificListScrollFrameScrollBar.styled = true
     end
   end)
 
@@ -520,6 +520,8 @@ local function LFDFrameStyle()
 
   SV.API:Set("!_EditBox", LFGListFrame.SearchPanel.SearchBox, false, false, -2, -1)
   SV.API:Set("ScrollBar", LFGListSearchPanelScrollFrame)
+  --JV - 21060921 - Fix for Non moving frame (mouse was disabled on the frame but never re-enabled)
+  PVEFrame:EnableMouse(true)
 end
 --[[
 ##########################################################

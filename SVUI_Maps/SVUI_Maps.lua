@@ -226,7 +226,8 @@ do
 				local frame = select(i, btn:GetRegions())
 				if frame:GetObjectType() == "Texture" then
 					local iconFile = frame:GetTexture()
-					if(iconFile ~= nil and (iconFile:find("Border") or iconFile:find("Background") or iconFile:find("AlphaMask"))) then
+					--JV: Check type in case iconFile is a number - reported error involving LiDBIcon - need to find root cause
+					if((iconFile ~= nil and type(iconFile) == "string") and (iconFile:find("Border") or iconFile:find("Background") or iconFile:find("AlphaMask"))) then
 						frame:SetTexture("")
 					else
 						frame:ClearAllPoints()

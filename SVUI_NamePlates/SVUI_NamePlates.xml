@@ -36,7 +36,7 @@
 	<Frame name="SVUI_PlateParentFrame" frameStrata="BACKGROUND" hidden="true">
         <Scripts>
             <OnLoad>
-                self:SetParent(_G['WorldFrame'])
+                -- self:SetParent(_G['WorldFrame'])
             </OnLoad>
         </Scripts>
     </Frame>
@@ -51,7 +51,7 @@
         </Backdrop>
     	<Scripts>
             <OnLoad>
-            	self:SetParent(_G['WorldFrame'])
+            	-- self:SetParent(_G['WorldFrame'])
 				self:SetScale(2.5)
             </OnLoad>
         </Scripts>

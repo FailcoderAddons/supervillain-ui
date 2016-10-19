@@ -1,18 +1,18 @@
 --[[
-Copyright (c) 2010-2014, Hendrik "nevcairiel" Leppkes <h.leppkes@gmail.com>
+Copyright (c) 2010-2015, Hendrik "nevcairiel" Leppkes <h.leppkes@gmail.com>
 
 All rights reserved.
 
-Redistribution and use in source and binary forms, with or without
+Redistribution and use in source and binary forms, with or without 
 modification, are permitted provided that the following conditions are met:
 
-    * Redistributions of source code must retain the above copyright notice,
+    * Redistributions of source code must retain the above copyright notice, 
       this list of conditions and the following disclaimer.
-    * Redistributions in binary form must reproduce the above copyright notice,
-      this list of conditions and the following disclaimer in the documentation
+    * Redistributions in binary form must reproduce the above copyright notice, 
+      this list of conditions and the following disclaimer in the documentation 
       and/or other materials provided with the distribution.
-    * Neither the name of the developer nor the names of its contributors
-      may be used to endorse or promote products derived from this software without
+    * Neither the name of the developer nor the names of its contributors 
+      may be used to endorse or promote products derived from this software without 
       specific prior written permission.
 
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
@@ -29,11 +29,13 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 ]]
 local MAJOR_VERSION = "LibActionButton-1.0"
-local MINOR_VERSION = 57
+local MINOR_VERSION = 66
 
 if not LibStub then error(MAJOR_VERSION .. " requires LibStub.") end
 local lib, oldversion = LibStub:NewLibrary(MAJOR_VERSION, MINOR_VERSION)
 if not lib then return end
+
+local IsLegion = select(4, GetBuildInfo()) >= 70000
 
 -- Lua functions
 local _G = _G
@@ -47,7 +49,7 @@ local str_match, format, tinsert, tremove = string.match, format, tinsert, tremo
 -- GLOBALS: LibStub, CreateFrame, InCombatLockdown, ClearCursor, GetCursorInfo, GameTooltip, GameTooltip_SetDefaultAnchor
 -- GLOBALS: GetBindingKey, GetBindingText, SetBinding, SetBindingClick, GetCVar, GetMacroInfo
 -- GLOBALS: PickupAction, PickupItem, PickupMacro, PickupPetAction, PickupSpell, PickupCompanion, PickupEquipmentSet
--- GLOBALS: CooldownFrame_Set, UIParent, IsSpellOverlayed, SpellFlyout, GetMouseFocus, SetClampedTextureRotation
+-- GLOBALS: CooldownFrame_SetTimer, UIParent, IsSpellOverlayed, SpellFlyout, GetMouseFocus, SetClampedTextureRotation
 -- GLOBALS: GetActionInfo, GetActionTexture, HasAction, GetActionText, GetActionCount, GetActionCooldown, IsAttackAction
 -- GLOBALS: IsAutoRepeatAction, IsEquippedAction, IsCurrentAction, IsConsumableAction, IsUsableAction, IsStackableAction, IsActionInRange
 -- GLOBALS: GetSpellLink, GetMacroSpell, GetSpellTexture, GetSpellCount, GetSpellCooldown, IsAttackSpell, IsCurrentSpell
@@ -55,9 +57,12 @@ local str_match, format, tinsert, tremove = string.match, format, tinsert, tremo
 -- GLOBALS: GetItemIcon, GetItemCount, GetItemCooldown, IsEquippedItem, IsCurrentItem, IsUsableItem, IsConsumableItem, IsItemInRange
 -- GLOBALS: GetActionCharges, IsItemAction, GetSpellCharges
 -- GLOBALS: RANGE_INDICATOR, ATTACK_BUTTON_FLASH_TIME, TOOLTIP_UPDATE_TIME
+-- GLOBALS: DraenorZoneAbilityFrame, HasDraenorZoneAbility, GetLastDraenorSpellTexture
 
 local KeyBound = LibStub("LibKeyBound-1.0", true)
 local CBH = LibStub("CallbackHandler-1.0")
+local LBG = LibStub("LibButtonGlow-1.0", true)
+local Masque = LibStub("Masque", true)
 
 lib.eventFrame = lib.eventFrame or CreateFrame("Frame")
 lib.eventFrame:UnregisterAllEvents()
@@ -69,9 +74,6 @@ lib.nonActionButtons = lib.nonActionButtons or {}
 
 lib.ChargeCooldowns = lib.ChargeCooldowns or {}
 lib.NumChargeCooldowns = lib.NumChargeCooldowns or 0
-
-lib.unusedOverlayGlows = lib.unusedOverlayGlows or {}
-lib.numOverlays = lib.numOverlays or 0
 
 lib.ACTION_HIGHLIGHT_MARKS = lib.ACTION_HIGHLIGHT_MARKS or setmetatable({}, { __index = ACTION_HIGHLIGHT_MARKS })
 
@@ -113,8 +115,8 @@ local ButtonRegistry, ActiveButtons, ActionButtons, NonActionButtons = lib.butto
 local Update, UpdateButtonState, UpdateUsable, UpdateCount, UpdateCooldown, UpdateTooltip, UpdateNewAction
 local StartFlash, StopFlash, UpdateFlash, UpdateHotkeys, UpdateRangeTimer, UpdateOverlayGlow
 local UpdateFlyout, ShowGrid, HideGrid, UpdateGrid, SetupSecureSnippets, WrapOnClick
-local ShowOverlayGlow, HideOverlayGlow, GetOverlayGlow, OverlayGlowAnimOutFinished
-local HookCooldown
+local ShowOverlayGlow, HideOverlayGlow
+local EndChargeCooldown
 
 local InitializeEventHandler, OnEvent, ForAllButtons, OnUpdate
 
@@ -183,9 +185,6 @@ function lib:CreateButton(id, name, header, config)
 
 	-- adjust count/stack size
 	button.Count:SetFont(button.Count:GetFont(), 16, "OUTLINE")
-
-	-- hook Cooldown stuff for alpha fix in 6.0
-	HookCooldown(button)
 
 	-- Store the button in the registry, needed for event and OnUpdate handling
 	if not next(ButtonRegistry) then
@@ -1031,6 +1030,7 @@ function Update(self)
 		end
 		self.cooldown:Hide()
 		self:SetChecked(false)
+
 		if self.chargeCooldown then
 			EndChargeCooldown(self.chargeCooldown)
 		end
@@ -1053,6 +1053,23 @@ function Update(self)
 
 	-- Update icon and hotkey
 	local texture = self:GetTexture()
+
+	-- Draenor zone button handling
+	self.draenorZoneDisabled = false
+	self.icon:SetDesaturated(false)
+	if self._state_type == "action" then
+		local action_type, id = GetActionInfo(self._state_action)
+		if ((action_type == "spell" or action_type == "companion") and DraenorZoneAbilityFrame and DraenorZoneAbilityFrame.baseName and not HasDraenorZoneAbility()) then
+			local name = GetSpellInfo(DraenorZoneAbilityFrame.baseName)
+			local abilityName = GetSpellInfo(id)
+			if name == abilityName then
+				texture = GetLastDraenorSpellTexture()
+				self.draenorZoneDisabled = true
+				self.icon:SetDesaturated(true)
+			end
+		end
+	end
+
 	if texture then
 		self.icon:SetTexture(texture)
 		self.icon:Show()
@@ -1152,50 +1169,11 @@ function UpdateCount(self)
 		end
 	else
 		local charges, maxCharges, chargeStart, chargeDuration = self:GetCharges()
-		if charges and maxCharges and maxCharges > 0 then
+		if charges and maxCharges and maxCharges > 1 then
 			self.Count:SetText(charges)
 		else
 			self.Count:SetText("")
 		end
-	end
-end
-
-local function SetCooldownHook(cooldown, ...)
-	local effectiveAlpha = cooldown:GetEffectiveAlpha()
-	local start, duration = ...
-
-	if start ~= 0 or duration ~= 0 then
-		-- update swipe alpha
-		cooldown.__metaLAB.SetSwipeColor(cooldown, cooldown.__SwipeR, cooldown.__SwipeG, cooldown.__SwipeB, cooldown.__SwipeA * effectiveAlpha)
-
-		-- only draw bling and edge if alpha is over 50%
-		cooldown:SetDrawBling(effectiveAlpha > 0.5)
-		if effectiveAlpha < 0.5 then
-			cooldown:SetDrawEdge(false)
-		end
-
-		-- ensure the swipe isn't drawn on fully faded bars
-		if effectiveAlpha <= 0.0 then
-			cooldown:SetDrawSwipe(false)
-		end
-	end
-
-	return cooldown.__metaLAB.SetCooldown(cooldown, ...)
-end
-
-local function SetSwipeColorHook(cooldown, r, g, b, a)
-	local effectiveAlpha = cooldown:GetEffectiveAlpha()
-	cooldown.__SwipeR, cooldown.__SwipeG, cooldown.__SwipeB, cooldown.__SwipeA = r, g, b, (a or 1)
-	return cooldown.__metaLAB.SetSwipeColor(cooldown, r, g, b, a * effectiveAlpha)
-end
-
-function HookCooldown(button)
-	if not button.cooldown.__metaLAB then
-		button.cooldown.__metaLAB = getmetatable(button.cooldown).__index
-		button.cooldown.__SwipeR, button.cooldown.__SwipeG, button.cooldown.__SwipeB, button.cooldown.__SwipeA = 0, 0, 0, 0.8
-
-		button.cooldown.SetCooldown = SetCooldownHook
-		button.cooldown.SetSwipeColor = SetSwipeColorHook
 	end
 end
 
@@ -1225,13 +1203,21 @@ local function StartChargeCooldown(parent, chargeStart, chargeDuration)
 		parent.chargeCooldown = cooldown
 		cooldown.parent = parent
 	end
+	-- set cooldown
+	parent.chargeCooldown:SetDrawBling(parent.chargeCooldown:GetEffectiveAlpha() > 0.5)
 	parent.chargeCooldown:SetCooldown(chargeStart, chargeDuration)
+
+	-- update charge cooldown skin when masque is used
+	if Masque and Masque.UpdateCharge then
+		Masque:UpdateCharge(parent)
+	end
+
 	if not chargeStart or chargeStart == 0 then
 		EndChargeCooldown(parent.chargeCooldown)
 	end
 end
 
-function OnCooldownDone(self)
+local function OnCooldownDone(self)
 	self:SetScript("OnCooldownDone", nil)
 	UpdateCooldown(self:GetParent())
 end
@@ -1241,30 +1227,41 @@ function UpdateCooldown(self)
 	local start, duration, enable = self:GetCooldown()
 	local charges, maxCharges, chargeStart, chargeDuration = self:GetCharges()
 
+	self.cooldown:SetDrawBling(self.cooldown:GetEffectiveAlpha() > 0.5)
+
 	if (locStart + locDuration) > (start + duration) then
 		if self.cooldown.currentCooldownType ~= COOLDOWN_TYPE_LOSS_OF_CONTROL then
 			self.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge-LoC")
+			self.cooldown:SetSwipeColor(0.17, 0, 0)
 			self.cooldown:SetHideCountdownNumbers(true)
 			self.cooldown.currentCooldownType = COOLDOWN_TYPE_LOSS_OF_CONTROL
-			self.cooldown:SetSwipeColor(0.17, 0, 0, 0.8)
 		end
-		CooldownFrame_Set(self.cooldown, locStart, locDuration, 1, nil, nil, true)
+		if IsLegion then
+			CooldownFrame_Set(self.cooldown, locStart, locDuration, true, true)
+		else
+			CooldownFrame_SetTimer(self.cooldown, locStart, locDuration, 1, true)
+		end
 	else
 		if self.cooldown.currentCooldownType ~= COOLDOWN_TYPE_NORMAL then
 			self.cooldown:SetEdgeTexture("Interface\\Cooldown\\edge")
+			self.cooldown:SetSwipeColor(0, 0, 0)
 			self.cooldown:SetHideCountdownNumbers(false)
 			self.cooldown.currentCooldownType = COOLDOWN_TYPE_NORMAL
-			self.cooldown:SetSwipeColor(0, 0, 0, 0.8)
 		end
 		if locStart > 0 then
 			self.cooldown:SetScript("OnCooldownDone", OnCooldownDone)
 		end
-		if charges and maxCharges and maxCharges > 0 and charges < maxCharges then
+
+		if charges and maxCharges and charges > 0 and charges < maxCharges then
 			StartChargeCooldown(self, chargeStart, chargeDuration)
 		elseif self.chargeCooldown then
 			EndChargeCooldown(self.chargeCooldown)
 		end
-		CooldownFrame_Set(self.cooldown, start, duration, enable, charges, maxCharges)
+		if IsLegion then
+			CooldownFrame_Set(self.cooldown, start, duration, enable)
+		else
+			CooldownFrame_SetTimer(self.cooldown, start, duration, enable)
+		end
 	end
 end
 
@@ -1312,68 +1309,18 @@ function UpdateHotkeys(self)
 		self.HotKey:SetPoint("TOPLEFT", self, "TOPLEFT", - 2, - 2)
 		self.HotKey:Show()
 	end
-
-	if self.postKeybind then
-		self.postKeybind(nil, self)
-	end
-end
-
-local function OverlayGlow_OnHide(self)
-	if self.animOut:IsPlaying() then
-		self.animOut:Stop()
-		OverlayGlowAnimOutFinished(self.animOut)
-	end
-end
-
-function GetOverlayGlow()
-	local overlay = tremove(lib.unusedOverlayGlows);
-	if not overlay then
-		lib.numOverlays = lib.numOverlays + 1
-		overlay = CreateFrame("Frame", "LAB10ActionButtonOverlay"..lib.numOverlays, UIParent, "ActionBarButtonSpellActivationAlert")
-		overlay.animOut:SetScript("OnFinished", OverlayGlowAnimOutFinished)
-		overlay:SetScript("OnHide", OverlayGlow_OnHide)
-	end
-	return overlay
 end
 
 function ShowOverlayGlow(self)
-	if self.overlay then
-		if self.overlay.animOut:IsPlaying() then
-			self.overlay.animOut:Stop()
-			self.overlay.animIn:Play()
-		end
-	else
-		self.overlay = GetOverlayGlow()
-		local frameWidth, frameHeight = self:GetSize()
-		self.overlay:SetParent(self)
-		self.overlay:ClearAllPoints()
-		--Make the height/width available before the next frame:
-		self.overlay:SetSize(frameWidth * 1.4, frameHeight * 1.4)
-		self.overlay:SetPoint("TOPLEFT", self, "TOPLEFT", -frameWidth * 0.2, frameHeight * 0.2)
-		self.overlay:SetPoint("BOTTOMRIGHT", self, "BOTTOMRIGHT", frameWidth * 0.2, -frameHeight * 0.2)
-		self.overlay.animIn:Play()
+	if LBG then
+		LBG.ShowOverlayGlow(self)
 	end
 end
 
 function HideOverlayGlow(self)
-	if self.overlay then
-		if self.overlay.animIn:IsPlaying() then
-			self.overlay.animIn:Stop()
-		end
-		if self:IsVisible() then
-			self.overlay.animOut:Play()
-		else
-			OverlayGlowAnimOutFinished(self.overlay.animOut)
-		end
+	if LBG then
+		LBG.HideOverlayGlow(self)
 	end
-end
-
-function OverlayGlowAnimOutFinished(animGroup)
-	local overlay = animGroup:GetParent()
-	local actionButton = overlay:GetParent()
-	overlay:Hide()
-	tinsert(lib.unusedOverlayGlows, overlay)
-	actionButton.overlay = nil
 end
 
 function UpdateOverlayGlow(self)
@@ -1455,15 +1402,6 @@ end
 
 function UpdateRangeTimer()
 	rangeTimer = -1
-end
-
-local function GetSpellIdByName(spellName)
-	if not spellName then return end
-	local spellLink = GetSpellLink(spellName)
-	if spellLink then
-		return tonumber(spellLink:match("spell:(%d+)"))
-	end
-	return nil
 end
 
 -----------------------------------------------------------

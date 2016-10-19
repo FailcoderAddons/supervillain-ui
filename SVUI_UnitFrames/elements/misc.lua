@@ -526,121 +526,133 @@ function MOD:CreateHealPrediction(frame, fullSet)
 
 	return healPrediction
 end
+
+-- JV - 20160919 : Resolve mechanic is now gone as of Legion.
 --[[
 ##########################################################
 RESOLVE
 ##########################################################
 ]]--
-local cached_resolve;
-local RESOLVE_ID = 158300;
+-- local cached_resolve;
+-- local RESOLVE_ID = 158300;
 
-local function Short(value)
-	local fmt
-	if value >= 10000 then
-		fmt = "%.0fk"
-		value = value / 1000
-	elseif value >= 1000 then
-		fmt = "%.1fk"
-		value = value / 1000
-	else
-		fmt = "%d"
-	end
-	return fmt:format(value)
-end
+-- local function Short(value)
+-- 	local fmt
+-- 	if value >= 10000 then
+-- 		fmt = "%.0fk"
+-- 		value = value / 1000
+-- 	elseif value >= 1000 then
+-- 		fmt = "%.1fk"
+-- 		value = value / 1000
+-- 	else
+-- 		fmt = "%d"
+-- 	end
+-- 	return fmt:format(value)
+-- end
 
-local function IsTank()
-	local _, playerclass = UnitClass("player")
-	local masteryIndex
-	local tank = false
-	if playerclass == "DEATHKNIGHT" then
-		masteryIndex = GetSpecialization()
-		if masteryIndex and masteryIndex == 1 then
-			tank = true
-		end
-	elseif playerclass == "DRUID" then
-		masteryIndex = GetSpecialization()
-		if masteryIndex and masteryIndex == 3 then
-			tank = true
-		end
-	elseif playerclass == "MONK" then
-		masteryIndex = GetSpecialization()
-		if masteryIndex and masteryIndex == 1 then
-			tank = true
-		end
-	elseif playerclass == "PALADIN" then
-		masteryIndex = GetSpecialization()
-		if masteryIndex and masteryIndex == 2 then
-			tank = true
-		end
-	elseif playerclass == "WARRIOR" then
-		masteryIndex = GetSpecialization()
-		if masteryIndex and masteryIndex == 3 then
-			tank = true
-		end
-	end
-	return tank
-end
+-- local function IsTank()
+-- 	local _, playerclass = UnitClass("player")
+-- 	local masteryIndex
+-- 	local tank = false
+-- 	if playerclass == "DEATHKNIGHT" then
+-- 		masteryIndex = GetSpecialization()
+-- 		if masteryIndex and masteryIndex == 1 then
+-- 			tank = true
+-- 		end
+-- 	elseif playerclass == "DRUID" then
+-- 		masteryIndex = GetSpecialization()
+-- 		if masteryIndex and masteryIndex == 3 then
+-- 			tank = true
+-- 		end
+-- 	elseif playerclass == "MONK" then
+-- 		masteryIndex = GetSpecialization()
+-- 		if masteryIndex and masteryIndex == 1 then
+-- 			tank = true
+-- 		end
+-- 	elseif playerclass == "PALADIN" then
+-- 		masteryIndex = GetSpecialization()
+-- 		if masteryIndex and masteryIndex == 2 then
+-- 			tank = true
+-- 		end
+-- 	elseif playerclass == "WARRIOR" then
+-- 		masteryIndex = GetSpecialization()
+-- 		if masteryIndex and masteryIndex == 3 then
+-- 			tank = true
+-- 		end
+-- 	elseif playerclass == "DEMONHUNTER" then
+-- 		masteryIndex = GetSpecialization()
+-- 		if masteryIndex and masteryIndex == 2 then
+-- 			tank = true
+-- 		end
+-- 	end
+-- 	return tank
+-- end
 
-local ResolveBar_OnEvent = function(self, event, unit)
-	if(SV.db.UnitFrames.resolveBar) then
-		if(event == 'UNIT_AURA') then
-			for index = 1, 30 do
-				local _, _, _, _, _, _, _, _, _, _, spellID, _, _, _, value, amount = UnitBuff('player', index)
-				if((spellID == RESOLVE_ID) and (amount and (cached_resolve ~= amount))) then
-					if(value) then
-						self.bar:SetValue(value)
-					end
-					self.bar.text:SetText(Short(amount))
-					self:FadeIn()
-					cached_resolve = amount
-				end
-			end
-		else
-			if IsTank() then
-				if(not self.bar:IsShown()) then
-					self:RegisterUnitEvent("UNIT_AURA", "player")
-					self.bar:Show()
-				end
-			else
-				if(self.bar:IsShown()) then
-					self:UnregisterEvent("UNIT_AURA")
-					self.bar:Hide()
-				end
-			end
-		end
-	end
-	if(self.bar:IsShown()) then
-		if(self.bar.text:GetText() == "0") then
-			self.bar.text:SetText("")
-			self:FadeOut()
-		end
-	end
-end
+-- local ResolveBar_OnEvent = function(self, event, unit)
+-- 	if(SV.db.UnitFrames.resolveBar) then
+-- 		if(event == 'UNIT_AURA') then
+-- 			for index = 1, 30 do
+-- 				local _, _, _, _, _, _, _, _, _, _, spellID, _, _, _, value, amount = UnitBuff('player', index)
+-- 				if((spellID == RESOLVE_ID) and (amount and (cached_resolve ~= amount))) then
+-- 					if(value) then
+-- 						self.bar:SetValue(value)
+-- 					end
+-- 					self.bar.text:SetText(Short(amount))
+-- 					self:FadeIn()
+-- 					cached_resolve = amount
+-- 				end
+-- 			end
+-- 		else
+-- 			if IsTank() then
+-- 				if(not self.bar:IsShown()) then
+-- 					self:RegisterUnitEvent("UNIT_AURA", "player")
+-- 					self.bar:Show()
+-- 				end
+-- 			else
+-- 				if(self.bar:IsShown()) then
+-- 					self:UnregisterEvent("UNIT_AURA")
+-- 					self.bar:Hide()
+-- 				end
+-- 			end
+-- 		end
+-- 	else
+-- 		if(self.bar:IsShown()) then
+-- 			self:UnregisterEvent("UNIT_AURA")
+-- 			self.bar:Hide()
+-- 		end
+-- 	end
+-- 	if(self.bar:IsShown()) then
+-- 		if(self.bar.text:GetText() == "0") then
+-- 			self.bar.text:SetText("")
+-- 			self:FadeOut()
+-- 		end
+-- 	end
+-- end
 
-function MOD:CreateResolveBar(frame)
-	local resolve = CreateFrame("Frame", nil, frame)
-	resolve:SetPoint("TOPLEFT", frame.Health, "TOPLEFT", 0, 0)
-	resolve:SetPoint("TOPRIGHT", frame.Health, "TOPRIGHT", 0, 0)
-	resolve:SetHeight(8)
+-- function MOD:CreateResolveBar(frame)
+-- 	local resolve = CreateFrame("Frame", nil, frame)
+-- 	resolve:SetPoint("TOPLEFT", frame.Health, "TOPLEFT", 0, 0)
+-- 	resolve:SetPoint("TOPRIGHT", frame.Health, "TOPRIGHT", 0, 0)
+-- 	resolve:SetHeight(8)
 
-	local bar = CreateFrame('StatusBar', nil, resolve)
-	bar:InsetPoints(resolve)
-	bar:SetStyle("Frame", "Bar")
-	bar:SetStatusBarTexture([[Interface\BUTTONS\WHITE8X8]])
-	bar:SetStatusBarColor(0.15, 0.7, 0.05, 0.9)
-	bar:SetMinMaxValues(0, 100)
-	bar.text = bar:CreateFontString(nil, "OVERLAY")
-	bar.text:SetPoint("LEFT")
-	bar.text:SetFontObject(SVUI_Font_Pixel)
-	bar.text:SetJustifyH('LEFT')
-	bar.text:SetTextColor(0.8, 0.42, 0.09)
-	bar:Hide()
-	resolve.bar = bar;
+-- 	local bar = CreateFrame('StatusBar', nil, resolve)
+-- 	bar:InsetPoints(resolve)
+-- 	bar:SetStyle("Frame", "Bar")
+-- 	bar:SetStatusBarTexture([[Interface\BUTTONS\WHITE8X8]])
+-- 	bar:SetStatusBarColor(0.15, 0.7, 0.05, 0.9)
+-- 	bar:SetMinMaxValues(0, 100)
+-- 	bar.text = bar:CreateFontString(nil, "OVERLAY")
+-- 	bar.text:SetPoint("LEFT")
+-- 	bar.text:SetFontObject(SVUI_Font_Pixel)
+-- 	bar.text:SetJustifyH('LEFT')
+-- 	bar.text:SetTextColor(0.8, 0.42, 0.09)
+-- 	bar:Hide()
+-- 	resolve.bar = bar;
 
-	resolve:RegisterEvent("PLAYER_TALENT_UPDATE")
-	resolve:RegisterEvent("PLAYER_ENTERING_WORLD")
-	resolve:SetScript('OnEvent', ResolveBar_OnEvent)
+-- 	resolve:RegisterEvent("PLAYER_TALENT_UPDATE")
+-- 	resolve:RegisterEvent("PLAYER_ENTERING_WORLD")
+-- 	resolve:SetScript('OnEvent', ResolveBar_OnEvent)
 
-	ResolveBar_OnEvent(resolve)
-	return resolve
-end
+-- 	ResolveBar_OnEvent(resolve)
+-- 	return resolve
+-- end

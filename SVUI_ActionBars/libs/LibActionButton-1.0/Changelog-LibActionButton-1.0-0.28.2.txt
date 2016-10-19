@@ -1,0 +1,20 @@
+tag 0.28.2
+7e643e264a0ebbe276693496e0ab548e619f3b41
+Hendrik Leppkes <h.leppkes@gmail.com>
+2016-07-18 21:38:14 +0200
+
+Tag as 0.28.2
+
+
+--------------------
+
+Hendrik Leppkes:
+	- Update TOC to 7.0
+	- Update for Cooldown changes in 7.0.3.21796
+	- Remove redundant charge position set
+	This is already done when an overlay is retrieved from the storage
+	- Support skinning the charge cooldown frame with Masque
+	- Treat spells with one maximum charge like spells without charges
+	These spells usually get a second charge through a talent or glyph,
+	in which case they will be handled as spells with charges again when
+	this talent/glyph is chosen.

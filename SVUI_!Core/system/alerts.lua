@@ -900,33 +900,31 @@ local AlertFramePostMove_Hook = function(forced)
 		SVUI_AlertFrame_MOVE:SetText(SVUI_AlertFrame_MOVE.textString.." (Grow Up)")
 	end
 
-	-- if(SV.RollFrames and SV.RollFrames[1]) then
-	-- 	local lastFrame = SVUI_AlertFrame;
-	-- 	local newAnchor;
-	-- 	for index, rollFrame in pairs(SV.RollFrames) do
-	-- 		rollFrame:ClearAllPoints()
-	-- 		if(POSITION == "TOP") then
-	-- 			rollFrame:SetPoint("TOP", lastFrame, "BOTTOM", 0, -4)
-	-- 		else
-	-- 			rollFrame:SetPoint("BOTTOM", lastFrame, "TOP", 0, 4)
-	-- 		end
-	-- 		lastFrame = rollFrame;
-	-- 		if(rollFrame:IsShown()) then
-	-- 			newAnchor = rollFrame
-	-- 		end
-	-- 	end
-	-- 	AlertFrame:ClearAllPoints()
-	-- 	if(newAnchor) then
-	-- 		AlertFrame:SetAllPoints(newAnchor)
-	-- 	else
-	-- 		AlertFrame:SetPoint(POSITION, SVUI_AlertFrame, POSITION, 0, 0)
-	-- 	end
-	-- else
-	-- 	AlertFrame:ClearAllPoints()
-	-- 	AlertFrame:SetPoint(POSITION, SVUI_AlertFrame, POSITION, 0, 0)
-	-- end
-	AlertFrame:ClearAllPoints()
-	AlertFrame:SetPoint(POSITION, SVUI_AlertFrame, POSITION, 0, 0)
+	if(SV.RollFrames and SV.RollFrames[1]) then
+		local lastFrame = SVUI_AlertFrame;
+		local newAnchor;
+		for index, rollFrame in pairs(SV.RollFrames) do
+			rollFrame:ClearAllPoints()
+			if(POSITION == "TOP") then
+				rollFrame:SetPoint("TOP", lastFrame, "BOTTOM", 0, -4)
+			else
+				rollFrame:SetPoint("BOTTOM", lastFrame, "TOP", 0, 4)
+			end
+			lastFrame = rollFrame;
+			if(rollFrame:IsShown()) then
+				newAnchor = rollFrame
+			end
+		end
+		AlertFrame:ClearAllPoints()
+		if(newAnchor) then
+			AlertFrame:SetAllPoints(newAnchor)
+		else
+			AlertFrame:SetPoint(POSITION, SVUI_AlertFrame, POSITION, 0, 0)
+		end
+	else
+		AlertFrame:ClearAllPoints()
+		AlertFrame:SetPoint(POSITION, SVUI_AlertFrame, POSITION, 0, 0)
+	end
 end
 --[[
 ##########################################################

@@ -94,7 +94,7 @@ _G.SVUISayIncoming = function()
 end
 --[[
 ##########################################################
-MUNGLUNCH's FAVORITE EMOTE GENERATOR
+Failcoder's FAVORITE EMOTE GENERATOR
 ##########################################################
 ]]--
 local SpecialEmotes = {

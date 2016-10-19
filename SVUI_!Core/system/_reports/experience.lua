@@ -141,11 +141,11 @@ local function FetchExperience()
 	return xp,mxp,exp,rxp
 end
 
-local function CacheRepData(data)
-	local nextIndex = #data+1;
-	data[nextIndex] = {text = factionName, func = fn};
-	tsort(data, function(a,b) return a.text < b.text end)
-end
+-- local function CacheRepData(data)
+-- 	local nextIndex = #data+1;
+-- 	data[nextIndex] = {text = factionName, func = fn};
+-- 	tsort(data, function(a,b) return a.text < b.text end)
+-- end
 --[[
 ##########################################################
 STANDARD TYPE

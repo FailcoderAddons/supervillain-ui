@@ -93,7 +93,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "[bonusbar:1] 7; [bonusbar:2] 8;", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "[bonusbar:1] 7; [bonusbar:2] 8; [bonusbar:3] 9;",
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	}, 
@@ -122,7 +122,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "", 
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	}, 
@@ -151,7 +151,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "", 
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	}, 
@@ -180,7 +180,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "", 
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	}, 
@@ -209,7 +209,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "", 
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	}, 
@@ -238,7 +238,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "", 
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	},
@@ -267,7 +267,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "", 
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	},
@@ -296,7 +296,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "", 
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	},
@@ -354,7 +354,7 @@ SV.defaults[Schema] = {
 		    ["WARRIOR"] 	 = "", 
 		    ["DEATHKNIGHT"]  = "", 
 		    ["MONK"]    	 = "", 
-		    ["DEMONHUNTER"]  = "", 
+		    ["DEMONHUNTER"]  = "",
 		}, 
 		["alpha"] = 1
 	},

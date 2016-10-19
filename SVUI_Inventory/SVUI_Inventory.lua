@@ -58,6 +58,7 @@ local DEBUG_BAGS = false;
 local CreateFrame = _G.CreateFrame;
 local hooksecurefunc = _G.hooksecurefunc;
 local numBagFrame = NUM_BAG_FRAMES + 1;
+local MULTI_BAG_LAYOUT = false;
 local MULTI_BAG_HEIGHT_OFFSET = 0;
 local LOOT_CACHE, GEAR_CACHE, GEARSET_LISTING = {}, {}, {};
 local internalTimer;

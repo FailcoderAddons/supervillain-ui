@@ -118,7 +118,8 @@ SV.defaults[Schema] = {
 	["auraBarShield"] = true,
 	["castClassColor"] = false,
 	["xrayFocus"] = true,
-	["resolveBar"] = false,
+	-- JV - 20160919 : Resolve mechanic is now gone as of Legion.
+	--["resolveBar"] = false,
 	["player"] = {
 		["enable"] = true,
 		["width"] = 215,

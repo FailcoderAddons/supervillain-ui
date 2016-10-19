@@ -60,6 +60,7 @@ local GetNumSpecGroups    	= _G.GetNumSpecGroups;
 local GetActiveSpecGroup    = _G.GetActiveSpecGroup;
 local SetActiveSpecGroup    = _G.SetActiveSpecGroup;
 local GetSpecializationInfo = _G.GetSpecializationInfo;
+local GetToyInfo            = _G.C_ToyBox.GetToyInfo;  
 --[[
 ##########################################################
 ADDON
@@ -69,13 +70,22 @@ local SV = select(2, ...)
 local L = SV.L
 
 local MOD = SV.Dock;
+
+--Debug
+local Debug
+if AdiDebug then
+	Debug = AdiDebug:GetSink("MiscTools")
+else
+	Debug = function() end
+end
+
 --[[
 ##########################################################
 LOCALS
 ##########################################################
 ]]--
-local HEARTH_SPELLS = {556,50977,18960,126892};
-local HEARTH_ITEMS = {6948,110560,64488,54452,93672,28585,128353};
+local HEARTH_SPELLS = {556,50977,18960,126892,193753};
+local HEARTH_ITEMS = {6948,110560,64488,54452,93672,28585,128353,140192};
 local HEARTH_LEFT_CLICK, HEARTH_RIGHT_CLICK = 6948, 110560;
 local HEARTH_HEADER = "HearthStone";
 
@@ -130,6 +140,12 @@ local function GetHearthOption(selected)
 					if(test and type(test) == 'string') then
 						local owned = GetItemCount(optionID,false)
 						if(owned and owned > 0) then
+							option = test;
+						end
+					else
+						--JV: 20161002 - Fix for #66 Toys no longer return data from GetItemInfo
+						local _,test,_,collected = GetToyInfo(optionID)
+						if (test and type(test) == 'string') and collected then
 							option = test;
 						end
 					end
@@ -235,34 +251,55 @@ local Hearth_OnShiftRightClick = function(self)
 	end
 end
 
-local SpecSwap_OnClick = function(self)
-	if InCombatLockdown() then return end
-	local current = GetActiveSpecGroup()
-	if(current == 2) then
-		SetActiveSpecGroup(1)
+local SpecSwap_OnLeftClick = function(self)
+	if(IsShiftKeyDown()) then
+		local spec = GetSpecializationInfo(3)
+		if spec then SetSpecialization(3) end
 	else
-		SetActiveSpecGroup(2)
+		SetSpecialization(1)
+	end
+end
+
+local SpecSwap_OnRightClick = function(self)
+	if(IsShiftKeyDown()) then
+		local spec = GetSpecializationInfo(4)
+		if spec then SetSpecialization(4) end
+	else
+		local spec = GetSpecializationInfo(2)
+		if spec then SetSpecialization(2) end
 	end
 end
 
 local SpecSwap_OnEnter = function(self)
-	local currentGroup = GetActiveSpecGroup()
-	local currentSpec = GetSpecialization(false, false, currentGroup);
-	local text1 = currentSpec and select(2, GetSpecializationInfo(currentSpec)) or "None"
-	local otherGroup = 1;
-	local activeText = SPECIALIZATION_SECONDARY_ACTIVE;
-	local otherText = SPECIALIZATION_PRIMARY;
-	if(currentGroup == 1) then
-		otherGroup = 2
-		activeText = SPECIALIZATION_PRIMARY_ACTIVE;
-		otherText = SPECIALIZATION_SECONDARY;
-	end
-	local otherSpec = GetSpecialization(false, false, otherGroup);
-	local text2 = otherSpec and select(2, GetSpecializationInfo(otherSpec)) or "None"
 	GameTooltip:AddLine(GARRISON_SWITCH_SPECIALIZATIONS, 1, 1, 0)
 	GameTooltip:AddLine(" ", 1, 1, 1)
-	GameTooltip:AddDoubleLine(activeText, text1, 1, 0.5, 0, 1, 1, 1)
-	GameTooltip:AddDoubleLine(otherText, text2, 1, 0.5, 0, 1, 1, 1)
+
+	local specs = {}
+	local numSpecs = GetNumSpecializations()
+	local active = GetSpecialization()
+
+	if numSpecs then
+		for i=1,numSpecs do
+			local _, sname = GetSpecializationInfo(i)
+			tinsert(specs,i,{name=sname,r=1,g=1,b=1})
+			if i==tonumber(active) then 
+				specs[i].r = 0.3
+				specs[i].g = 0.3
+				specs[i].b = 1	
+			end
+		end
+
+		GameTooltip:AddDoubleLine("[Left-Click]", specs[1].name, 0, 1, 0, specs[1].r,specs[1].g,specs[1].b)
+		if(specs[3]) then
+			GameTooltip:AddDoubleLine("[SHIFT + Left-Click]", specs[3].name, 0, 1, 0,specs[3].r,specs[3].g,specs[3].b)
+		end
+		if(specs[2]) then
+			GameTooltip:AddDoubleLine("[Right-Click]", specs[2].name, 0, 1, 0, specs[2].r,specs[2].g,specs[2].b)
+		end
+		if(specs[4]) then
+			GameTooltip:AddDoubleLine("[SHIFT + Right-Click]", specs[4].name, 0, 1, 0,specs[4].r,specs[4].g,specs[4].b)
+		end
+	end
 end
 
 local PowerButton_OnLeftClick = function(self)
@@ -312,10 +349,12 @@ local function LoadMiscTools()
 
 	-- SPEC BUTTON
 	if(SV.db.Dock.dockTools.specswap and (not SVUI_SpecSwap)) then
-		local numSpecGroups = GetNumSpecGroups()
-		if(numSpecGroups and numSpecGroups == 2) then
+		Debug("Setting up spec swap dock")
+		local numSpecs = GetNumSpecializations()
+		if(numSpecs and numSpecs > 1) then
+			Debug("numSpecs = ", numSpecs)
 			local specSwap = SV.Dock:SetDockButton("BottomLeft", L["Spec Swap"], "SVUI_SpecSwap", SV.media.dock.specSwapIcon, SpecSwap_OnEnter)
-			specSwap:SetClickCallbacks(SpecSwap_OnClick);
+			specSwap:SetClickCallbacks(SpecSwap_OnLeftClick, SpecSwap_OnRightClick);
 		end
 	end
 

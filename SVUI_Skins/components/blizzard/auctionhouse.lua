@@ -198,7 +198,7 @@ local function AuctionStyle()
 	hooksecurefunc("FilterButton_SetType", _hook_FilterButton_SetType)
 
 	for _,field in pairs(AuctionTextFields) do
-		_G[field]:RemoveTextures()
+		--_G[field]:RemoveTextures()
 		_G[field]:SetStyle("Editbox", 2, 2)
 		_G[field]:SetTextInsets(-1, -1, -2, -2)
 	end

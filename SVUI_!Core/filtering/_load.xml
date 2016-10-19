@@ -2,6 +2,7 @@
     <Script file="defaults.lua"/>
     <Script file="class_filters\pets.lua"/>
     <Script file="class_filters\deathknight.lua"/>
+    <Script file="class_filters\demonhunter.lua"/>
     <Script file="class_filters\druid.lua"/>
     <Script file="class_filters\hunter.lua"/>
     <Script file="class_filters\mage.lua"/>

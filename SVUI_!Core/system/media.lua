@@ -313,6 +313,7 @@ do
 			["durabilityLabel"] 	= [[Interface\AddOns\SVUI_!Core\assets\textures\Dock\LABEL-DUR]],
 			["reputationLabel"] 	= [[Interface\AddOns\SVUI_!Core\assets\textures\Dock\LABEL-REP]],
 			["experienceLabel"] 	= [[Interface\AddOns\SVUI_!Core\assets\textures\Dock\LABEL-XP]],
+			["artifactLabel"] 		= [[Interface\AddOns\SVUI_!Core\assets\textures\Dock\LABEL-ART]],	
 			["sizeIcon"] 			= [[Interface\AddOns\SVUI_!Core\assets\textures\Dock\DOCK-ICON-SIZE]],
 			["optionsIcon"] 		= [[Interface\AddOns\SVUI_!Core\assets\textures\Dock\DOCK-ICON-OPTIONS]],
 			["breakStuffIcon"] 		= [[Interface\AddOns\SVUI_!Core\assets\textures\Dock\DOCK-ICON-BREAKSTUFF]],

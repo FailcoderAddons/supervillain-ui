@@ -367,7 +367,7 @@ function MOD:UpdateDimensions()
 		end
 		headerFrame:SetWidth(scrollWidth)
 	end
-
+	if totalHeight < 1 then totalHeight = 1 end
 	MOD.Docklet.ScrollFrame.MaxVal = totalHeight;
 	MOD.Docklet.ScrollFrame.ScrollBar:SetMinMaxValues(1, totalHeight);
 	--MOD.Docklet.ScrollFrame.ScrollBar:SetHeight(scrollHeight);

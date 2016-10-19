@@ -74,7 +74,8 @@ local SVUIMicroButton_SetNormal = function()
 	MainMenuMicroButton.overlay:SetFrameLevel(level + 1)
 	MainMenuMicroButton.overlay:SetFrameStrata("HIGH")
 	MainMenuBarPerformanceBar:Hide()
-	HelpMicroButton:Show()
+	MainMenuBarDownload:Hide()
+	--HelpMicroButton:Show()
 end 
 
 local SVUIMicroButtonsParent = function(self)
@@ -136,25 +137,25 @@ function MOD:InitializeMicroBar()
 	microBar:SetPoint('BOTTOMLEFT', SV.Dock.TopLeft.Bar.ToolBar, 'BOTTOMRIGHT', 4, 0)
 	SV:ManageVisibility(microBar)
 
-	for i=1,13 do
+	for i=1,16 do
 		local data = MOD.media.microMenuCoords[i]
 		if(data) then
 			local button = _G[data[1]]
 			if(button) then
 				button:SetParent(SVUI_MicroBar)
 				button:SetSize(buttonSize, buttonSize + 28)
-				button.Flash:SetTexture("")
+				button.Flash:SetTexture(nil)
 				if button.SetPushedTexture then 
-					button:SetPushedTexture("")
+					button:SetPushedTexture(nil)
 				end 
 				if button.SetNormalTexture then 
-					button:SetNormalTexture("")
+					button:SetNormalTexture(nil)
 				end 
 				if button.SetDisabledTexture then 
-					button:SetDisabledTexture("")
+					button:SetDisabledTexture(nil)
 				end 
 				if button.SetHighlightTexture then 
-					button:SetHighlightTexture("")
+					button:SetHighlightTexture(nil)
 				end 
 				button:RemoveTextures()
 
@@ -180,12 +181,17 @@ function MOD:InitializeMicroBar()
 	MicroButtonPortrait:ClearAllPoints()
 	MicroButtonPortrait:Hide()
 	MainMenuBarPerformanceBar:ClearAllPoints()
+	MainMenuBarDownload:ClearAllPoints()
 	MainMenuBarPerformanceBar:Hide()
+	MainMenuBarDownload:Hide()
+
 
 	NewHook('MainMenuMicroButton_SetNormal', SVUIMicroButton_SetNormal)
+	MainMenuMicroButton:SetScript("OnUpdate",nil) -- Fix for problems with texture behind. Besides, No interest in the perf bar stuff as we already have the performance meters in SVUI
 	NewHook('UpdateMicroButtonsParent', SVUIMicroButtonsParent)
 	NewHook('MoveMicroButtons', RefreshMicrobar)
 	NewHook('UpdateMicroButtons', MOD.UpdateMicroButtons)
+	NewHook('GuildMicroButton_UpdateTabard', MOD.UpdateMicroButtons)
 
 	SVUIMicroButtonsParent(microBar)
 	SVUIMicroButton_SetNormal()

@@ -54,33 +54,47 @@ local function TruncateString(value)
     end
 end
 
-local sort_menu_fn = function(a,b) return a.text < b.text end;
+local sort_menu_fn = function(a,b) 
+	if (a ~= nil and b ~= nil) then 
+		if (a.text ~= nil and b.text ~= nil) then
+			return a.text < b.text
+		end
+	end
+	return false 
+end;
 
 local function CacheRepData(data)
 	local count = 1;
 	local savedCount = #data;
+	ExpandAllFactionHeaders();
 	local totalFactions = GetNumFactions();
 	local maxCount = totalFactions;
 	if(savedCount > totalFactions) then maxCount = savedCount; end
+
 	for i=1, maxCount do
 		if(i <= totalFactions) then
-			local factionName, description, standingID, barMin, barMax, barValue, _, _, _, _, hasRep, isWatched, isChild = GetFactionInfo(i)
-			if(standingID) then
-				local fn = function()
-					local active = GetWatchedFactionInfo()
-					if factionName ~= active then
-						SetWatchedFactionIndex(i)
+			local factionName, description, standingID, barMin, barMax, barValue, _, _, isHeader, _, hasRep, isWatched, isChild = GetFactionInfo(i)
+
+			if((not isHeader) and standingID > 0) then
+				if not IsFactionInactive(i) then
+					local fn = function()
+						local active = GetWatchedFactionInfo()
+						if factionName ~= active then
+							SetWatchedFactionIndex(i)
+						end
 					end
+					data[count] = {text = factionName, func = fn};
+					--DEFAULT_CHAT_FRAME:AddMessage("Faction: " .. data[count].text .. " - " .. count)
+					count=count+1;
 				end
-				data[count] = {text = factionName, func = fn};
-				count=count+1;
 			end
 		else
-			data[count] = nil;
-			count=count+1;
+			tremove(data, count);
 		end
 	end
-	tsort(data, sort_menu_fn)
+	if #data > 0 then
+		tsort(data, sort_menu_fn);
+	end
 end
 --[[
 ##########################################################

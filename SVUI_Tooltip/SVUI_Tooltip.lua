@@ -84,6 +84,8 @@ local tooltips = {
 	ItemSocketingDescription
 };
 
+local INSPECT_CACHE_DURATION = 600 -- how long something lives in the inspect cache.
+
 -- local ignored_tooltips = {
 -- 	FrameStackTooltip
 -- };
@@ -273,13 +275,15 @@ local function ShowInspectInfo(this, unit, unitLevel, r, g, b, iteration)
 	local inspectable = CanInspect(unit)
 	if((not inspectable) or (unitLevel < 10) or (iteration > 2)) then return end
 	local GUID = UnitGUID(unit)
+
 	if(GUID == playerGUID) then
+		local total,equipped = GetAverageItemLevel()
 		this:AddDoubleLine(L["Talent Specialization:"], GetTalentSpec(unit, true), nil, nil, nil, r, g, b)
-		this:AddDoubleLine(L["Item Level:"], floor(select(2, GetAverageItemLevel())), nil, nil, nil, 1, 1, 1)
+		this:AddDoubleLine(L["Item Level:"], floor(equipped), nil, nil, nil, 1, 1, 1)
 	elseif(inspectCache[GUID]) then
 		local talent = inspectCache[GUID].talent;
 		local itemLevel = inspectCache[GUID].itemLevel;
-		if(((GetTime() - inspectCache[GUID].time) > 900) or not talent or not itemLevel) then
+		if(((GetTime() - inspectCache[GUID].time) > INSPECT_CACHE_DURATION) or not talent or not itemLevel) then
 			inspectCache[GUID] = nil;
 			return ShowInspectInfo(this,unit,unitLevel,r,g,b,iteration+1)
 		end

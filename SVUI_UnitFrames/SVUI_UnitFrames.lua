@@ -1376,7 +1376,18 @@ function MOD:Load()
 
 	if(SV.db.UnitFrames.disableBlizzard) then
 		self:KillBlizzardRaidFrames()
-		hooksecurefunc("CompactUnitFrame_RegisterEvents", CompactUnitFrame_UnregisterEvents)
+		-- This doesn't work as intended any more: Nameplates are now UnitFrames based on CompactUnitFrame and just unhooking RegisterEvent 
+		-- means that the nameplates can't register events and therefore can't update (e.g. bars don't update)
+		-- hooksecurefunc("CompactUnitFrame_RegisterEvents", CompactUnitFrame_UnregisterEvents)
+		oUF_SVUI:DisableBlizzard("player")
+		oUF_SVUI:DisableBlizzard("pet")
+		oUF_SVUI:DisableBlizzard("pettarget")
+		oUF_SVUI:DisableBlizzard("target")
+		oUF_SVUI:DisableBlizzard("targettarget")
+		oUF_SVUI:DisableBlizzard("focus")
+		oUF_SVUI:DisableBlizzard("focustarget")
+		oUF_SVUI:DisableBlizzard("boss")
+
 		hooksecurefunc("UnitFrameThreatIndicator_Initialize", UnitFrameThreatIndicator_Hook)
 
 		--[[

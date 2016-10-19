@@ -248,31 +248,32 @@ function MOD:LoadOptions()
 								desc = L["This will enable/disable the extra fancy styling around elite/rare plates."],
 								set = function(d,e)MOD:ChangeDBVar(e,d[#d])SV:StaticPopup_Show("RL_CLIENT")end
 							},
-							combatHide = {
-								type = "toggle",
-								order = 2,
-								name = L["Combat Toggle"],
-								desc = L["Toggle the nameplates to be invisible outside of combat and visible inside combat."],
-								set = function(d,e)MOD:ChangeDBVar(e,d[#d])MOD:CombatToggle()end
-							},
+							-- combatHide = {
+							-- 	type = "toggle",
+							-- 	order = 2,
+							-- 	name = L["Combat Toggle"],
+							-- 	desc = L["Toggle the nameplates to be invisible outside of combat and visible inside combat."],
+							-- 	set = function(d,e)MOD:ChangeDBVar(e,d[#d]);MOD:CombatToggle();SV:StaticPopup_Show("RL_CLIENT");end
+							-- },
 							comboPoints = {
 								type = "toggle",
 								order = 3,
-								name = L["Combo Points"],
-								desc = L["Display combo points on nameplates."]
+								name = L["Combo Points on Enemy"],
+								desc = L["Display combo points on enemy nameplates"],
+								set = function(d,e)MOD:ChangeDBVar(e,d[#d]);MOD:ComboToggle();SV:StaticPopup_Show("RL_CLIENT");end
 							},
-							colorNameByValue = {
-								type = "toggle",
-								order = 4,
-								name = L["Color Name By Health Value"],
-								width = 'full',
-							},
-							showthreat = {
-								type = "toggle",
-								order = 5,
-								name = L["Threat Text"],
-								desc = L["Display threat level as text on targeted,	boss or mouseover nameplate."]
-							},
+							-- colorNameByValue = {
+							-- 	type = "toggle",
+							-- 	order = 4,
+							-- 	name = L["Color Name By Health Value"],
+							-- 	width = 'full',
+							-- },
+							-- showthreat = {
+							-- 	type = "toggle",
+							-- 	order = 5,
+							-- 	name = L["Threat Text"],
+							-- 	desc = L["Display threat level as text on targeted,	boss or mouseover nameplate."]
+							-- },
 							barTexture = {
 								type = "select",
 								dialogControl = "LSM30_Statusbar",
@@ -281,189 +282,189 @@ function MOD:LoadOptions()
 								desc = L["Main statusbar texture."],
 								values = AceVillainWidgets.statusbar
 							},
-							nonTargetAlpha = {
-								type = "range",
-								order = 7,
-								name = L["Non-Target Alpha"],
-								desc = L["Alpha of nameplates that are not your current target."],
-								width = 'full',
-								min = 0,
-								max = 1,
-								step = 0.01,
-								isPercent = true
-							},
-							spacer1 = {
-								order = 8,
-								type = "description",
-								name = "",
-								width = "full",
-							},
-							reactions = {
-								order = 9,
-								type = "group",
-								name = L["Reaction Coloring"],
-								guiInline = true,
-								get = function(key)
-									local color = SV.db[Schema].reactions[key[#key]]
-									if color then
-										return color[1],color[2],color[3],color[4]
-									end
-								end,
-								set = function(key,r,g,b)
-									local color = {r,g,b}
-									MOD:ChangeDBVar(color, key[#key], "reactions")
-									MOD:UpdateAllPlates()
-								end,
-								args = {
-									friendlyNPC = {
-										type = "color",
-										order = 1,
-										name = L["Friendly NPC"],
-										hasAlpha = false
-									},
-									friendlyPlayer = {
-										name = L["Friendly Player"],
-										order = 2,
-										type = "color",
-										hasAlpha = false
-									},
-									neutral = {
-										name = L["Neutral"],
-										order = 3,
-										type = "color",
-										hasAlpha = false
-									},
-									enemy = {
-										name = L["Enemy"],
-										order = 4,
-										type = "color",
-										hasAlpha = false
-									},
-									tapped = {
-										name = L["Tagged NPC"],
-										order = 5,
-										type = "color",
-										hasAlpha = false
-									},
-								}
-							},
-							threat = {
-								type = "group",
-								name = L["Threat Coloring"],
-								guiInline = true,
-								order = 10,
-								args = {
-									enable = {
-										type = "toggle",
-										order = 1,
-										name = L["Enable Threat Coloring"],
-										width = "full",
-										get = function(key)return SV.db[Schema].threat.enable end,
-										set = function(key,value) SV.db[Schema].threat.enable = value; MOD:UpdateAllPlates() end,
-									},
-									goodColor = {
-										type = "color",
-										order = 2,
-										name = L["Good Threat"],
-										hasAlpha = false,
-										disabled = function(key) return not SV.db[Schema].threat.enable end,
-										get = function(key)
-											local color = SV.db[Schema].threat.goodColor
-											if color then
-												return color[1],color[2],color[3],color[4]
-											end
-										end,
-										set = function(key,r,g,b)
-											SV.db[Schema].threat.goodColor = {r,g,b}
-											MOD:UpdateAllPlates()
-										end,
-									},
-									badColor = {
-										name = L["Bad Threat"],
-										order = 3,
-										type = "color",
-										hasAlpha = false,
-										disabled = function(key) return not SV.db[Schema].threat.enable end,
-										get = function(key)
-											local color = SV.db[Schema].threat.badColor
-											if color then
-												return color[1],color[2],color[3],color[4]
-											end
-										end,
-										set = function(key,r,g,b)
-											SV.db[Schema].threat.badColor = {r,g,b}
-											MOD:UpdateAllPlates()
-										end,
-									},
-									goodTransitionColor = {
-										name = L["Good Threat Transition"],
-										order = 4,
-										type = "color",
-										hasAlpha = false,
-										disabled = function(key) return not SV.db[Schema].threat.enable end,
-										get = function(key)
-											local color = SV.db[Schema].threat.goodTransitionColor
-											if color then
-												return color[1],color[2],color[3],color[4]
-											end
-										end,
-										set = function(key,r,g,b)
-											SV.db[Schema].threat.goodTransitionColor = {r,g,b}
-											MOD:UpdateAllPlates()
-										end,
-									},
-									badTransitionColor = {
-										name = L["Bad Threat Transition"],
-										order = 5,
-										type = "color",
-										hasAlpha = false,
-										disabled = function(key) return not SV.db[Schema].threat.enable end,
-										get = function(key)
-											local color = SV.db[Schema].threat.badTransitionColor
-											if color then
-												return color[1],color[2],color[3],color[4]
-											end
-										end,
-										set = function(key,r,g,b)
-											SV.db[Schema].threat.badTransitionColor = {r,g,b}
-											MOD:UpdateAllPlates()
-										end,
-									},
-								}
-							},
-							scaling = {
-								type = "group",
-								name = L["Threat Scaling"],
-								guiInline = true,
-								order = 11,
-								disabled = function(key) return not SV.db[Schema].threat.enable end,
-								args = {
-									goodScale = {
-										type = "range",
-										name = L["Good"],
-										order = 1,
-										min = 0.5,
-										max = 1.5,
-										step = 0.01,
-										width = 'full',
-										isPercent = true,
-										get = function(key)return SV.db[Schema].threat.goodScale end,
-										set = function(key,value) SV.db[Schema].threat.goodScale = value; MOD:UpdateAllPlates() end,
-									},
-									badScale = {
-										type = "range",
-										name = L["Bad"],
-										order = 1,
-										min = 0.5,
-										max = 1.5,
-										step = 0.01,
-										width = 'full',
-										isPercent = true,
-										get = function(key)return SV.db[Schema].threat.badScale end,
-										set = function(key,value) SV.db[Schema].threat.badScale = value; MOD:UpdateAllPlates() end,
-									}
-								}
-							},
+							-- nonTargetAlpha = {
+							-- 	type = "range",
+							-- 	order = 7,
+							-- 	name = L["Non-Target Alpha"],
+							-- 	desc = L["Alpha of nameplates that are not your current target."],
+							-- 	width = 'full',
+							-- 	min = 0,
+							-- 	max = 1,
+							-- 	step = 0.01,
+							-- 	isPercent = true
+							-- },
+							-- spacer1 = {
+							-- 	order = 8,
+							-- 	type = "description",
+							-- 	name = "",
+							-- 	width = "full",
+							-- },
+							-- reactions = {
+							-- 	order = 9,
+							-- 	type = "group",
+							-- 	name = L["Reaction Coloring"],
+							-- 	guiInline = true,
+							-- 	get = function(key)
+							-- 		local color = SV.db[Schema].reactions[key[#key]]
+							-- 		if color then
+							-- 			return color[1],color[2],color[3],color[4]
+							-- 		end
+							-- 	end,
+							-- 	set = function(key,r,g,b)
+							-- 		local color = {r,g,b}
+							-- 		MOD:ChangeDBVar(color, key[#key], "reactions")
+							-- 		MOD:UpdateAllPlates()
+							-- 	end,
+							-- 	args = {
+							-- 		friendlyNPC = {
+							-- 			type = "color",
+							-- 			order = 1,
+							-- 			name = L["Friendly NPC"],
+							-- 			hasAlpha = false
+							-- 		},
+							-- 		friendlyPlayer = {
+							-- 			name = L["Friendly Player"],
+							-- 			order = 2,
+							-- 			type = "color",
+							-- 			hasAlpha = false
+							-- 		},
+							-- 		neutral = {
+							-- 			name = L["Neutral"],
+							-- 			order = 3,
+							-- 			type = "color",
+							-- 			hasAlpha = false
+							-- 		},
+							-- 		enemy = {
+							-- 			name = L["Enemy"],
+							-- 			order = 4,
+							-- 			type = "color",
+							-- 			hasAlpha = false
+							-- 		},
+							-- 		tapped = {
+							-- 			name = L["Tagged NPC"],
+							-- 			order = 5,
+							-- 			type = "color",
+							-- 			hasAlpha = false
+							-- 		},
+							-- 	}
+							-- },
+							-- threat = {
+							-- 	type = "group",
+							-- 	name = L["Threat Coloring"],
+							-- 	guiInline = true,
+							-- 	order = 10,
+							-- 	args = {
+							-- 		enable = {
+							-- 			type = "toggle",
+							-- 			order = 1,
+							-- 			name = L["Enable Threat Coloring"],
+							-- 			width = "full",
+							-- 			get = function(key)return SV.db[Schema].threat.enable end,
+							-- 			set = function(key,value) SV.db[Schema].threat.enable = value; MOD:UpdateAllPlates() end,
+							-- 		},
+							-- 		goodColor = {
+							-- 			type = "color",
+							-- 			order = 2,
+							-- 			name = L["Good Threat"],
+							-- 			hasAlpha = false,
+							-- 			disabled = function(key) return not SV.db[Schema].threat.enable end,
+							-- 			get = function(key)
+							-- 				local color = SV.db[Schema].threat.goodColor
+							-- 				if color then
+							-- 					return color[1],color[2],color[3],color[4]
+							-- 				end
+							-- 			end,
+							-- 			set = function(key,r,g,b)
+							-- 				SV.db[Schema].threat.goodColor = {r,g,b}
+							-- 				MOD:UpdateAllPlates()
+							-- 			end,
+							-- 		},
+							-- 		badColor = {
+							-- 			name = L["Bad Threat"],
+							-- 			order = 3,
+							-- 			type = "color",
+							-- 			hasAlpha = false,
+							-- 			disabled = function(key) return not SV.db[Schema].threat.enable end,
+							-- 			get = function(key)
+							-- 				local color = SV.db[Schema].threat.badColor
+							-- 				if color then
+							-- 					return color[1],color[2],color[3],color[4]
+							-- 				end
+							-- 			end,
+							-- 			set = function(key,r,g,b)
+							-- 				SV.db[Schema].threat.badColor = {r,g,b}
+							-- 				MOD:UpdateAllPlates()
+							-- 			end,
+							-- 		},
+							-- 		goodTransitionColor = {
+							-- 			name = L["Good Threat Transition"],
+							-- 			order = 4,
+							-- 			type = "color",
+							-- 			hasAlpha = false,
+							-- 			disabled = function(key) return not SV.db[Schema].threat.enable end,
+							-- 			get = function(key)
+							-- 				local color = SV.db[Schema].threat.goodTransitionColor
+							-- 				if color then
+							-- 					return color[1],color[2],color[3],color[4]
+							-- 				end
+							-- 			end,
+							-- 			set = function(key,r,g,b)
+							-- 				SV.db[Schema].threat.goodTransitionColor = {r,g,b}
+							-- 				MOD:UpdateAllPlates()
+							-- 			end,
+							-- 		},
+							-- 		badTransitionColor = {
+							-- 			name = L["Bad Threat Transition"],
+							-- 			order = 5,
+							-- 			type = "color",
+							-- 			hasAlpha = false,
+							-- 			disabled = function(key) return not SV.db[Schema].threat.enable end,
+							-- 			get = function(key)
+							-- 				local color = SV.db[Schema].threat.badTransitionColor
+							-- 				if color then
+							-- 					return color[1],color[2],color[3],color[4]
+							-- 				end
+							-- 			end,
+							-- 			set = function(key,r,g,b)
+							-- 				SV.db[Schema].threat.badTransitionColor = {r,g,b}
+							-- 				MOD:UpdateAllPlates()
+							-- 			end,
+							-- 		},
+							-- 	}
+							-- },
+							-- scaling = {
+							-- 	type = "group",
+							-- 	name = L["Threat Scaling"],
+							-- 	guiInline = true,
+							-- 	order = 11,
+							-- 	disabled = function(key) return not SV.db[Schema].threat.enable end,
+							-- 	args = {
+							-- 		goodScale = {
+							-- 			type = "range",
+							-- 			name = L["Good"],
+							-- 			order = 1,
+							-- 			min = 0.5,
+							-- 			max = 1.5,
+							-- 			step = 0.01,
+							-- 			width = 'full',
+							-- 			isPercent = true,
+							-- 			get = function(key)return SV.db[Schema].threat.goodScale end,
+							-- 			set = function(key,value) SV.db[Schema].threat.goodScale = value; MOD:UpdateAllPlates() end,
+							-- 		},
+							-- 		badScale = {
+							-- 			type = "range",
+							-- 			name = L["Bad"],
+							-- 			order = 1,
+							-- 			min = 0.5,
+							-- 			max = 1.5,
+							-- 			step = 0.01,
+							-- 			width = 'full',
+							-- 			isPercent = true,
+							-- 			get = function(key)return SV.db[Schema].threat.badScale end,
+							-- 			set = function(key,value) SV.db[Schema].threat.badScale = value; MOD:UpdateAllPlates() end,
+							-- 		}
+							-- 	}
+							-- },
 						}
 					},
 					healthBar = {
@@ -473,16 +474,16 @@ function MOD:LoadOptions()
 						get = function(d)return SV.db[Schema].healthBar[d[#d]]end,
 						set = function(d,e)MOD:ChangeDBVar(e,d[#d],"healthBar");MOD:UpdateAllPlates()end,
 						args = {
-							width = {
-								type = "range",
-								order = 1,
-								name = L["Width"],
-								desc = L["Controls the width of the nameplate"],
-								type = "range",
-								min = 50,
-								max = 125,
-								step = 1
-							},
+							-- width = {
+							-- 	type = "range",
+							-- 	order = 1,
+							-- 	name = L["Width"],
+							-- 	desc = L["Controls the width of the nameplate"],
+							-- 	type = "range",
+							-- 	min = 50,
+							-- 	max = 125,
+							-- 	step = 1
+							-- },
 							height = {
 								type = "range",
 								order = 2,
@@ -493,76 +494,76 @@ function MOD:LoadOptions()
 								max = 30,
 								step = 1
 							},
-							lowThreshold = {
-								type = "range",
-								order = 3,
-								name = L["Low Health Threshold"],
-								desc = L["Color the border of the nameplate yellow when it reaches this point,it will be colored red when it reaches half this value."],
-								isPercent = true,
-								min = 0,
-								max = 1,
-								step = 0.01
-							},
-							fontGroup = {
-								order = 4,
-								type = "group",
-								name = L["Texts"],
-								guiInline = true,
-								get = function(d)return SV.db[Schema].healthBar.text[d[#d]]end,
-								set = function(d,e)MOD:ChangeDBVar(e,d[#d],"healthBar","text");MOD:UpdateAllPlates()end,
-								args = {
-									enable = {
-										type = "toggle",
-										name = L["Enable"],
-										order = 1
-									},
-									attachTo = {
-										type = "select",
-										order = 2,
-										name = L["Attach To"],
-										values = {
-											TOPLEFT = "TOPLEFT",
-											LEFT = "LEFT",
-											BOTTOMLEFT = "BOTTOMLEFT",
-											RIGHT = "RIGHT",
-											TOPRIGHT = "TOPRIGHT",
-											BOTTOMRIGHT = "BOTTOMRIGHT",
-											CENTER = "CENTER",
-											TOP = "TOP",
-											BOTTOM = "BOTTOM"
-										}
-									},
-									format = {
-										type = "select",
-										order = 3,
-										name = L["Format"],
-										values = {
-											["CURRENT_MAX_PERCENT"] = L["Current - Max | Percent"],
-											["CURRENT_PERCENT"] = L["Current - Percent"],
-											["CURRENT_MAX"] = L["Current - Max"],
-											["CURRENT"] = L["Current"],
-											["PERCENT"] = L["Percent"],
-											["DEFICIT"] = L["Deficit"]
-										}
-									},
-									xOffset = {
-										type = "range",
-										order = 4,
-										name = L["X-Offset"],
-										min = -150,
-										max = 150,
-										step = 1
-									},
-									yOffset = {
-										type = "range",
-										order = 5,
-										name = L["Y-Offset"],
-										min = -150,
-										max = 150,
-										step = 1
-									}
-								}
-							}
+							-- lowThreshold = {
+							-- 	type = "range",
+							-- 	order = 3,
+							-- 	name = L["Low Health Threshold"],
+							-- 	desc = L["Color the border of the nameplate yellow when it reaches this point,it will be colored red when it reaches half this value."],
+							-- 	isPercent = true,
+							-- 	min = 0,
+							-- 	max = 1,
+							-- 	step = 0.01
+							-- },
+							-- fontGroup = {
+							-- 	order = 4,
+							-- 	type = "group",
+							-- 	name = L["Texts"],
+							-- 	guiInline = true,
+							-- 	get = function(d)return SV.db[Schema].healthBar.text[d[#d]]end,
+							-- 	set = function(d,e)MOD:ChangeDBVar(e,d[#d],"healthBar","text");MOD:UpdateAllPlates()end,
+							-- 	args = {
+							-- 		enable = {
+							-- 			type = "toggle",
+							-- 			name = L["Enable"],
+							-- 			order = 1
+							-- 		},
+							-- 		attachTo = {
+							-- 			type = "select",
+							-- 			order = 2,
+							-- 			name = L["Attach To"],
+							-- 			values = {
+							-- 				TOPLEFT = "TOPLEFT",
+							-- 				LEFT = "LEFT",
+							-- 				BOTTOMLEFT = "BOTTOMLEFT",
+							-- 				RIGHT = "RIGHT",
+							-- 				TOPRIGHT = "TOPRIGHT",
+							-- 				BOTTOMRIGHT = "BOTTOMRIGHT",
+							-- 				CENTER = "CENTER",
+							-- 				TOP = "TOP",
+							-- 				BOTTOM = "BOTTOM"
+							-- 			}
+							-- 		},
+							-- 		format = {
+							-- 			type = "select",
+							-- 			order = 3,
+							-- 			name = L["Format"],
+							-- 			values = {
+							-- 				["CURRENT_MAX_PERCENT"] = L["Current - Max | Percent"],
+							-- 				["CURRENT_PERCENT"] = L["Current - Percent"],
+							-- 				["CURRENT_MAX"] = L["Current - Max"],
+							-- 				["CURRENT"] = L["Current"],
+							-- 				["PERCENT"] = L["Percent"],
+							-- 				["DEFICIT"] = L["Deficit"]
+							-- 			}
+							-- 		},
+							-- 		xOffset = {
+							-- 			type = "range",
+							-- 			order = 4,
+							-- 			name = L["X-Offset"],
+							-- 			min = -150,
+							-- 			max = 150,
+							-- 			step = 1
+							-- 		},
+							-- 		yOffset = {
+							-- 			type = "range",
+							-- 			order = 5,
+							-- 			name = L["Y-Offset"],
+							-- 			min = -150,
+							-- 			max = 150,
+							-- 			step = 1
+							-- 		}
+							-- 	}
+							--}
 						}
 					},
 					castBar = {
@@ -614,231 +615,231 @@ function MOD:LoadOptions()
 							}
 						}
 					},
-					pointer = {
-						type = "group",
-						order = 4,
-						name = L["Target Indicator"],
-						get = function(d)return SV.db[Schema].pointer[d[#d]]end,
-						set = function(d,e) MOD:ChangeDBVar(e,d[#d],"pointer"); _G.WorldFrame.elapsed = 3; MOD:UpdateAllPlates() end,
-						args = {
-							enable = {
-								order = 1,
-								type = "toggle",
-								name = L["Enable"]
-							},
-							useArrowEffect = {
-								order = 2,
-								type = "toggle",
-								name = L["Use 3D Arrow"]
-							},
-							colorMatchHealthBar = {
-								order = 3,
-								type = "toggle",
-								name = L["Color By Healthbar"],
-								desc = L["Match the color of the healthbar."],
-								set = function(key, value)
-									MOD:ChangeDBVar(value, key[#key], "pointer");
-									if value then
-										_G.WorldFrame.elapsed = 3
-									end
-								end
-							},
-							color = {
-								type = "color",
-								name = L["Color"],
-								order = 4,
-								disabled = function()return SV.db[Schema].pointer.colorMatchHealthBar end,
-								get = function(key)
-									local color = SV.db[Schema].pointer[key[#key]]
-									if color then
-										return color[1],color[2],color[3],color[4]
-									end
-								end,
-								set = function(key,r,g,b)
-									local color = {r,g,b}
-									MOD:ChangeDBVar(color, key[#key], "pointer")
-									MOD:UpdateAllPlates()
-								end,
-							}
-						}
-					},
-					raidHealIcon = {
-						type = "group",
-						order = 5,
-						name = L["Raid Icon"],
-						get = function(d)return SV.db[Schema].raidHealIcon[d[#d]]end,
-						set = function(d,e)MOD:ChangeDBVar(e,d[#d],"raidHealIcon")MOD:UpdateAllPlates()end,
-						args = {
-							attachTo = {
-								type = "select",
-								order = 1,
-								name = L["Attach To"],
-								values = positionTable
-							},
-							xOffset = {
-								type = "range",
-								order = 2,
-								name = L["X-Offset"],
-								min = -150,
-								max = 150,
-								step = 1
-							},
-							yOffset = {
-								type = "range",
-								order = 3,
-								name = L["Y-Offset"],
-								min = -150,
-								max = 150,
-								step = 1
-							},
-							size = {
-								order = 4,
-								type = "range",
-								name = L["Size"],
-								width = "full",
-								min = 10,
-								max = 200,
-								step = 1
-							},
-						}
-					},
-					auras = {
-						type = "group",
-						order = 4,
-						name = L["Auras"],
-						get = function(d)return SV.db[Schema].auras[d[#d]]end,
-						set = function(d,e)MOD:ChangeDBVar(e,d[#d],"auras")MOD:UpdateAllPlates()end,
-						args = {
-							numAuras = {
-								type = "range",
-								order = 1,
-								name = L["Number of Auras"],
-								min = 2,
-								max = 8,
-								step = 1
-							},
-							additionalFilter = {
-								type = "select",
-								order = 2,
-								name = L["Additional Filter"],
-								values = function()
-									filters = {}
-									filters[""] = _G.NONE;
-									for j in pairs(SV.db.Filters.Custom) do
-										filters[j] = j
-									end
-									return filters
-								end
-							},
-							configureButton = {
-								order = 4,
-								name = L["Configure Selected Filter"],
-								type = "execute",
-								width = "full",
-								func = function()ns:SetToFilterConfig(SV.db[Schema].auras.additionalFilter)end
-							},
-							fontGroup = {
-								order = 100,
-								type = "group",
-								guiInline = true,
-								name = L["Fonts"],
-								args = {
-									font = {
-										type = "select",
-										dialogControl = "LSM30_Font",
-										order = 4,
-										name = L["Font"],
-										values = AceVillainWidgets.font
-									},
-									fontSize = {
-										order = 5,
-										name = L["Font Size"],
-										type = "range",
-										min = 6,
-										max = 22,
-										step = 1
-									},
-									fontOutline = {
-										order = 6,
-										name = L["Font Outline"],
-										desc = L["Set the font outline."],
-										type = "select",
-										values = {
-											["NONE"] = L["None"],
-											["OUTLINE"] = "OUTLINE",
-											["MONOCHROMEOUTLINE"] = "MONOCROMEOUTLINE",
-											["THICKOUTLINE"] = "THICKOUTLINE"
-										}
-									}
-								}
-							}
-						}
-					},
-					filters = {
-						type = "group",
-						order = 5,
-						name = L["Filters"],
-						args = {
-							addname = {
-								type = "input",
-								order = 1,
-								name = L["Add Name"],
-								get = function(d)return""end,
-								set = function(d,e)
-									if SV.db["NamePlates"]["filter"][e]then
-										SV:AddonMessage(L["Filter already exists!"])
-										return
-									end
-									SV.db["NamePlates"]["filter"][e] = {
-										["enable"] = true,
-										["hide"] = false,
-										["customColor"] = false,
-										["customScale"] = 1,
-										["color"] = {
-											g = 104/255,
-											h = 138/255,
-											i = 217/255
-										}
-									}
-									UpdateFilterGroupOptions()
-									MOD:UpdateAllPlates()
-								end
-							},
-							deletename = {
-								type = "input",
-								order = 2,
-								name = L["Remove Name"],
-								get = function(d)return""end,
-								set = function(d,e)
-									if SV.db["NamePlates"]["filter"][e] then
-										SV.db["NamePlates"]["filter"][e].enable = false;
-										SV:AddonMessage(L["You can't remove a default name from the filter,disabling the name."])
-									else
-										SV.db["NamePlates"]["filter"][e] = nil;
-										SV.Options.args[Schema].args.Filters.args.filterGroup = nil
-									end
-									UpdateFilterGroupOptions()
-									MOD:UpdateAllPlates()
-								end
-							},
-							selectFilter = {
-								order = 3,
-								type = "select",
-								name = L["Select Filter"],
-								get = function(d)return activeFilter end,
-								set = function(d,e)activeFilter = e;UpdateFilterGroupOptions()end,
-								values = function()
-									filters = {}
-									if(SV.db["NamePlates"]["filter"]) then
-										for j in pairs(SV.db["NamePlates"]["filter"])do
-											filters[j] = j
-										end
-									end
-									return filters
-								end
-							}
-						}
-					}
+					-- pointer = {
+					-- 	type = "group",
+					-- 	order = 4,
+					-- 	name = L["Target Indicator"],
+					-- 	get = function(d)return SV.db[Schema].pointer[d[#d]]end,
+					-- 	set = function(d,e) MOD:ChangeDBVar(e,d[#d],"pointer"); _G.WorldFrame.elapsed = 3; MOD:UpdateAllPlates() end,
+					-- 	args = {
+					-- 		enable = {
+					-- 			order = 1,
+					-- 			type = "toggle",
+					-- 			name = L["Enable"]
+					-- 		},
+					-- 		useArrowEffect = {
+					-- 			order = 2,
+					-- 			type = "toggle",
+					-- 			name = L["Use 3D Arrow"]
+					-- 		},
+					-- 		colorMatchHealthBar = {
+					-- 			order = 3,
+					-- 			type = "toggle",
+					-- 			name = L["Color By Healthbar"],
+					-- 			desc = L["Match the color of the healthbar."],
+					-- 			set = function(key, value)
+					-- 				MOD:ChangeDBVar(value, key[#key], "pointer");
+					-- 				if value then
+					-- 					_G.WorldFrame.elapsed = 3
+					-- 				end
+					-- 			end
+					-- 		},
+					-- 		color = {
+					-- 			type = "color",
+					-- 			name = L["Color"],
+					-- 			order = 4,
+					-- 			disabled = function()return SV.db[Schema].pointer.colorMatchHealthBar end,
+					-- 			get = function(key)
+					-- 				local color = SV.db[Schema].pointer[key[#key]]
+					-- 				if color then
+					-- 					return color[1],color[2],color[3],color[4]
+					-- 				end
+					-- 			end,
+					-- 			set = function(key,r,g,b)
+					-- 				local color = {r,g,b}
+					-- 				MOD:ChangeDBVar(color, key[#key], "pointer")
+					-- 				MOD:UpdateAllPlates()
+					-- 			end,
+					-- 		}
+					-- 	}
+					-- },
+					-- raidHealIcon = {
+					-- 	type = "group",
+					-- 	order = 5,
+					-- 	name = L["Raid Icon"],
+					-- 	get = function(d)return SV.db[Schema].raidHealIcon[d[#d]]end,
+					-- 	set = function(d,e)MOD:ChangeDBVar(e,d[#d],"raidHealIcon")MOD:UpdateAllPlates()end,
+					-- 	args = {
+					-- 		attachTo = {
+					-- 			type = "select",
+					-- 			order = 1,
+					-- 			name = L["Attach To"],
+					-- 			values = positionTable
+					-- 		},
+					-- 		xOffset = {
+					-- 			type = "range",
+					-- 			order = 2,
+					-- 			name = L["X-Offset"],
+					-- 			min = -150,
+					-- 			max = 150,
+					-- 			step = 1
+					-- 		},
+					-- 		yOffset = {
+					-- 			type = "range",
+					-- 			order = 3,
+					-- 			name = L["Y-Offset"],
+					-- 			min = -150,
+					-- 			max = 150,
+					-- 			step = 1
+					-- 		},
+					-- 		size = {
+					-- 			order = 4,
+					-- 			type = "range",
+					-- 			name = L["Size"],
+					-- 			width = "full",
+					-- 			min = 10,
+					-- 			max = 200,
+					-- 			step = 1
+					-- 		},
+					-- 	}
+					-- },
+					-- auras = {
+					-- 	type = "group",
+					-- 	order = 4,
+					-- 	name = L["Auras"],
+					-- 	get = function(d)return SV.db[Schema].auras[d[#d]]end,
+					-- 	set = function(d,e)MOD:ChangeDBVar(e,d[#d],"auras")MOD:UpdateAllPlates()end,
+					-- 	args = {
+					-- 		numAuras = {
+					-- 			type = "range",
+					-- 			order = 1,
+					-- 			name = L["Number of Auras"],
+					-- 			min = 2,
+					-- 			max = 8,
+					-- 			step = 1
+					-- 		},
+					-- 		additionalFilter = {
+					-- 			type = "select",
+					-- 			order = 2,
+					-- 			name = L["Additional Filter"],
+					-- 			values = function()
+					-- 				filters = {}
+					-- 				filters[""] = _G.NONE;
+					-- 				for j in pairs(SV.db.Filters.Custom) do
+					-- 					filters[j] = j
+					-- 				end
+					-- 				return filters
+					-- 			end
+					-- 		},
+					-- 		configureButton = {
+					-- 			order = 4,
+					-- 			name = L["Configure Selected Filter"],
+					-- 			type = "execute",
+					-- 			width = "full",
+					-- 			func = function()ns:SetToFilterConfig(SV.db[Schema].auras.additionalFilter)end
+					-- 		},
+					-- 		fontGroup = {
+					-- 			order = 100,
+					-- 			type = "group",
+					-- 			guiInline = true,
+					-- 			name = L["Fonts"],
+					-- 			args = {
+					-- 				font = {
+					-- 					type = "select",
+					-- 					dialogControl = "LSM30_Font",
+					-- 					order = 4,
+					-- 					name = L["Font"],
+					-- 					values = AceVillainWidgets.font
+					-- 				},
+					-- 				fontSize = {
+					-- 					order = 5,
+					-- 					name = L["Font Size"],
+					-- 					type = "range",
+					-- 					min = 6,
+					-- 					max = 22,
+					-- 					step = 1
+					-- 				},
+					-- 				fontOutline = {
+					-- 					order = 6,
+					-- 					name = L["Font Outline"],
+					-- 					desc = L["Set the font outline."],
+					-- 					type = "select",
+					-- 					values = {
+					-- 						["NONE"] = L["None"],
+					-- 						["OUTLINE"] = "OUTLINE",
+					-- 						["MONOCHROMEOUTLINE"] = "MONOCROMEOUTLINE",
+					-- 						["THICKOUTLINE"] = "THICKOUTLINE"
+					-- 					}
+					-- 				}
+					-- 			}
+					-- 		}
+					-- 	}
+					-- },
+					-- filters = {
+					-- 	type = "group",
+					-- 	order = 5,
+					-- 	name = L["Filters"],
+					-- 	args = {
+					-- 		addname = {
+					-- 			type = "input",
+					-- 			order = 1,
+					-- 			name = L["Add Name"],
+					-- 			get = function(d)return""end,
+					-- 			set = function(d,e)
+					-- 				if SV.db["NamePlates"]["filter"][e]then
+					-- 					SV:AddonMessage(L["Filter already exists!"])
+					-- 					return
+					-- 				end
+					-- 				SV.db["NamePlates"]["filter"][e] = {
+					-- 					["enable"] = true,
+					-- 					["hide"] = false,
+					-- 					["customColor"] = false,
+					-- 					["customScale"] = 1,
+					-- 					["color"] = {
+					-- 						g = 104/255,
+					-- 						h = 138/255,
+					-- 						i = 217/255
+					-- 					}
+					-- 				}
+					-- 				UpdateFilterGroupOptions()
+					-- 				MOD:UpdateAllPlates()
+					-- 			end
+					-- 		},
+					-- 		deletename = {
+					-- 			type = "input",
+					-- 			order = 2,
+					-- 			name = L["Remove Name"],
+					-- 			get = function(d)return""end,
+					-- 			set = function(d,e)
+					-- 				if SV.db["NamePlates"]["filter"][e] then
+					-- 					SV.db["NamePlates"]["filter"][e].enable = false;
+					-- 					SV:AddonMessage(L["You can't remove a default name from the filter,disabling the name."])
+					-- 				else
+					-- 					SV.db["NamePlates"]["filter"][e] = nil;
+					-- 					SV.Options.args[Schema].args.Filters.args.filterGroup = nil
+					-- 				end
+					-- 				UpdateFilterGroupOptions()
+					-- 				MOD:UpdateAllPlates()
+					-- 			end
+					-- 		},
+					-- 		selectFilter = {
+					-- 			order = 3,
+					-- 			type = "select",
+					-- 			name = L["Select Filter"],
+					-- 			get = function(d)return activeFilter end,
+					-- 			set = function(d,e)activeFilter = e;UpdateFilterGroupOptions()end,
+					-- 			values = function()
+					-- 				filters = {}
+					-- 				if(SV.db["NamePlates"]["filter"]) then
+					-- 					for j in pairs(SV.db["NamePlates"]["filter"])do
+					-- 						filters[j] = j
+					-- 					end
+					-- 				end
+					-- 				return filters
+					-- 			end
+					-- 		}
+					-- 	}
+					-- }
 				}
 			}
 		}

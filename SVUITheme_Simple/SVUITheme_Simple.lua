@@ -64,9 +64,10 @@ local _RefreshZoneText = function(self)
 	if(self.InfoTop:IsShown()) then
 		self.InfoTop:Hide();
 	end
-	if(not SV.db.Maps.locationText or SV.db.Maps.locationText == "HIDE") then
+	  -- JV - 20160918 Fix error around expectation that SV.db.Maps exists which might not be so if SVUI_Maps is not loaded.
+ 	if ((SV.Maps and SV.db.Maps) and (not SV.db.Maps.locationText or SV.db.Maps.locationText == "HIDE")) then
 		self.InfoBottom:Hide();
-	else
+ 	else
 		self.InfoBottom:Show();
 		local zone = GetRealZoneText() or UNKNOWN
 		self.InfoBottom.Text:SetText(zone)

@@ -109,7 +109,7 @@ local groupTagPoints = {
 
 local GroupDistributor = {
     ["CLASS"] = function(x)
-        x:SetAttribute("groupingOrder","DEATHKNIGHT,DRUID,HUNTER,MAGE,PALADIN,PRIEST,SHAMAN,WARLOCK,WARRIOR,MONK,DEMONHUNTER")
+        x:SetAttribute("groupingOrder","DEATHKNIGHT,DRUID,HUNTER,MAGE,PALADIN,PRIEST,SHAMAN,WARLOCK,WARRIOR,MONK")
         x:SetAttribute("sortMethod","NAME")
         x:SetAttribute("groupBy","CLASS")
     end,

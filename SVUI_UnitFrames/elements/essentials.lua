@@ -559,6 +559,28 @@ end
 HEALTH
 ##########################################################
 ]]--
+local function CreateAbsorbBar(parent, unit)
+	local absorbBar = CreateFrame("StatusBar", nil, parent)
+	absorbBar:SetFrameStrata("LOW")
+	absorbBar:SetFrameLevel(3)
+	absorbBar:SetStatusBarTexture(SV.media.statusbar.default);
+	absorbBar:SetMinMaxValues(0, 100)
+	absorbBar:SetAllPoints(parent)
+	absorbBar:SetScript("OnUpdate", function(self)
+		if unit then
+			local hpMax = UnitHealthMax(unit)
+			local currentHP = UnitHealth(unit)
+			local absorb = UnitGetTotalAbsorbs(unit)
+			local effectiveHP = absorb + currentHP
+
+			if effectiveHP > hpMax then effectiveHP = hpMax end
+			self:SetMinMaxValues(0, hpMax)
+			self:SetValue(effectiveHP)
+		end
+	end)
+	return absorbBar
+end
+
 local OverlayHealthUpdate = function(health, unit, min, max)
 	local disconnected = not UnitIsConnected(unit)
 	health:SetMinMaxValues(-max, 0)
@@ -606,6 +628,13 @@ local OverlayHealthUpdate = function(health, unit, min, max)
 end
 
 local RefreshHealthBar = function(self, overlay)
+	local db = SV.db.UnitFrames[self.unit]
+	local absorbBarEnabled = false
+
+	if db and db.health.absorbsBar then
+		absorbBarEnabled = true
+	end
+
 	if(overlay) then
 		self.Health.bg:SetVertexColor(0, 0, 0, 0)
 		self.Health.PreUpdate = OverlayHealthUpdate;
@@ -613,16 +642,51 @@ local RefreshHealthBar = function(self, overlay)
 		self.Health.bg:SetVertexColor(0.4, 0.1, 0.1, 0.8)
 		self.Health.PreUpdate = nil;
 	end
+
+	if absorbBarEnabled then
+		local absorbBar
+			if self.Health.absorbBar then
+				absorbBar = self.Health.absorbBar
+			else
+				absorbBar = CreateAbsorbBar(self.Health, self.unit)
+			end
+
+		self.Health.bg:SetParent(absorbBar)
+		absorbBar:Show()
+	else
+		self.Health.bg:SetParent(self.Health)
+		if self.Health.absorbBar then
+			self.Health.absorbBar:Hide()
+		end
+	end
 end
 
 function MOD:CreateHealthBar(frame, hasbg)
+	local db = SV.db.UnitFrames[frame.unit]
+	local enableAbsorbsBar = false
+
+	if db and db.health.absorbsBar then
+		enableAbsorbsBar = true
+	end
+
+
+
 	local healthBar = CreateFrame("StatusBar", nil, frame)
 	healthBar:SetFrameStrata("LOW")
 	healthBar:SetFrameLevel(4)
 	healthBar:SetStatusBarTexture(SV.media.statusbar.default);
 
+	if enableAbsorbsBar then
+		local absorbBar = CreateAbsorbBar(healthBar, frame.unit)
+		healthBar.absorbBar = absorbBar
+	end
+
 	if hasbg then
-		healthBar.bg = healthBar:CreateTexture(nil, "BORDER")
+		if not enableAbsorbsBar then
+			healthBar.bg = healthBar:CreateTexture(nil, "BORDER")
+		else
+			healthBar.bg = healthBar.absorbBar:CreateTexture(nil, "BORDER")
+		end
 		healthBar.bg:SetAllPoints()
 		healthBar.bg:SetTexture(SV.media.statusbar.gradient)
 		healthBar.bg:SetVertexColor(0.4, 0.1, 0.1)

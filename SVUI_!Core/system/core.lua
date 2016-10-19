@@ -156,7 +156,7 @@ if(not CUSTOM_CLASS_COLORS) then
         ["WARRIOR"]       = { r = 0.698, g = 0.36,  b = 0.152 },
         ["DEATHKNIGHT"]   = { r = 0.847, g = 0.117, b = 0.074 },
         ["MONK"]          = { r = 0.015, g = 0.886, b = 0.38 },
-        ["DEMONHUNTER"]   = { r = 0.454, g = 0.015, b = 0.894 },
+        ["DEMONHUNTER"]   = { r = 0.286, g = 0,     b = 0.788 },
     };
 
     ---- IF WE NEED TO FORCE DEFAULT COLORS, USE THIS INSTEAD ----

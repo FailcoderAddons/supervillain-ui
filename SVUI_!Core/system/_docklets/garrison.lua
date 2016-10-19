@@ -80,6 +80,47 @@ local GarrisonData = {};
 LOCALS
 ##########################################################
 ]]--
+
+local function GetInProgressMissions()
+    local garrisonMission = {}
+
+    local types = {
+        LE_FOLLOWER_TYPE_GARRISON_7_0,
+        LE_FOLLOWER_TYPE_GARRISON_6_0,
+        LE_FOLLOWER_TYPE_SHIPYARD_6_2
+    }
+
+    for key, type in pairs(types) do
+        local localMission = {}
+        C_Garrison.GetInProgressMissions(localMission, type)
+        for i = 1, #localMission do
+            garrisonMission[#garrisonMission + 1] = localMission[i]
+        end
+    end
+
+    return garrisonMission
+end
+
+local function GetCompleteMissions()
+    local garrisonMission = {}
+
+    local types = {
+        LE_FOLLOWER_TYPE_GARRISON_7_0,
+        LE_FOLLOWER_TYPE_GARRISON_6_0,
+        LE_FOLLOWER_TYPE_SHIPYARD_6_2
+    }
+
+    for key, type in pairs(types) do
+        local localMission = {}
+        C_Garrison.GetCompleteMissions(garrisonMission, type)
+        for i = 1, #localMission do
+            garrisonMission[#garrisonMission + 1] = localMission[i]
+        end
+    end
+
+    return garrisonMission
+end
+
 local function GetDockCooldown(itemID)
 	local start,duration = GetItemCooldown(itemID)
 	local expires = duration - (GetTime() - start)
@@ -125,6 +166,8 @@ local GarrisonButton_OnEvent = function(self, event, ...)
 		self:StartAlert();
 	elseif ( event == "GARRISON_MISSION_NPC_OPENED" ) then
 		self:StopAlert();
+	elseif ( event == "GARRISON_SHIPYARD_NPC_OPENED" ) then
+		self:StopAlert();
 	elseif (event == "GARRISON_INVASION_AVAILABLE") then
 		self:StartAlert();
 	elseif (event == "GARRISON_INVASION_UNAVAILABLE") then
@@ -153,6 +196,8 @@ end
 local function GetActiveMissions()
 	wipe(GarrisonData)
 	local hasMission = false
+	local inProgressMissions = {}
+	local completedMissions = {}
 
 	GameTooltip:AddLine(" ", 1, 1, 1)
 	GameTooltip:AddLine("Active Missions", 1, 0.7, 0)
@@ -239,12 +284,19 @@ end
 
 local SetGarrisonTooltip = function(self)
 	if(not InCombatLockdown()) then C_Garrison.RequestLandingPageShipmentInfo() end
-	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(824)
+	local name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(1220)
 	local texStr = ("\124T%s:12\124t %d"):format(tex, amount)
+	GameTooltip:AddDoubleLine(name, texStr, 1, 1, 0, 1, 1, 1)
+	name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(1155)
+	texStr = ("\124T%s:12\124t %d"):format(tex, amount)
+	GameTooltip:AddDoubleLine(name, texStr, 1, 1, 0, 1, 1, 1)
+	name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(824)
+	texStr = ("\124T%s:12\124t %d"):format(tex, amount)
 	GameTooltip:AddDoubleLine(name, texStr, 1, 1, 0, 1, 1, 1)
 	name, amount, tex, week, weekmax, maxed, discovered = GetCurrencyInfo(1101)
 	texStr = ("\124T%s:12\124t %d"):format(tex, amount)
 	GameTooltip:AddDoubleLine(name, texStr, 1, 1, 0, 1, 1, 1)
+
 	GetActiveMissions()
 	GetBuildingData()
 	if(self.StopAlert) then
@@ -274,7 +326,7 @@ local function LoadToolBarGarrison()
 		return
 	end
 
-	local garrison = SV.Dock:SetDockButton("BottomLeft", L["Garrison Landing Page"], "SVUI_Garrison", SV.media.dock.garrisonToolIcon, SetGarrisonTooltip, "SecureActionButtonTemplate")
+	local garrison = SV.Dock:SetDockButton("BottomLeft", L["Landing Page"], "SVUI_Garrison", SV.media.dock.garrisonToolIcon, SetGarrisonTooltip, "SecureActionButtonTemplate")
 	garrison:SetAttribute("type1", "click")
 	garrison:SetAttribute("clickbutton", mmButton)
 
@@ -300,6 +352,7 @@ local function LoadToolBarGarrison()
 	garrison:RegisterEvent("GARRISON_ARCHITECT_OPENED");
 	garrison:RegisterEvent("GARRISON_MISSION_FINISHED");
 	garrison:RegisterEvent("GARRISON_MISSION_NPC_OPENED");
+	garrison:RegisterEvent("GARRISON_SHIPYARD_NPC_OPENED");
 	garrison:RegisterEvent("GARRISON_INVASION_AVAILABLE");
 	garrison:RegisterEvent("GARRISON_INVASION_UNAVAILABLE");
 	garrison:RegisterEvent("SHIPMENT_UPDATE");

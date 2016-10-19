@@ -26,6 +26,8 @@ GET ADDON DATA
 ]]--
 local SV = select(2, ...)
 local L = SV.L
+
+local LIUI = LibStub("LibItemUpgradeInfo-1.0");
 --[[
 ##########################################################
 LOCAL VARS
@@ -171,41 +173,43 @@ do
     end
 
     function ParseItemLevel(unit, itemLink)
-        local name, link, quality;
-        local iLevel = 0;
-        if(itemLink and type(itemLink) == "string") then
-          name, link, quality, iLevel = GetItemInfo(itemLink)
-          local itemId = tonumber(itemLink:match("item:%d+:%d+:%d+:%d+:%d+:%d+:%-?%d+:%-?%d+:%d+:%d+:(%d+)"))
-          if iLevel and itemId then
-              if(quality == 7) then
-                  iLevel = _getHeirloomLevel(unit, itemId)
-              end
-          end
-        end
-        return iLevel or 0
+        -- local name, link, quality;
+        -- local iLevel = 0;
+        -- if(itemLink and type(itemLink) == "string") then
+        --   name, link, quality, iLevel = GetItemInfo(itemLink)
+        --   local itemId = tonumber(itemLink:match("item:%d+:%d+:%d+:%d+:%d+:%d+:%-?%d+:%-?%d+:%d+:%d+:(%d+)"))
+        --   if iLevel and itemId then
+        --       if(quality == 7) then
+        --           iLevel = _getHeirloomLevel(unit, itemId)
+        --       end
+        --   end
+        -- end
+        -- return iLevel or 0
+        return LIUI:GetUpgradedItemLevel(itemLink) or 0
     end
 
     local function _getEquippedItemLevel(unit, itemLink)
-        local tooltip = _justthetip();
-        if(not tooltip) then return ParseItemLevel(unit, itemLink) end
-        tooltip:SetOwner(UIParent, "ANCHOR_NONE");
-        tooltip:SetHyperlink(itemLink);
-        tooltip:Show();
+        -- local tooltip = _justthetip();
+        -- if(not tooltip) then return ParseItemLevel(unit, itemLink) end
+        -- tooltip:SetOwner(UIParent, "ANCHOR_NONE");
+        -- tooltip:SetHyperlink(itemLink);
+        -- tooltip:Show();
 
-        local iLevel = 0;
-        local tname = tooltip:GetName().."TextLeft%s";
-        for i = 2, tooltip:NumLines() do
-            local text = _G[tname:format(i)]:GetText();
-            if(text and text ~= "") then
-                local value = tonumber(text:match(iLevelFilter));
-                if(value) then
-                    iLevel = value;
-                end
-            end
-        end
+        -- local iLevel = 0;
+        -- local tname = tooltip:GetName().."TextLeft%s";
+        -- for i = 2, tooltip:NumLines() do
+        --     local text = _G[tname:format(i)]:GetText();
+        --     if(text and text ~= "") then
+        --         local value = tonumber(text:match(iLevelFilter));
+        --         if(value) then
+        --             iLevel = value;
+        --         end
+        --     end
+        -- end
 
-        tooltip:Hide();
-        return iLevel
+        -- tooltip:Hide();
+        -- return iLevel
+        return LIUI:GetUpgradedItemLevel(itemLink) or 0
     end
 
     local function _setLevelDisplay(frame, iLevel)
@@ -317,17 +321,17 @@ end
 
 local function GetActiveGear()
 	local count = GetNumEquipmentSets()
-	local resultSpec = GetActiveSpecGroup()
+	local resultSpec = GetSpecialization()
+  local _, sname = GetSpecializationInfo(resultSpec)
 	local resultSet
-  BG_SET = "none"
+
+  BG_SET = SV.db.Gear.battleground.equipmentset
 	SPEC_SET = "none"
-	if(resultSpec and GetSpecializationInfo(resultSpec) and (resultSpec ~= 1)) then
-    SPEC_SET = SV.db.Gear.specialization.secondary
-    BG_SET = SV.db.Gear.battleground.secondary
-  else
-    SPEC_SET = SV.db.Gear.specialization.primary
-    BG_SET = SV.db.Gear.battleground.primary
+
+	if(sname) then
+    SPEC_SET = SV.db.Gear.specialization[sname] or SPEC_SET
 	end
+
 	if(count == 0) then
 		return resultSpec,false
 	end
@@ -502,18 +506,20 @@ local function InitializeGearInfo()
 	ONLY_DAMAGED = SV.db.Gear.durability.onlydamaged
 	MAX_LEVEL, AVG_LEVEL = GetAverageItemLevel()
 
+
+  LoadAddOn("Blizzard_InspectUI")
+  SetDisplayStats("Character")
+  SetDisplayStats("Inspect")
+  
   GearHandler:RegisterEvent("PLAYER_ENTERING_WORLD")
 	GearHandler:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
 	GearHandler:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
 	GearHandler:RegisterEvent("SOCKET_INFO_UPDATE")
 	GearHandler:RegisterEvent("COMBAT_RATING_UPDATE")
 	GearHandler:RegisterEvent("MASTERY_UPDATE")
-	GearHandler:RegisterEvent("EQUIPMENT_SWAP_FINISHED")
+  GearHandler:RegisterEvent("EQUIPMENT_SWAP_FINISHED")
 	GearHandler:SetScript("OnEvent", GearHandler_OnEvent)
 
-	LoadAddOn("Blizzard_InspectUI")
-	SetDisplayStats("Character")
-	SetDisplayStats("Inspect")
 	NewHook('InspectFrame_UpdateTabs', Gear_UpdateTabs)
 	SV.Timers:ExecuteTimer(SV.UpdateGearInfo, 10)
 	SV:GearSwap()

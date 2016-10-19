@@ -111,11 +111,14 @@ local function WorldMap_OnShow()
     WorldMap_SmallView()
   end
   -- WorldMap_SmallView()
-  if not SV.db.Maps.tinyWorldMap then
+  
+  -- JV - 20160918 Fix error around expectation that SV.db.Maps exists which might not be so if SVUI_Maps is not be true if it's not loaded/installed
+  if ((SV.Maps and SV.db.Maps) and not SV.db.Maps.tinyWorldMap) then
     BlackoutWorld:SetColorTexture(0,0,0,1)
   else
     BlackoutWorld:SetTexture("")
   end
+
 
   WorldMapFrameAreaLabel:SetShadowOffset(2, -2)
   WorldMapFrameAreaLabel:SetTextColor(0.90, 0.8294, 0.6407)

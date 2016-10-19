@@ -1498,8 +1498,14 @@ DOCKS
 MOD.TopCenter = _G["SVUI_DockTopCenter"];
 MOD.BottomCenter = _G["SVUI_DockBottomCenter"];
 
+local dockAlertCombatActive = false
+
 local DockAlert_OnEvent = function(self, event)
     if(event == 'PLAYER_REGEN_ENABLED') then
+    	if dockAlertCombatActive then
+    		DockAlert_Deactivate(self)
+    		dockAlertCombatActive = false
+    	end
         self:SetHeight(self.activeHeight)
         self:UnregisterEvent(event)
     end
@@ -1515,6 +1521,11 @@ local DockAlert_Activate = function(self, child, newHeight)
 end
 
 local DockAlert_Deactivate = function(self)
+	if InCombatLockdown() then 
+		-- Make sure we deactivate later
+		dockAlertCombatActive = true 
+		return 
+	end
 	self:SetHeight(1)
 end
 
@@ -2103,7 +2114,7 @@ function MOD:Load()
 		dock.Alert:ClearAllPoints()
 		dock.Alert:SetSize(width, 1)
 		dock.Alert:SetPoint(anchor, dock, anchor, 0, 0)
-		dock.Alert:SetParent(UIParent)
+		--dock.Alert:SetParent(UIParent)
 
 		dock.Window:ClearAllPoints()
 		dock.Window:SetSize(width, height)
@@ -2114,7 +2125,7 @@ function MOD:Load()
 		SV:NewAnchor(dock, location .. " Dock Window");
 		SV:SetAnchorResizing(dock, dockPostSizeFunc, 10, 500);
 
-		dock.Alert:SetParent(UIParent)
+		--dock.Alert:SetParent(UIParent)
 	end
 
 	if MOD.private.LeftFaded then MOD.BottomLeft:Hide() end

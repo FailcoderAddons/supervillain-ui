@@ -307,7 +307,8 @@ CONSTRUCTORS["player"] = function(self, unit)
     self.PvPText:SetFontObject(SpellFont_Small)
     self.Afflicted = MOD:CreateAfflicted(self)
     self.HealPrediction = MOD:CreateHealPrediction(self, true)
-    self.ResolveBar = MOD:CreateResolveBar(self)
+    -- JV - 20160919 : Resolve mechanic is now gone as of Legion.
+    --self.ResolveBar = MOD:CreateResolveBar(self)
     self.CombatFade = false;
     self:SetPoint("BOTTOMRIGHT", SV.Screen, "BOTTOM", -80, 182)
     SV:NewAnchor(self, L["Player Frame"])

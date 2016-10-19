@@ -141,7 +141,7 @@ local function AchievementStyle()
 		return
 	end
 
-	AchievementFrameHeader:EnableMouse(false)
+	--AchievementFrameHeader:EnableMouse(false)
 
 	for _, gName in pairs(AchievementFrameList) do
 		local frame = _G[gName]
@@ -453,6 +453,8 @@ local function AchievementStyle()
 			end
 		end
 	end)
+	--JV - 21060921 - Fix for Non moving frame (mouse was disabled on the frame but never re-enabled)
+	--AchievementFrameHeader:EnableMouse(true)
 end
 --[[
 ##########################################################

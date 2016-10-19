@@ -63,14 +63,18 @@ local Update = function(self, event, unit)
 		local MAX_COMBO_POINTS = UnitPowerMax("player", SPELL_POWER_COMBO_POINTS);
 		for i=1, MAX_COMBO_POINTS do
 			if(i <= current) then
-				cpoints[i]:Show()
-				if(bar.PointShow) then
-					bar.PointShow(cpoints[i])
+				if (cpoints[i]) then
+					cpoints[i]:Show()
+					if(bar.PointShow) then
+						bar.PointShow(cpoints[i])
+					end
 				end
 			else
-				cpoints[i]:Hide()
-				if(bar.PointHide) then
-					bar.PointHide(cpoints[i], i)
+				if (cpoints[i]) then
+					cpoints[i]:Hide()
+					if(bar.PointHide) then
+						bar.PointHide(cpoints[i], i)
+					end
 				end
 			end
 		end
@@ -108,7 +112,7 @@ local Enable = function(self)
 			local maxComboPoints = UnitPowerMax("player", SPELL_POWER_COMBO_POINTS);
 			for index = 1, maxComboPoints do
 				local cpoint = cpoints[index]
-				if(cpoint:IsObjectType'Texture' and not cpoint:GetTexture()) then
+				if(cpoint and cpoint:IsObjectType'Texture' and not cpoint:GetTexture()) then
 					cpoint:SetTexture[[Interface\ComboFrame\ComboPoint]]
 					cpoint:SetTexCoord(0, 0.375, 0, 1)
 				end
@@ -125,7 +129,7 @@ local Disable = function(self)
 		if(cpoints) then
 			local maxComboPoints = UnitPowerMax(self.unit, SPELL_POWER_COMBO_POINTS);
 			for index = 1, maxComboPoints do
-				cpoints[index]:Hide()
+				if (cpoints[index]) then cpoints[index]:Hide() end
 			end
 		end
 		self:UnregisterEvent('PLAYER_ENTERING_WORLD', Path)

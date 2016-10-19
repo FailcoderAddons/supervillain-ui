@@ -64,6 +64,7 @@ local UIPanels = {};
 UIPanels["AchievementFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["AuctionFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["ArchaeologyFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
+UIPanels["ArtifactFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["BattlefieldMinimap"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = true };
 UIPanels["BarberShopFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["BlackMarketFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
@@ -95,6 +96,7 @@ UIPanels["MacroFrame"] 						= { moving = false, snapped = false, canupdate = fa
 UIPanels["MailFrame"] 						= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["MerchantFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["ObjectiveTrackerFrame"] 			= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
+UIPanels["OrderHallMissionFrame"] 			= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["PlayerTalentFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["PetJournalParent"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["PetStableFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
@@ -110,6 +112,7 @@ UIPanels["ReportPlayerNameDialog"] 			= { moving = false, snapped = false, canup
 UIPanels["RolePollPopup"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = true };
 UIPanels["SpellBookFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["TabardFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
+--UIPanels["TalkingHeadFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["TaxiFrame"] 						= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["TimeManagerFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["TradeSkillFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
@@ -1002,7 +1005,7 @@ local Dragger = CreateFrame("Frame", nil);
 Dragger.Frames = {};
 
 local function SetDraggablePoint(frame, data)
-	if((not frame) or (not data)) then return; end
+	if(InCombatLockdown() or (not frame) or (not data)) then return; end
 	local frameName = frame:GetName()
 	local point = Dragger.Frames[frameName];
 	if(point and (type(point) == "string") and (point ~= 'TBD')) then
@@ -1169,6 +1172,7 @@ local DraggerEventHandler = function(self, event, ...)
 		self:UnregisterEvent("UPDATE_WORLD_STATES")
 		self:UnregisterEvent("WORLD_STATE_TIMER_START")
 		self:UnregisterEvent("WORLD_STATE_UI_TIMER_UPDATE")
+		self:UnregisterEvent("TALKINGHEAD_REQUESTED");
 		self:SetScript("OnEvent", nil)
 	end
 end
@@ -1186,6 +1190,7 @@ function Dragger:New(frameName)
 			self:RegisterEvent("UPDATE_WORLD_STATES")
 			self:RegisterEvent("WORLD_STATE_TIMER_START")
 			self:RegisterEvent("WORLD_STATE_UI_TIMER_UPDATE")
+			self:RegisterEvent("TALKINGHEAD_REQUESTED");
 			self:SetScript("OnEvent", DraggerEventHandler)
 			self.EventsActive = true;
 		end
@@ -1227,6 +1232,7 @@ function Dragger:Reset()
 		self:RegisterEvent("UPDATE_WORLD_STATES")
 		self:RegisterEvent("WORLD_STATE_TIMER_START")
 		self:RegisterEvent("WORLD_STATE_UI_TIMER_UPDATE")
+		self:RegisterEvent("TALKINGHEAD_REQUESTED");
 		self:SetScript("OnEvent", DraggerEventHandler)
 		self.EventsActive = true;
 	end
@@ -1379,7 +1385,7 @@ local function InitializeMovables()
 		Dragger:RegisterEvent("UPDATE_WORLD_STATES")
 		Dragger:RegisterEvent("WORLD_STATE_TIMER_START")
 		Dragger:RegisterEvent("WORLD_STATE_UI_TIMER_UPDATE")
-
+		Dragger:RegisterEvent("TALKINGHEAD_REQUESTED");
 		DraggerEventHandler(Dragger)
 		Dragger:SetScript("OnEvent", DraggerEventHandler)
 
