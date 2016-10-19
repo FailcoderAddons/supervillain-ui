@@ -21,9 +21,6 @@ SuperVillain UI is designed to work with the latest live expansion of World of W
 If you're looking for the most up to date information about what's happening with this fan update of SVUI, Mentalo commands you to (please) join the authors (and other SuperVillains) on Discord: https://discord.gg/4VJdSsc
 
 ### Notes
-
-* This repo will be used exclusively for development versions
-* All feature requests will be considered but not guranteed
 * Please be thorough when posting issues
 
 ## Release Version
