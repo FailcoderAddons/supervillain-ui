@@ -10,7 +10,7 @@ SuperVillain UI is designed to work with the latest live expansion of World of W
 * Make sure WoW isn't running
 * Go to your WoW "Interface\Addons" folder (Normally this would be "C:\Program Files\World of Warcraft\Interface\Addons")
 * Delete all the SVUI_ folders
-* Go to the [SVUI-Temp project on GitHub](https://github.com/failcoder/supervillain-ui)
+* Go to the [project on GitHub](https://github.com/failcoder/supervillain-ui)
 * Click the green "Clone or Download" button
 * Click "Download a ZIP" and save the ZIP wherever you like :)
 * Open the ZIP and copy all the SVUI_ folders into your WoW Interface\Addons folder
