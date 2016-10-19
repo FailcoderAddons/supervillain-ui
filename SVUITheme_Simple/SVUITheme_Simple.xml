@@ -1,0 +1,102 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Frame name="SVUITheme_Simple_Default" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="default" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="default" />
+            <Attribute name="panelGradient" type="string" value="default" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+            <Attribute name="panelOffset" type="number" value="0" />
+        </Attributes>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.2" g="0.2" b="0.2" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUITheme_Simple_Button" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="button" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="button" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="0.5" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUITheme_Simple_DockButton" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="dockbutton" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="dark" />
+            <Attribute name="panelGradient" type="string" value="dark" />
+            <Attribute name="panelTexUpdate" type="boolean" value="true" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+            <Attribute name="panelOffset" type="number" value="0" />
+        </Attributes>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUITheme_Simple_ActionPanel" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="actionpanel" />
+            <Attribute name="panelKeyOverride" type="string" value="ActionPanel" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="darkest" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\textures\EMPTY" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="0" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUITheme_Simple_Minimap" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="minimap" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="darkest" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+    </Frame>
+
+    <Script file="SVUITheme_Simple.lua"/>
+</Ui>

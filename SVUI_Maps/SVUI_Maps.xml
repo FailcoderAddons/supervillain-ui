@@ -1,0 +1,213 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Font name="SVUI_Font_MinimapInfo" font="Fonts\ARIALN.TTF" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="13"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_MinimapCoords" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="13"/>
+        </FontHeight>
+    </Font>
+
+    <Frame name="SVUI_StyleTemplate_Minimap" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="minimap" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="transparent" />
+            <Attribute name="panelGradient" type="string" value="light" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelOffset" type="number" value="1" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="1" right="1" top="1" bottom="1" />
+            <Color r="0" g="0" b="0" a="0.5" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Skin" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT" setAllPoints="true" />
+                <Color r="0" g="0" b="0" a="0.5" />
+            </Layer>
+            <Layer level="BORDER">
+                <Texture parentKey="BorderLeft" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension x="2" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderRight" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension x="2" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderTop" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension y="2" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderBottom" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension y="2" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoordHolderTemplate" virtual="true">
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString name="$parentXLabel" parentKey="XLabel" inherits="SVUI_Font_MinimapCoords" text="X:" justifyH="LEFT" justifyV="MIDDLE">
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parent" relativePoint="LEFT" x="0" y="0" />
+                    </Anchors>
+                    <Color r="1" g="1" b="0" a="1"/>
+                </FontString>
+                <FontString name="$parentX" parentKey="X" inherits="SVUI_Font_MinimapCoords" text="" justifyH="LEFT" justifyV="MIDDLE">
+                    <Size x="50" y="22"/>
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parentXLabel" relativePoint="RIGHT" x="1" y="0" />
+                    </Anchors>
+                    <Color r="0" g="1" b="0.5" a="1"/>
+                </FontString>
+                <FontString name="$parentYLabel" parentKey="YLabel" inherits="SVUI_Font_MinimapCoords" text="Y:" justifyH="LEFT" justifyV="MIDDLE">
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parentX" relativePoint="RIGHT" x="0" y="0" />
+                    </Anchors>
+                    <Color r="1" g="1" b="0" a="1"/>
+                </FontString>
+                <FontString name="$parentY" parentKey="Y" inherits="SVUI_Font_MinimapCoords" text="" justifyH="LEFT" justifyV="MIDDLE">
+                    <Size x="50" y="22"/>
+                    <Anchors>
+                        <Anchor point="LEFT" relativeTo="$parentYLabel" relativePoint="RIGHT" x="1" y="0" />
+                    </Anchors>
+                    <Color r="0" g="1" b="0.5" a="1"/>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_MinimapFrame" parent="UIParent">
+        <Size x="240" y="197"/>
+        <Anchors>
+            <Anchor point="CENTER" relativeTo="Minimap" relativePoint="CENTER" x="0" y="0" />
+        </Anchors>
+    </Frame>
+
+    <Frame name="SVUI_MinimapInfoTop" parent="Minimap">
+        <Size x="18" y="18"/>
+        <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="SVUI_MinimapFrame" relativePoint="TOPLEFT" x="4" y="-4" />
+        </Anchors>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Text" inherits="SVUI_Font_MinimapInfo" text="Meanwhile" justifyH="CENTER" justifyV="MIDDLE">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT" x="2" y="-2" />
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_MinimapInfoBottom" parent="Minimap">
+        <Size x="240" y="28"/>
+        <Anchors>
+            <Anchor point="BOTTOMRIGHT" relativeTo="SVUI_MinimapFrame" relativePoint="BOTTOMRIGHT" x="2" y="-3" />
+        </Anchors>
+        <Layers>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Text" inherits="SVUI_Font_MinimapInfo" text="..." justifyH="RIGHT" justifyV="MIDDLE" setAllPoints="true" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_WorldMapCoords" parent="WorldMapFrame" >
+        <Size x="212" y="54"/>
+        <Anchors>
+            <Anchor point="BOTTOMLEFT" relativeTo="WorldMapFrame" relativePoint="BOTTOMLEFT" x="5" y="5" />
+        </Anchors>
+        <Frames>
+            <Frame name="$parentPlayer" parentKey="Player" inherits="SVUI_CoordHolderTemplate">
+                <Size x="142" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT" x="70" y="5" />
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="$parentName" parentKey="Name" inherits="SVUI_Font_MinimapInfo" text="" justifyH="LEFT" justifyV="MIDDLE">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativeTo="$parent" relativePoint="LEFT" x="-2" y="0" />
+                            </Anchors>
+                            <Color r="1" g="1" b="1" a="1"/>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Frame>
+            <Frame name="$parentMouse" parentKey="Mouse" inherits="SVUI_CoordHolderTemplate">
+                <Size x="142" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT" x="70" y="30" />
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="$parentName" parentKey="Name" inherits="SVUI_Font_MinimapInfo" text="" justifyH="LEFT" justifyV="MIDDLE">
+                            <Anchors>
+                                <Anchor point="RIGHT" relativeTo="$parent" relativePoint="LEFT" x="-2" y="0" />
+                            </Anchors>
+                            <Color r="1" g="1" b="1" a="1"/>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_MiniMapCoords" parent="Minimap" inherits="SVUI_CoordHolderTemplate">
+        <Size x="140" y="22"/>
+        <Anchors>
+            <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT" x="0" y="-2" />
+        </Anchors>
+    </Frame>
+
+	<Script file='Loader.lua'/>
+	<Script file='SVUI_Maps.lua'/>
+</Ui>

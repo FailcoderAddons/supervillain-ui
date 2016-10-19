@@ -1,0 +1,22 @@
+<Bindings>
+  <Binding name="SVUI_MARKERS" description="Raid Marker" category="ADDONS" header="SVUI" runOnUp="true">
+    RaidMark_HotkeyPressed(keystate)
+  </Binding>
+  <Binding name="SVUI_DOCKS" description="Toggle All Docks" category="ADDONS" runOnUp="false">
+    ToggleSuperDocks()
+  </Binding>
+  <Binding name="SVUI_DOCKS_LEFT" description="Toggle Left Dock" category="ADDONS" runOnUp="false">
+    ToggleSuperDockLeft()
+  </Binding>
+  <Binding name="SVUI_DOCKS_RIGHT" description="Toggle Right Dock" category="ADDONS" runOnUp="false">
+    ToggleSuperDockRight()
+  </Binding>
+  <Binding name="SVUI_RIDE" description="Lets Ride" category="ADDONS" runOnUp="false">
+    SVUILetsRide()
+  </Binding>
+  <Binding name="SVUI_DRAENORZONE" description="Draenor Zone Ability Button" category="ADDONS" runOnUp="false" />
+  <Binding name="SVUI_FRAMEDEBUGGER" description="Frame Stack Analyzer" category="ADDONS" runOnUp="false">
+    DebugThisFrame()
+  </Binding>
+  <ModifiedClick action="VENDORMARKITEM" default="ALT-BUTTON2"/>
+</Bindings>

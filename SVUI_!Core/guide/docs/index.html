@@ -1,0 +1,688 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>SVUI Guide</title>
+    <link rel="stylesheet" href="ldoc.css" type="text/css" />
+    <!-- Fonts -->
+	  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet" type="text/css">
+</head>
+<body id="page-top" data-spy="scroll" data-target=".layout-header">
+<div class="skinned-page"></div>
+<div id="message-depot"></div>
+<!-- BEGIN LAYOUT -->
+<div class="layout js-layout js-skins layout-overlay-drawer-button layout-shadow layout-fixed-header layout-fixed-drawer">
+
+
+<!-- BEGIN NAV // -->
+	<div class="layout-header">
+	 <div class="layout-header-row">
+     <span class="layout-title">Documentation</span>
+		 <div class="layout-spacer"></div>
+		 <nav class="navigation">
+		</nav>
+	 </div>
+	</div>
+
+	<div class="layout-drawer">
+    <span class="navigation-title" style="padding:">Contents</span>
+	 <nav class="navigation" style="padding-top:0 !important;">
+<div class="navigation-subtitle">Addons</div>
+<a href="index.html" class="navigation-link current-link">SVUI_Core</a>
+<a href="#Messages" class="navigation-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Messages </a>
+<a href="#Utilities" class="navigation-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Utilities </a>
+<a href="#media_Functions" class="navigation-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;media Functions</a>
+<div class="navigation-spacer"></div>
+  <div class="navigation-spacer"></div>
+<div class="navigation-subtitle">Manual</div>
+ <a href="manual/doc.md.html" class="navigation-link">doc</a>
+  <div class="navigation-spacer"></div>
+<div class="navigation-subtitle">Libraries</div>
+ <a href="libraries/Librarian.html" class="navigation-link">Librarian</a>
+ <a href="libraries/LUA.html" class="navigation-link">LUA</a>
+ <a href="libraries/AceVillain.html" class="navigation-link">AceVillain</a>
+  <div class="navigation-spacer"></div>
+	 </nav>
+	</div>
+
+	<span class="layout-title floating-title no-desktop">Menu</span>
+
+	<div class="layout-drawer-button">
+	 <i class="layout-drawer-button-icon menu-icon"></i>
+	</div>
+	<!-- END NAV // -->
+
+  <!-- BEGIN CONTENT // -->
+  <div class="layout-content">
+
+<section style="padding:0;">
+<div class="grid">
+<div class="cell cell-12-col">
+<div class="container">
+  <div class="comic">
+  <div class="card">
+  <div class="card-header flex--expand">
+  <div class="card-header-title flex--centered">
+  <span class="badge" data-badge="Module">SVUI_Core</span>
+  </div>
+  </div>
+  <div class="card-actions flex--expand">
+  <div class="card-header-subtitle flex--centered">SVUI is our global addon object.</div>
+  </div>
+  <div class="card-section">
+  <div class="section-dialog">
+  <h4 class="section-label">Info:</h4>
+  <ul>
+    <li> SuperVillain UI Core Module.</li>
+        <li><strong>Release</strong>: 1.0.0</li>
+        <li><strong>Author</strong>: Steven Jackson (2014)</li>
+  <hr />
+  </ul>
+  <h5 class="section-label">Construct:</h5>
+      <pre class="example">
+    <span class="comment">-- Every other file will set a reference to the addon using this variable. Here is how we set it.
+</span>
+    <span class="comment">-- METHOD 1 ----------------------------------------------------------------
+</span>    <span class="comment">-- if we are setting this inside the core.lua file then use this method
+</span>    <span class="keyword">local</span> global = <span class="string">"SVUI_Global"</span>    <span class="comment">-- reference to SavedVariables
+</span>    <span class="keyword">local</span> errors = <span class="string">"SVUI_Errors"</span>    <span class="comment">-- reference to SavedVariables
+</span>    <span class="keyword">local</span> private = <span class="string">"SVUI_Private"</span>  <span class="comment">-- reference to SavedVariables
+</span>    <span class="keyword">local</span> media = <span class="string">"SVUI_Media"</span>      <span class="comment">-- reference to SavedVariables
+</span>    <span class="keyword">local</span> shared = <span class="string">"SVUI_Shared"</span>    <span class="comment">-- reference to SavedVariables
+</span>
+    <span class="keyword">local</span> Registry = Librarian(<span class="string">"Registry"</span>)  <span class="comment">-- now pull down the Registry object
+</span>    <span class="comment">-- finally we use the 'NewCore' function specifically for this
+</span>    <span class="keyword">local</span> SV = Registry:NewCore(global, errors, private, media, shared)
+
+    <span class="comment">-- METHOD 2 ----------------------------------------------------------------
+</span>    <span class="comment">-- if we are setting the variable in any other file then use this method
+</span>    <span class="keyword">local</span> SV = _G[<span class="string">'SVUI'</span>]</pre>
+  <hr />
+  <h5 class="section-label">Summary:</h5>
+  <div style="padding:6px 0px;"><a href="#Messages" style="color:#ff5500">Jump To: Messages &#8921;</a></div>
+  <table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#SCTMessage">SCTMessage (message, red, green, blue, displayType)</a></td>
+	<td class="summary">Send messages to the scrolling message frame (combat text).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#AddonMessage">AddonMessage (message)</a></td>
+	<td class="summary">Send messages to the chat frame prefixed with the addon branding.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#CharacterMessage">CharacterMessage (message)</a></td>
+	<td class="summary">Send messages to the chat frame as if they came from your character.</td>
+	</tr>
+  </table>
+  <div style="padding:6px 0px;"><a href="#Utilities" style="color:#ff5500">Jump To: Utilities &#8921;</a></div>
+  <table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#fubar">fubar ()</a></td>
+	<td class="summary">Dummy function used to override existing methods, effectively killing them.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#StaticPopup_Show">StaticPopup_Show (arg)</a></td>
+	<td class="summary">Request specific &lsquo;Static Popup&rsquo; windows.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ResetAllUI">ResetAllUI ()</a></td>
+	<td class="summary">Reset all SVUI created settings to defaults.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ResetUI">ResetUI ()</a></td>
+	<td class="summary">Reset layout positions back to their default.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#ToggleConfig">ToggleConfig ()</a></td>
+	<td class="summary">Open the config menu (&lsquo;/sv&rsquo;).</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#VersionCheck">VersionCheck ()</a></td>
+	<td class="summary">Checks to see which (if any) version of the core that the client has installed.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#RefreshEverything">RefreshEverything ()</a></td>
+	<td class="summary">Reloads all current packages and modules.</td>
+	</tr>
+  </table>
+  <div style="padding:6px 0px;"><a href="#media_Functions" style="color:#ff5500">Jump To: media Functions&#8921;</a></div>
+  <table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#ColorGradient">ColorGradient (percentage, ...)</a></td>
+	<td class="summary">Returns a color value based on percentages.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#HexColor">HexColor (red, green, blue)</a></td>
+	<td class="summary">Returns a hexadecimal color value.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#FontManager">FontManager (obj, template, abstract, sizeMod, styleOverride, red, green, blue)</a></td>
+	<td class="summary">Adds a font object to the custom SVUI font manager.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#GenerateFontOptionGroup">GenerateFontOptionGroup (groupName, groupCount, groupOverview, groupList)</a></td>
+	<td class="summary">Create an add-in set of specific font configuration options.</td>
+	</tr>
+  </table>
+  <hr />
+  <br />
+  <br />
+    <h6 class="section-label" id="Messages">Messages
+
+          <small>
+           Addon Message Handlers
+        </small>
+    </h6>
+    <dl class="function">
+    <dt id="SCTMessage">
+    <strong>SCTMessage (message, red, green, blue, displayType)</strong>
+    </dt>
+    <dd>
+    Send messages to the scrolling message frame (combat text).
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>message</strong><td>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The dialog to be displayed.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>red</strong><td>
+         Text coloring, red value.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>green</strong><td>
+         Text coloring, green value.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>blue</strong><td>
+         Text coloring, blue value.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>displayType</strong><td>
+         Special animation type (STICKY, CRITICAL or nil).
+        </td></tr>
+</tbody></table>
+
+
+
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Usage:</strong></div>
+    <ul>
+        <pre class="example">SV:SCTMessage(<span class="string">'My message'</span>, <span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>, <span class="string">'STICKY'</span>)</pre>
+    </ul>
+
+  </dd>
+    <dt id="AddonMessage">
+    <strong>AddonMessage (message)</strong>
+    </dt>
+    <dd>
+    Send messages to the chat frame prefixed with the addon branding.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>message</strong><td>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The dialog to be displayed.
+        </td></tr>
+</tbody></table>
+
+
+
+
+
+  </dd>
+    <dt id="CharacterMessage">
+    <strong>CharacterMessage (message)</strong>
+    </dt>
+    <dd>
+    Send messages to the chat frame as if they came from your character.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>message</strong><td>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         The dialog to be displayed.
+        </td></tr>
+</tbody></table>
+
+
+
+
+
+  </dd>
+  </dl>
+    <h6 class="section-label" id="Utilities">Utilities
+
+          <small>
+           Utilities used and shared by the SVUI core.
+        </small>
+    </h6>
+    <dl class="function">
+    <dt id="fubar">
+    <strong>fubar ()</strong>
+    </dt>
+    <dd>
+    Dummy function used to override existing methods, effectively killing them.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Returns:</strong></div>
+    <ol>
+
+        nothing.
+    </ol>
+
+
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Usage:</strong></div>
+    <ul>
+        <pre class="example">
+   <span class="comment">-- Kill a function
+</span>   SomeObject.some_function = SV.fubar</pre>
+    </ul>
+
+  </dd>
+    <dt id="StaticPopup_Show">
+    <strong>StaticPopup_Show (arg)</strong>
+    </dt>
+    <dd>
+    Request specific &lsquo;Static Popup&rsquo; windows.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>arg</strong><td>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Name of the popup
+        </td></tr>
+</tbody></table>
+
+
+
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Usage:</strong></div>
+    <ul>
+        <pre class="example">
+   <span class="comment">-- Open the 'Reload UI' popup
+</span>   SV:StaticPopup_Show(<span class="string">'RL_CLIENT'</span>)</pre>
+    </ul>
+
+  </dd>
+    <dt id="ResetAllUI">
+    <strong>ResetAllUI ()</strong>
+    </dt>
+    <dd>
+    Reset all SVUI created settings to defaults.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+
+
+
+
+
+  </dd>
+    <dt id="ResetUI">
+    <strong>ResetUI ()</strong>
+    </dt>
+    <dd>
+    Reset layout positions back to their default.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+
+
+
+
+
+  </dd>
+    <dt id="ToggleConfig">
+    <strong>ToggleConfig ()</strong>
+    </dt>
+    <dd>
+    Open the config menu (&lsquo;/sv&rsquo;).
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+
+
+
+
+
+  </dd>
+    <dt id="VersionCheck">
+    <strong>VersionCheck ()</strong>
+    </dt>
+    <dd>
+    Checks to see which (if any) version of the core that the client has installed.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+
+
+
+
+
+  </dd>
+    <dt id="RefreshEverything">
+    <strong>RefreshEverything ()</strong>
+    </dt>
+    <dd>
+    Reloads all current packages and modules.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+
+
+
+
+
+  </dd>
+  </dl>
+    <h6 class="section-label" id="media_Functions">media Functions
+
+    </h6>
+    <dl class="function">
+    <dt id="ColorGradient">
+    <strong>ColorGradient (percentage, ...)</strong>
+    </dt>
+    <dd>
+    Returns a color value based on percentages.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>percentage</strong><td>
+            <span class="types"><span class="type">number</span></span>
+         The needed gradient percent.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>...</strong><td>
+         (vararg) remaining arguments are up to 3 sets of numeric color values (r,g,b).
+        </td></tr>
+</tbody></table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Returns:</strong></div>
+    <ol>
+
+        red value, green value, blue value
+    </ol>
+
+
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Usage:</strong></div>
+    <ul>
+        <pre class="example">SV:ColorGradient(<span class="number">50</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>)</pre>
+    </ul>
+
+  </dd>
+    <dt id="HexColor">
+    <strong>HexColor (red, green, blue)</strong>
+    </dt>
+    <dd>
+    Returns a hexadecimal color value.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>red</strong><td>
+            <span class="types"><span class="type">number</span></span>
+         Color, red value.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>green</strong><td>
+            <span class="types"><span class="type">number</span></span>
+         Color, green value.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>blue</strong><td>
+            <span class="types"><span class="type">number</span></span>
+         Color, blue value.
+        </td></tr>
+</tbody></table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Returns:</strong></div>
+    <ol>
+
+        Hexadecimal string color
+    </ol>
+
+
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Usage:</strong></div>
+    <ul>
+        <pre class="example">SV:HexColor(<span class="number">0.1</span>, <span class="number">0.2</span>, <span class="number">0.3</span>)</pre>
+    </ul>
+
+  </dd>
+    <dt id="FontManager">
+    <strong>FontManager (obj, template, abstract, sizeMod, styleOverride, red, green, blue)</strong>
+    </dt>
+    <dd>
+    Adds a font object to the custom SVUI font manager.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>obj</strong><td>
+         Font object.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>template</strong><td>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Internal name of the media-font to be assigned.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>abstract</strong><td>
+         A multi-use flag.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>sizeMod</strong><td>
+         Font size override.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>styleOverride</strong><td>
+         Outline override.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>red</strong><td>
+            <span class="types"><span class="type">number</span></span>
+         Color, red value.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>green</strong><td>
+            <span class="types"><span class="type">number</span></span>
+         Color, green value.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>blue</strong><td>
+            <span class="types"><span class="type">number</span></span>
+         Color, blue value.
+        </td></tr>
+</tbody></table>
+
+
+
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Usage:</strong></div>
+    <ul>
+        <pre class="example">SV:FontManager(FontObject, <span class="string">'default'</span>, <span class="keyword">false</span>, <span class="keyword">false</span>, <span class="string">'OUTLINE'</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>)</pre>
+    </ul>
+
+  </dd>
+    <dt id="GenerateFontOptionGroup">
+    <strong>GenerateFontOptionGroup (groupName, groupCount, groupOverview, groupList)</strong>
+    </dt>
+    <dd>
+    Create an add-in set of specific font configuration options.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>groupName</strong><td>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Options group to insert into.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>groupCount</strong><td>
+            <span class="types"><span class="type">number</span></span>
+         Option order for this option.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>groupOverview</strong><td>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.4">string</a></span>
+         Option group name for this option.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>groupList</strong><td>
+            <span class="types"><a class="type" href="http://www.lua.org/manual/5.1/manual.html#5.5">table</a></span>
+         Array of relevant font data.
+        </td></tr>
+</tbody></table>
+
+
+
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Usage:</strong></div>
+    <ul>
+        <pre class="example">SV:GenerateFontOptionGroup(groupName, groupCount, groupOverview, groupList)</pre>
+    </ul>
+
+  </dd>
+  </dl>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- END CONTENT -->
+
+<!-- BEGIN FOOTER // -->
+<footer>
+  <div class="right-section">
+    <ul class="link-list">
+      <li>
+        <span style="color:#5fafff">Last updated 2015-08-26 14:32:22</span>
+      </li>
+    </ul>
+  </div>
+</footer>
+<!-- END FOOTER // -->
+
+</div>
+<!-- END LAYOUT -->
+
+<!-- Core JavaScript -->
+<script src="http://supervillainui.com/js/app.min.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery-1.11.0.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery.easing.min.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery.swipebox.min.js"></script>
+</body>
+</html>

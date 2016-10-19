@@ -1,0 +1,51 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Font name="SVUI_Font_Quest" font="Fonts\ARIALN.TTF" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="12"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Quest_Header" font="Fonts\skurri.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="16"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Quest_Number" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="11"/>
+        </FontHeight>
+    </Font>
+
+    <Frame name="SVUI_QuestItemBar" parent="UIParent">
+        <Size x="32" y="160"/>
+        <Anchors>
+            <Anchor point="BOTTOMRIGHT" x="-250" y="60"/>
+        </Anchors>
+    </Frame>
+
+    <Script file="Loader.lua"/>
+    <Script file='SVUI_QuestTracker.lua'/>
+    <Script file='components\popups.lua'/>
+    <Script file='components\active.lua'/>
+    <Script file='components\scenario.lua'/>
+    <Script file='components\quests.lua'/>
+    <Script file='components\bonus.lua'/>
+    <Script file='components\achievements.lua'/>
+</Ui>

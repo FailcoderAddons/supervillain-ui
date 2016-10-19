@@ -1,0 +1,870 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Font name="SVUI_Font_Super_Text" inherits="SVUI_Font_Number" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="2" y="-2"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.5"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="22"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Super_Title" inherits="SVUI_Font_Number_Huge" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="2" y="-2"/>
+            </Offset>
+            <Color r="0" g="0" b="0" />
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="128"/>
+        </FontHeight>
+    </Font>
+
+    <Frame name="SVUI_SuperTitleFrame" frameStrata="BACKGROUND" hidden="true">
+        <Size x="400" y="100"/>
+        <Anchors>
+            <Anchor point="LEFT" relativePoint="CENTER" x="150" y="-50" />
+        </Anchors>
+        <Layers>
+            <Layer level="ARTWORK">
+
+              <FontString name="$parentList" font="SVUI_Font_Super_Title">
+                <Color r="1" g="0.5" b="0" a="0.85"/>
+                <Anchors>
+                    <Anchor point="LEFT" x="0" y="0" />
+                </Anchors>
+                <Shadow>
+                    <Offset>
+                        <AbsDimension x="2" y="-2"/>
+                    </Offset>
+                    <Color r="0" g="0" b="0" />
+                </Shadow>
+              </FontString>
+
+              <FontString name="$parentTitle" inherits="SVUI_Font_Super_Text">
+                <Color r="1" g="1" b="0" a="0.85"/>
+                  <Anchors>
+                      <Anchor point="BOTTOMLEFT" relativeTo="$parentList" relativePoint="TOPLEFT" x="0" y="6" />
+                  </Anchors>
+              </FontString>
+          </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_CreditFrame" frameStrata="BACKGROUND" hidden="true">
+        <Size x="400" y="100"/>
+        <Anchors>
+            <Anchor point="LEFT" relativePoint="CENTER" x="200" y="-50" />
+        </Anchors>
+        <Layers>
+            <Layer level="ARTWORK">
+
+              <FontString name="$parentList" font="SystemFont_Shadow_Outline_Huge2" justifyH="LEFT">
+                <Color r="1" g="1" b="1" a="0.65"/>
+                <Anchors>
+                    <Anchor point="LEFT" x="0" y="0" />
+                </Anchors>
+              </FontString>
+
+              <FontString name="$parentTitle" inherits="SystemFont_Shadow_Large">
+                <Color r="1" g="1" b="1" a="0.65"/>
+                  <Anchors>
+                      <Anchor point="BOTTOMLEFT" relativeTo="$parentList" relativePoint="TOPLEFT" x="0" y="6" />
+                  </Anchors>
+              </FontString>
+          </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_DropdownFrame" frameStrata="DIALOG" hidden="true" />
+
+    <Frame name="SVUI_MailMinion" parent="InboxFrame" hidden="true">
+        <Size x="150" y="25"/>
+        <Anchors>
+            <Anchor point="CENTER" relativePoint="TOP" x="-22" y="-400" />
+        </Anchors>
+        <Frames>
+            <Button name="$parentGetMail" parentKey="GetMail" inherits="UIPanelButtonTemplate" text="Get All">
+                <Size x="70" y="25"/>
+                <Anchors>
+                    <Anchor point="LEFT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentGetGold" parentKey="GetGold" inherits="UIPanelButtonTemplate" text="Get Gold">
+                <Size x="70" y="25"/>
+                <Anchors>
+                    <Anchor point="RIGHT" />
+                </Anchors>
+            </Button>
+            <Button name="$parentDelete" parentKey="Delete" inherits="UIPanelButtonTemplate" text="Delete All">
+                <Size x="70" y="25"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="InboxFrame" relativePoint="TOPLEFT">
+                        <Offset x="16" y="-30"/>
+                    </Anchor>
+                </Anchors>
+            </Button>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_RaidMarkFrame" frameStrata="DIALOG" hidden="true" />
+
+    <Frame name="SVUI_LayoutPrecision" movable="true" hidden="true" frameStrata="DIALOG">
+        <Size x="200" y="144"/>
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentBG" setAllPoints="true"/>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture name="$parentTitleBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parentBG" relativePoint="TOPLEFT">
+                            <Offset x="30" y="0"/>
+                        </Anchor>
+                        <Anchor point="TOPRIGHT" relativeTo="$parentBG" relativePoint="TOPRIGHT">
+                            <Offset x="-30" y="0"/>
+                        </Anchor>
+                    </Anchors>
+                    <Size y="20"/>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Title" inherits="GameFontNormal" justifyV="TOP" text="Focused Position">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parentTitleBG" relativePoint="TOPLEFT"/>
+                        <Anchor point="TOPRIGHT" relativeTo="$parentTitleBG" relativePoint="TOPRIGHT"/>
+                    </Anchors>
+                </FontString>
+                <FontString inherits="NumberFont_Outline_Huge" text="X">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" relativeTo="$parentTitleBG" relativePoint="BOTTOMLEFT">
+                            <Offset x="-8" y="-10"/>
+                        </Anchor>
+                    </Anchors>
+                    <Color r="1" g="0.5" b="0" a="1"/>
+                </FontString>
+                <FontString inherits="NumberFont_Outline_Huge" text="Y">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativeTo="$parentTitleBG" relativePoint="BOTTOMRIGHT">
+                            <Offset x="8" y="-10"/>
+                        </Anchor>
+                    </Anchors>
+                    <Color r="1" g="0.5" b="0" a="1"/>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+          <Button name="$parentCloseButton" parentKey="Close" inherits="UIPanelCloseButton">
+              <Anchors>
+                  <Anchor point="TOPRIGHT" relativeTo="$parentBG" relativePoint="TOPRIGHT">
+                      <Offset x="6" y="6"/>
+                  </Anchor>
+              </Anchors>
+          </Button>
+            <EditBox name="$parentSetX" inherits="InputBoxTemplate" autoFocus="false">
+                <Size x="50" y="17"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentTitleBG" relativePoint="BOTTOM">
+                        <Offset x="-27" y="0"/>
+                    </Anchor>
+                </Anchors>
+
+                <Scripts>
+                    <OnEscapePressed>
+                        self:SetText(math.floor((self.CurrentValue or 0) + 0.5))
+                        EditBox_ClearFocus(self)
+                    </OnEscapePressed>
+                    <OnEditFocusLost>
+                        self:SetText(math.floor((self.CurrentValue or 0) + 0.5))
+                    </OnEditFocusLost>
+                    <OnShow>
+                        EditBox_ClearFocus(self)
+                        self:SetText(math.floor((self.CurrentValue or 0) + 0.5))
+                    </OnShow>
+                </Scripts>
+            </EditBox>
+
+            <EditBox name="$parentSetY" inherits="InputBoxTemplate" autoFocus="false">
+                <Size x="50" y="17"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentTitleBG" relativePoint="BOTTOM">
+                        <Offset x="27" y="0"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnEscapePressed>
+                        self:SetText(math.floor((self.CurrentValue or 0) + 0.5))
+                        EditBox_ClearFocus(self)
+                    </OnEscapePressed>
+                    <OnEditFocusLost>
+                        self:SetText(math.floor((self.CurrentValue or 0) + 0.5))
+                    </OnEditFocusLost>
+                    <OnShow>
+                        EditBox_ClearFocus(self)
+                        self:SetText(math.floor((self.CurrentValue or 0) + 0.5))
+                    </OnShow>
+                </Scripts>
+            </EditBox>
+
+            <Button name="$parentResetButton" inherits="OptionsButtonTemplate" text="Reset">
+                <Size x="48" y="20"/>
+                <Anchors>
+                    <Anchor point="TOP" relativeTo="$parentTitleBG" relativePoint="BOTTOM" x="0" y="-22" />
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        self:RegisterForClicks("AnyUp");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+
+            <Button name="$parentUpButton" inherits="UIPanelSquareButton">
+                <Size x="25" y="20"/>
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentResetButton" relativePoint="RIGHT">
+                        <Offset x="2" y="0"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        SquareButton_SetIcon(self, "UP");
+                        self:RegisterForClicks("AnyUp");
+                    </OnLoad>
+                    <OnClick>
+                        local frame = _G["SVUI_LayoutPrecisionSetY"];
+                        frame.CurrentValue = frame.CurrentValue + 1
+                        frame:SetText(frame.CurrentValue)
+                        frame:GetScript('OnEnterPressed')(frame)
+                    </OnClick>
+                </Scripts>
+            </Button>
+
+            <Button name="$parentDownButton" inherits="UIPanelSquareButton">
+                <Size x="25" y="20"/>
+                <Anchors>
+                    <Anchor point="LEFT" relativeTo="$parentUpButton" relativePoint="RIGHT">
+                        <Offset x="2" y="0"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        SquareButton_SetIcon(self, "DOWN");
+                        self:RegisterForClicks("AnyUp");
+                    </OnLoad>
+                    <OnClick>
+                        local frame = _G["SVUI_LayoutPrecisionSetY"];
+                        frame.CurrentValue = frame.CurrentValue - 1
+                        frame:SetText(frame.CurrentValue)
+                        frame:GetScript('OnEnterPressed')(frame)
+                    </OnClick>
+                </Scripts>
+            </Button>
+
+            <Button name="$parentRightButton" inherits="UIPanelSquareButton">
+                <Size x="25" y="20"/>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentResetButton" relativePoint="LEFT">
+                        <Offset x="-2" y="0"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        SquareButton_SetIcon(self, "RIGHT");
+                        self:RegisterForClicks("AnyUp");
+                    </OnLoad>
+                    <OnClick>
+                        local frame = _G["SVUI_LayoutPrecisionSetX"];
+                        frame.CurrentValue = frame.CurrentValue + 1
+                        frame:SetText(frame.CurrentValue)
+                        frame:GetScript('OnEnterPressed')(frame)
+                    </OnClick>
+                </Scripts>
+            </Button>
+
+            <Button name="$parentLeftButton" inherits="UIPanelSquareButton">
+                <Size x="25" y="20"/>
+                <Anchors>
+                    <Anchor point="RIGHT" relativeTo="$parentRightButton" relativePoint="LEFT">
+                        <Offset x="-2" y="0"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnLoad>
+                        SquareButton_SetIcon(self, "LEFT");
+                        self:RegisterForClicks("AnyUp");
+                    </OnLoad>
+                    <OnClick>
+                        local frame = _G["SVUI_LayoutPrecisionSetX"];
+                        frame.CurrentValue = frame.CurrentValue - 1
+                        frame:SetText(frame.CurrentValue)
+                        frame:GetScript('OnEnterPressed')(frame)
+                    </OnClick>
+                </Scripts>
+            </Button>
+
+            <Slider name="$parentWidthAdjust" inherits="SVUI_HSliderTemplate">
+      				<Size x="132" y="12"/>
+      				<Anchors>
+      					<Anchor point="TOP" relativeTo="$parentResetButton" relativePoint="BOTTOM">
+      						<Offset>
+      							<AbsDimension x="0" y="-20"/>
+      						</Offset>
+      					</Anchor>
+      				</Anchors>
+      				<Scripts>
+      					<OnLoad>
+      						local name = self:GetName();
+                  self.rangeLow = _G[name.."Low"];
+                  self.rangeHigh = _G[name.."High"];
+                  self.rangeValue = _G[name.."Text"];
+      					</OnLoad>
+      				</Scripts>
+      			</Slider>
+
+            <Slider name="$parentHeightAdjust" inherits="SVUI_HSliderTemplate">
+      				<Size x="132" y="12"/>
+      				<Anchors>
+      					<Anchor point="TOP" relativeTo="$parentWidthAdjust" relativePoint="BOTTOM">
+      						<Offset>
+      							<AbsDimension x="0" y="-20"/>
+      						</Offset>
+      					</Anchor>
+      				</Anchors>
+      				<Scripts>
+      					<OnLoad>
+      						local name = self:GetName();
+                  self.rangeLow = _G[name.."Low"];
+                  self.rangeHigh = _G[name.."High"];
+                  self.rangeValue = _G[name.."Text"];
+      					</OnLoad>
+      				</Scripts>
+      			</Slider>
+        </Frames>
+        <Scripts>
+            <OnDragStart>
+                self.moving = true;
+                self:StartMoving();
+            </OnDragStart>
+            <OnDragStop>
+                self.moving = nil;
+                self:StopMovingOrSizing();
+            </OnDragStop>
+        </Scripts>
+    </Frame>
+
+    <Frame name="SVUI_Layout" movable="true" hidden="true" frameStrata="DIALOG">
+        <Size x="220" y="30"/>
+        <Anchors>
+            <Anchor point="CENTER">
+                <Offset x="0" y="30"/>
+            </Anchor>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentBG" setAllPoints="true"/>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture name="$parentTitleBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+                            <Offset x="0" y="-30"/>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Title" inherits="SVUI_Font_Narrator" justifyH="CENTER" text="Mentalo The Frame Mover!">
+                    <Anchors>
+                        <Anchor point="CENTER" relativeTo="$parentTitleBG" relativePoint="CENTER" />
+                    </Anchors>
+                    <Color r="1" g="1" b="1" a="1"/>
+                </FontString>
+                <FontString name="$parentSubTitle" parentKey="SubTitle" inherits="SVUI_Font_Caps" justifyH="CENTER" text="Right-click frames to move with precision.">
+                    <Anchors>
+                        <Anchor point="TOP" relativeTo="$parentTitleBG" relativePoint="BOTTOM" x="0" y="5" />
+                    </Anchors>
+                    <Color r="1" g="1" b="0" a="0.8"/>
+                </FontString>
+                <FontString parentKey="SubInfo" inherits="SVUI_Font_Caps" justifyH="CENTER" text="Hold shift to enable snapping.">
+                    <Anchors>
+                        <Anchor point="TOP" relativeTo="$parentSubTitle" relativePoint="BOTTOM" x="0" y="-4" />
+                    </Anchors>
+                    <Color r="1" g="0.5" b="0" a="0.8"/>
+                </FontString>
+                <Texture name="$parentPortrait" parentKey="Portrait" file="Interface\AddOns\SVUI_!Core\assets\textures\EMPTY">
+                    <Size x="132" y="132"/>
+                    <Anchors>
+                        <Anchor point="BOTTOM" relativeTo="$parentBG" relativePoint="TOP" x="0" y="-28" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Button name="$parentGridButton" inherits="OptionsButtonTemplate" text="">
+                <Size x="104" y="24"/>
+                <Anchors>
+                    <Anchor point="CENTER" relativeTo="$parentPortrait" relativePoint="TOPRIGHT" x="0" y="0" />
+                </Anchors>
+            </Button>
+            <Button name="$parentLockButton" inherits="OptionsButtonTemplate" text="">
+                <Size x="104" y="24"/>
+                <Anchors>
+                    <Anchor point="CENTER" relativeTo="$parentPortrait" relativePoint="TOPLEFT" x="0" y="0" />
+                </Anchors>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnHide>
+                _G["SVUI_LayoutPrecision"]:Hide();
+            </OnHide>
+            <OnDragStart>
+                self.moving = true;
+                self:StartMoving();
+            </OnDragStart>
+            <OnDragStop>
+                self.moving = nil;
+                self:StopMovingOrSizing();
+            </OnDragStop>
+        </Scripts>
+    </Frame>
+
+    <Frame name="SVUI_GameMenuFrame" parent="GameMenuFrame">
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="-7">
+                <Texture file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" x="0" y="-300" />
+                    </Anchors>
+                    <Color r="0" g="0" b="0" a="0.8" />
+                </Texture>
+                <Texture file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="0" y="0" />
+                        <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="300" />
+                    </Anchors>
+                    <Color r="0" g="0" b="0" a="0.8" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <PlayerModel name="$parentModelLeft" parentKey="ModelLeft" frameStrata="HIGH">
+                <Size y="1"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="-250" y="-300" />
+                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM" x="0" y="300" />
+                </Anchors>
+            </PlayerModel>
+            <PlayerModel name="$parentModelRight" parentKey="ModelRight" frameStrata="HIGH">
+                <Size y="1"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="250" y="-300" />
+                    <Anchor point="BOTTOMLEFT" relativePoint="BOTTOM" x="0" y="300" />
+                </Anchors>
+            </PlayerModel>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_AFKFrame" hidden="true">
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="-7">
+                <Texture file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" x="0" y="-64" />
+                    </Anchors>
+                    <Color r="0" g="0" b="0" a="0.8" />
+                </Texture>
+                <Texture file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="0" y="0" />
+                        <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="90" />
+                    </Anchors>
+                    <Color r="0" g="0" b="0" a="0.8" />
+                </Texture>
+            </Layer>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="BG" file="Interface\AddOns\SVUI_!Core\assets\textures\Doodads\AFK-BG">
+                    <Size x="600" y="600"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+                    </Anchors>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <PlayerModel name="$parentModel" parentKey="Model" frameStrata="HIGH">
+                <Size x="600" y="600"/>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                </Anchors>
+            </PlayerModel>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_BoozedUpFrame" parent="UIParent" setAllPoints="true" hidden="true">
+        <Frames>
+            <PlayerModel name="$parentScreenEffect1" parentKey="ScreenEffect1" frameStrata="BACKGROUND" setAllPoints="true" />
+            <PlayerModel name="$parentScreenEffect2" parentKey="ScreenEffect2" frameStrata="BACKGROUND">
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="0" y="0" />
+                </Anchors>
+            </PlayerModel>
+            <PlayerModel name="$parentScreenEffect3" parentKey="ScreenEffect3" frameStrata="BACKGROUND">
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+                </Anchors>
+            </PlayerModel>
+            <Frame name="$parentYeeHaw" parentKey="YeeHaw" frameStrata="DIALOG">
+                <Size x="256" y="128"/>
+                <Anchors>
+                    <Anchor point="TOP" relativeTo="$parent" relativePoint="TOP" x="0" y="-50" />
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="tex" file="Interface\AddOns\SVUI_!Core\assets\textures\Doodads\DRUNK-PARTYTIME" setAllPoints="true" />
+                    </Layer>
+                </Layers>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <StatusBar name="SVUI_ThreatOMeter" frameStrata="DIALOG" hidden="true" />
+
+    <Frame name="SVUI_ComixFrame" frameStrata="DIALOG" hidden="true" />
+
+    <Frame name="SVUI_ComixPopup1" frameStrata="DIALOG" hidden="true">
+        <Size x="100" y="100"/>
+        <Anchors>
+            <Anchor point="CENTER" relativePoint="CENTER" x="0" y="0" />
+        </Anchors>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="tex" file="Interface\AddOns\SVUI_!Core\assets\textures\Doodads\COMICS-TYPE1" setAllPoints="true" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_ComixPopup2" frameStrata="DIALOG" hidden="true">
+        <Size x="100" y="100"/>
+        <Anchors>
+            <Anchor point="BOTTOM" relativePoint="BOTTOM" x="0" y="100" />
+        </Anchors>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="tex" file="Interface\AddOns\SVUI_!Core\assets\textures\Doodads\COMICS-TYPE2" setAllPoints="true" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_ComixPopup3" frameStrata="DIALOG" hidden="true">
+        <Size x="100" y="100"/>
+        <Anchors>
+            <Anchor point="CENTER" relativePoint="CENTER" x="0" y="0" />
+        </Anchors>
+        <Layers>
+            <Layer level="ARTWORK">
+                <Texture parentKey="tex" file="Interface\AddOns\SVUI_!Core\assets\textures\Doodads\COMICS-TYPE3" setAllPoints="true" />
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame name="$parentBG" parentKey="bg" frameStrata="BACKGROUND">
+                <Size x="128" y="128"/>
+                <Anchors>
+                    <Anchor point="CENTER" relativePoint="CENTER" x="0" y="0" />
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <Texture parentKey="tex" file="Interface\AddOns\SVUI_!Core\assets\textures\Doodads\COMICS-TYPE3-BG" setAllPoints="true" />
+                    </Layer>
+                </Layers>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_ScriptError" movable="true" hidden="true" frameStrata="DIALOG">
+        <Size x="484" y="550"/>
+        <Anchors>
+            <Anchor point="TOPLEFT" x="80" y="-80"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentBG" setAllPoints="true"/>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture name="$parentTitleBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-8"/>
+                        </Anchor>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+                            <Offset x="-32" y="-24"/>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+                <Texture name="$parentDialogBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-32"/>
+                        </Anchor>
+                        <Anchor point="BOTTOMRIGHT">
+                            <Offset x="-32" y="32"/>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Title" inherits="GameFontNormal">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-8"/>
+                        </Anchor>
+                        <Anchor point="TOPRIGHT">
+                            <Offset x="-32" y="-24"/>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="sourceLabel" font="GameFontNormalCenter">
+                    <Size x="140" y="16"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT">
+                            <Offset x="104" y="8"/>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <ScrollFrame name="$parentDialog" parentKey="Dialog" inherits="MinimalScrollFrameTemplate">
+                <Size x="443" y="484"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset x="12" y="-30"/>
+                    </Anchor>
+                </Anchors>
+                <ScrollChild>
+                    <EditBox parentKey="Input" multiLine="true" letters="25000" autoFocus="false">
+                        <Size x="443" y="484"/>
+                        <Scripts>
+                            <OnCursorChanged function="ScrollingEdit_OnCursorChanged"/>
+                            <OnUpdate>
+                                ScrollingEdit_OnUpdate(self, elapsed, self:GetParent());
+                            </OnUpdate>
+                            <OnEditFocusGained>
+                                self:HighlightText(0);
+                            </OnEditFocusGained>
+                            <OnEscapePressed function="EditBox_ClearFocus"/>
+                        </Scripts>
+                        <FontString inherits="ChatFontNormal"/>
+                    </EditBox>
+                </ScrollChild>
+            </ScrollFrame>
+            <Button parentKey="Clear" inherits="UIPanelButtonTemplate" text="RESET">
+                <Size x="96" y="24"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT">
+                        <Offset x="8" y="4"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        local frame = _G["SVUI_ScriptErrorDialog"];
+                        frame.Input:SetText("");
+                        _G["SVUI"]:ResetErrors();
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button parentKey="Close" inherits="UIPanelCloseButton">
+                <Anchors>
+                    <Anchor point="TOPRIGHT">
+                        <Offset x="-2" y="-2"/>
+                    </Anchor>
+                </Anchors>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnDragStart>
+                _G["SVUI_ScriptError"].moving = true;
+                _G["SVUI_ScriptError"]:StartMoving();
+            </OnDragStart>
+            <OnDragStop>
+                _G["SVUI_ScriptError"].moving = nil;
+                _G["SVUI_ScriptError"]:StopMovingOrSizing();
+            </OnDragStop>
+        </Scripts>
+    </Frame>
+
+    <Frame name="SVUI_ProfileInterface" movable="true" hidden="true" frameStrata="DIALOG">
+        <Size x="484" y="550"/>
+        <Anchors>
+            <Anchor point="TOPLEFT" x="80" y="-80"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentBG" setAllPoints="true"/>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture name="$parentTitleBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-8"/>
+                        </Anchor>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+                            <Offset x="-32" y="-24"/>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+                <Texture name="$parentDialogBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-32"/>
+                        </Anchor>
+                        <Anchor point="BOTTOMRIGHT">
+                            <Offset x="-32" y="32"/>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Title" inherits="GameFontNormal">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-8"/>
+                        </Anchor>
+                        <Anchor point="TOPRIGHT">
+                            <Offset x="-32" y="-24"/>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+                <FontString parentKey="sourceLabel" font="GameFontNormalCenter">
+                    <Size x="140" y="16"/>
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT">
+                            <Offset x="104" y="8"/>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame name="$parentHelp">
+                <Size x="300" y="200"/>
+                <Anchors>
+                    <Anchor point="LEFT" relativePoint="RIGHT" x="6" y="0" />
+                </Anchors>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <FontString parentKey="Text" font="GameFontNormal">
+                            <Size x="290" y="190"/>
+                            <Anchors>
+                                <Anchor point="CENTER" x="0" y="0" />
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+            </Frame>
+            <ScrollFrame name="$parentDialog" parentKey="Dialog" inherits="MinimalScrollFrameTemplate">
+                <Size x="443" y="484"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT">
+                        <Offset x="12" y="-30"/>
+                    </Anchor>
+                </Anchors>
+                <ScrollChild>
+                    <EditBox parentKey="Input" multiLine="true" letters="100000" autoFocus="true">
+                        <Size x="443" y="484"/>
+                        <Scripts>
+                            <OnCursorChanged function="ScrollingEdit_OnCursorChanged"/>
+                            <OnUpdate>
+                                ScrollingEdit_OnUpdate(self, elapsed, self:GetParent());
+                            </OnUpdate>
+                            <OnEditFocusGained>
+                                self:HighlightText(0);
+                            </OnEditFocusGained>
+                            <OnEscapePressed function="EditBox_ClearFocus"/>
+                        </Scripts>
+                        <FontString inherits="ChatFontNormal"/>
+                    </EditBox>
+                </ScrollChild>
+            </ScrollFrame>
+            <Button parentKey="Export" inherits="UIPanelButtonTemplate" text="Generate Export Key">
+                <Size x="126" y="24"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT">
+                        <Offset x="8" y="4"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        _G["SVUI"]:ExportProfile();
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button parentKey="Import" inherits="UIPanelButtonTemplate" text="Import From Key">
+                <Size x="126" y="24"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT">
+                        <Offset x="142" y="4"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        _G["SVUI"]:ImportProfile();
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button parentKey="Clear" inherits="UIPanelButtonTemplate" text="Clear">
+                <Size x="126" y="24"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT">
+                        <Offset x="284" y="4"/>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        local dialog = _G["SVUI_ProfileInterfaceDialog"];
+                        if(dialog and dialog.Input) then
+                            dialog.Input:SetText('')
+                        end
+                    </OnClick>
+                </Scripts>
+            </Button>
+            <Button parentKey="Close" inherits="UIPanelCloseButton">
+                <Anchors>
+                    <Anchor point="TOPRIGHT">
+                        <Offset x="-2" y="-2"/>
+                    </Anchor>
+                </Anchors>
+            </Button>
+        </Frames>
+        <Scripts>
+            <OnDragStart>
+                _G["SVUI_ProfileInterface"].moving = true;
+                _G["SVUI_ProfileInterface"]:StartMoving();
+            </OnDragStart>
+            <OnDragStop>
+                _G["SVUI_ProfileInterface"].moving = nil;
+                _G["SVUI_ProfileInterface"]:StopMovingOrSizing();
+            </OnDragStop>
+        </Scripts>
+    </Frame>
+
+    <Frame name="SVUI_NPCFrame" hidden="true">
+        <Size x="384" y="512"/>
+        <Frames>
+            <PlayerModel name="$parentModel" parentKey="Model" frameStrata="HIGH">
+                <Size x="100" y="100"/>
+                <Anchors>
+                    <Anchor point="BOTTOM" relativeTo="$parent" relativePoint="TOPLEFT" x="40" y="-50" />
+                </Anchors>
+            </PlayerModel>
+        </Frames>
+    </Frame>
+</Ui>

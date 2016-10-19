@@ -1,0 +1,77 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+
+	<!-- oUF Core Files -->
+	<Script file='oUF\init.lua' />
+	<Script file='oUF\private.lua' />
+	<Script file='oUF\ouf.lua' />
+	<Script file='oUF\events.lua'/>
+	<Script file='oUF\factory.lua' />
+	<Script file='oUF\blizzard.lua' />
+	<Script file='oUF\units.lua' />
+	<Script file='oUF\colors.lua' />
+	<Script file='oUF\finalize.lua' />
+
+	<Script file='oUF\elements\power.lua' />
+	<Script file='oUF\elements\aura.lua' />
+	<Script file='oUF\elements\health.lua' />
+	<Script file='oUF\elements\ricons.lua' />
+	<Script file='oUF\elements\leader.lua' />
+	<Script file='oUF\elements\combat.lua' />
+	<Script file='oUF\elements\resting.lua' />
+	<Script file='oUF\elements\pvp.lua' />
+	<Script file='oUF\elements\portraits.lua' />
+	<Script file='oUF\elements\range.lua' />
+	<Script file='oUF\elements\castbar.lua' />
+	<Script file='oUF\elements\threat.lua' />
+	<Script file='oUF\elements\tags.lua' />
+	<Script file='oUF\elements\masterlooter.lua' />
+	<Script file='oUF\elements\lfdrole.lua' />
+	<Script file='oUF\elements\healprediction.lua' />
+	<Script file='oUF\elements\picon.lua' />
+	<Script file='oUF\elements\readycheck.lua' />
+	<Script file='oUF\elements\qicon.lua' />
+	<Script file='oUF\elements\altpowerbar.lua' />
+	<Script file='oUF\elements\resurrect.lua' />
+	<Script file='oUF\elements\assistant.lua' />
+	<Script file='oUF\elements\maintank.lua' />
+
+	<!-- Clique support -->
+	<Button name="oUF_ClickCastUnitTemplate" virtual="true" inherits="SecureUnitButtonTemplate,SecureHandlerEnterLeaveTemplate">
+		<Attributes>
+			<Attribute name="_onenter" type="string" value="local snippet = self:GetAttribute('clickcast_onenter'); if snippet then self:Run(snippet) end"/>
+			<Attribute name="_onleave" type="string" value="local snippet = self:GetAttribute('clickcast_onleave'); if snippet then self:Run(snippet) end"/>
+		</Attributes>
+	</Button>
+
+	<!-- Pet Battle Hider Frame -->
+	<Frame name="oUF_PetBattleFrameHider" inherits="SecureHandlerStateTemplate" parent="UIParent" setAllPoints="true">
+		<Scripts>
+			<OnLoad>
+				RegisterStateDriver(self, "visibility", "[petbattle] hide; show")
+			</OnLoad>
+		</Scripts>
+	</Frame>
+
+	<!-- Custom oUF Plugins -->
+	<Script file="plugins\oUF_AuraWatch\oUF_AuraWatch.lua"/>
+	<Script file="plugins\oUF_RaidDebuffs\oUF_RaidDebuffs.lua"/>
+	<Script file="plugins\oUF_Smooth\oUF_Smooth.lua"/>
+	<Script file="plugins\oUF_CombatFader\oUF_CombatFader.lua"/>
+	<Script file="plugins\oUF_Experience\oUF_Experience.lua"/>
+	<Script file="plugins\oUF_Reputation\oUF_Reputation.lua"/>
+	<Script file="plugins\oUF_Friendship\oUF_Friendship.lua"/>
+	<Script file="plugins\oUF_MageMagic\oUF_MageMagic.lua"/>
+	<Script file="plugins\oUF_ActionPanel\oUF_ActionPanel.lua"/>
+	<Script file="plugins\oUF_Afflicted\oUF_Afflicted.lua"/>
+	<Script file="plugins\oUF_HunterTraps\oUF_HunterTraps.lua"/>
+	<Script file="plugins\oUF_PallyPower\oUF_PallyPower.lua"/>
+	<Script file="plugins\oUF_WarlockShards\oUF_WarlockShards.lua"/>
+	<Script file="plugins\oUF_PriestOrbs\oUF_PriestOrbs.lua"/>
+	<Script file="plugins\oUF_KungFu\oUF_KungFu.lua"/>
+	<Script file="plugins\oUF_Maelstrom\oUF_Maelstrom.lua"/>
+	<Script file="plugins\oUF_HyperCombo\oUF_HyperCombo.lua"/>
+	<Script file="plugins\oUF_Gladiator\oUF_Gladiator.lua"/>
+	<Script file="plugins\oUF_Necromancy\oUF_Necromancy.lua"/>
+	<Script file="plugins\oUF_Druidness\oUF_Druidness.lua"/>
+	<Script file="plugins\oUF_Conqueror\oUF_Conqueror.lua"/>
+</Ui>

@@ -1,0 +1,15 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="defaults.lua"/>
+    <Script file="class_filters\pets.lua"/>
+    <Script file="class_filters\deathknight.lua"/>
+    <Script file="class_filters\druid.lua"/>
+    <Script file="class_filters\hunter.lua"/>
+    <Script file="class_filters\mage.lua"/>
+    <Script file="class_filters\monk.lua"/>
+    <Script file="class_filters\paladin.lua"/>
+    <Script file="class_filters\priest.lua"/>
+    <Script file="class_filters\rogue.lua"/>
+    <Script file="class_filters\shaman.lua"/>
+    <Script file="class_filters\warlock.lua"/>
+    <Script file="class_filters\warrior.lua"/>
+</Ui>

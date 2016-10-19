@@ -1,0 +1,9 @@
+## Interface: 50001
+## Author: p3lim
+## Version: 50001.12-Release
+## Title: oUF Experience
+## Notes: Experience Bar support for oUF layouts.
+## RequiredDeps: oUF
+
+
+oUF_Experience.lua

@@ -1,0 +1,17 @@
+## Interface: 70000
+## Author: Failcoder
+## Version: 1.3.5
+## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00UnitFrames|r
+## Notes: UnitFrames Plugin for [|cff9911FFSVUI|r].
+## OptionalDeps: LibSharedMedia-3.0
+## RequiredDeps: SVUI_!Core
+## X-SVUIName: UnitFrames
+## X-SVUISchema: UnitFrames
+## X-oUF: oUF_SVUI
+## X-Email: munglunch@gmail.com
+## X-Website: http://www.supervillainui.com
+## X-Donate: PayPal:munglunch@gmail.com
+## X-License: MIT
+## X-Category: Interface Enhancements
+
+SVUI_UnitFrames.xml

@@ -1,0 +1,25 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/
+..\FrameXML\UI.xsd">
+	<Script file="AceVillain-1.0.lua"/>
+	<!-- Container -->
+	<Script file="widgets\AceGUIContainer-DropDownGroup.lua"/>
+	<Script file="widgets\AceGUIContainer-Frame.lua"/>
+	<Script file="widgets\AceGUIContainer-InlineGroup.lua"/>
+	<Script file="widgets\AceGUIContainer-TabGroup.lua"/>
+	<Script file="widgets\AceGUIContainer-TreeGroup.lua"/>
+	<!-- Widgets -->
+	<Script file="widgets\AceGUIWidget-Button.lua"/>
+	<Script file="widgets\AceGUIWidget-CheckBox.lua"/>
+	<Script file="widgets\AceGUIWidget-DropDown.lua"/>
+	<Script file="widgets\AceGUIWidget-EditBox.lua"/>
+	<Script file="widgets\AceGUIWidget-Heading.lua"/>
+	<Script file="widgets\AceGUIWidget-Keybinding.lua"/>
+	<Script file="widgets\AceGUIWidget-MultiLineEditBox.lua"/>
+	<Script file="widgets\AceGUIWidget-Slider.lua"/>
+	<!-- Shared Widgets -->
+	<Script file="widgets\shared\FontWidget.lua" />
+	<Script file="widgets\shared\SoundWidget.lua" />
+	<Script file="widgets\shared\StatusbarWidget.lua" />
+	<Script file="widgets\shared\BorderWidget.lua" />
+	<Script file="widgets\shared\BackgroundWidget.lua" />
+</Ui>

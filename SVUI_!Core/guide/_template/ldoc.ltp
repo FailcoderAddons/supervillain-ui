@@ -1,0 +1,365 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=$(ldoc.doc_charset)"/>
+<head>
+    <title>$(ldoc.title)</title>
+    <link rel="stylesheet" href="$(ldoc.css)" type="text/css" />
+    <!-- Fonts -->
+	  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet" type="text/css">
+</head>
+<body id="page-top" data-spy="scroll" data-target=".layout-header">
+<div class="skinned-page"></div>
+<div id="message-depot"></div>
+<!-- BEGIN LAYOUT -->
+<div class="layout js-layout js-skins layout-overlay-drawer-button layout-shadow layout-fixed-header layout-fixed-drawer">
+
+# local no_spaces = ldoc.no_spaces
+# local use_li = ldoc.use_li
+# local display_name = ldoc.display_name
+# local iter = ldoc.modules.iter
+# local function M(txt,item) return ldoc.markup(txt,item,ldoc.plain) end
+# local nowrap = ldoc.wrap and '' or 'nowrap'
+
+<!-- BEGIN NAV // -->
+	<div class="layout-header">
+	 <div class="layout-header-row">
+     <span class="layout-title">Documentation</span>
+		 <div class="layout-spacer"></div>
+		 <nav class="navigation">
+# if not ldoc.single and module then -- reference back to project index
+<a href="../$(ldoc.output).html" class="navigation-link">Index</a>
+# end
+		</nav>
+	 </div>
+	</div>
+
+	<div class="layout-drawer">
+    <span class="navigation-title" style="padding:">Contents</span>
+	 <nav class="navigation" style="padding-top:0 !important;">
+# if not ldoc.single and module then -- reference back to project index
+<a href="../$(ldoc.output).html" class="navigation-link">Index</a>
+# end
+# if ldoc.no_summary and module and not ldoc.one then -- bang out the functions on the side
+# for kind, items in module.kinds() do
+<div class="navigation-subtitle">$(kind)</div>
+# for item in items() do
+<a href="#$(item.name)" class="navigation-link">$(display_name(item))</a>
+# end
+<div class="navigation-spacer"></div>
+# end
+# end
+# -------- contents of project ----------
+# local this_mod = module and module.name
+# for kind, mods, type in ldoc.kinds() do
+#  if ldoc.allowed_in_contents(type,module) then
+<div class="navigation-subtitle">$(kind)</div>
+#  for mod in mods() do local name = display_name(mod)
+#   if mod.name == this_mod then
+<a href="$(ldoc.ref_to_module(mod))" class="navigation-link current-link">$(name)</a>
+# --------- contents of module -------------
+# if module and not ldoc.no_summary and #module.items > 0 then
+# for kind,items in module.kinds() do
+<a href="#$(no_spaces(kind))" class="navigation-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$(kind)</a>
+# end
+<div class="navigation-spacer"></div>
+# end
+#   else
+ <a href="$(ldoc.ref_to_module(mod))" class="navigation-link">$(name)</a>
+#   end
+#  end
+  <div class="navigation-spacer"></div>
+#  end
+# end
+	 </nav>
+	</div>
+
+	<span class="layout-title floating-title no-desktop">Menu</span>
+
+	<div class="layout-drawer-button">
+	 <i class="layout-drawer-button-icon menu-icon"></i>
+	</div>
+	<!-- END NAV // -->
+
+  <!-- BEGIN CONTENT // -->
+  <div class="layout-content">
+
+<section style="padding:0;">
+<div class="grid">
+<div class="cell cell-12-col">
+<div class="container">
+# if ldoc.body then -- verbatim HTML as contents; 'non-code' entries
+  <div class="comic">
+  <div class="card">
+  <div class="card-section">
+  <div class="section-dialog">
+    $(ldoc.body)
+  </div>
+  </div>
+  </div>
+  </div>
+# elseif module then -- module documentation
+  <div class="comic">
+  <div class="card">
+  <div class="card-header flex--expand">
+  <div class="card-header-title flex--centered">
+  <span class="badge" data-badge="$(ldoc.module_typename(module))">$(module.name)</span>
+  </div>
+  </div>
+  <div class="card-actions flex--expand">
+  <div class="card-header-subtitle flex--centered">$(M(module.summary,module))</div>
+  </div>
+  <div class="card-section">
+  <div class="section-dialog">
+  <h4 class="section-label">Info:</h4>
+  <ul>
+    <li>$(M(module.description,module))</li>
+#   if module.tags.include then
+        <li>$(M(ldoc.include_file(module.tags.include)))</li>
+#   end
+#   if module.info then
+#     for tag, value in module.info:iter() do
+        <li><strong>$(tag)</strong>: $(M(value,module))</li>
+#     end
+  <hr />
+#   end -- if module.info
+  </ul>
+#   if module.usage then
+  <h5 class="section-label">Construct:</h5>
+#     for usage in iter(module.usage) do
+      <pre class="example">$(ldoc.prettify(usage))</pre>
+#     end -- for
+  <hr />
+#   end -- if usage
+# if not ldoc.no_summary then
+  <h5 class="section-label">Summary:</h5>
+# for kind,items in module.kinds() do
+  <div style="padding:6px 0px;"><a href="#$(no_spaces(kind))" style="color:#ff5500">Jump To: $(kind)&#8921;</a></div>
+  <table class="function_list">
+#  for item in items() do
+	<tr>
+	<td class="name" $(nowrap)><a href="#$(item.name)">$(display_name(item))</a></td>
+	<td class="summary">$(M(item.summary,item))</td>
+	</tr>
+#  end -- for items
+  </table>
+# end -- for kinds
+  <hr />
+# end -- if not no_summary
+  <br />
+  <br />
+# --- currently works for both Functions and Tables. The params field either contains
+# --- function parameters or table fields.
+# local show_return = not ldoc.no_return_or_parms
+# local show_parms = show_return
+# for kind, items in module.kinds() do
+#   local kitem = module.kinds:get_item(kind)
+#   local has_description = kitem and ldoc.descript(kitem) ~= ""
+    <h6 class="section-label" id="$(no_spaces(kind))">$(kind)
+    $(M(module.kinds:get_section_description(kind),nil))
+#   if kitem then
+#       if has_description then
+          <small>
+          $(M(ldoc.descript(kitem),kitem))
+        </small>
+#       end
+    </h6>
+#       if kitem.usage then
+            <h5>Usage:</h5>
+            <pre class="example">$(ldoc.prettify(kitem.usage[1]))</pre>
+#        end
+#   else
+    </h6>
+#   end
+    <dl class="function">
+#  for item in items() do
+    <dt id="$(item.name)">
+    <strong>$(display_name(item))</strong>
+#   if ldoc.prettify_files then
+    <a style="float:right;" href="$(ldoc.source_ref(item))">line $(item.lineno)</a>
+#  end
+    </dt>
+    <dd>
+    $(M(ldoc.descript(item),item))
+    <br />
+#   if ldoc.custom_tags then
+#    for custom in iter(ldoc.custom_tags) do
+#     local tag = item.tags[custom[1]]
+#     if tag and not custom.hidden then
+  <table>
+    <thead>
+    <tr><th><strong>$(custom.title or custom[1]):</strong></th></tr>
+  </thead>
+  <tbody>
+#      for value in iter(tag) do
+  <tr><td>
+    $(custom.format and custom.format(value) or M(value))
+  </td></tr>
+#      end -- for
+#     end -- if tag
+    </tbody>
+  </table>
+#    end -- iter tags
+#   end
+
+#  if show_parms and item.params and #item.params > 0 then
+#    local subnames = module.kinds:type_of(item).subnames
+#    if subnames then
+<div style="padding:12px 0 6px;font-size:15px;"><strong>$(subnames):</strong></div>
+#    end
+<table>
+<tbody>
+#   for parm in iter(item.params) do
+#     local param,sublist = item:subparam(parm)
+#     if sublist then
+        <tr><td colspan="2"><span class="parameter">$(sublist)</span>$(M(item.params.map[sublist],item))</td></tr>
+#     end
+#     for p in iter(param) do
+#        local name,tp,def = item:display_name_of(p), ldoc.typename(item:type_of_param(p)), item:default_of_param(p)
+        <tr><td style="width:20% !important;"><strong>$(name)</strong><td>
+#       if tp ~= '' then
+            <span class="types">$(tp)</span>
+#       end
+        $(M(item.params.map[p],item))
+#       if def == true then
+         (<em>optional</em>)
+#       elseif def then
+         (<em>default</em> $(def))
+#       end
+#       if item:readonly(p) then
+          <em>readonly</em>
+#       end
+        </td></tr>
+#     end
+#   end -- for
+</tbody></table>
+#   end -- if params
+
+#  if show_return and item.retgroups then local groups = item.retgroups
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Returns:</strong></div>
+#   for i,group in ldoc.ipairs(groups) do local li,il = use_li(group)
+    <ol>
+#   for r in group:iter() do local type, ctypes = item:return_type(r); local rt = ldoc.typename(type)
+        $(li)
+#     if rt ~= '' then
+           <span class="types">$(rt)</span>
+#     end
+        $(M(r.text,item))$(il)
+#    if ctypes then
+      <ul>
+#    for c in ctypes:iter() do
+            <li><span class="parameter">$(c.name)</span>
+            <span class="types">$(ldoc.typename(c.type))</span>
+            $(M(c.comment,item))</li>
+#     end
+        </ul>
+#    end -- if ctypes
+#     end -- for r
+    </ol>
+#   if i < #groups then
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Or</strong></div>
+#   end
+#   end -- for group
+#   end -- if returns
+
+#   if show_return and item.raise then
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Raises:</strong></div>
+    $(M(item.raise,item))
+#   end
+
+#   if item.see then
+#     local li,il = use_li(item.see)
+<div style="padding:12px 0 6px;font-size:15px;"><strong>See also:</strong></div>
+    <ul>
+#     for see in iter(item.see) do
+         $(li)<a href="$(ldoc.href(see))">$(see.label)</a>$(il)
+#    end -- for
+    </ul>
+#   end -- if see
+
+#   if item.usage then
+#     local li,il = use_li(item.usage)
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Usage:</strong></div>
+    <ul>
+#     for usage in iter(item.usage) do
+        $(li)<pre class="example">$(ldoc.prettify(usage))</pre>$(il)
+#     end -- for
+    </ul>
+#   end -- if usage
+
+  </dd>
+# end -- for items
+  </dl>
+# end -- for kinds
+  </div>
+  </div>
+  </div>
+  </div>
+# else -- if module; project-level contents
+  <div class="comic">
+  <div class="card">
+  <div class="card-header flex--expand">
+  <div class="card-header-title flex--centered">
+# if ldoc.description then
+  $(M(ldoc.description,nil))
+# else
+  $(ldoc.title)
+# end
+  </div>
+  </div>
+  <div class="card-actions flex--expand">
+  <div class="card-header-subtitle flex--centered">
+# if ldoc.full_description then
+  $(M(ldoc.full_description,nil))
+# end
+  </div>
+  </div>
+  <div class="card-section">
+  <div class="section-dialog">
+
+# for kind, mods in ldoc.kinds() do
+  <h6>$(kind)</h6>
+# kind = kind:lower()
+  <table class="module_list">
+# for m in mods() do
+	<tr>
+		<td class="name"  $(nowrap)><a href="$(no_spaces(kind))/$(m.name).html">$(m.name)</a></td>
+		<td class="summary">$(M(ldoc.strip_header(m.summary),m))</td>
+	</tr>
+#  end -- for modules
+  </table>
+# end -- for kinds
+  </div>
+  </div>
+  </div>
+  </div>
+# end -- if module
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- END CONTENT -->
+
+<!-- BEGIN FOOTER // -->
+<footer>
+  <div class="right-section">
+    <ul class="link-list">
+      <li>
+        <span style="color:#5fafff">Last updated $(ldoc.updatetime)</span>
+      </li>
+    </ul>
+  </div>
+</footer>
+<!-- END FOOTER // -->
+
+</div>
+<!-- END LAYOUT -->
+
+<!-- Core JavaScript -->
+<script src="http://supervillainui.com/js/app.min.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery-1.11.0.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery.easing.min.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery.swipebox.min.js"></script>
+</body>
+</html>

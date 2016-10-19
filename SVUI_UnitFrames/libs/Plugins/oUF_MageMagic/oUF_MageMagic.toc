@@ -1,0 +1,9 @@
+## Interface: 50001
+## Title: oUF Mage Magic
+## Notes: Adds support for mage spell indicators to oUF.
+## Author: Failcoder
+## Version: 1.1.0
+## Dependencies: oUF
+
+
+oUF_MageMagic.lua

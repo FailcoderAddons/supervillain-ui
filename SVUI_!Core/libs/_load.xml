@@ -1,0 +1,9 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="_Librarian\Librarian.lua"/>
+	<Script file="CallbackHandler-1.0\CallbackHandler-1.0.lua"/>
+	<Script file="LibSharedMedia-3.0\LibSharedMedia-3.0.lua"/>
+	<Include file="_SVUI_Lib\_SVUI_Lib.xml"/>
+	<Include file="AceGUI-3.0\AceGUI-3.0.xml"/>
+	<Include file="AceConfig-3.0\AceConfig-3.0.xml"/>
+	<Include file="AceVillain-1.0\AceVillain-1.0.xml"/>
+</Ui>

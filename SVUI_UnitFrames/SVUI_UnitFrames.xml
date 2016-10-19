@@ -1,0 +1,142 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Font name="SVUI_Font_Unit" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="11"/>
+        </FontHeight>
+    </Font>
+
+    <Font name="SVUI_Font_Unit_Small" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="11"/>
+        </FontHeight>
+    </Font>
+
+    <Font name="SVUI_Font_UnitAura" font="Fonts\ARIALN.TTF" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="10"/>
+        </FontHeight>
+    </Font>
+
+    <Font name="SVUI_Font_UnitAura_Bar" font="Fonts\skurri.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="10"/>
+        </FontHeight>
+    </Font>
+
+    <Font name="SVUI_Font_UnitAura_Small" font="Fonts\skurri.ttf" monochrome="true" virtual="true">
+        <FontHeight>
+            <AbsValue val="8"/>
+        </FontHeight>
+    </Font>
+
+    <Frame name="SVUI_StyleTemplate_ActionPanel" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="actionpanel" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="darkest" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\textures\EMPTY" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="0" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+    </Frame>
+
+    <Button name="SVUI_UNITTARGET" inherits="SecureUnitButtonTemplate" hidden="true" virtual="true">
+        <Frames>
+            <Button name="$parentTarget" inherits="SecureUnitButtonTemplate">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="7" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Attributes>
+                    <Attribute name="unitsuffix" type="string" value="target"/>
+                    <Attribute name="useparent-unit" type="boolean" value="true"/>
+                    <Attribute name="type1" type="string" value="target"/>
+                    <Attribute name="initial-unitWatch" type="boolean" value="true"/>
+                </Attributes>
+            </Button>
+        </Frames>
+    </Button>
+
+    <Button name="SVUI_UNITPET" inherits="SecureUnitButtonTemplate" hidden="true" virtual="true">
+        <Frames>
+            <Button name="$parentPet" inherits="SecureUnitButtonTemplate">
+                <Anchors>
+                    <Anchor point="BOTTOM" relativePoint="TOP" relativeTo="$parent">
+                        <Offset>
+                            <AbsDimension x="0" y="1"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Attributes>
+                    <Attribute name="unitsuffix" type="string" value="pet"/>
+                    <Attribute name="useparent-unit" type="boolean" value="true"/>
+                    <Attribute name="type1" type="string" value="target"/>
+                    <Attribute name="initial-unitWatch" type="boolean" value="true"/>
+                </Attributes>
+            </Button>
+        </Frames>
+    </Button>
+
+    <Script file="Loader.lua"/>
+    <Include file="libs\_load.xml"/>
+
+	<Script file="SVUI_UnitFrames.lua"/>
+
+	<Script file="elements\tags.lua"/>
+    <Script file="elements\essentials.lua"/>
+    <Script file="elements\castbar.lua"/>
+    <Script file="elements\auras.lua"/>
+    <Script file="elements\misc.lua"/>
+
+    <Script file="class_resources\deathknight.lua"/>
+    <Script file="class_resources\demonhunter.lua"/>
+    <Script file="class_resources\druid.lua"/>
+    <Script file="class_resources\hunter.lua"/>
+    <Script file="class_resources\mage.lua"/>
+    <Script file="class_resources\monk.lua"/>
+    <Script file="class_resources\paladin.lua"/>
+    <Script file="class_resources\priest.lua"/>
+    <Script file="class_resources\rogue.lua"/>
+    <Script file="class_resources\shaman.lua"/>
+    <Script file="class_resources\warlock.lua"/>
+    <Script file="class_resources\warrior.lua"/>
+
+    <Script file="frames.lua"/>
+    <Script file="groups.lua"/>
+    <Script file="view.lua"/>
+    <Script file="bodyguard.lua"/>
+</Ui>

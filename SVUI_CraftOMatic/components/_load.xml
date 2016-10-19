@@ -1,0 +1,6 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">	
+	<Script file="archaeology.lua"/>
+	<Script file="cooking.lua"/>
+	<Script file="fishing.lua"/>
+	<Script file="farming.lua"/>
+</Ui>

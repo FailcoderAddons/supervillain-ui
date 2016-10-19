@@ -1,0 +1,616 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Frame name="SVUI_CoreStyle_Default" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="default" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="default" />
+            <Attribute name="panelGradient" type="string" value="default" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.2" g="0.2" b="0.2" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Skin" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT" setAllPoints="true" />
+                <Color r="0.2" g="0.2" b="0.2" a="1" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Transparent" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="transparent" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="transparent" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="true" />
+        </Attributes>
+        <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="0.5" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Button" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="button" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="default" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\BUTTON" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.2" g="0.2" b="0.2" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_DockButton" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="dockbutton" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="default" />
+            <Attribute name="panelGradient" type="string" value="default" />
+            <Attribute name="panelTexUpdate" type="boolean" value="true" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+            <Attribute name="panelOffset" type="number" value="0" />
+        </Attributes>
+        <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.2" g="0.2" b="0.2" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_ActionSlot" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="actionslot" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="transparent" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="true" />
+            <Attribute name="panelOffset" type="number" value="0" />
+            <Attribute name="shadowAlpha" type="number" value="0.75" />
+        </Attributes>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="1" right="1" top="1" bottom="1" />
+            <Color r="0" g="0" b="0" a="0.5" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BORDER">
+                <Texture parentKey="BorderLeft" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension x="1" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderRight" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension x="1" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderTop" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension y="1" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderBottom" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension y="1" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Icon" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="icon" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="invisible" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="true" />
+            <Attribute name="panelOffset" type="number" value="0" />
+            <Attribute name="shadowAlpha" type="number" value="0.5" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\EMPTY" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="1" right="1" top="1" bottom="1" />
+            <Color r="0" g="0" b="0" a="0" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BORDER">
+                <Texture parentKey="BorderLeft" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension x="2" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderRight" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension x="2" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderTop" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension y="2" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="BorderBottom" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension y="2" />
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_CheckButton" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="checkbox" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="default" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\buttons\CHECK-BG" edgeFile="Interface\AddOns\SVUI_!Core\assets\borders\DEFAULT" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.2" g="0.2" b="0.2" a="1" />
+            <BorderColor r="0.1" g="0.1" b="0.1" a="1" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Inset" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="inset" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="transparent" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="true" />
+        </Attributes>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\AddOns\SVUI_!Core\assets\borders\INSET" tile="false">
+            <EdgeSize val="6" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="1" />
+            <BorderColor r="0" g="0" b="0" a="0.5" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_EditBox" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="editbox" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="transparent" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="true" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\EMPTY" tile="true" edgeFile="Interface\BUTTONS\WHITE8X8">
+            <EdgeSize val="1" />
+            <TileSize val="20" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+            <Color r="0" g="0" b="0" a="0" />
+        </Backdrop>
+        <Frames>
+            <Frame parentKey="InnerGlow">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="1" y="-1" />
+                    <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-1" y="1" />
+                </Anchors>
+                <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT" edgeFile="Interface\AddOns\SVUI_!Core\assets\borders\INSET" tile="false">
+                    <EdgeSize val="12" />
+                    <TileSize val="0" />
+                    <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+                    <Color r="0" g="0" b="0" a="0.25" />
+                    <BorderColor r="0" g="0" b="0" a="1" />
+                </Backdrop>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Lite" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="lite" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="hinted" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" tile="true" edgeFile="Interface\BUTTONS\WHITE8X8">
+            <EdgeSize val="1" />
+            <TileSize val="20" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+            <Color r="0" g="0" b="0" a="0.25" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Bar" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="bar" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="transparent" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="true" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT" edgeFile="Interface\AddOns\SVUI_!Core\assets\borders\DEFAULT" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="0.5" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Skin" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT" setAllPoints="true" />
+                <Color r="0" g="0" b="0" a="0.5" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Paper" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="paper" />
+            <Attribute name="panelPadding" type="number" value="3" />
+            <Attribute name="panelColor" type="string" value="paper" />
+            <Attribute name="panelGradient" type="string" value="paper" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="true" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\pattern\PATTERN6" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="1" g="1" b="1" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Skin" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\pattern\PATTERN6" setAllPoints="true" />
+                <Color r="1" g="1" b="1" a="1" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Container" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="container" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="special" />
+            <Attribute name="panelGradient" type="string" value="special" />
+            <Attribute name="panelTexUpdate" type="boolean" value="true" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\pattern\PATTERN6" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.22" g="0.21" b="0.2" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Skin" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\pattern\PATTERN6" setAllPoints="true" />
+                <Color r="0.22" g="0.21" b="0.2" a="1" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Pattern" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="pattern" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="secondary" />
+            <Attribute name="panelGradient" type="string" value="secondary" />
+            <Attribute name="panelTexUpdate" type="boolean" value="true" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\pattern\PATTERN1" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.37" g="0.32" b="0.29" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Premium" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="premium" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="special" />
+            <Attribute name="panelGradient" type="string" value="special" />
+            <Attribute name="panelTexUpdate" type="boolean" value="true" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+            <Attribute name="panelOffset" type="number" value="4" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\art\ART1" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.37" g="0.32" b="0.29" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Model" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="model" />
+            <Attribute name="panelPadding" type="number" value="1" />
+            <Attribute name="panelColor" type="string" value="special" />
+            <Attribute name="panelGradient" type="string" value="special" />
+            <Attribute name="panelTexUpdate" type="boolean" value="true" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+            <Attribute name="panelOffset" type="number" value="0" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\MODEL" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0.37" g="0.32" b="0.29" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Window" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="window" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="specialdark" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="1" right="1" top="1" bottom="1" />
+            <Color r="0.2" g="0.2" b="0.2" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="2">
+                <Texture parentKey="TopLeft" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\window\COMPOSITE1-TOPLEFT">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="TOPRIGHT" relativePoint="TOP" />
+                        <Anchor point="BOTTOMLEFT" relativePoint="LEFT" />
+                    </Anchors>
+                    <Color r="0.05" g="0.05" b="0.05" a="0.5" />
+                </Texture>
+                <Texture parentKey="TopRight" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\window\COMPOSITE1-TOPRIGHT">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                        <Anchor point="TOPLEFT" relativePoint="TOP" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" />
+                    </Anchors>
+                    <Color r="0.05" g="0.05" b="0.05" a="0.5" />
+                </Texture>
+                <Texture parentKey="BottomLeft" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\window\COMPOSITE1-BOTTOMLEFT">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM" />
+                        <Anchor point="TOPLEFT" relativePoint="LEFT" />
+                    </Anchors>
+                    <Color r="0.1" g="0.1" b="0.1" a="0.5" />
+                </Texture>
+                <Texture parentKey="BottomRight" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\window\COMPOSITE1-BOTTOMRIGHT">
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOM" />
+                        <Anchor point="TOPRIGHT" relativePoint="RIGHT" />
+                    </Anchors>
+                    <Color r="0.1" g="0.1" b="0.1" a="0.5" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Window2" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="window2" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="specialdark" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="1" right="1" top="1" bottom="1" />
+            <Color r="0.2" g="0.2" b="0.2" a="1" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="2">
+                <Texture parentKey="TopLeft" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\window\COMPOSITE2-TOPLEFT">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="TOPRIGHT" relativePoint="TOP" />
+                        <Anchor point="BOTTOMLEFT" relativePoint="LEFT" />
+                    </Anchors>
+                    <Color r="0.05" g="0.05" b="0.05" a="0.5" />
+                </Texture>
+                <Texture parentKey="TopRight" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\window\COMPOSITE2-TOPRIGHT">
+                    <Anchors>
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" />
+                        <Anchor point="TOPLEFT" relativePoint="TOP" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="RIGHT" />
+                    </Anchors>
+                    <Color r="0.05" g="0.05" b="0.05" a="0.5" />
+                </Texture>
+                <Texture parentKey="BottomLeft" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\window\COMPOSITE2-BOTTOMLEFT">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOM" />
+                        <Anchor point="TOPLEFT" relativePoint="LEFT" />
+                    </Anchors>
+                    <Color r="0.1" g="0.1" b="0.1" a="0.5" />
+                </Texture>
+                <Texture parentKey="BottomRight" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\window\COMPOSITE2-BOTTOMRIGHT">
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" />
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOM" />
+                        <Anchor point="TOPRIGHT" relativePoint="RIGHT" />
+                    </Anchors>
+                    <Color r="0.1" g="0.1" b="0.1" a="0.5" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_Blackout" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="blackout" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="transparent" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelOffset" type="number" value="2" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+        </Attributes>
+        <Backdrop bgFile="Interface\AddOns\SVUI_!Core\assets\backgrounds\DARK" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="1" right="1" top="1" bottom="1" />
+            <Color r="0" g="0" b="0" a="0.5" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Skin" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DARK" setAllPoints="true" />
+                <Color r="0" g="0" b="0" a="0.5" />
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_UnitLarge" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="unitlarge" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="special" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="true" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+            <Attribute name="panelHookVertex" type="boolean" value="true" />
+        </Attributes>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Skin" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\unit\UNIT-BG1" setAllPoints="true" />
+                <Color r="0.37" g="0.32" b="0.29" a="1" />
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Frame name="SVUI_CoreStyle_UnitSmall" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="unitsmall" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="special" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="true" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+            <Attribute name="panelHookVertex" type="boolean" value="true" />
+        </Attributes>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="1">
+                <Texture parentKey="Skin" nonBlocking="true" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\unit\UNIT-SMALL-BG1" setAllPoints="true" />
+                <Color r="0.37" g="0.32" b="0.29" a="1" />
+            </Layer>
+        </Layers>
+    </Frame>
+</Ui>

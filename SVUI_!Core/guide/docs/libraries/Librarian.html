@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>SVUI Guide</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+    <!-- Fonts -->
+	  <link href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en" rel="stylesheet" type="text/css">
+</head>
+<body id="page-top" data-spy="scroll" data-target=".layout-header">
+<div class="skinned-page"></div>
+<div id="message-depot"></div>
+<!-- BEGIN LAYOUT -->
+<div class="layout js-layout js-skins layout-overlay-drawer-button layout-shadow layout-fixed-header layout-fixed-drawer">
+
+
+<!-- BEGIN NAV // -->
+	<div class="layout-header">
+	 <div class="layout-header-row">
+     <span class="layout-title">Documentation</span>
+		 <div class="layout-spacer"></div>
+		 <nav class="navigation">
+		</nav>
+	 </div>
+	</div>
+
+	<div class="layout-drawer">
+    <span class="navigation-title" style="padding:">Contents</span>
+	 <nav class="navigation" style="padding-top:0 !important;">
+<div class="navigation-subtitle">Libraries</div>
+<a href="../libraries/Librarian.html" class="navigation-link current-link">Librarian</a>
+<a href="#Functions" class="navigation-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Functions</a>
+<a href="#Tables" class="navigation-link">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tables</a>
+<div class="navigation-spacer"></div>
+ <a href="../libraries/LUA.html" class="navigation-link">LUA</a>
+ <a href="../libraries/AceVillain.html" class="navigation-link">AceVillain</a>
+  <div class="navigation-spacer"></div>
+<div class="navigation-subtitle">Addons</div>
+ <a href="../index.html" class="navigation-link">SVUI_Core</a>
+  <div class="navigation-spacer"></div>
+<div class="navigation-subtitle">Manual</div>
+ <a href="../manual/doc.md.html" class="navigation-link">doc</a>
+  <div class="navigation-spacer"></div>
+	 </nav>
+	</div>
+
+	<span class="layout-title floating-title no-desktop">Menu</span>
+
+	<div class="layout-drawer-button">
+	 <i class="layout-drawer-button-icon menu-icon"></i>
+	</div>
+	<!-- END NAV // -->
+
+  <!-- BEGIN CONTENT // -->
+  <div class="layout-content">
+
+<section style="padding:0;">
+<div class="grid">
+<div class="cell cell-12-col">
+<div class="container">
+  <div class="comic">
+  <div class="card">
+  <div class="card-header flex--expand">
+  <div class="card-header-title flex--centered">
+  <span class="badge" data-badge="File">Librarian</span>
+  </div>
+  </div>
+  <div class="card-actions flex--expand">
+  <div class="card-header-subtitle flex--centered">Librarian lib management library.</div>
+  </div>
+  <div class="card-section">
+  <div class="section-dialog">
+  <h4 class="section-label">Info:</h4>
+  <ul>
+    <li> Librarian is a versioning manager for use with proprietary SVUI libraries.</li>
+        <li><strong>Release</strong>: 1.0.0</li>
+        <li><strong>Author</strong>: Steven Jackson (2014)</li>
+  <hr />
+  </ul>
+  <h5 class="section-label">Summary:</h5>
+  <div style="padding:6px 0px;"><a href="#Functions" style="color:#ff5500">Jump To: Functions&#8921;</a></div>
+  <table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#NewLibrary">NewLibrary (libName)</a></td>
+	<td class="summary">Adds a new lib to saved objects.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Fetch">Fetch (libName, silent)</a></td>
+	<td class="summary">Retrieve a saved library object.</td>
+	</tr>
+  </table>
+  <div style="padding:6px 0px;"><a href="#Tables" style="color:#ff5500">Jump To: Tables&#8921;</a></div>
+  <table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Librarian">Librarian</a></td>
+	<td class="summary">Global Librarian object.</td>
+	</tr>
+  </table>
+  <hr />
+  <br />
+  <br />
+    <h6 class="section-label" id="Functions">Functions
+
+    </h6>
+    <dl class="function">
+    <dt id="NewLibrary">
+    <strong>NewLibrary (libName)</strong>
+    </dt>
+    <dd>
+    Adds a new lib to saved objects.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>libName</strong><td>
+         hashable name of the new library.
+        </td></tr>
+</tbody></table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Returns:</strong></div>
+    <ol>
+
+        Lib class object
+    </ol>
+
+
+
+
+  </dd>
+    <dt id="Fetch">
+    <strong>Fetch (libName, silent)</strong>
+    </dt>
+    <dd>
+    Retrieve a saved library object.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Parameters:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>libName</strong><td>
+         Saved name of the library.
+        </td></tr>
+        <tr><td style="width:20% !important;"><strong>silent</strong><td>
+         do not allow errors to propegate.
+        </td></tr>
+</tbody></table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Returns:</strong></div>
+    <ol>
+
+        Lib class object
+    </ol>
+
+
+
+
+  </dd>
+  </dl>
+    <h6 class="section-label" id="Tables">Tables
+
+    </h6>
+    <dl class="function">
+    <dt id="Librarian">
+    <strong>Librarian</strong>
+    </dt>
+    <dd>
+    Global Librarian object.
+    <br />
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+    </tbody>
+  </table>
+
+<div style="padding:12px 0 6px;font-size:15px;"><strong>Fields:</strong></div>
+<table>
+<tbody>
+        <tr><td style="width:20% !important;"><strong>libs</strong><td>
+
+
+        </td></tr>
+</tbody></table>
+
+
+
+
+
+  </dd>
+  </dl>
+  </div>
+  </div>
+  </div>
+  </div>
+</div>
+</div>
+</div>
+</section>
+</div>
+<!-- END CONTENT -->
+
+<!-- BEGIN FOOTER // -->
+<footer>
+  <div class="right-section">
+    <ul class="link-list">
+      <li>
+        <span style="color:#5fafff">Last updated 2015-08-26 14:32:22</span>
+      </li>
+    </ul>
+  </div>
+</footer>
+<!-- END FOOTER // -->
+
+</div>
+<!-- END LAYOUT -->
+
+<!-- Core JavaScript -->
+<script src="http://supervillainui.com/js/app.min.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery-1.11.0.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery.easing.min.js"></script>
+<script src="http://supervillainui.com/js/extended/jquery.swipebox.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Font name="SVUI_Font_NamePlate" font="Fonts\skurri.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="9"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_NamePlate_Aura" font="Fonts\skurri.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="9"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_NamePlate_Number" font="Fonts\skurri.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="9"/>
+        </FontHeight>
+    </Font>
+
+	<Frame name="SVUI_PlateParentFrame" frameStrata="BACKGROUND" hidden="true">
+        <Scripts>
+            <OnLoad>
+                self:SetParent(_G['WorldFrame'])
+            </OnLoad>
+        </Scripts>
+    </Frame>
+
+    <Frame name="SVUI_PlateGlowFrame" frameStrata="BACKGROUND" hidden="true">
+        <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\AddOns\SVUI_!Core\assets\borders\SHADOW">
+            <EdgeSize val="2" />
+            <TileSize val="0" />
+            <BackgroundInsets left="2" right="2" top="2" bottom="2" />
+            <Color r="0" g="0" b="0" a="0" />
+            <BorderColor r="0" g="0" b="0" a="0" />
+        </Backdrop>
+    	<Scripts>
+            <OnLoad>
+            	self:SetParent(_G['WorldFrame'])
+				self:SetScale(2.5)
+            </OnLoad>
+        </Scripts>
+    </Frame>
+
+    <Frame name="SVUI_StyleTemplate_Nameplate" virtual="true">
+        <Attributes>
+            <Attribute name="panelID" type="string" value="nameplate" />
+            <Attribute name="panelPadding" type="number" value="2" />
+            <Attribute name="panelColor" type="string" value="transparent" />
+            <Attribute name="panelGradient" type="boolean" value="false" />
+            <Attribute name="panelTexUpdate" type="boolean" value="false" />
+            <Attribute name="panelSkipUpdate" type="boolean" value="false" />
+            <Attribute name="panelOffset" type="number" value="1" />
+        </Attributes>
+        <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+            <EdgeSize val="1" />
+            <TileSize val="0" />
+            <BackgroundInsets left="1" right="1" top="1" bottom="1" />
+            <Color r="0" g="0" b="0" a="0.8" />
+            <BorderColor r="0" g="0" b="0" a="1" />
+        </Backdrop>
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="-7">
+                <Texture parentKey="Top" file="Interface\AddOns\SVUI_NamePlates\assets\PLATE-TOP">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension y="22" />
+                    </Size>
+                    <Color r="1" g="1" b="0" a="0.25" />
+                </Texture>
+                <Texture parentKey="Bottom" file="Interface\AddOns\SVUI_NamePlates\assets\PLATE-BOTTOM">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT" />
+                        <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT" />
+                    </Anchors>
+                    <Size>
+                        <AbsDimension y="32" />
+                    </Size>
+                    <Color r="1" g="1" b="0" a="0.25" />
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame parentKey="Shadow" inherits="SVUI_ShadowTemplate" />
+        </Frames>
+    </Frame>
+
+    <Script file="Loader.lua"/>
+    <Script file='SVUI_NamePlates.lua'/>
+    <!-- <Script file='components\healers.lua'/> -->
+</Ui>

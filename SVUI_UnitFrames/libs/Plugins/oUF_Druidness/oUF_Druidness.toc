@@ -1,0 +1,11 @@
+## Interface: 40100
+## Title: oUF Druidness
+## Notes: Adds All the Druid Things!
+## Author: SV
+## Version: 1.0
+## X-Category: UnitFrame
+## Dependencies: oUF
+
+
+oUF_Druidness.lua
+

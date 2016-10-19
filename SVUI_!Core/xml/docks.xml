@@ -1,0 +1,307 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Frame name="SVUI_DockBarBottomLeft" frameStrata="BACKGROUND">
+        <Size y="22"/>
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="BOTTOMLEFT" x="1" y="1" />
+        </Anchors>
+        <Frames>
+            <Button name="$parentButton" parentKey="Button">
+                <Size x="22" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent" />
+                </Anchors>
+                <Attributes>
+                    <Attribute name="tipText" type="string" value="Toggle Left Dock" />
+                    <Attribute name="tipExtraText" type="string" value="Expand Left Dock" />
+                </Attributes>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <Texture parentKey="Icon" file="Interface\AddOns\SVUI_!Core\assets\textures\EMPTY">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="2" y="-2" />
+                                <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-2" y="2" />
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnLoad>
+                        self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+            <Button name="$parentButton2" parentKey="Button2">
+                <Size x="22" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parentButton" relativePoint="BOTTOMRIGHT" x="4" y="0" />
+                </Anchors>
+                <Attributes>
+                    <Attribute name="tipText" type="string" value="Toggle Left Dock" />
+                    <Attribute name="tipExtraText" type="string" value="Expand Left Dock" />
+                </Attributes>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <Texture parentKey="Icon" file="Interface\AddOns\SVUI_!Core\assets\textures\EMPTY">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="2" y="-2" />
+                                <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-2" y="2" />
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnLoad>
+                        self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+            <Frame name="$parentToolBar" parentKey="ToolBar">
+                <Size x="1" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parentButton2" relativePoint="BOTTOMRIGHT" x="4" y="0" />
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_DockBottomLeft" frameStrata="BACKGROUND">
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="1" y="32" />
+        </Anchors>
+        <Frames>
+            <Frame name="$parentAlert" parentKey="Alert" frameStrata="BACKGROUND">
+                <Size y="1"/>
+                <Anchors>
+                    <Anchor point="BOTTOMLEFT" x="0" y="4" />
+                    <Anchor point="BOTTOMRIGHT" x="0" y="4" />
+                </Anchors>
+            </Frame>
+            <Frame name="$parentWindow" parentKey="Window" frameStrata="BACKGROUND">
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parentAlert" relativePoint="TOPRIGHT" x="-4" y="4" />
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parentAlert" relativePoint="TOPLEFT" x="4" y="4" />
+                    <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT" x="4" y="0" />
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT" x="-4" y="0" />
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_DockBarBottomRight" frameStrata="BACKGROUND">
+        <Size y="22"/>
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="BOTTOMRIGHT" x="-1" y="1" />
+        </Anchors>
+        <Frames>
+            <Button name="$parentButton" parentKey="Button">
+                <Size x="22" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parent" />
+                </Anchors>
+                <Attributes>
+                    <Attribute name="tipText" type="string" value="Toggle Right Dock" />
+                    <Attribute name="tipExtraText" type="string" value="Expand Right Dock" />
+                </Attributes>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <Texture parentKey="Icon" file="Interface\AddOns\SVUI_!Core\assets\textures\EMPTY">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="2" y="-2" />
+                                <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-2" y="2" />
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnLoad>
+                        self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+            <Button name="$parentButton2" parentKey="Button2">
+                <Size x="22" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parentButton" relativePoint="BOTTOMLEFT" x="-4" y="0" />
+                </Anchors>
+                <Attributes>
+                    <Attribute name="tipText" type="string" value="Toggle Right Dock" />
+                    <Attribute name="tipExtraText" type="string" value="Expand Right Dock" />
+                </Attributes>
+                <Layers>
+                    <Layer level="OVERLAY">
+                        <Texture parentKey="Icon" file="Interface\AddOns\SVUI_!Core\assets\textures\EMPTY">
+                            <Anchors>
+                                <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="2" y="-2" />
+                                <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-2" y="2" />
+                            </Anchors>
+                        </Texture>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnLoad>
+                        self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+                    </OnLoad>
+                </Scripts>
+            </Button>
+            <Frame name="$parentToolBar" parentKey="ToolBar">
+                <Size x="1" y="22"/>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parentButton2" relativePoint="BOTTOMLEFT" x="-4" y="0" />
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_DockBottomRight" frameStrata="BACKGROUND">
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-1" y="32" />
+        </Anchors>
+        <Frames>
+            <Frame name="$parentAlert" parentKey="Alert" frameStrata="BACKGROUND">
+                <Size y="1"/>
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" x="0" y="4" />
+                    <Anchor point="BOTTOMLEFT" x="0" y="4" />
+                </Anchors>
+            </Frame>
+            <Frame name="$parentWindow" parentKey="Window" frameStrata="BACKGROUND">
+                <Anchors>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parentAlert" relativePoint="TOPRIGHT" x="-4" y="4" />
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parentAlert" relativePoint="TOPLEFT" x="4" y="4" />
+                    <Anchor point="TOPLEFT" relativeTo="$parent" relativePoint="TOPLEFT" x="4" y="0" />
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT" x="-4" y="0" />
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_DockBarTopLeft" frameStrata="BACKGROUND">
+        <Size y="22"/>
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="TOPLEFT" />
+        </Anchors>
+        <Frames>
+            <Frame name="$parentToolBar" parentKey="ToolBar">
+                <Size x="1" y="22"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parent" />
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_DockTopLeft" frameStrata="BACKGROUND">
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="TOPLEFT" />
+        </Anchors>
+        <Frames>
+            <Frame name="$parentAlert" parentKey="Alert" frameStrata="BACKGROUND">
+                <Size y="1"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" x="0" y="4" />
+                    <Anchor point="TOPLEFT" x="0" y="4" />
+                </Anchors>
+            </Frame>
+            <Frame name="$parentWindow" parentKey="Window" frameStrata="BACKGROUND">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentAlert" relativePoint="BOTTOMRIGHT" x="0" y="4" />
+                    <Anchor point="TOPLEFT" relativeTo="$parentAlert" relativePoint="BOTTOMLEFT" x="0" y="4" />
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT" x="0" y="0" />
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_DockBarTopRight" frameStrata="BACKGROUND">
+        <Size y="22"/>
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="TOPRIGHT" />
+        </Anchors>
+        <Frames>
+            <Frame name="$parentToolBar" parentKey="ToolBar">
+                <Size x="1" y="22"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" />
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_DockTopRight" frameStrata="BACKGROUND">
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="TOPRIGHT" />
+        </Anchors>
+        <Frames>
+            <Frame name="$parentAlert" parentKey="Alert" frameStrata="BACKGROUND">
+                <Size y="1"/>
+                <Anchors>
+                    <Anchor point="TOPRIGHT" x="0" y="4" />
+                    <Anchor point="TOPLEFT" x="0" y="4" />
+                </Anchors>
+            </Frame>
+            <Frame name="$parentWindow" parentKey="Window" frameStrata="BACKGROUND">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parentAlert" relativePoint="BOTTOMRIGHT" x="0" y="4" />
+                    <Anchor point="TOPLEFT" relativeTo="$parentAlert" relativePoint="BOTTOMLEFT" x="0" y="4" />
+                    <Anchor point="BOTTOMLEFT" relativeTo="$parent" relativePoint="BOTTOMLEFT" x="0" y="0" />
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_DockBottomCenter" frameStrata="BACKGROUND">
+        <Size x="500" y="22"/>
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="BOTTOM" />
+        </Anchors>
+    </Frame>
+
+    <Frame name="SVUI_DockTopCenter" frameStrata="BACKGROUND">
+        <Size x="500" y="22"/>
+        <Attributes>
+            <Attribute name="spacingSize" type="number" value="4" />
+            <Attribute name="buttonSize" type="number" value="22" />
+        </Attributes>
+        <Anchors>
+            <Anchor point="TOP" />
+        </Anchors>
+    </Frame>
+</Ui>

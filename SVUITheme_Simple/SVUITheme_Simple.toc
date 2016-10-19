@@ -1,0 +1,17 @@
+## Interface: 70000
+## Author: Failcoder
+## Version: 1.0.0
+## Title: |cffFF9900SVUI Theme: |r|cff00EFFFSimple|r
+## Notes: Theme for [|cff9911FFSVUI Framework|r].
+## RequiredDeps: SVUI_!Core
+## OptionalDeps: LibSharedMedia-3.0
+## LoadOnDemand: 1
+## DefaultState: disabled
+## X-SVUITheme: Simple
+## X-Email: munglunch@gmail.com
+## X-Website: http://www.supervillainui.com
+## X-Donate: PayPal:munglunch@gmail.com
+## X-License: MIT
+## X-Category: Interface Enhancements
+
+SVUITheme_Simple.xml

@@ -1,0 +1,9 @@
+## Interface: 50001
+## Author: p3lim
+## Version: 50001.3-Beta
+## Title: oUF Friendship
+## Notes: NPC Friendship Bar support for oUF layouts.
+## RequiredDeps: oUF
+
+
+oUF_Friendship.lua

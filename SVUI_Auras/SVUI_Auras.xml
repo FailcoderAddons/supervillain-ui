@@ -1,0 +1,119 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file='Loader.lua'/>
+	<Script file='SVUI_Auras.lua'/>
+	<Script file="components\procs.lua"/>
+    
+	<Button name='SVUI_AuraTemplate' inherits='SecureActionButtonTemplate' virtual='true'>
+        <Size x='26' y='26'/>
+        <Attributes>
+            <Attribute name='type' value='cancelaura'/>
+        </Attributes>
+        <Scripts>
+            <OnLoad>
+                SVUI.Auras:CreateIcon(self)
+                self:RegisterForClicks('RightButtonUp')
+            </OnLoad>
+            <OnEnter>
+                GameTooltip:SetOwner(self, 'ANCHOR_BOTTOMLEFT', -5, -5)
+                if(self:GetAttribute'index') then
+                    GameTooltip:SetUnitAura(SecureButton_GetUnit(self:GetParent()), self:GetID(), self:GetParent():GetAttribute("filter"))
+                elseif(self:GetAttribute'target-slot') then
+                    GameTooltip:SetInventoryItem('player', self:GetID())
+                end
+            </OnEnter>
+            <OnLeave function='GameTooltip_Hide'/>
+        </Scripts>
+    </Button>
+    
+    <Button name='SVUI_AuraTemplate16' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='16' y='16'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate18' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='18' y='18'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate20' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='20' y='20'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate22' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='22' y='22'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate24' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='24' y='24'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate26' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='26' y='26'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate28' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='28' y='28'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate30' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='30' y='30'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate32' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='32' y='32'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate34' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='34' y='34'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate36' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='36' y='36'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate38' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='38' y='38'/>
+    </Button>       
+
+    <Button name='SVUI_AuraTemplate40' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='40' y='40'/>
+    </Button>
+
+    <Button name='SVUI_AuraTemplate42' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='42' y='42'/>
+    </Button>
+
+    <Button name='SVUI_AuraTemplate44' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='44' y='44'/>
+    </Button>
+
+    <Button name='SVUI_AuraTemplate46' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='46' y='46'/>
+    </Button>
+
+    <Button name='SVUI_AuraTemplate48' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='48' y='48'/>
+    </Button>
+
+    <Button name='SVUI_AuraTemplate50' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='50' y='50'/>
+    </Button>   
+
+    <Button name='SVUI_AuraTemplate52' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='52' y='52'/>
+    </Button>   
+
+    <Button name='SVUI_AuraTemplate54' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='54' y='54'/>
+    </Button>   
+
+    <Button name='SVUI_AuraTemplate56' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='56' y='56'/>
+    </Button>   
+
+    <Button name='SVUI_AuraTemplate58' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='58' y='58'/>
+    </Button>   
+
+    <Button name='SVUI_AuraTemplate60' inherits='SVUI_AuraTemplate' virtual='true'>
+        <Size x='60' y='60'/>
+    </Button>
+</Ui>

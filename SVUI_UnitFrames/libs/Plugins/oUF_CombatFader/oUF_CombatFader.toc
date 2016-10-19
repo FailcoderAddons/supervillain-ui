@@ -1,0 +1,9 @@
+## Interface: 40200
+## Title: oUF Combat Fader
+## Notes: Adds combat fade ability to oUF
+## Author: SV
+## Version: 1.1.0
+## Dependencies: oUF
+
+
+oUF_CombatFader.lua

@@ -1,0 +1,10 @@
+## Interface: 50001
+## Title: oUF Afflicted
+## Notes: Adds Custom Debuff Highlighting to oUF.
+## Author: Failcoder
+## Version: 1.1.0
+## X-Category: oUF
+## Dependencies: oUF
+
+
+oUF_ActionPanel.lua

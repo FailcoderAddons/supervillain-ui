@@ -1,0 +1,11 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file="LUA.lua"/>
+	<Script file="External.lua"/>
+	<Script file="Linguist.lua"/>
+	<Script file="Registry.lua"/>
+	<Script file="Events.lua"/>
+	<Script file="Timers.lua"/>
+	<Script file="Animate.lua"/>
+	<Script file="Sounds.lua"/>
+	<Script file="SpecialFX.lua"/>
+</Ui>

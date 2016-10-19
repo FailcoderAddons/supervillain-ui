@@ -1,0 +1,5 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Script file="installer.lua"/>
+    <Script file="theme_select.lua"/>
+    <Script file="presets.lua"/>
+</Ui>

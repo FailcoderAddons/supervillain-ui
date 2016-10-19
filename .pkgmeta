@@ -1,0 +1,25 @@
+package-as: SVUI_PKG
+
+move-folders:
+    SVUI_PKG/SVUI_!Core: SVUI_!Core
+    SVUI_PKG/SVUI_!Options: SVUI_!Options
+    SVUI_PKG/SVUI_ActionBars: SVUI_ActionBars
+    SVUI_PKG/SVUI_Auras: SVUI_Auras
+    SVUI_PKG/SVUI_Chat: SVUI_Chat
+    SVUI_PKG/SVUI_CraftOMatic: SVUI_CraftOMatic
+    SVUI_PKG/SVUI_FightOMatic: SVUI_FightOMatic
+    SVUI_PKG/SVUI_Inventory: SVUI_Inventory
+    SVUI_PKG/SVUI_Maps: SVUI_Maps
+    SVUI_PKG/SVUI_NamePlates: SVUI_NamePlates
+    SVUI_PKG/SVUI_QuestTracker: SVUI_QuestTracker
+    SVUI_PKG/SVUI_Skins: SVUI_Skins
+    SVUI_PKG/SVUI_Tooltip: SVUI_Tooltip
+    SVUI_PKG/SVUI_TrackOMatic: SVUI_TrackOMatic
+    SVUI_PKG/SVUI_UnitFrames: SVUI_UnitFrames
+    SVUI_PKG/SVUITheme_Simple: SVUITheme_Simple
+
+manual-changelog:
+    filename: CHANGELOG.md
+    markup-type: markdown
+
+license-output: LICENSE.txt

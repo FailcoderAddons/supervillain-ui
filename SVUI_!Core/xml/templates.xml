@@ -1,0 +1,340 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Slider name="SVUI_TinySliderTemplate" orientation="HORIZONTAL" virtual="true" enableMouse="true">
+      <Size>
+        <AbsDimension x="100" y="6"/>
+      </Size>
+      <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+          <EdgeSize val="1" />
+          <TileSize val="0" />
+          <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+          <Color r="0" g="0" b="0" a="0.5" />
+          <BorderColor r="0" g="0" b="0" a="1" />
+      </Backdrop>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString parentKey="Text" inherits="GameFontHighlightSmall">
+            <Anchors>
+              <Anchor point="BOTTOM" relativePoint="TOP"/>
+            </Anchors>
+          </FontString>
+          <FontString parentKey="Low" inherits="GameFontHighlightSmall" text="LOW">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="0" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </FontString>
+          <FontString parentKey="High" inherits="GameFontHighlightSmall" text="HIGH">
+            <Anchors>
+              <Anchor point="TOPRIGHT" relativePoint="BOTTOMRIGHT">
+                <Offset>
+                  <AbsDimension x="0" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+      <Scripts>
+        <OnEnter>
+          if ( self:IsEnabled() ) then
+            if ( self.tooltipText ) then
+              GameTooltip:SetOwner(self, self.tooltipOwnerPoint or "ANCHOR_RIGHT");
+              GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, true);
+            end
+          end
+        </OnEnter>
+        <OnLeave>
+          GameTooltip:Hide();
+        </OnLeave>
+      </Scripts>
+      <ThumbTexture parentKey="Thumb" file="Interface\AddOns\SVUI_!Core\assets\buttons\SCROLLBAR-KNOB">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+      </ThumbTexture>
+    </Slider>
+
+    <Slider name="SVUI_HSliderTemplate" orientation="HORIZONTAL" virtual="true" enableMouse="true">
+      <Size>
+        <AbsDimension x="144" y="12"/>
+      </Size>
+      <HitRectInsets>
+        <AbsInset left="0" right="0" top="-10" bottom="-10"/>
+      </HitRectInsets>
+      <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+          <EdgeSize val="2" />
+          <TileSize val="0" />
+          <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+          <Color r="0" g="0" b="0" a="0.5" />
+          <BorderColor r="0" g="0" b="0" a="1" />
+      </Backdrop>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString name="$parentText" inherits="GameFontNormal">
+            <Anchors>
+              <Anchor point="BOTTOM" relativePoint="TOP"/>
+            </Anchors>
+          </FontString>
+          <FontString name="$parentLow" inherits="GameFontNormal" text="LOW">
+            <Anchors>
+              <Anchor point="RIGHT" relativePoint="LEFT">
+                <Offset>
+                  <AbsDimension x="-8" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </FontString>
+          <FontString name="$parentHigh" inherits="GameFontNormal" text="HIGH">
+            <Anchors>
+              <Anchor point="LEFT" relativePoint="RIGHT">
+                <Offset>
+                  <AbsDimension x="8" y="0"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+      <Scripts>
+        <OnEnter>
+          if ( self:IsEnabled() ) then
+            if ( self.tooltipText ) then
+              GameTooltip:SetOwner(self, self.tooltipOwnerPoint or "ANCHOR_RIGHT");
+              GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, true);
+            end
+          end
+        </OnEnter>
+        <OnLeave>
+          GameTooltip:Hide();
+        </OnLeave>
+      </Scripts>
+      <ThumbTexture name="$parentThumb" file="Interface\AddOns\SVUI_!Core\assets\buttons\SCROLLBAR-KNOB">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+      </ThumbTexture>
+    </Slider>
+
+    <Slider name="SVUI_VSliderTemplate" orientation="VERTICAL" virtual="true" enableMouse="true">
+      <Size>
+        <AbsDimension x="12" y="144"/>
+      </Size>
+      <HitRectInsets>
+        <AbsInset left="-10" right="-10" top="0" bottom="0"/>
+      </HitRectInsets>
+      <Backdrop bgFile="Interface\BUTTONS\WHITE8X8" edgeFile="Interface\BUTTONS\WHITE8X8" tile="false">
+          <EdgeSize val="2" />
+          <TileSize val="0" />
+          <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+          <Color r="0" g="0" b="0" a="0.5" />
+          <BorderColor r="0" g="0" b="0" a="1" />
+      </Backdrop>
+      <Layers>
+        <Layer level="ARTWORK">
+          <FontString name="$parentText" inherits="GameFontHighlight">
+            <Anchors>
+              <Anchor point="BOTTOM" relativePoint="TOP"/>
+            </Anchors>
+          </FontString>
+          <FontString name="$parentLow" inherits="GameFontHighlightSmall" text="LOW">
+            <Anchors>
+              <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT">
+                <Offset>
+                  <AbsDimension x="3" y="-4"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </FontString>
+          <FontString name="$parentHigh" inherits="GameFontHighlightSmall" text="HIGH">
+            <Anchors>
+              <Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+                <Offset>
+                  <AbsDimension x="3" y="4"/>
+                </Offset>
+              </Anchor>
+            </Anchors>
+          </FontString>
+        </Layer>
+      </Layers>
+      <Scripts>
+        <OnEnter>
+          if ( self:IsEnabled() ) then
+            if ( self.tooltipText ) then
+              GameTooltip:SetOwner(self, self.tooltipOwnerPoint or "ANCHOR_RIGHT");
+              GameTooltip:SetText(self.tooltipText, nil, nil, nil, nil, true);
+            end
+          end
+        </OnEnter>
+        <OnLeave>
+          GameTooltip:Hide();
+        </OnLeave>
+      </Scripts>
+      <ThumbTexture name="$parentThumb" file="Interface\AddOns\SVUI_!Core\assets\buttons\SCROLLBAR-KNOB">
+        <Size>
+          <AbsDimension x="20" y="20"/>
+        </Size>
+      </ThumbTexture>
+    </Slider>
+
+    <Frame name="SVUI_ShadowTemplate" virtual="true">
+        <Attributes>
+            <Attribute name="shadowAlpha" type="number" value="0.5" />
+        </Attributes>
+        <Backdrop edgeFile="Interface\AddOns\SVUI_!Core\assets\borders\SHADOW">
+            <EdgeSize val="3" />
+            <BackgroundInsets left="0" right="0" top="0" bottom="0" />
+            <Color r="0" g="0" b="0" a="0" />
+            <BorderColor r="0" g="0" b="0" a="0.5" />
+        </Backdrop>
+    </Frame>
+
+    <Frame name="SVUI_ShadowBoxTemplate" virtual="true">
+        <Layers>
+            <Layer level="BACKGROUND" textureSubLevel="2">
+                <Texture parentKey="Left" nonBlocking="true" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="0" y="0" />
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="2"/>
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="Top" nonBlocking="true" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="0" y="0" />
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="0" y="0" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension y="2"/>
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="Right" nonBlocking="true" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+                        <Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" x="0" y="0" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension x="2"/>
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+                <Texture parentKey="Bottom" nonBlocking="true" file="Interface\BUTTONS\WHITE8X8">
+                    <Anchors>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="0" y="0" />
+                        <Anchor point="BOTTOMLEFT" relativePoint="BOTTOMLEFT" x="0" y="0" />
+                    </Anchors>
+                    <Size>
+                      <AbsDimension y="2"/>
+                    </Size>
+                    <Color r="0" g="0" b="0" a="1" />
+                </Texture>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Button name="SVUI_DockletButtonTemplate" virtual="true" hidden="true">
+        <Size x="22" y="22"/>
+        <Attributes>
+            <Attribute name="tipText" type="string" value="" />
+            <Attribute name="tipExtraText" type="string" value="" />
+        </Attributes>
+        <Layers>
+            <Layer level="OVERLAY">
+                <Texture parentKey="Icon" file="Interface\AddOns\SVUI_!Core\assets\backgrounds\DEFAULT">
+                    <Anchors>
+                        <Anchor point="TOPLEFT" relativePoint="TOPLEFT" x="2" y="-2" />
+                        <Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMRIGHT" x="-2" y="2" />
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnLoad>
+                self:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+            </OnLoad>
+        </Scripts>
+    </Button>
+
+    <Frame name="SVUI_MovingPanelTemplate" virtual="true" movable="true" clampedToScreen="true" toplevel="true">
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentBG" setAllPoints="true"/>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture name="$parentTitleBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT"/>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+                            <Offset x="0" y="-30"/>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Frame name="$parentTitleButton">
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="$parentTitleBG"/>
+                    <Anchor point="BOTTOMRIGHT" relativeTo="$parentTitleBG"/>
+                </Anchors>
+            </Frame>
+        </Frames>
+    </Frame>
+
+    <Frame name="SVUI_MessagePanelTemplate" virtual="true" toplevel="true">
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture name="$parentBG" setAllPoints="true"/>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture name="$parentTitleBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-8"/>
+                        </Anchor>
+                        <Anchor point="BOTTOMRIGHT" relativePoint="TOPRIGHT">
+                            <Offset x="-32" y="-24"/>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+                <Texture name="$parentDialogBG">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-32"/>
+                        </Anchor>
+                        <Anchor point="BOTTOMRIGHT">
+                            <Offset x="-32" y="32"/>
+                        </Anchor>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Title" inherits="GameFontNormal">
+                    <Anchors>
+                        <Anchor point="TOPLEFT">
+                            <Offset x="8" y="-8"/>
+                        </Anchor>
+                        <Anchor point="TOPRIGHT">
+                            <Offset x="-32" y="-24"/>
+                        </Anchor>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Frames>
+            <Button parentKey="Close" inherits="UIPanelCloseButton">
+                <Anchors>
+                    <Anchor point="TOPRIGHT">
+                        <Offset x="-2" y="-2"/>
+                    </Anchor>
+                </Anchors>
+            </Button>
+        </Frames>
+    </Frame>
+</Ui>

@@ -1,0 +1,139 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">  
+    <Font name="SVUI_Font_Default" font="Fonts\ARIALN.TTF" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="12"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Aura" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="10"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Number" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="11"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Number_Huge" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="18"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Header" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="15"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Data" font="Fonts\ARIALN.TTF" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="11"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Caps" font="Fonts\skurri.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="12"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Narrator" font="Fonts\ARIALN.TTF" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="12"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Pixel" font="Fonts\skurri.ttf" monochrome="true" virtual="true">
+        <FontHeight>
+            <AbsValue val="8"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Loot" font="Fonts\ARIALN.TTF" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="12"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Loot_Number" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="11"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Roll" font="Fonts\ARIALN.TTF" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="12"/>
+        </FontHeight>
+    </Font>
+    <Font name="SVUI_Font_Roll_Number" font="Fonts\MORPHEUS.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="11"/>
+        </FontHeight>
+    </Font>
+</Ui>

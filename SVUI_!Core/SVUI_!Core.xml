@@ -1,0 +1,58 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Include file="libs\_load.xml"/>
+    <Include file="language\_load.xml"/>
+    <Include file="xml\fonts.xml"/>
+    <Include file="xml\templates.xml"/>
+    <Include file="xml\styles.xml"/>
+    <Include file="xml\widgets.xml"/>
+    <Include file="xml\docks.xml"/>
+    <Script file="system\damage_text.lua"/>
+    <Script file="system\core.lua"/>
+	  <Script file="system\media.lua"/>
+    <Script file="system\api.lua"/>
+    <Script file="system\utilities.lua"/>
+    <Script file="system\alerts.lua"/>
+    <Script file="system\dock.lua"/>
+    <Script file="system\reports.lua"/>
+    <Script file="system\layout.lua"/>
+    <Script file="system\dropdown.lua"/>
+    <Script file="system\overrides.lua"/>
+    <Script file="system\errors.lua"/>
+    <Script file="system\debug.lua"/>
+    <Script file="system\profile.lua"/>
+
+    <Include file="setup\_load.xml"/>
+
+    <Script file="system\slash.lua"/>
+
+    <Script file="system\_reports\bags.lua"/>
+    <Script file="system\_reports\cta.lua"/>
+    <Script file="system\_reports\durability.lua"/>
+    <Script file="system\_reports\experience.lua"/>
+    <Script file="system\_reports\friends.lua"/>
+    <Script file="system\_reports\gold.lua"/>
+    <Script file="system\_reports\tokens.lua"/>
+    <Script file="system\_reports\guild.lua"/>
+    <Script file="system\_reports\reputation.lua"/>
+    <Script file="system\_reports\system.lua"/>
+    <Script file="system\_reports\time.lua"/>
+    <Script file="system\_reports\dps.lua"/>
+    <Script file="system\_reports\hps.lua"/>
+
+    <Script file="system\_docklets\profession.lua"/>
+    <Script file="system\_docklets\misc.lua"/>
+    <Script file="system\_docklets\garrison.lua"/>
+    <Script file="system\_docklets\raidleader.lua"/>
+    <Script file="system\_docklets\breakstuff.lua"/>
+
+    <Script file="system\funstuff.lua"/>
+    <Script file="system\misc.lua"/>
+    <Script file="system\mail.lua"/>
+    <Script file="system\henchmen.lua"/>
+    <Script file="system\letsride.lua"/>
+    <Script file="system\automations.lua"/>
+    <Script file="system\gear.lua"/>
+
+    <Script file="system\credits.lua"/>
+    <Include file="filtering\_load.xml"/>
+</Ui>

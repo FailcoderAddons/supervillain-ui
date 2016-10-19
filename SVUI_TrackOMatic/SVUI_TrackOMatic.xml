@@ -1,0 +1,82 @@
+﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Font name="SVUI_Font_Tracking" font="Fonts\skurri.ttf" virtual="true">
+        <Shadow>
+            <Offset>
+                <AbsDimension x="1" y="-1"/>
+            </Offset>
+            <Color r="0" g="0" b="0" a="0.25"/>
+        </Shadow>
+        <FontHeight>
+            <AbsValue val="12"/>
+        </FontHeight>
+    </Font>
+	  <Frame name="SVUI_UnitTrackingCompass" movable="true" frameStrata="DIALOG" hidden="true">
+        <Size x="70" y="70"/>
+        <Anchors>
+            <Anchor point="CENTER" relativeTo="UIParent" relativePoint="CENTER"/>
+        </Anchors>
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="BG" setAllPoints="true" file="Interface\AddOns\SVUI_TrackOMatic\artwork\DOODAD-BG"/>
+            </Layer>
+            <Layer level="BORDER">
+                <Texture parentKey="Border" setAllPoints="true" file="Interface\AddOns\SVUI_TrackOMatic\artwork\DOODAD-BORDER"/>
+                <Texture parentKey="Arrow" file="Interface\AddOns\SVUI_TrackOMatic\artwork\DOODAD-ARROW">
+                    <Size x="35" y="35"/>
+                    <Anchors>
+                        <Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture parentKey="Radar" setAllPoints="true" file="Interface\AddOns\SVUI_TrackOMatic\artwork\DOODAD-RADAR"/>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Range" inherits="SVUI_Font_Tracking">
+                    <Anchors>
+                        <Anchor point="TOP" relativeTo="$parent" relativePoint="BOTTOM"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+        <Scripts>
+            <OnDragStart>
+                _G["SVUI_UnitTrackingCompass"].moving = true;
+                _G["SVUI_UnitTrackingCompass"]:StartMoving();
+            </OnDragStart>
+            <OnDragStop>
+                _G["SVUI_UnitTrackingCompass"].moving = nil;
+                _G["SVUI_UnitTrackingCompass"]:StopMovingOrSizing();
+            </OnDragStop>
+        </Scripts>
+    </Frame>
+
+    <Frame name="SVUI_TrackingCompassTemplate" frameStrata="DIALOG" virtual="true" >
+        <Layers>
+            <Layer level="BACKGROUND">
+                <Texture parentKey="BG" setAllPoints="true" file="Interface\AddOns\SVUI_TrackOMatic\artwork\QUEST-COMPASS-BG"/>
+            </Layer>
+            <Layer level="BORDER">
+                <Texture parentKey="Arrow" file="Interface\AddOns\SVUI_TrackOMatic\artwork\QUEST-COMPASS-ARROW">
+                    <Anchors>
+                        <Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER"/>
+                    </Anchors>
+                </Texture>
+            </Layer>
+            <Layer level="OVERLAY">
+                <Texture parentKey="Radar" setAllPoints="true" file="Interface\AddOns\SVUI_TrackOMatic\artwork\DOODAD-RADAR"/>
+            </Layer>
+            <Layer level="ARTWORK">
+                <FontString parentKey="Range" inherits="SVUI_Font_Tracking">
+                    <Anchors>
+                        <Anchor point="CENTER" relativeTo="$parent" relativePoint="CENTER"/>
+                    </Anchors>
+                </FontString>
+            </Layer>
+        </Layers>
+    </Frame>
+
+    <Script file='Loader.lua'/>
+    <Include file='components\_load.xml'/>
+    <Script file='SVUI_TrackOMatic.lua'/>
+</Ui>

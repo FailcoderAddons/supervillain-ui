@@ -1,0 +1,11 @@
+## Interface: 70000
+## LoadOnDemand: 1
+
+## Title: Lib: AceVillain-1.0
+## Notes: Provides shared widgets for use by the AceGUI lib.
+## Author: Failcoder
+## Version: 1.0-1
+## X-Category: Library
+## X-Revision: 1
+
+AceVillain-1.0\AceVillain-1.0.lua

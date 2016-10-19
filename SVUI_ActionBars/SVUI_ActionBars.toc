@@ -1,0 +1,16 @@
+## Interface: 70000
+## Author: Failcoder
+## Version: 1.3.5
+## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00Action Bars|r
+## Notes: Action Bar Plugin for [|cff9911FFSVUI|r].
+## OptionalDeps: LibSharedMedia-3.0, LibActionButton-1.0
+## RequiredDeps: SVUI_!Core
+## X-SVUIName: ActionBars
+## X-SVUISchema: ActionBars
+## X-Embeds: LibActionButton-1.0
+## X-Email: munglunch@gmail.com
+## X-Website: http://www.supervillainui.com
+## X-Donate: PayPal:munglunch@gmail.com
+## X-License: MIT
+
+SVUI_ActionBars.xml

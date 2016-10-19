@@ -1,0 +1,10 @@
+## Interface: 50001
+## Title: oUF Gladiator
+## Notes: Adds PvP trinket status and spec icons to oUF frames.
+## Author: Failcoder
+## Version: 1.1.0
+## X-Category: oUF
+## Dependencies: oUF
+
+
+oUF_Gladiator.lua

@@ -1,0 +1,10 @@
+## Interface: 50001
+## Title: oUF ActionPanel
+## Notes: Adds a backing to all unit frames that provides many utilities.
+## Author: Failcoder
+## Version: 1.1.0
+## X-Category: oUF
+## Dependencies: oUF
+
+
+oUF_ActionPanel.lua
