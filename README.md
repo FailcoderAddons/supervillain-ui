@@ -1,4 +1,4 @@
-# supervillain-ui
+# SuperVillain UI
 
 Custom World of Warcraft User Interface
 
