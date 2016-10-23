@@ -46,6 +46,13 @@ if(not MOD) then return end;
 
 local LSM = _G.LibStub("LibSharedMedia-3.0")
 
+--Debug
+local Debug
+if AdiDebug then
+	Debug = AdiDebug:GetSink("Nameplates")
+else
+	Debug = function() end
+end
 --[[
 ##########################################################
 LOCAL VARS
@@ -226,7 +233,6 @@ local BorderTexGlow = path..'Border\\PlateGlow.blp'
 local MarkTex = path..'Border\\Mark.blp'
 local HighlightTex = path..'Border\\Highlight.blp'
 
-
 local TexCoord 		= {24/256, 186/256, 35/128, 59/128}
 local CbTexCoord 	= {24/256, 186/256, 59/128, 35/128}
 
@@ -234,6 +240,8 @@ local GlowTexCoord 	= {15/256, 195/256, 21/128, 73/128}
 local CbGlowTexCoord= {15/256, 195/256, 73/128, 21/128}
 
 local HiTexCoord 	= {5/128, 105/128, 20/32, 26/32}
+
+local AggroTexCoords = {  0.00781250, 0.55468750, 0.00781250, 0.27343750 }
 
 local raidIconColor = {
 	[1] = {r = 1.0,  g = 0.92, b = 0,     },
@@ -981,15 +989,14 @@ function UnitFrameMixin:Create(unitframe)
 	self.name:SetPoint('BOTTOM', h, 'TOP', 0, 4)
 	self.name:SetWordWrap(false)
 	self.name:SetJustifyH'CENTER'
-	--self.name:SetFont(config.Font, config.FontSize, 'THINOUTLINE')
-
-	self.aggroHighlight = h:CreateTexture(nil, 'BORDER', nil, 4)
-	self.aggroHighlight:SetTexture(BorderTexGlow)
-	self.aggroHighlight:SetTexCoord(unpack(GlowTexCoord))
-	self.aggroHighlight:SetPoint('TOPLEFT', h.border, -7, 15)
-	self.aggroHighlight:SetPoint('BOTTOMRIGHT', h.border, 7, -15)
-	self.aggroHighlight:SetAlpha(.7)
+	
+	self.aggroHighlight = h:CreateTexture(nil, 'OVERLAY', nil, 1)
+	self.aggroHighlight:SetTexture("Interface\\RaidFrame\\Raid-FrameHighlights");
+	self.aggroHighlight:SetTexCoord(unpack(AggroTexCoords));
+	self.aggroHighlight:SetAllPoints(h);
 	self.aggroHighlight:Hide()
+
+ 	
 
 	self.hoverHighlight = h:CreateTexture(nil, 'ARTWORK', nil, 1)
 	self.hoverHighlight:SetTexture(HighlightTex)
@@ -1210,12 +1217,16 @@ function UnitFrameMixin:UpdateThreat()
 
 	local isTanking, status = UnitDetailedThreatSituation('player', self.displayedUnit)
 	if status ~= nil then
+		Debug("Aggro...")
 		if MOD.IsPlayerEffectivelyTank() then
-			status = math.abs(status - 3)
+			Debug("... and I'm the tank")
+			status = math.abs(status - 2)
 		end
 		if status > 0 then
+			Debug("...and I have the threat")
 			tex:SetVertexColor(GetThreatStatusColor(status))
 			if not tex:IsShown() then 
+				Debug("showing the aggroHighlight")
 				tex:Show()
 			end
 			return
