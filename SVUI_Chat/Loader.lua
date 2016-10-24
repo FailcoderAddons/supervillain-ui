@@ -27,7 +27,7 @@ MOD.media = {}
 MOD.media.dockIcon = [[Interface\AddOns\SVUI_Chat\assets\DOCK-ICON-CHAT]];
 MOD.media.scrollIcon = [[Interface\AddOns\SVUI_Chat\assets\CHAT-SCROLL]];
 MOD.media.whisperIcon = [[Interface\AddOns\SVUI_Chat\assets\CHAT-WHISPER]];
-
+ 
 SV.defaults[Schema] = {
 	["docked"] = "BottomLeft",
 	["tabHeight"] = 20,
@@ -47,7 +47,9 @@ SV.defaults[Schema] = {
 	["shortChannels"] = true,
 	["hideRealms"] = false,
 	["mention"] = "Mention Alert",
+	["mention_channel"] = "Master",
 	["psst"] = "Whisper Alert",
+	["psst_channel"] = "Master",
 	["noWipe"] = false,
 	["timeStampFormat"] = "NONE",
 	["secretWords"] = "%MYNAME%, SVUI",
@@ -170,8 +172,23 @@ function MOD:LoadOptions()
 						values = AceVillainWidgets.sound,
 						set = function(a,b) MOD:ChangeDBVar(b,a[#a]) end
 					},
-					mention = {
+					psst_channel = {
 						order = 12,
+						type = "select",
+						name = L["Whisper Alert Sound Channel"],
+						desc = L["Select the sound channel for Whisper Alerts"],
+						disabled = function()return not SV.db[Schema].psst end,
+						values = {
+							["Master"] = "Master",
+							["Dialog"] = "Dialog",
+							["Sound"] = "SFX",
+							["Ambience"] = "Ambience",
+							["Music"] = "Music"
+						},
+						set = function(a,b) MOD:ChangeDBVar(b,a[#a]) end
+					},
+					mention = {
+						order = 13,
 						type = "select",
 						dialogControl = "LSM30_Sound",
 						name = L["Mention Alert"],
@@ -179,13 +196,28 @@ function MOD:LoadOptions()
 						values = AceVillainWidgets.sound,
 						set = function(a,b) MOD:ChangeDBVar(b,a[#a]) end
 					},
+					mention_channel = {
+						order = 14,
+						type = "select",
+						name = L["Mention Alert Sound Channel"],
+						desc = L["Select the sound channel for Mention Alerts"],
+						disabled = function()return not SV.db[Schema].mention end,
+						values = {
+							["Master"] = "Master",
+							["Dialog"] = "Dialog",
+							["Sound"] = "SFX",
+							["Ambience"] = "Ambience",
+							["Music"] = "Music"
+						},
+						set = function(a,b) MOD:ChangeDBVar(b,a[#a]) end
+					},
 					spacer2 = {
-						order = 13,
+						order = 15,
 						type = "description",
 						name = ""
 					},
 					throttleInterval = {
-						order = 14,
+						order = 16,
 						type = "range",
 						name = L["Spam Interval"],
 						desc = L["Prevent the same messages from displaying in chat more than once within this set amount of seconds, set to zero to disable."],

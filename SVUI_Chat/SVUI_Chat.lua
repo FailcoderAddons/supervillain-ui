@@ -48,7 +48,7 @@ local wipe          = _G.wipe;
 --BLIZZARD API
 local time 					= _G.time;
 local difftime 			= _G.difftime;
-
+ 
 local ChatFrame_AddMessageEventFilter = _G.ChatFrame_AddMessageEventFilter;
 local ChatEdit_ChooseBoxForSend = _G.ChatEdit_ChooseBoxForSend;
 --[[
@@ -407,7 +407,9 @@ do
 		end
 
 		if(message:find(PLAYERNAME_MATCH) and (not InCombatLockdown())) then
-			PlaySoundFile(SECRET_SOUND, "Master")
+	
+
+			PlaySoundFile(SECRET_SOUND, SV.db.Chat.mention_channel or "Master")
 		end
 
 		return SVUI_ParseMessage(self, event, message, author, ...)
@@ -1432,14 +1434,14 @@ EVENTS
 ##########################################################
 ]]--
 function MOD:CHAT_MSG_WHISPER(event, ...)
-	if(not InCombatLockdown() and WHISPER_SOUND) then PlaySoundFile(WHISPER_SOUND, "Master") end
+	if(not InCombatLockdown() and WHISPER_SOUND) then PlaySoundFile(WHISPER_SOUND, SV.db.Chat.psst_channel or "Master") end
 	if(self.db.general.saveChats) then
 		self:SAVE_CHAT_HISTORY(event, ...)
 	end
 end
 
 function MOD:CHAT_MSG_BN_WHISPER(event, ...)
-	if(not InCombatLockdown() and WHISPER_SOUND) then PlaySoundFile(WHISPER_SOUND, "Master") end
+	if(not InCombatLockdown() and WHISPER_SOUND) then PlaySoundFile(WHISPER_SOUND, SV.db.Chat.psst or "Master") end
 	if(self.db.general.saveChats) then
 		self:SAVE_CHAT_HISTORY(event, ...)
 	end
