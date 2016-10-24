@@ -1441,7 +1441,7 @@ function MOD:CHAT_MSG_WHISPER(event, ...)
 end
 
 function MOD:CHAT_MSG_BN_WHISPER(event, ...)
-	if(not InCombatLockdown() and WHISPER_SOUND) then PlaySoundFile(WHISPER_SOUND, SV.db.Chat.psst or "Master") end
+	if(not InCombatLockdown() and WHISPER_SOUND) then PlaySoundFile(WHISPER_SOUND, SV.db.Chat.psst_channel or "Master") end
 	if(self.db.general.saveChats) then
 		self:SAVE_CHAT_HISTORY(event, ...)
 	end
