@@ -392,7 +392,7 @@ local function InitializeScriptError()
     SV.ScriptError.Clear:SetStyle("Button")
     SV.ScriptError:SetScript("OnShow", ScriptError_OnShow)
     SV.API:Set("ScrollBar", SVUI_ScriptErrorDialogScrollBar)
-    ScriptErrorDialog:SetStyle("!_Frame", "Transparent")
+    --ScriptErrorDialog:SetStyle("!_Frame", "Transparent")
     ScriptErrorDialog.Input:SetScript("OnTextChanged", ScriptError_OnTextChanged)
     SV.ScriptError:RegisterForDrag("LeftButton");
 end

@@ -201,7 +201,8 @@ local function ChatStyle()
 	for i = 1, #ChatFrameWipeList do
 		local frame = _G[ChatFrameWipeList[i]]
 		if(frame) then
-			frame:RemoveTextures()
+			-- JV: 20161025 - Broken in 70100-22900 (7.1 build 22900)
+			--frame:RemoveTextures()
 		end
 	end
 

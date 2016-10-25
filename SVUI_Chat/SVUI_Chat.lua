@@ -1097,7 +1097,7 @@ do
 			if(not chat.hookedHyperLinks) then
 				chat:HookScript('OnHyperlinkEnter', _hook_OnHyperlinkEnter)
 				chat:HookScript('OnHyperlinkLeave', _hook_OnHyperlinkLeave)
-				chat:HookScript('OnMessageScrollChanged', _hook_OnMessageScrollChanged)
+				--chat:HookScript('OnMessageScrollChanged', _hook_OnMessageScrollChanged)
 				chat:HookScript('OnMouseWheel', _hook_OnMouseWheel)
 				tab:HookScript('OnEnter', _hook_TabOnEnter)
 				tab:HookScript('OnLeave', _hook_TabOnLeave)
