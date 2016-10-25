@@ -954,7 +954,8 @@ do
 	end
 
 	local _hook_OnHyperlinkLeave = function(self, refString)
-		if(not CHAT_HOVER_URL) then return; end
+		-- JV: 20161025 FIXME: (7.1) Lazyfix for Chat window reset causing this to fire with no refString. Longterm: figure out why! 
+		if(not CHAT_HOVER_URL or not refString) then return; end
 		local token = refString:match("^([^:]+)")
 		if _linkTokens[token] then
 			HideUIPanel(GameTooltip)
