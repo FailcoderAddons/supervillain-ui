@@ -1866,7 +1866,7 @@ function MOD:Load()
 
 	SetAllChatHooks()
 
-	FriendsMicroButton:Die()
+	--FriendsMicroButton:Die()
 	ChatFrameMenuButton:Die()
 
 	_G.InterfaceOptionsSocialPanelTimestampsButton:SetAlpha(0)

@@ -608,7 +608,8 @@ function DriverFrame:UpdateNamePlateOptions()
 
 	local namePlateVerticalScale = tonumber(GetCVar("NamePlateVerticalScale"));
 	local horizontalScale = tonumber(GetCVar("NamePlateHorizontalScale"));
-	C_NamePlate.SetNamePlateOtherSize(self.baseNamePlateWidth * horizontalScale, self.baseNamePlateHeight);
+	C_NamePlate.SetNamePlateFriendlySize(self.baseNamePlateWidth * horizontalScale, self.baseNamePlateHeight);
+	C_NamePlate.SetNamePlateEnemySize(self.baseNamePlateWidth * horizontalScale, self.baseNamePlateHeight);
 	C_NamePlate.SetNamePlateSelfSize(self.baseNamePlateWidth * horizontalScale, self.baseNamePlateHeight);
 
 

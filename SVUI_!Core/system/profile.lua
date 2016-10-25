@@ -126,7 +126,7 @@ local function InitializeProfileInterface()
     SV.ProfileInterface.Clear:SetStyle("Button")
     SV.ProfileInterface.Clear:SetScript("OnClick", ProfileInterface_ClearProfile)
     SV.API:Set("CloseButton", SV.ProfileInterface.Close)
-    ProfileInterfaceDialog:SetStyle("Frame", "Transparent")
+    --ProfileInterfaceDialog:SetStyle("Frame", "Transparent")
     ProfileInterfaceDialog.Input:SetScript("OnTextChanged", ProfileInterface_OnTextChanged)
     SV.ProfileInterface:RegisterForDrag("LeftButton");
     ProfileInterfaceHelp:SetStyle("Frame", "Default")

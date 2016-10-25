@@ -1425,7 +1425,7 @@ function MOD:Load()
 
 	SV.Events:On("AURA_FILTER_OPTIONS_CHANGED", UpdateUnitFrames, true);
 
-	self:InitializeBodyGuard()
+	--self:InitializeBodyGuard()
 
 	local rDebuffs = SV.oUF_RaidDebuffs or oUF_RaidDebuffs;
 	if not rDebuffs then return end
