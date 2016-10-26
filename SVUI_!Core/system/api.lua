@@ -1542,6 +1542,11 @@ local CURRENT_OBJECT = CreateFrame("Frame");
 AppendFrameMethods(CURRENT_OBJECT)
 AppendTextureMethods(CURRENT_OBJECT:CreateTexture())
 AppendFontStringMethods(CURRENT_OBJECT:CreateFontString())
+
+function SV:AppendAPI(obj)
+    AppendFrameMethods(obj)
+end
+
 CURRENT_OBJECT = EnumerateFrames()
 while CURRENT_OBJECT do
     AppendFrameMethods(CURRENT_OBJECT)

@@ -31,7 +31,7 @@ local QuestFrameList = {
 };
 
 local function QuestScrollHelper(b, c, d, e)
-	b:SetStyle("Frame", "Inset")
+	SV.API:Set("Frame", b, "Inset")
 	b.spellTex = b:CreateTexture(nil, 'ARTWORK')
 	b.spellTex:SetTexture([[Interface\QuestFrame\QuestBG]])
 	if e then
@@ -88,7 +88,7 @@ end
 
 local _hook_DetailScrollShow = function(self)
 	if not self.Panel then
-		self:SetStyle("Frame", "Default")
+		SV.API:Set("Frame", self)
 		QuestScrollHelper(self, 509, 630, false)
 	end
 	self.spellTex:SetHeight(self:GetHeight() + 217)
