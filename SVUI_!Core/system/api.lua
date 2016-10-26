@@ -1495,7 +1495,6 @@ API INJECTION
 ##########################################################
 ]]--
 local MODIFIED_OBJECTS = {};
-local CURRENT_OBJECT = CreateFrame("Frame");
 
 local function AppendFrameMethods(OBJECT)
     local objType = OBJECT:GetObjectType()
@@ -1539,10 +1538,10 @@ local function AppendFontStringMethods(OBJECT)
     if not OBJECT.InsetPoints then META.InsetPoints = InsetPoints end
 end
 
+local CURRENT_OBJECT = CreateFrame("Frame");
 AppendFrameMethods(CURRENT_OBJECT)
 AppendTextureMethods(CURRENT_OBJECT:CreateTexture())
 AppendFontStringMethods(CURRENT_OBJECT:CreateFontString())
-
 CURRENT_OBJECT = EnumerateFrames()
 while CURRENT_OBJECT do
     AppendFrameMethods(CURRENT_OBJECT)

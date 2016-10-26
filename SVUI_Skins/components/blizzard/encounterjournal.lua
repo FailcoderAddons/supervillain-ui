@@ -190,7 +190,7 @@ local function EncounterJournalStyle()
   ChangeTabHelper(EncounterJournalEncounterFrameInfoBossTab, 0, -10)
   ChangeTabHelper(EncounterJournalEncounterFrameInfoModelTab, 0, -20)
 
-  EncounterJournalEncounterFrameInfoOverviewScrollFrame:RemoveTextures()
+  EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollBar:RemoveTextures()
   EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetTextColor(1,1,0)
   EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildLoreDescription:SetTextColor(1,1,1)
   EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChild.overviewDescription.Text:SetTextColor(1,1,1)

@@ -84,19 +84,19 @@ local function StyleAltoholic(event, addon)
 		SV.API:Set("DropDown", AltoholicTabSummary_SelectLocation, 200)
 
 		if(AltoholicFrameSummaryScrollFrame) then
-			AltoholicFrameSummaryScrollFrame:RemoveTextures(true)
+			AltoholicFrameSummaryScrollFrameScrollBar:RemoveTextures(true)
 		end
 
 		if(AltoholicFrameBagUsageScrollFrame) then
-			AltoholicFrameBagUsageScrollFrame:RemoveTextures(true)
+			AltoholicFrameBagUsageScrollFrameScrollBar:RemoveTextures(true)
 		end
 
 		if(AltoholicFrameSkillsScrollFrame) then
-			AltoholicFrameSkillsScrollFrame:RemoveTextures(true)
+			AltoholicFrameSkillsScrollFrameScrollBar:RemoveTextures(true)
 		end
 
 		if(AltoholicFrameActivityScrollFrame) then
-			AltoholicFrameActivityScrollFrame:RemoveTextures(true)
+			AltoholicFrameActivityScrollFrameScrollBar:RemoveTextures(true)
 		end
 
 		SV.API:Set("Button", AltoholicTabSummary_RequestSharing)
@@ -138,9 +138,9 @@ local function StyleAltoholic(event, addon)
 		SV.API:Set("Button", AltoholicTabCharacters_Sort1)
 		SV.API:Set("Button", AltoholicTabCharacters_Sort2)
 		SV.API:Set("Button", AltoholicTabCharacters_Sort3)
-		AltoholicFrameContainersScrollFrame:RemoveTextures(true)
-		AltoholicFrameQuestsScrollFrame:RemoveTextures(true)
-		AltoholicFrameRecipesScrollFrame:RemoveTextures(true)
+		AltoholicFrameContainersScrollFrameScrollBar:RemoveTextures(true)
+		AltoholicFrameQuestsScrollFrameScrollBar:RemoveTextures(true)
+		AltoholicFrameRecipesScrollFrameScrollBar:RemoveTextures(true)
 
 		local Buttons = {
 			'AltoholicTabCharacters_Characters',
@@ -169,8 +169,8 @@ local function StyleAltoholic(event, addon)
 
 	if IsAddOnLoaded("Altoholic_Achievements") then
 		SV.API:Set("!_Frame", AltoholicFrameAchievements)
-		AltoholicFrameAchievementsScrollFrame:RemoveTextures(true)
-		AltoholicAchievementsMenuScrollFrame:RemoveTextures(true)
+		AltoholicFrameAchievementsScrollFrameScrollBar:RemoveTextures(true)
+		AltoholicAchievementsMenuScrollFrameScrollBar:RemoveTextures(true)
 		SV.API:Set("ScrollBar", AltoholicFrameAchievementsScrollFrameScrollBar)
 		SV.API:Set("ScrollBar", AltoholicAchievementsMenuScrollFrameScrollBar)
 		SV.API:Set("DropDown", AltoholicTabAchievements_SelectRealm)
@@ -204,7 +204,7 @@ local function StyleAltoholic(event, addon)
 	end
 
 	if IsAddOnLoaded("Altoholic_Grids") then
-		AltoholicFrameGridsScrollFrame:RemoveTextures(true)
+		AltoholicFrameGridsScrollFrameScrollBar:RemoveTextures(true)
 		SV.API:Set("!_Frame", AltoholicFrameGrids)
 		SV.API:Set("ScrollBar", AltoholicFrameGridsScrollFrameScrollBar)
 		SV.API:Set("DropDown", AltoholicTabGrids_SelectRealm)
@@ -233,7 +233,7 @@ local function StyleAltoholic(event, addon)
 		SV.API:Set("Frame", AltoholicFrameGuildMembers)
 		SV.API:Set("Frame", AltoholicFrameGuildBank)
 		SV.API:Set("ScrollBar", AltoholicFrameGuildMembersScrollFrameScrollBar)
-		AltoholicFrameGuildMembersScrollFrame:RemoveTextures(true)
+		AltoholicFrameGuildMembersScrollFrameScrollBar:RemoveTextures(true)
 
 		for i = 1, 2 do
 			SV.API:Set("Button", _G["AltoholicTabGuildMenuItem"..i])
@@ -256,8 +256,8 @@ local function StyleAltoholic(event, addon)
 
 	if IsAddOnLoaded("Altoholic_Search") then
 		SV.API:Set("!_Frame", AltoholicFrameSearch)
-		AltoholicFrameSearchScrollFrame:RemoveTextures(true)
-		AltoholicSearchMenuScrollFrame:RemoveTextures(true)
+		AltoholicFrameSearchScrollFrameScrollBar:RemoveTextures(true)
+		AltoholicSearchMenuScrollFrameScrollBar:RemoveTextures(true)
 		SV.API:Set("ScrollBar", AltoholicFrameSearchScrollFrameScrollBar)
 		SV.API:Set("ScrollBar", AltoholicSearchMenuScrollFrameScrollBar)
 		SV.API:Set("DropDown", AltoholicTabSearch_SelectRarity)

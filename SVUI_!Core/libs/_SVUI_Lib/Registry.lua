@@ -1114,9 +1114,10 @@ local Core_HandleError = function(self, schema, action, catch)
     local err_message = (debugPattern):format(schema, action, timestamp, catch)
     local count = #self.ERRORLOG + 1;
     self.ERRORLOG[count] = err_message;
-    if(self.DebugMode == true) then
-        self.HasErrors = true;
-        --self:Debugger(err_message)
+    self.HasErrors = true;
+    if(self.DebugMode == true and self.initialized and self.ShowErrors) then
+        self:ShowErrors();
+        wipe(self.ERRORLOG);
     end
 end
 
@@ -1152,7 +1153,7 @@ function lib:NewCore(gfile, efile, pfile, mfile, sfile)
     CoreObject.NameID               = CoreGlobalName;
     CoreObject.Version              = AddonVersion;
     CoreObject.GameVersion          = tonumber(InterfaceVersion);
-    CoreObject.DebugMode            = true;
+    CoreObject.DebugMode            = false;
     CoreObject.HasErrors            = false;
     CoreObject.Schema               = GetAddOnMetadata(CoreName, SchemaFromMeta);
     CoreObject.TitleID              = GetAddOnMetadata(CoreName, HeaderFromMeta);

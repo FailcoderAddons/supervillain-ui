@@ -233,7 +233,7 @@ local function GlyphStyle()
 	if(GlyphFrameSideInset) then GlyphFrameSideInset:RemoveTextures() end
 	if(GlyphFrameHeader1) then GlyphFrameHeader1:RemoveTextures() end
 	if(GlyphFrameHeader2) then GlyphFrameHeader2:RemoveTextures() end
-	if(GlyphFrameScrollFrame) then GlyphFrameScrollFrame:SetStyle("Frame", "Inset", false, 3, 2, 2) end
+	if(GlyphFrameScrollFrame) then GlyphFrameScrollFrameScrollBar:SetStyle("Frame", "Inset", false, 3, 2, 2) end
 	if(GlyphFrameSearchBox) then GlyphFrameSearchBox:SetStyle("Editbox") end
 
 	if(GlyphFrameClearInfoFrame and GlyphFrameClearInfoFrame.icon) then

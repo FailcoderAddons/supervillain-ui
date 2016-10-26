@@ -370,9 +370,9 @@ local function GuildBankStyle()
 
 	GuildBankFrameWithdrawButton:SetPoint("RIGHT", GuildBankFrameDepositButton, "LEFT", -2, 0)
 	GuildBankInfoScrollFrame:SetPoint('TOPLEFT', GuildBankInfo, 'TOPLEFT', -10, 12)
-	GuildBankInfoScrollFrame:RemoveTextures()
+	GuildBankInfoScrollFrameScrollBar:RemoveTextures()
 	GuildBankInfoScrollFrame:SetWidth(GuildBankInfoScrollFrame:GetWidth()-8)
-	GuildBankTransactionsScrollFrame:RemoveTextures()
+	GuildBankTransactionsScrollFrameScrollBar:RemoveTextures()
 
 	for i = 1, NUM_GUILDBANK_COLUMNS do
 		local frame = _G["GuildBankColumn"..i]
@@ -436,7 +436,7 @@ local function GuildBankStyle()
 	hooksecurefunc('GuildBankFrame_Update', _hook_GuildBankFrame_Update)
 
 	GuildBankPopupFrame:RemoveTextures()
-	GuildBankPopupScrollFrame:RemoveTextures()
+	GuildBankPopupScrollFrameScrollBar:RemoveTextures()
 	GuildBankPopupFrame:SetStyle("!_Frame", "Transparent", true)
 	GuildBankPopupFrame:SetPoint("TOPLEFT", GuildBankFrame, "TOPRIGHT", 1, -30)
 	GuildBankPopupOkayButton:SetStyle("Button")
@@ -682,7 +682,7 @@ local function GuildControlStyle()
 	GuildControlUI:RemoveTextures()
 	GuildControlUIHbar:RemoveTextures()
 	GuildControlUIRankBankFrameInset:RemoveTextures()
-	GuildControlUIRankBankFrameInsetScrollFrame:RemoveTextures()
+	GuildControlUIRankBankFrameInsetScrollFrameScrollBar:RemoveTextures()
 
 	SV.API:Set("Window", GuildControlUI)
 

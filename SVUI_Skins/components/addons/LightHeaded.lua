@@ -53,7 +53,7 @@ local function StyleLightHeaded()
 	SV.API:Set("Frame", LightHeadedFrameSub)
 	SV.API:Set("Frame", LightHeadedSearchBox)
 	SV.API:Set("Tooltip", LightHeadedTooltip)
-	LightHeadedScrollFrame:RemoveTextures()
+	LightHeadedScrollFrameScrollBar:RemoveTextures()
 			
 	lhframe.close:Hide()
 	SV.API:Set("CloseButton", lhframe.close)

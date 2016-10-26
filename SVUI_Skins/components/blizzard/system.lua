@@ -782,4 +782,4 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(SystemPanelQue)
+MOD:SaveCustomStyle("SYSTEM", SystemPanelQue)

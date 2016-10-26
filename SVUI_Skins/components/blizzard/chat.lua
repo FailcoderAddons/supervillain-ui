@@ -310,4 +310,4 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(ChatStyle)
+MOD:SaveCustomStyle("CHAT", ChatStyle)

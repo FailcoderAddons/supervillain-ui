@@ -50,7 +50,7 @@ local CharFrameList = {
 	"CharacterFrameInsetRight",
 	"PaperDollFrame",
 	"PaperDollSidebarTabs",
-	"PaperDollEquipmentManagerPane"
+	--"PaperDollEquipmentManagerPane"
 };
 
 local CharacterStatsSubFrames = {
@@ -242,7 +242,7 @@ local function PaperDollEquipmentManagerPane_OnShow()
 	GearManagerDialogPopup:RemoveTextures()
 	GearManagerDialogPopup:SetStyle("Frame", "Inset", true)
 	GearManagerDialogPopup:SetPoint("LEFT", PaperDollFrame, "RIGHT", 4, 0)
-	GearManagerDialogPopupScrollFrame:RemoveTextures()
+	GearManagerDialogPopupScrollFrameScrollBar:RemoveTextures()
 	GearManagerDialogPopupEditBox:RemoveTextures()
 	GearManagerDialogPopupEditBox:SetStyle("Frame", 'Inset')
 	GearManagerDialogPopupOkay:SetStyle("Button")
@@ -319,7 +319,7 @@ local function CharacterFrameStyle()
 	SV.API:Set("ScrollBar", _G["PaperDollEquipmentManagerPaneScrollBar"], 5)
 
 	for _,gName in pairs(CharFrameList) do
-		if(_G[gName]) then _G[gName]:RemoveTextures(true) end
+		if(_G[gName] and _G[gName].RemoveTextures) then _G[gName]:RemoveTextures(true) else print(gName) end
 	end
 
 	for _,gName in pairs(CharacterStatsSubFrames) do
@@ -345,36 +345,36 @@ local function CharacterFrameStyle()
 
 	CharacterModelFrame:SetStyle("!_Frame", "Model")
 
-	PaperDollTitlesPane:RemoveTextures()
-	PaperDollTitlesPaneScrollChild:RemoveTextures()
-	PaperDollTitlesPane:SetStyle("Frame", 'Inset')
-	PaperDollTitlesPane:HookScript("OnShow", PaperDollTitlesPane_OnShow)
+	--PaperDollTitlesPane:RemoveTextures()
+	--PaperDollTitlesPaneScrollChild:RemoveTextures()
+	--PaperDollTitlesPane:SetStyle("Frame", 'Inset')
+	--PaperDollTitlesPane:HookScript("OnShow", PaperDollTitlesPane_OnShow)
 
-	PaperDollEquipmentManagerPane:SetStyle("Frame", 'Inset')
-	PaperDollEquipmentManagerPaneEquipSet:SetStyle("Button")
-	PaperDollEquipmentManagerPaneSaveSet:SetStyle("Button")
-	PaperDollEquipmentManagerPaneEquipSet:SetWidth(PaperDollEquipmentManagerPaneEquipSet:GetWidth()-8)
-	PaperDollEquipmentManagerPaneSaveSet:SetWidth(PaperDollEquipmentManagerPaneSaveSet:GetWidth()-8)
-	PaperDollEquipmentManagerPaneEquipSet:SetPoint("TOPLEFT", PaperDollEquipmentManagerPane, "TOPLEFT", 8, 0)
-	PaperDollEquipmentManagerPaneSaveSet:SetPoint("LEFT", PaperDollEquipmentManagerPaneEquipSet, "RIGHT", 4, 0)
-	PaperDollEquipmentManagerPaneEquipSet.ButtonBackground:SetTexture("")
+	-- PaperDollEquipmentManagerPane:SetStyle("Frame", 'Inset')
+	-- PaperDollEquipmentManagerPaneEquipSet:SetStyle("Button")
+	-- PaperDollEquipmentManagerPaneSaveSet:SetStyle("Button")
+	-- PaperDollEquipmentManagerPaneEquipSet:SetWidth(PaperDollEquipmentManagerPaneEquipSet:GetWidth()-8)
+	-- PaperDollEquipmentManagerPaneSaveSet:SetWidth(PaperDollEquipmentManagerPaneSaveSet:GetWidth()-8)
+	-- PaperDollEquipmentManagerPaneEquipSet:SetPoint("TOPLEFT", PaperDollEquipmentManagerPane, "TOPLEFT", 8, 0)
+	-- PaperDollEquipmentManagerPaneSaveSet:SetPoint("LEFT", PaperDollEquipmentManagerPaneEquipSet, "RIGHT", 4, 0)
+	-- PaperDollEquipmentManagerPaneEquipSet.ButtonBackground:SetTexture("")
 
-	PaperDollEquipmentManagerPane:HookScript("OnShow", PaperDollEquipmentManagerPane_OnShow)
+	-- PaperDollEquipmentManagerPane:HookScript("OnShow", PaperDollEquipmentManagerPane_OnShow)
 
 	for i = 1, 4 do
 		 SV.API:Set("Tab", _G["CharacterFrameTab"..i])
 	end
 
 	ReputationFrame:RemoveTextures(true)
-	ReputationListScrollFrame:RemoveTextures()
-	ReputationListScrollFrame:SetStyle("Frame", "Inset")
+	--ReputationListScrollFrameScrollBar:RemoveTextures()
+	--ReputationListScrollFrameScrollBar:SetStyle("Frame", "Inset")
 	ReputationDetailFrame:RemoveTextures()
 	ReputationDetailFrame:SetStyle("Frame", "Inset", true)
 	ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 4, -28)
 	ReputationFrame:HookScript("OnShow", Reputation_OnShow)
 	hooksecurefunc("ExpandFactionHeader", Reputation_OnShow)
 	hooksecurefunc("CollapseFactionHeader", Reputation_OnShow)
-	TokenFrameContainer:SetStyle("Frame", 'Inset')
+	--TokenFrameContainer:SetStyle("Frame", 'Inset')
 
 	TokenFrame:HookScript("OnShow", function()
 		for i = 1, GetCurrencyListSize() do
@@ -408,4 +408,4 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(CharacterFrameStyle)
+MOD:SaveCustomStyle("CHARACTER", CharacterFrameStyle)

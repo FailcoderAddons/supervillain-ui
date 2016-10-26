@@ -22,8 +22,8 @@ local function ItemSocketStyle()
 	ItemSocketingFrame:RemoveTextures()
 	ItemSocketingFrame:SetStyle("Frame", "Window2")
 	ItemSocketingFrameInset:Die()
-	ItemSocketingScrollFrame:RemoveTextures()
-	ItemSocketingScrollFrame:SetStyle("Frame", "Inset", true)
+	ItemSocketingScrollFrameScrollBar:RemoveTextures()
+	ItemSocketingScrollFrameScrollBar:SetStyle("Frame", "Inset", true)
 	SV.API:Set("ScrollBar", ItemSocketingScrollFrame, 2)
 	for j = 1, MAX_NUM_SOCKETS do 
 		local i = _G[("ItemSocketingSocket%d"):format(j)];

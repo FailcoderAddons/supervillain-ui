@@ -347,7 +347,7 @@ local function LFDFrameStyle()
   LFDParentFrame:RemoveTextures()
   LFDQueueFrameFindGroupButton:RemoveTextures()
   LFDParentFrameInset:RemoveTextures()
-  LFDQueueFrameSpecificListScrollFrame:RemoveTextures()
+  --LFDQueueFrameSpecificListScrollFrameScrollBar:RemoveTextures()
   LFDQueueFrameFindGroupButton:SetStyle("Button")
   hooksecurefunc("LFDQueueFrameRandom_UpdateFrame", LFDQueueRandom_OnUpdate)
 
@@ -356,8 +356,8 @@ local function LFDFrameStyle()
   RaidFinderFrame:RemoveTextures()
   RaidFinderFrameBottomInset:RemoveTextures()
   RaidFinderFrameRoleInset:RemoveTextures()
-  LFDQueueFrameRandomScrollFrame:RemoveTextures()
-  ScenarioQueueFrameSpecificScrollFrame:RemoveTextures()
+  --LFDQueueFrameRandomScrollFrameScrollBar:RemoveTextures()
+  --ScenarioQueueFrameSpecificScrollFrameScrollBar:RemoveTextures()
   RaidFinderFrameBottomInsetBg:Hide()
   RaidFinderFrameBtnCornerRight:Hide()
   RaidFinderFrameButtonBottomBorder:Hide()
@@ -472,9 +472,9 @@ local function LFDFrameStyle()
 
   SV.API:Set("ScrollBar", LFDQueueFrameRandomScrollFrame)
   SV.API:Set("ScrollBar", ScenarioQueueFrameSpecificScrollFrame)
-  LFDQueueFrameRandomScrollFrame:SetStyle("Frame", 'Transparent')
-  ScenarioQueueFrameRandomScrollFrame:SetStyle("Frame", 'Transparent')
-  RaidFinderQueueFrameScrollFrame:SetStyle("Frame", 'Transparent')
+  LFDQueueFrameRandomScrollFrameScrollBar:SetStyle("Frame", 'Transparent')
+  ScenarioQueueFrameRandomScrollFrameScrollBar:SetStyle("Frame", 'Transparent')
+  RaidFinderQueueFrameScrollFrameScrollBar:SetStyle("Frame", 'Transparent')
 
   -- for u = 1, NUM_LFD_CHOICE_BUTTONS do
   --   local box = _G["LFDQueueFrameSpecificListButton"..u.."EnableButton"]
@@ -528,4 +528,4 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(LFDFrameStyle)
+MOD:SaveCustomStyle("LFD", LFDFrameStyle)

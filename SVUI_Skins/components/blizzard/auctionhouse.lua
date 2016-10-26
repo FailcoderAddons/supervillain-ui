@@ -93,10 +93,10 @@ local function AuctionStyle()
 
 	SV.API:Set("Window", AuctionFrame, false, true, 1, 2, -8)
 
-	BrowseFilterScrollFrame:RemoveTextures()
-	BrowseScrollFrame:RemoveTextures()
-	AuctionsScrollFrame:RemoveTextures()
-	BidScrollFrame:RemoveTextures()
+	BrowseFilterScrollFrameScrollBar:RemoveTextures()
+	BrowseScrollFrameScrollBar:RemoveTextures()
+	AuctionsScrollFrameScrollBar:RemoveTextures()
+	BidScrollFrameScrollBar:RemoveTextures()
 
 	SV.API:Set("CloseButton", AuctionFrameCloseButton)
 	SV.API:Set("ScrollBar", AuctionsScrollFrame)

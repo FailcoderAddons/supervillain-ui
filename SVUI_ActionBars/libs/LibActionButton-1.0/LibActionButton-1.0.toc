@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 70100
 ## Title: Lib: ActionButton-1.0
 ## Notes: Creates and manages secure Action Buttons
 ## Author: Nevcairiel

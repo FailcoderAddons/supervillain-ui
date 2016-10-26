@@ -22,11 +22,11 @@ local function AdjustMapLevel()
     local WorldMapFrame = _G.WorldMapFrame;
     WorldMapFrame:SetFrameStrata("HIGH");
     WorldMapTooltip:SetFrameStrata("TOOLTIP");
-    WorldMapPlayerLower:SetFrameStrata("MEDIUM");
-    WorldMapPlayerLower:SetFrameStrata("FULLSCREEN");
+    --WorldMapPlayerLower:SetFrameStrata("MEDIUM");
+    --WorldMapPlayerLower:SetFrameStrata("FULLSCREEN");
     WorldMapFrame:SetFrameLevel(1)
     WorldMapDetailFrame:SetFrameLevel(2)
-    WorldMapArchaeologyDigSites:SetFrameLevel(3)
+    --WorldMapArchaeologyDigSites:SetFrameLevel(3)
 end
 
 local function WorldMap_SmallView()
@@ -67,7 +67,7 @@ local function StripQuestMapFrame()
   --print('test StripQuestMapFrame 2')
   QuestMapFrame:RemoveTextures(true)
   QuestMapFrame.DetailsFrame:RemoveTextures(true)
-  QuestScrollFrame:RemoveTextures(true)
+  --QuestScrollFrameScrollBar:RemoveTextures(true)
   --QuestScrollFrame.ViewAll:RemoveTextures(true)
   --print('test StripQuestMapFrame 3')
   QuestMapFrame.DetailsFrame.CompleteQuestFrame:RemoveTextures(true)
@@ -88,7 +88,7 @@ local function StripQuestMapFrame()
   SV.API:Set("ScrollBar", QuestMapDetailsScrollFrame)
   SV.API:Set("Skin", QuestMapFrame.DetailsFrame.RewardsFrame, 0, -10, 0, 0)
 
-  QuestScrollFrame:SetStyle("Frame", "Paper")
+  --QuestScrollFrameScrollBar:SetStyle("Frame", "Paper")
   --QuestScrollFrame.ViewAll:SetStyle("Button")
   --print('test StripQuestMapFrame 5')
   local detailWidth = QuestMapFrame.DetailsFrame.RewardsFrame:GetWidth()
@@ -185,7 +185,7 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(WorldMapStyle)
+MOD:SaveCustomStyle("WORLDMAP", WorldMapStyle)
 
 --[[
 function ArchaeologyDigSiteFrame_OnUpdate()

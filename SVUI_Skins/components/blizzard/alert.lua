@@ -507,7 +507,7 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(AlertStyle)
+MOD:SaveCustomStyle("ALERTS", AlertStyle)
 -- /script GarrisonMissionAlertFrame:Show()
 -- /script GarrisonBuildingAlertFrame:Show()
 -- /script GarrisonFollowerAlertFrame:Show()

@@ -32,12 +32,12 @@ local FriendsFrameList1 = {
 	"ScrollOfResurrectionSelectionFrameList",
 	"FriendsListFrame",
 	"FriendsTabHeader",
-	"FriendsFrameFriendsScrollFrame",
+	"FriendsFrameFriendsScrollFrameScrollBar",
 	"WhoFrameColumnHeader1",
 	"WhoFrameColumnHeader2",
 	"WhoFrameColumnHeader3",
 	"WhoFrameColumnHeader4",
-	"ChannelListScrollFrame",
+	"ChannelListScrollFrameScrollBar",
 	"ChannelRoster",
 	"FriendsFramePendingButton1",
 	"FriendsFramePendingButton2",
@@ -134,7 +134,7 @@ local function FriendsFrameStyle()
 	LFRQueueFrameCommentInset:RemoveTextures()
 	LFRQueueFrameListInset:SetStyle("!_Frame", "Model")
 	FriendsFrameInset:SetStyle("!_Frame", "Model")
-	--FriendsFrameFriendsScrollFrame:SetStyle("!_Frame", "Model")
+	--FriendsFrameFriendsScrollFrameScrollBar:SetStyle("!_Frame", "Model")
 	WhoFrameListInset:SetStyle("!_Frame", "Model")
 	--RaidFrame:SetStyle("!_Frame", "Model")
 
@@ -201,19 +201,19 @@ local function FriendsFrameStyle()
 	ChannelFrameDaughterFrameChannelPassword:SetStyle("Frame", "Default")
 	
 	ChannelFrame:HookScript("OnShow", function()
-		ChannelRosterScrollFrame:RemoveTextures()
+		ChannelRosterScrollFrameScrollBar:RemoveTextures()
 	end)
 
 	hooksecurefunc("FriendsFrame_OnEvent", function()
-		ChannelRosterScrollFrame:RemoveTextures()
+		ChannelRosterScrollFrameScrollBar:RemoveTextures()
 	end)
 
 	WhoFrame:HookScript("OnShow", function()
-		ChannelRosterScrollFrame:RemoveTextures()
+		ChannelRosterScrollFrameScrollBar:RemoveTextures()
 	end)
 
 	hooksecurefunc("FriendsFrame_OnEvent", function()
-		WhoListScrollFrame:RemoveTextures()
+		WhoListScrollFrameScrollBar:RemoveTextures()
 	end)
 
 	ChannelFrameDaughterFrame:SetStyle("Frame", 'Inset')
@@ -265,12 +265,9 @@ local function FriendsFrameStyle()
 	FriendsTabHeaderRecruitAFriendButtonIcon:SetTexCoord(unpack(_G.SVUI_ICON_COORDS))
 	FriendsTabHeaderRecruitAFriendButtonIcon:InsetPoints()
 	
-	FriendsFrameIgnoreScrollFrame:SetStyle("!_Frame", "Model")
+	FriendsFrameIgnoreScrollFrameScrollBar:SetStyle("!_Frame", "Model")
 	SV.API:Set("ScrollBar", FriendsFrameIgnoreScrollFrame, 4)
-	FriendsFramePendingScrollFrame:SetStyle("!_Frame", "Inset")
-	SV.API:Set("ScrollBar", FriendsFramePendingScrollFrame, 4)
 	IgnoreListFrame:RemoveTextures()
-	PendingListFrame:RemoveTextures()
 	ScrollOfResurrectionFrame:RemoveTextures()
 	ScrollOfResurrectionFrameAcceptButton:SetStyle("Button")
 	ScrollOfResurrectionFrameCancelButton:SetStyle("Button")
@@ -287,4 +284,4 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(FriendsFrameStyle)
+MOD:SaveCustomStyle("FRIENDS", FriendsFrameStyle)

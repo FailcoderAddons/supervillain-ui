@@ -80,7 +80,7 @@ local function RaidInfoStyle()
 		end 
 	end
 
-	RaidInfoScrollFrame:RemoveTextures()
+	RaidInfoScrollFrameScrollBar:RemoveTextures()
 	RaidInfoFrame:SetStyle("Frame", 'Transparent')
 	RaidInfoFrame.Panel:SetPoint("TOPLEFT", RaidInfoFrame, "TOPLEFT")
 	RaidInfoFrame.Panel:SetPoint("BOTTOMRIGHT", RaidInfoFrame, "BOTTOMRIGHT")
@@ -97,4 +97,4 @@ MOD LOADING
 ##########################################################
 ]]--
 MOD:SaveBlizzardStyle("Blizzard_RaidUI", RaidUIStyle)
-MOD:SaveCustomStyle(RaidInfoStyle)
+MOD:SaveCustomStyle("RAIDINFO", RaidInfoStyle)

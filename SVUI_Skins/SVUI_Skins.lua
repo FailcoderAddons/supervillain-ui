@@ -53,11 +53,14 @@ MOD.EventListeners = {};
 MOD.OnLoadAddons = {};
 MOD.SkinnedAddons = {};
 MOD.Debugging = false;
+MOD.DebugInternal = false;
+MOD.DebugExternal = false;
 --[[
 ##########################################################
 CORE FUNCTIONS
 ##########################################################
 ]]--
+local BLIZZCACHE = {};
 local charming = {"Spiffy", "Pimped Out", "Fancy", "Awesome", "Bad Ass", "Sparkly", "Gorgeous", "Handsome", "Shiny"}
 local styleMessage = '|cffFFAA00[Skinned]|r |cff00FF77%s|r Is Now %s!'
 
@@ -76,16 +79,13 @@ end
 
 function MOD:Style(style, fn, ...)
 	local pass, catch = pcall(fn, ...)
-	--self.Debugging = true
 	if(catch and self.Debugging) then
 		SV:HandleError("SKINS", style, catch);
-		return
-	end
-	if(pass and (not style:find("Blizzard")) and not self.SkinnedAddons[style]) then
+	elseif(pass and (not style:find("Blizzard")) and (not style:find("CUSTOM")) and not self.SkinnedAddons[style]) then
 		self.SkinnedAddons[style] = true
-		self.AddOnQueue[style] = nil
+		return true;
 	end
-	self.Debugging = false
+	return false;
 end
 
 function MOD:IsAddonReady(addon, ...)
@@ -132,8 +132,8 @@ function MOD:SaveBlizzardStyle(addon, fn, force)
 	end
 end
 
-function MOD:SaveCustomStyle(fn)
-	tinsert(MOD.CustomQueue, fn)
+function MOD:SaveCustomStyle(addon, fn)
+	self.CustomQueue["CUSTOM_"..addon] = fn;
 end
 
 function MOD:DefineEventFunction(addonEvent, addon)
@@ -146,7 +146,9 @@ function MOD:DefineEventFunction(addonEvent, addon)
 		self[addonEvent] = function(self, event, ...)
 			for name,fn in pairs(self.AddOnQueue) do
 				if self:IsAddonReady(name) and self.EventListeners[event] and self.EventListeners[event][name] then
+					self.Debugging = self.DebugExternal
 					self:Style(name, fn, event, ...)
+					self.AddOnQueue[style] = nil
 				end
 			end
 		end
@@ -171,29 +173,32 @@ function MOD:SafeEventRemoval(addon, event)
 end
 
 function MOD:PLAYER_ENTERING_WORLD(event, ...)
-	for addonName,fn in pairs(self.OnLoadAddons) do
-		if(IsAddOnLoaded(addonName)) then
-			--print(addonName)
-			--self.Debugging = true
-			self:Style(addonName, fn, event, ...)
-			self.OnLoadAddons[addonName] = nil
+	for name,fn in pairs(self.OnLoadAddons) do
+		if(IsAddOnLoaded(name)) then
+			self.Debugging = self.DebugInternal
+			if(self:Style(name, fn, event, ...)) then
+				self.OnLoadAddons[name] = nil
+			end
 		end
 	end
 
-	for _,fn in pairs(self.CustomQueue)do
-		--print(_)
-		fn(event, ...)
+	for name,fn in pairs(self.CustomQueue) do
+		self.Debugging = self.DebugInternal
+		if(self:Style(name, fn, event, ...)) then
+			self.CustomQueue[name] = nil
+		end
 	end
-
-	twipe(self.CustomQueue)
 
 	local listener = self.EventListeners[event]
-	for addonName,fn in pairs(self.AddOnQueue)do
-		if(SV.db.Skins.addons[addonName] == nil) then
-			SV.db.Skins.addons[addonName] = true
+	for name,fn in pairs(self.AddOnQueue)do
+		if(SV.db.Skins.addons[name] == nil) then
+			SV.db.Skins.addons[name] = true
 		end
-		if(listener[addonName] and self:IsAddonReady(addonName)) then
-			self:Style(addonName, fn, event, ...)
+		if(listener[name] and self:IsAddonReady(name)) then
+			self.Debugging = self.DebugExternal
+			if(self:Style(name, fn, event, ...)) then
+				self.AddOnQueue[name] = nil
+			end
 		end
 	end
 
@@ -205,10 +210,11 @@ function MOD:ADDON_LOADED(event, addon)
 	local needsUpdate = false
 	for name, fn in pairs(self.OnLoadAddons) do
 		if(addon:find(name)) then
-			--self.Debugging = true
-			self:Style(name, fn, event, addon)
-			self.OnLoadAddons[name] = nil
-			needsUpdate = true
+			self.Debugging = self.DebugInternal
+			if(self:Style(name, fn, event, addon)) then
+				self.OnLoadAddons[name] = nil
+				needsUpdate = true
+			end
 		end
 	end
 
@@ -216,8 +222,11 @@ function MOD:ADDON_LOADED(event, addon)
 	if(listener) then
 		for name, fn in pairs(self.AddOnQueue) do
 			if(listener[name] and self:IsAddonReady(name)) then
-				self:Style(name, fn, event, addon)
-				needsUpdate = true
+				self.Debugging = self.DebugExternal
+				if(self:Style(name, fn, event, addon)) then
+					self.AddOnQueue[name] = nil
+					needsUpdate = true
+				end
 			end
 		end
 	end

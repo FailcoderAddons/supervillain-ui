@@ -90,9 +90,9 @@ local function PVPFrameStyle()
 	local ConquestPointsBar = _G.ConquestPointsBar;
 
 	ConquestFrame.Inset:RemoveTextures()
-	ConquestPoints.XPBar:RemoveTextures()
-	ConquestPoints.XPBar:SetStyle("!_Frame", 'Inset')
-	ConquestPoints.XPBar.Panel:WrapPoints(ConquestPointsBar, nil, -2)
+	-- ConquestPoints.XPBar:RemoveTextures()
+	-- ConquestPoints.XPBar:SetStyle("!_Frame", 'Inset')
+	-- ConquestPoints.XPBar.Panel:WrapPoints(ConquestPointsBar, nil, -2)
 	--[[
 	ConquestPointsBarLeft:Die()
 	ConquestPointsBarRight:Die()
@@ -114,7 +114,7 @@ local function PVPFrameStyle()
 	ConquestFrame.RatedBG.SelectedTexture:SetColorTexture(1, 1, 0, 0.1)
 	WarGamesFrame:RemoveTextures()
 	WarGamesFrame.RightInset:RemoveTextures()
-	WarGamesFrameInfoScrollFrame:RemoveTextures()
+	WarGamesFrameInfoScrollFrameScrollBar:RemoveTextures()
 	WarGamesFrameInfoScrollFrameScrollBar:RemoveTextures()
 	WarGameStartButton:RemoveTextures()
 	WarGameStartButton:SetStyle("Button")
@@ -131,7 +131,7 @@ local function PVPFrameStyle()
 	PVPReadyDialogRoleIconTexture:SetAlpha(0.5)
 
 	ConquestFrame.Inset:SetStyle("!_Frame", "Inset")
-	WarGamesFrameScrollFrame:SetStyle("Frame", "Inset",false,2,2,6)
+	WarGamesFrameScrollFrameScrollBar:SetStyle("Frame", "Inset",false,2,2,6)
 
 	hooksecurefunc("PVPReadyDialog_Display", _hook_PVPReadyDialogDisplay)
 end

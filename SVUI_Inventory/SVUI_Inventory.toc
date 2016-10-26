@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 70100
 ## Author: Failcoder
 ## Version: 1.3.5
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00Inventory|r

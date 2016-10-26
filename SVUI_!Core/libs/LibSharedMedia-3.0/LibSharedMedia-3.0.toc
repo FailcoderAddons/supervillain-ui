@@ -1,4 +1,4 @@
-## Interface: 70000
+## Interface: 70100
 ## LoadOnDemand: 1
 ## X-Curse-Packaged-Version: 6.1.0 - r92
 ## X-Curse-Project-Name: LibSharedMedia-3.0

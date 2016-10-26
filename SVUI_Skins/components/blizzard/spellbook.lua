@@ -322,4 +322,4 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(SpellBookStyle)
+MOD:SaveCustomStyle("SPELLBOOK", SpellBookStyle)

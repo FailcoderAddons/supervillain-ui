@@ -73,10 +73,10 @@ local function HelpFrameStyle()
 	end 
 	HelpFrameHeader:SetFrameLevel(HelpFrameHeader:GetFrameLevel()+2)
 	HelpFrameKnowledgebaseErrorFrame:SetFrameLevel(HelpFrameKnowledgebaseErrorFrame:GetFrameLevel()+2)
-	HelpFrameReportBugScrollFrame:RemoveTextures()
-	HelpFrameReportBugScrollFrame:SetStyle("Frame", "Default")
-	HelpFrameReportBugScrollFrame.Panel:SetPoint("TOPLEFT", -4, 4)
-	HelpFrameReportBugScrollFrame.Panel:SetPoint("BOTTOMRIGHT", 6, -4)
+	HelpFrameReportBugScrollFrameScrollBar:RemoveTextures()
+	HelpFrameReportBugScrollFrameScrollBar:SetStyle("Frame", "Default")
+	HelpFrameReportBugScrollFrameScrollBar.Panel:SetPoint("TOPLEFT", -4, 4)
+	HelpFrameReportBugScrollFrameScrollBar.Panel:SetPoint("BOTTOMRIGHT", 6, -4)
 	for d = 1, HelpFrameReportBug:GetNumChildren()do 
 		local e = select(d, HelpFrameReportBug:GetChildren())
 		if not e:GetName() then
@@ -84,10 +84,10 @@ local function HelpFrameStyle()
 		end 
 	end 
 	SV.API:Set("ScrollBar", HelpFrameReportBugScrollFrame)
-	HelpFrameSubmitSuggestionScrollFrame:RemoveTextures()
-	HelpFrameSubmitSuggestionScrollFrame:SetStyle("Frame", "Default")
-	HelpFrameSubmitSuggestionScrollFrame.Panel:SetPoint("TOPLEFT", -4, 4)
-	HelpFrameSubmitSuggestionScrollFrame.Panel:SetPoint("BOTTOMRIGHT", 6, -4)
+	HelpFrameSubmitSuggestionScrollFrameScrollBar:RemoveTextures()
+	HelpFrameSubmitSuggestionScrollFrameScrollBar:SetStyle("Frame", "Default")
+	HelpFrameSubmitSuggestionScrollFrameScrollBar.Panel:SetPoint("TOPLEFT", -4, 4)
+	HelpFrameSubmitSuggestionScrollFrameScrollBar.Panel:SetPoint("BOTTOMRIGHT", 6, -4)
 	for d = 1, HelpFrameSubmitSuggestion:GetNumChildren()do 
 		local e = select(d, HelpFrameSubmitSuggestion:GetChildren())
 		if not e:GetName() then
@@ -159,10 +159,10 @@ local function HelpFrameStyle()
 
 	if(_G['HelpFrameTicket']) then
 		if(_G['HelpFrameTicketScrollFrame']) then
-			HelpFrameTicketScrollFrame:RemoveTextures()
-			HelpFrameTicketScrollFrame:SetStyle("Frame", "Default")
-			HelpFrameTicketScrollFrame.Panel:SetPoint("TOPLEFT", -4, 4)
-			HelpFrameTicketScrollFrame.Panel:SetPoint("BOTTOMRIGHT", 6, -4)
+			HelpFrameTicketScrollFrameScrollBar:RemoveTextures()
+			HelpFrameTicketScrollFrameScrollBar:SetStyle("Frame", "Default")
+			HelpFrameTicketScrollFrameScrollBar.Panel:SetPoint("TOPLEFT", -4, 4)
+			HelpFrameTicketScrollFrameScrollBar.Panel:SetPoint("BOTTOMRIGHT", 6, -4)
 		end
 		for d = 1, HelpFrameTicket:GetNumChildren()do 
 			local e = select(d, HelpFrameTicket:GetChildren())
@@ -178,4 +178,4 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(HelpFrameStyle)
+MOD:SaveCustomStyle("HELP", HelpFrameStyle)

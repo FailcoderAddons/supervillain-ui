@@ -97,7 +97,7 @@ end
 local _hook_QuestLogPopupDetailFrameShow = function(self)
 	local QuestLogPopupDetailFrameScrollFrame = _G.QuestLogPopupDetailFrameScrollFrame;
 	if not QuestLogPopupDetailFrameScrollFrame.spellTex then
-		QuestLogPopupDetailFrameScrollFrame:SetStyle("!_Frame", "Default")
+		QuestLogPopupDetailFrameScrollFrameScrollBar:SetStyle("!_Frame", "Default")
 		QuestLogPopupDetailFrameScrollFrame.spellTex = QuestLogPopupDetailFrameScrollFrame:CreateTexture(nil, 'ARTWORK')
 		QuestLogPopupDetailFrameScrollFrame.spellTex:SetTexture([[Interface\QuestFrame\QuestBookBG]])
 		QuestLogPopupDetailFrameScrollFrame.spellTex:SetPoint("TOPLEFT", 2, -2)
@@ -120,8 +120,8 @@ local function QuestFrameStyle()
 	SV.API:Set("Window", QuestLogPopupDetailFrame, true, true)
 	SV.API:Set("Window", QuestFrame, true, true)
 
-	QuestLogPopupDetailFrameScrollFrame:RemoveTextures()
-	QuestProgressScrollFrame:RemoveTextures()
+	QuestLogPopupDetailFrameScrollFrameScrollBar:RemoveTextures()
+	QuestProgressScrollFrameScrollBar:RemoveTextures()
 
 	QuestInfoItemHighlight:RemoveTextures()
 	QuestInfoItemHighlight:SetStyle("Frame", "Icon")
@@ -152,7 +152,7 @@ local function QuestFrameStyle()
 	SV.API:Set("ScrollBar", QuestLogPopupDetailFrameScrollFrame, 5)
 	SV.API:Set("ScrollBar", QuestRewardScrollFrame)
 
-	QuestGreetingScrollFrame:RemoveTextures()
+	QuestGreetingScrollFrameScrollBar:RemoveTextures()
 	SV.API:Set("ScrollBar", QuestGreetingScrollFrame)
 
 	for i = 1, 10 do
@@ -185,14 +185,14 @@ local function QuestFrameStyle()
 
 	QuestFrameInset:Die()
 	QuestFrameDetailPanel:RemoveTextures(true)
-	QuestDetailScrollFrame:RemoveTextures(true)
-	QuestScrollHelper(QuestDetailScrollFrame, 506, 615, true)
-	QuestProgressScrollFrame:SetStyle("!_Frame")
-	QuestScrollHelper(QuestProgressScrollFrame, 506, 615, true)
-	QuestGreetingScrollFrame:SetStyle("!_Frame")
-	QuestScrollHelper(QuestGreetingScrollFrame, 506, 615, true)
+	QuestDetailScrollFrameScrollBar:RemoveTextures(true)
+	QuestScrollHelper(QuestDetailScrollFrameScrollBar, 506, 615, true)
+	QuestProgressScrollFrameScrollBar:SetStyle("!_Frame")
+	QuestScrollHelper(QuestProgressScrollFrameScrollBar, 506, 615, true)
+	QuestGreetingScrollFrameScrollBar:SetStyle("!_Frame")
+	QuestScrollHelper(QuestGreetingScrollFrameScrollBar, 506, 615, true)
 	QuestDetailScrollChildFrame:RemoveTextures(true)
-	QuestRewardScrollFrame:RemoveTextures(true)
+	QuestRewardScrollFrameScrollBar:RemoveTextures(true)
 	QuestRewardScrollChildFrame:RemoveTextures(true)
 	QuestFrameProgressPanel:RemoveTextures(true)
 	QuestFrameRewardPanel:RemoveTextures(true)
@@ -260,5 +260,5 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(QuestFrameStyle)
+MOD:SaveCustomStyle("QUEST", QuestFrameStyle)
 MOD:SaveBlizzardStyle('Blizzard_QuestChoice', QuestChoiceFrameStyle)

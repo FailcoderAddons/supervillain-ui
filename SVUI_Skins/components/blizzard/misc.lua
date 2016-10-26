@@ -213,7 +213,7 @@ local function MiscStyles()
 		SV.API:Set("Window", GossipFrame, true, true)
 
 		ItemTextFrame:RemoveTextures(true)
-		ItemTextScrollFrame:RemoveTextures()
+		ItemTextScrollFrameScrollBar:RemoveTextures()
 		SV.API:Set("CloseButton", GossipFrameCloseButton)
 		SV.API:Set("PageButton", ItemTextPrevPageButton, false, true)
 		SV.API:Set("PageButton", ItemTextNextPageButton)
@@ -227,13 +227,13 @@ local function MiscStyles()
 		ItemTextFrameInset:Die()
 		SV.API:Set("ScrollBar", ItemTextScrollFrame)
 		SV.API:Set("CloseButton", ItemTextFrameCloseButton)
-		local r = {"GossipFrameGreetingPanel", "GossipFrameInset", "GossipGreetingScrollFrame"}
+		local r = {"GossipFrameGreetingPanel", "GossipFrameInset", "GossipGreetingScrollFrameScrollBar"}
 		SV.API:Set("ScrollBar", GossipGreetingScrollFrame)
 		for s, t in pairs(r)do
 			_G[t]:RemoveTextures()
 		end
 		GossipFrame:SetStyle("Frame", "Window")
-		GossipGreetingScrollFrame:SetStyle("!_Frame", "Inset", true)
+		GossipGreetingScrollFrameScrollBar:SetStyle("!_Frame", "Inset", true)
 		GossipGreetingScrollFrame.spellTex = GossipGreetingScrollFrame:CreateTexture(nil, "ARTWORK")
 		GossipGreetingScrollFrame.spellTex:SetTexture([[Interface\QuestFrame\QuestBG]])
 		GossipGreetingScrollFrame.spellTex:SetPoint("TOPLEFT", 2, -2)
@@ -332,7 +332,7 @@ local function MiscStyles()
 		txt:SetJustifyH("CENTER")
 		txt:SetText("RESIZE")
 
-		LootHistoryFrameScrollFrame:RemoveTextures()
+		LootHistoryFrameScrollFrameScrollBar:RemoveTextures()
 		SV.API:Set("ScrollBar", LootHistoryFrameScrollFrame)
 		hooksecurefunc("LootHistoryFrame_FullUpdate", LootHistoryFrame_OnUpdate)
 
@@ -378,8 +378,8 @@ local function MiscStyles()
 		SV.API:Set("Tab", MailFrameTab1)
 		SV.API:Set("Tab", MailFrameTab2)
 
-		SendMailScrollFrame:RemoveTextures(true)
-		SendMailScrollFrame:SetStyle("!_Frame", "Inset")
+		SendMailScrollFrameScrollBar:RemoveTextures(true)
+		SendMailScrollFrameScrollBar:SetStyle("!_Frame", "Inset")
 		SV.API:Set("ScrollBar", SendMailScrollFrame)
 
 		SendMailNameEditBox:SetStyle("Editbox")
@@ -418,8 +418,8 @@ local function MiscStyles()
 
 		SV.API:Set("CloseButton", OpenMailFrameCloseButton)
 
-		OpenMailScrollFrame:RemoveTextures(true)
-		OpenMailScrollFrame:SetStyle("!_Frame", "Default")
+		OpenMailScrollFrameScrollBar:RemoveTextures(true)
+		OpenMailScrollFrameScrollBar:SetStyle("!_Frame", "Default")
 
 		SV.API:Set("ScrollBar", OpenMailScrollFrame)
 		SendMailBodyEditBox:SetTextColor(1, 1, 1)
@@ -730,7 +730,7 @@ local function MiscStyles()
 	end
 
 	if(SV.db.Skins.blizzard.bgscore) then
-		WorldStateScoreScrollFrame:RemoveTextures()
+		WorldStateScoreScrollFrameScrollBar:RemoveTextures()
 		WorldStateScoreFrame:RemoveTextures()
 		WorldStateScoreFrame:SetStyle("Frame", "Window")
 		SV.API:Set("CloseButton", WorldStateScoreFrameCloseButton)
@@ -752,4 +752,4 @@ end
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveCustomStyle(MiscStyles)
+MOD:SaveCustomStyle("MISC", MiscStyles)
