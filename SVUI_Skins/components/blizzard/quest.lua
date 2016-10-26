@@ -45,7 +45,7 @@ end
 
 local QuestRewardScrollFrame_OnShow = function(self)
 	if(not self.Panel) then
-		self:SetStyle("Frame", "Default")
+		SV.API:Set("Frame", self)
 		QuestScrollHelper(self, 509, 630, false)
 		self:SetHeight(self:GetHeight() - 2)
 	end
@@ -120,8 +120,23 @@ local function QuestFrameStyle()
 	SV.API:Set("Window", QuestLogPopupDetailFrame, true, true)
 	SV.API:Set("Window", QuestFrame, true, true)
 
-	QuestLogPopupDetailFrameScrollFrameScrollBar:RemoveTextures()
-	QuestProgressScrollFrameScrollBar:RemoveTextures()
+	QuestLogPopupDetailFrameScrollFrameScrollBar:RemoveTextures(true)
+	QuestProgressScrollFrameScrollBar:RemoveTextures(true)
+	QuestDetailScrollFrameScrollBar:RemoveTextures(true)
+	QuestDetailScrollChildFrame:RemoveTextures(true)
+	QuestRewardScrollFrameScrollBar:RemoveTextures(true)
+	QuestRewardScrollChildFrame:RemoveTextures(true)
+	QuestFrameProgressPanel:RemoveTextures(true)
+	QuestFrameRewardPanel:RemoveTextures(true)
+	QuestGreetingScrollFrameScrollBar:RemoveTextures(true)
+	QuestDetailScrollFrameScrollBar:RemoveTextures(true)
+
+	QuestScrollHelper(QuestDetailScrollFrame, 506, 615, true)
+	QuestDetailScrollFrameScrollBar:SetStyle("!_Frame")
+	QuestScrollHelper(QuestProgressScrollFrame, 506, 615, true)
+	QuestProgressScrollFrameScrollBar:SetStyle("!_Frame")
+	QuestScrollHelper(QuestGreetingScrollFrame, 506, 615, true)
+	QuestGreetingScrollFrameScrollBar:SetStyle("!_Frame")
 
 	QuestInfoItemHighlight:RemoveTextures()
 	QuestInfoItemHighlight:SetStyle("Frame", "Icon")
@@ -149,11 +164,6 @@ local function QuestFrameStyle()
 	QuestLogPopupDetailFrame:HookScript("OnShow", _hook_QuestLogPopupDetailFrameShow)
 
 	SV.API:Set("CloseButton", QuestLogPopupDetailFrameCloseButton)
-	SV.API:Set("ScrollBar", QuestLogPopupDetailFrameScrollFrame, 5)
-	SV.API:Set("ScrollBar", QuestRewardScrollFrame)
-
-	QuestGreetingScrollFrameScrollBar:RemoveTextures()
-	SV.API:Set("ScrollBar", QuestGreetingScrollFrame)
 
 	for i = 1, 10 do
 		local name = ("QuestInfoRewardsFrameQuestInfoItem%d"):format(i)
@@ -185,17 +195,7 @@ local function QuestFrameStyle()
 
 	QuestFrameInset:Die()
 	QuestFrameDetailPanel:RemoveTextures(true)
-	QuestDetailScrollFrameScrollBar:RemoveTextures(true)
-	QuestScrollHelper(QuestDetailScrollFrameScrollBar, 506, 615, true)
-	QuestProgressScrollFrameScrollBar:SetStyle("!_Frame")
-	QuestScrollHelper(QuestProgressScrollFrameScrollBar, 506, 615, true)
-	QuestGreetingScrollFrameScrollBar:SetStyle("!_Frame")
-	QuestScrollHelper(QuestGreetingScrollFrameScrollBar, 506, 615, true)
-	QuestDetailScrollChildFrame:RemoveTextures(true)
-	QuestRewardScrollFrameScrollBar:RemoveTextures(true)
-	QuestRewardScrollChildFrame:RemoveTextures(true)
-	QuestFrameProgressPanel:RemoveTextures(true)
-	QuestFrameRewardPanel:RemoveTextures(true)
+
 
 	QuestFrameAcceptButton:SetStyle("Button")
 	QuestFrameDeclineButton:SetStyle("Button")
@@ -224,6 +224,10 @@ local function QuestFrameStyle()
 	QuestNPCModelTextFrame:RemoveTextures()
 	QuestNPCModelTextFrame:SetStyle("Frame", "Default")
 	QuestNPCModelTextFrame.Panel:SetPoint("TOPLEFT", QuestNPCModel.Panel, "BOTTOMLEFT", 0, -2)
+
+	SV.API:Set("ScrollBar", QuestLogPopupDetailFrameScrollFrame, 5)
+	SV.API:Set("ScrollBar", QuestRewardScrollFrame)
+	SV.API:Set("ScrollBar", QuestGreetingScrollFrame)
 
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", Hook_QuestNPCModel)
 	hooksecurefunc("QuestFrame_SetTitleTextColor", Hook_QuestFrame_SetTitleTextColor)

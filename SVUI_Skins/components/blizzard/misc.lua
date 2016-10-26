@@ -657,18 +657,18 @@ local function MiscStyles()
 		TabardCharacterModelRotateLeftButton:SetPoint("BOTTOMLEFT", 4, 4)
 		TabardCharacterModelRotateRightButton:SetPoint("TOPLEFT", TabardCharacterModelRotateLeftButton, "TOPRIGHT", 4, 0)
 
-		hooksecurefunc(TabardCharacterModelRotateLeftButton, "SetPoint", function(self, p1, a, p2, x, y)
-			if((p1 ~= "BOTTOMLEFT") or (x ~= 4) or (y ~= 4)) then
-				 self:SetPoint("BOTTOMLEFT", 4, 4)
-			end
-		end)
+		-- hooksecurefunc(TabardCharacterModelRotateLeftButton, "SetPoint", function(self, p1, a, p2, x, y)
+		-- 	if((p1 ~= "BOTTOMLEFT") or (x ~= 4) or (y ~= 4)) then
+		-- 		 self:SetPoint("BOTTOMLEFT", 4, 4)
+		-- 	end
+		-- end)
 
-		hooksecurefunc(TabardCharacterModelRotateRightButton, "SetPoint", function(self, p1, a, p2, x, y)
-		    local anchor = _G.TabardCharacterModelRotateLeftButton
-			if((anchor) and ((p1 ~= "TOPLEFT") or (x ~= 4) or (y ~= 0))) then
-				 self:SetPoint("TOPLEFT", anchor, "TOPRIGHT", 4, 0)
-			end
-		end)
+		-- hooksecurefunc(TabardCharacterModelRotateRightButton, "SetPoint", function(self, p1, a, p2, x, y)
+		--     local anchor = _G.TabardCharacterModelRotateLeftButton
+		-- 	if((anchor) and ((p1 ~= "TOPLEFT") or (x ~= 4) or (y ~= 0))) then
+		-- 		 self:SetPoint("TOPLEFT", anchor, "TOPRIGHT", 4, 0)
+		-- 	end
+		-- end)
 	end
 
 	if(SV.db.Skins.blizzard.taxi) then
