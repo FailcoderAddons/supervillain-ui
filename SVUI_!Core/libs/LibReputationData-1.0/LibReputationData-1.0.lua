@@ -184,7 +184,6 @@ end
 function private.PLAYER_ENTERING_WORLD(event)
 	TimerAfter(3, function()
 		frame:RegisterEvent("COMBAT_TEXT_UPDATE")
-		frame:RegisterEvent("UPDATE_FACTION")
 		EnsureFactionsLoaded()
 	end)
 end
