@@ -148,7 +148,7 @@ function MOD:DefineEventFunction(addonEvent, addon)
 				if self:IsAddonReady(name) and self.EventListeners[event] and self.EventListeners[event][name] then
 					self.Debugging = self.DebugExternal
 					self:Style(name, fn, event, ...)
-					self.AddOnQueue[style] = nil
+					self.AddOnQueue[name] = nil
 				end
 			end
 		end
