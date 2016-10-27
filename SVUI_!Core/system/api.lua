@@ -1445,10 +1445,12 @@ function SV:UI_SCALE_CHANGED(event)
         self.Screen:ClearAllPoints()
         self.Screen:SetPoint("CENTER")
         local ignoreChange = false;
+        local testScale1 = 0
+        local testScale2 = 0
 
         if(managedScale) then
-            local testScale1 = parsefloat(UIParent:GetScale(), 5);
-            local testScale2 = parsefloat(gxScale, 5);
+            testScale1 = parsefloat(UIParent:GetScale(), 5);
+            testScale2 = parsefloat(gxScale, 5);
 
             if(event == "PLAYER_LOGIN" and (testScale1 ~= testScale2)) then
                 SetCVar("useUiScale", 1)
