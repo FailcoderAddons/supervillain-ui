@@ -71,14 +71,6 @@ local L = SV.L
 
 local MOD = SV.Dock;
 
---Debug
-local Debug
-if AdiDebug then
-	Debug = AdiDebug:GetSink("MiscTools")
-else
-	Debug = function() end
-end
-
 --[[
 ##########################################################
 LOCALS
@@ -349,10 +341,9 @@ local function LoadMiscTools()
 
 	-- SPEC BUTTON
 	if(SV.db.Dock.dockTools.specswap and (not SVUI_SpecSwap)) then
-		Debug("Setting up spec swap dock")
+
 		local numSpecs = GetNumSpecializations()
 		if(numSpecs and numSpecs > 1) then
-			Debug("numSpecs = ", numSpecs)
 			local specSwap = SV.Dock:SetDockButton("BottomLeft", L["Spec Swap"], "SVUI_SpecSwap", SV.media.dock.specSwapIcon, SpecSwap_OnEnter)
 			specSwap:SetClickCallbacks(SpecSwap_OnLeftClick, SpecSwap_OnRightClick);
 		end

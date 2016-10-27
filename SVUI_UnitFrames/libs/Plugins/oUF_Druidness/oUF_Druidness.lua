@@ -48,12 +48,6 @@ local TextColors = {
 	[4]={0.5,1,0.1},
 	[5]={0.1,1,0.1}
 };
-local Debug
-if AdiDebug then
-	Debug = AdiDebug:GetSink("oUF_Druidness")
-else
-	Debug = function() end
-end
 
 local ProxyShow = function(self)
 	if(not self.isEnabled) then return end
@@ -161,7 +155,6 @@ local UpdateComboPoints = function(self, event, unit)
 
 	if(cpoints) then
 		local MAX_COMBO_POINTS = UnitPowerMax("player", SPELL_POWER_COMBO_POINTS);
-		Debug("max combo points/current: ", MAX_COMBO_POINTS,current)
 		for i=1, MAX_COMBO_POINTS do
 			if(i <= current) then
 				if cpoints[i] then

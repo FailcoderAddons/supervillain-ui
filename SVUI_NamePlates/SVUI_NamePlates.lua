@@ -46,13 +46,6 @@ if(not MOD) then return end;
 
 local LSM = _G.LibStub("LibSharedMedia-3.0")
 
---Debug
-local Debug
-if AdiDebug then
-	Debug = AdiDebug:GetSink("Nameplates")
-else
-	Debug = function() end
-end
 --[[
 ##########################################################
 LOCAL VARS
@@ -1220,16 +1213,13 @@ function UnitFrameMixin:UpdateThreat()
 
 	local isTanking, status = UnitDetailedThreatSituation('player', self.displayedUnit)
 	if status ~= nil then
-		Debug("Aggro...")
+
 		if MOD.IsPlayerEffectivelyTank() then
-			Debug("... and I'm the tank")
 			status = math.abs(status - 2)
 		end
 		if status > 0 then
-			Debug("...and I have the threat")
 			tex:SetVertexColor(GetThreatStatusColor(status))
 			if not tex:IsShown() then 
-				Debug("showing the aggroHighlight")
 				tex:Show()
 			end
 			return

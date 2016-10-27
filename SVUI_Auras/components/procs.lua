@@ -61,14 +61,6 @@ local L = SV.L
 local MOD = SV.Auras;
 if(not MOD) then return end;
 
---Debug
-local Debug
-if AdiDebug then
-	Debug = AdiDebug:GetSink("Auras")
-else
-	Debug = function() end
-end
-
 --[[
 ##########################################################
 LOCAL VARS

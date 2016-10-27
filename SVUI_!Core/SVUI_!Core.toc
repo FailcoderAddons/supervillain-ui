@@ -5,7 +5,7 @@
 ## Notes: SVUI [|cff9911FFCore Framework|r].
 ## SavedVariables: SVUI_Global, SVUI_Errors, SVUI_Filters, SVUI_Media, SVUI_Shared
 ## SavedVariablesPerCharacter: SVUI_Private
-## OptionalDeps: LibSharedMedia-3.0, AdiDebug
+## OptionalDeps: LibSharedMedia-3.0
 ## X-SVUIName: SVUI
 ## X-SVUISchema: Core
 ## X-Email: munglunch@gmail.com

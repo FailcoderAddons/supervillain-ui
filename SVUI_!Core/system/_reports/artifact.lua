@@ -41,14 +41,6 @@ local L = SV.L
 local Reports = SV.Reports;
 local LAD = LibStub("LibArtifactData-1.0");
 
---Debug
-local Debug
-if AdiDebug then
-	Debug = AdiDebug:GetSink("Reports")
-else
-	Debug = function() end
-end
-
 --[[
 ##########################################################
 UTILITIES
@@ -56,13 +48,11 @@ UTILITIES
 ]]--
 local function GetArtifactData()
 	local artID = LAD:GetActiveArtifactID()
-	Debug("GetArtifactData - GetActiveArtifactID returned artID: ",artID)	
 	if not artID then return false end
 
 	local data = nil
 	artID, data = LAD:GetArtifactInfo(artID)
 	if not artID then return false end
-	Debug()
 	
 	return true, data.numRanksPurchased, data.power, data.maxPower , data.numRanksPurchasable
 end
@@ -138,15 +128,12 @@ end
 
 Report.OnInit = function(self)
 	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function () 
-		Debug("Report: Caught Artifact Added")
 		Report.Populate(self)
 	end)
 	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function () 	
-		Debug("Report: Caught Artifact active changed")
 		Report.Populate(self)
 	end)
 	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function () 
-		Debug("Report: Caught Artifact power changed")	
 		Report.Populate(self)
 	end)
 end
@@ -201,15 +188,12 @@ end
 
 ReportBar.OnInit = function(self)
 	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function () 
-		Debug("Report: Caught Artifact Added")
 		ReportBar.Populate(self)
 	end)
 	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function () 	
-		Debug("Report: Caught Artifact active changed")
 		ReportBar.Populate(self)
 	end)
 	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function () 
-		Debug("Report: Caught Artifact power changed")	
 		ReportBar.Populate(self)
 	end)
 end
