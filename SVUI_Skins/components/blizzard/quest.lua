@@ -254,10 +254,15 @@ local function QuestChoiceFrameStyle()
 
 
 	SV.API:Set("CloseButton", QuestChoiceFrame.CloseButton)
-	--QuestChoiceFrame.Option1:SetStyle("Frame", "Inset")
-	QuestChoiceFrame.Option1.OptionButton:SetStyle("Button")
-	--QuestChoiceFrame.Option2:SetStyle("Frame", "Inset")
-	QuestChoiceFrame.Option2.OptionButton:SetStyle("Button")
+	if(QuestChoiceFrame.Option1) then
+		SV.API:Set("Button", QuestChoiceFrame.Option1.OptionButton)
+	end
+	if(QuestChoiceFrame.Option2) then
+		SV.API:Set("Button", QuestChoiceFrame.Option2.OptionButton)
+	end
+	if(QuestChoiceFrame.Option3) then
+		SV.API:Set("Button", QuestChoiceFrame.Option3.OptionButton)
+	end
 end
 --[[
 ##########################################################

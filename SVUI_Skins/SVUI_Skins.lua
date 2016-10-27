@@ -53,7 +53,7 @@ MOD.EventListeners = {};
 MOD.OnLoadAddons = {};
 MOD.SkinnedAddons = {};
 MOD.Debugging = false;
-MOD.DebugInternal = false;
+MOD.DebugInternal = true;
 MOD.DebugExternal = false;
 --[[
 ##########################################################

@@ -176,14 +176,22 @@ local function AchievementStyle()
 	-- AchievementFrameAchievementsContainer.Panel:SetPoint("TOPLEFT", 0, 2)
 	-- AchievementFrameAchievementsContainer.Panel:SetPoint("BOTTOMRIGHT", -3, -3)
 	SV.API:Set("CloseButton", AchievementFrameCloseButton, AchievementFrame.Panel)
-	SV.API:Set("DropDown", AchievementFrameFilterDropDown)
-	AchievementFrameFilterDropDown:SetPoint("TOPRIGHT", AchievementFrame, "TOPRIGHT", -44, 5)
+	
+	SV.API:Set("EditBox", AchievementFrame.searchBox, false, 24)
+	AchievementFrame.searchBox:ClearAllPoints();
+	AchievementFrame.searchBox:SetPoint("TOPLEFT", AchievementFrameHeaderRightDDLInset, "TOPLEFT", 12, -8);
 
-	SV.API:Set("ScrollBar", AchievementFrameCategoriesContainerScrollBar, 5)
-	--SV.API:Set("ScrollBar", AchievementFrameAchievementsContainerScrollBar, 5)
-	SV.API:Set("ScrollBar", AchievementFrameStatsContainerScrollBar, 5)
-	SV.API:Set("ScrollBar", AchievementFrameComparisonContainerScrollBar, 5)
-	SV.API:Set("ScrollBar", AchievementFrameComparisonStatsContainerScrollBar, 5)
+	SV.API:Set("DropDown", AchievementFrameFilterDropDown)
+	AchievementFrameFilterDropDown:ClearAllPoints();
+	AchievementFrameFilterDropDown:SetPoint("TOPRIGHT", AchievementFrame.searchBox, "TOPLEFT", -12, 2);
+	AchievementFrameFilterDropDownText:ClearAllPoints();
+	AchievementFrameFilterDropDownText:SetPoint("LEFT", AchievementFrameFilterDropDown, "LEFT", 24, 0);
+
+	SV.API:Set("ScrollBar", AchievementFrameCategoriesContainer, 5)
+	SV.API:Set("ScrollBar", AchievementFrameAchievementsContainer, 5)
+	SV.API:Set("ScrollBar", AchievementFrameStatsContainer, 5)
+	SV.API:Set("ScrollBar", AchievementFrameComparisonContainer, 5)
+	SV.API:Set("ScrollBar", AchievementFrameComparisonStatsContainer, 5)
 
 	for i = 1, 3 do
 		local tab = _G["AchievementFrameTab"..i]

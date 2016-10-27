@@ -992,17 +992,19 @@ function UnitFrameMixin:Create(unitframe)
 	self.name:SetJustifyH'CENTER'
 	
 	self.aggroHighlight = h:CreateTexture(nil, 'OVERLAY', nil, 1)
-	self.aggroHighlight:SetTexture("Interface\\RaidFrame\\Raid-FrameHighlights");
-	self.aggroHighlight:SetTexCoord(unpack(AggroTexCoords));
+	--self.aggroHighlight:SetTexture("Interface\\RaidFrame\\Raid-FrameHighlights");
+	--self.aggroHighlight:SetTexCoord(unpack(AggroTexCoords));
+	self.aggroHighlight:SetTexture(SV.media.statusbar.default)
+	self.aggroHighlight:SetVertexColor(1, 1, 1, 0.25)
 	self.aggroHighlight:SetAllPoints(h);
 	self.aggroHighlight:Hide()
 
  	
 
 	self.hoverHighlight = h:CreateTexture(nil, 'ARTWORK', nil, 1)
-	self.hoverHighlight:SetTexture(HighlightTex)
+	self.hoverHighlight:SetTexture(SV.media.statusbar.default)
+	self.hoverHighlight:SetVertexColor(1, 1, 1, 0.25)
 	self.hoverHighlight:SetAllPoints(h)
-	self.hoverHighlight:SetVertexColor(1, 1, 1)
 	self.hoverHighlight:SetBlendMode('ADD')
 	self.hoverHighlight:SetTexCoord(unpack(HiTexCoord))
 	self.hoverHighlight:Hide()

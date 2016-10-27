@@ -1,6 +1,6 @@
 ## Interface: 70100
 ## Author: Failcoder, Azilroka, Sortokk
-## Version: 1.3.5
+## Version: 1.3.7
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00Skins|r
 ## Notes: SVUI [|cff9911FFSkins System and AddOn Frames|r].
 ## SavedVariables: SVUIUI_STYLE_GLOBAL

@@ -1,6 +1,6 @@
 ## Interface: 70100
 ## Author: Failcoder
-## Version: 1.3.5
+## Version: 1.3.7
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00UnitFrames|r
 ## Notes: UnitFrames Plugin for [|cff9911FFSVUI|r].
 ## OptionalDeps: LibSharedMedia-3.0

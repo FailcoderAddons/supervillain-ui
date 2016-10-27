@@ -116,9 +116,7 @@ local function _hook_EncounterJournal_ListInstances()
 end
 
 local function _hook_EncounterJournal_ToggleHeaders(self)
-  local isOverview = self.isOverview;
-
-  if (not isOverview) then
+  if (not self or not self.isOverview) then
     local usedHeaders = EncounterJournal.encounter.usedHeaders
     for key,used in pairs(usedHeaders) do
       if(not used.button.Panel) then
@@ -224,6 +222,8 @@ local function EncounterJournalStyle()
   EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:SetFrameLevel(EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:GetFrameLevel() + 10)
 
   if(EncounterJournalSuggestFrame) then
+    SV.API:Set("PageButton", EncounterJournalSuggestFrameNextButton)
+    SV.API:Set("PageButton", EncounterJournalSuggestFramePrevButton, false, true)
     if(EncounterJournalSuggestFrame.Suggestion1 and EncounterJournalSuggestFrame.Suggestion1.button) then
       EncounterJournalSuggestFrame.Suggestion1.button:RemoveTextures(true)
       EncounterJournalSuggestFrame.Suggestion1.button:SetStyle("Button")
@@ -231,6 +231,10 @@ local function EncounterJournalStyle()
     if(EncounterJournalSuggestFrame.Suggestion2 and EncounterJournalSuggestFrame.Suggestion2.centerDisplay and EncounterJournalSuggestFrame.Suggestion2.centerDisplay.button) then
       EncounterJournalSuggestFrame.Suggestion2.centerDisplay.button:RemoveTextures(true)
       EncounterJournalSuggestFrame.Suggestion2.centerDisplay.button:SetStyle("Button")
+    end
+    if(EncounterJournalSuggestFrame.Suggestion3 and EncounterJournalSuggestFrame.Suggestion3.centerDisplay and EncounterJournalSuggestFrame.Suggestion3.centerDisplay.button) then
+      EncounterJournalSuggestFrame.Suggestion3.centerDisplay.button:RemoveTextures(true)
+      EncounterJournalSuggestFrame.Suggestion3.centerDisplay.button:SetStyle("Button")
     end
   end
 
@@ -247,6 +251,10 @@ local function EncounterJournalStyle()
     _G[tabBaseName .. "RaidTab"]:RemoveTextures(true)
     _G[tabBaseName .. "RaidTab"]:SetStyle("Button")
   end
+  if(_G[tabBaseName .. "LootJournalTab"]) then
+    _G[tabBaseName .. "LootJournalTab"]:RemoveTextures(true)
+    _G[tabBaseName .. "LootJournalTab"]:SetStyle("Button")
+  end
 
   local bgParent = EncounterJournal.encounter.instance
   local loreParent = EncounterJournal.encounter.instance.loreScroll
@@ -254,7 +262,7 @@ local function EncounterJournalStyle()
   bgParent.loreBG:SetPoint("TOPLEFT", bgParent, "TOPLEFT", 0, 0)
   bgParent.loreBG:SetPoint("BOTTOMRIGHT", bgParent, "BOTTOMRIGHT", 0, 90)
 
-  loreParent:SetStyle("Frame", "Pattern")
+  SV.API:Set("Frame", loreParent, "Pattern")
   --loreParent:SetPanelColor("dark")
   loreParent.child.lore:SetTextColor(1, 1, 1)
   EncounterJournal.encounter.infoFrame.description:SetTextColor(1, 1, 1)
@@ -279,6 +287,8 @@ local function EncounterJournalStyle()
   end
 
   EncounterJournal.instanceSelect.raidsTab:GetFontString():SetTextColor(1, 1, 1);
+
+  SV.API:Set("DropDown", LootJournalViewDropDown)
 
   hooksecurefunc("EncounterJournal_SetBullets", _hook_EncounterJournal_SetBullets)
   hooksecurefunc("EncounterJournal_ListInstances", _hook_EncounterJournal_ListInstances)

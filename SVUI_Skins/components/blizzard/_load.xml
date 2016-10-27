@@ -2,6 +2,7 @@
 	<Script file='achievement.lua'/>
 	<Script file='alert.lua'/>
 	<Script file='archeology.lua'/>
+	<Script file='artifact.lua'/>
 	<Script file='auctionhouse.lua'/>
 	<Script file='barbershop.lua'/>
 	<Script file='battlefield.lua'/>
@@ -27,7 +28,7 @@
 	<Script file='quest.lua'/>
 	<Script file='raid.lua'/>
 	<Script file='reforging.lua'/>
-	<!-- <Script file='social.lua'/> -->
+	<Script file='orderhall.lua'/>
 	<Script file='spellbook.lua'/>
 	<Script file='talents.lua'/>
 	<Script file='timemanager.lua'/>

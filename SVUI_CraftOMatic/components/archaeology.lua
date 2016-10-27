@@ -444,26 +444,19 @@ function PLUGIN:LoadArchaeologyMode()
 	ArchCrafting:InsetPoints(ModeLogsFrame)
 
 	local BAR_WIDTH = (ArchCrafting:GetWidth() * 0.33) - 4
-	local BAR_HEIGHT = (ArchCrafting:GetHeight() / 5) - 4
+	local BAR_HEIGHT = (ArchCrafting:GetHeight() / math.floor(ArchRaces / 3)) - 4
 
 	for i = 1, ArchRaces do
 		local bar = CreateFrame("StatusBar", nil, ArchCrafting)
 		local solve = CreateFrame("Button", nil, bar, "SecureHandlerClickTemplate")
-		local yOffset,xOffset = 0,0;
+		local xMod = (i == 1) and 0 or ((i-1) % 3);
+		local xOffset = ((BAR_WIDTH + 4) * xMod) + 4;
+		local yMod = (i == 1) and 0 or math.floor((i-1) / 3);
+		local yOffset = ((BAR_HEIGHT + 4) * yMod) + 4;
 
 		bar:SetStyle("Frame", "Bar")
 		bar:SetStatusBarTexture([[Interface\AddOns\SVUI\assets\artwork\Template\DEFAULT]])
 		bar:SetSize(BAR_WIDTH,BAR_HEIGHT)
-		if(i > 10) then
-			xOffset = (BAR_WIDTH * 2) + 6
-			yOffset = ((i - 11) * (BAR_HEIGHT + 4)) + 4
-		elseif(i > 5) then
-			xOffset = BAR_WIDTH + 4
-			yOffset = ((i - 6) * (BAR_HEIGHT + 4)) + 4
-		else
-			xOffset = 2
-			yOffset = ((i - 1) * (BAR_HEIGHT + 4)) + 4;
-		end
 		bar:SetPoint("TOPLEFT", ArchCrafting, "TOPLEFT", xOffset, -yOffset)
 		bar:SetStatusBarColor(0.2, 0.2, 0.8, 0.5)
 

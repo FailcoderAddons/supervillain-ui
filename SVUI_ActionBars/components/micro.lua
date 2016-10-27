@@ -134,7 +134,7 @@ function MOD:InitializeMicroBar()
 	microBar:SetSize(barWidth, barHeight)
 	microBar:SetFrameStrata("HIGH")
 	microBar:SetFrameLevel(0)
-	microBar:SetPoint('BOTTOMLEFT', SV.Dock.TopLeft.Bar.ToolBar, 'BOTTOMRIGHT', 4, 0)
+	microBar:SetPoint('TOPLEFT', SV.Dock.TopLeft.Bar.ToolBar, 'TOPRIGHT', 4, 0)
 	SV:ManageVisibility(microBar)
 
 	for i=1,16 do
