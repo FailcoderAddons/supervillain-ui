@@ -110,7 +110,9 @@ SV.Credits["community"] = {
   "Xarioth", "AtomicKiller", "Meljen", "Moondoggy", "Stormblade",
   "Schreibstift", "Anj", "Risien", "Cromax", "Nitro_Turtle",
   "Shinzou", "Autolykus", "Taotao", "ColorsGaming", "Necroo", "Panser (TradeChat)",
-  "Synnistry", "MetaGoblin", "Panda Co Live!", "klepp0906"
+  "Synnistry", "MetaGoblin", "Panda Co Live!", 
+  -- The new wave... 
+  "klepp0906", "finalsilver", "Alien Guy", "TiaMaster", "GoombaLord", "Silenced24", "Rinvata", "Deviant"
 };
 
 local LIST_PATTERN = "    %s\n        %s\n            %s\n                %s";
