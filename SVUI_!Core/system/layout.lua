@@ -64,7 +64,7 @@ local UIPanels = {};
 UIPanels["AchievementFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["AuctionFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["ArchaeologyFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
-UIPanels["ArtifactFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
+--UIPanels["ArtifactFrame"] 					= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["BattlefieldMinimap"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = true };
 UIPanels["BarberShopFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
 UIPanels["BlackMarketFrame"] 				= { moving = false, snapped = false, canupdate = false, cansetpoint = false, centered = false };
