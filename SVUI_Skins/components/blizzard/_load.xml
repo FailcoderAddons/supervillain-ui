@@ -2,7 +2,7 @@
 	<Script file='achievement.lua'/>
 	<Script file='alert.lua'/>
 	<Script file='archeology.lua'/>
-	<Script file='artifact.lua'/>
+	<!-- Script file='artifact.lua'/ Needs rework - causing bug in OH 7.1 -->
 	<Script file='auctionhouse.lua'/>
 	<Script file='barbershop.lua'/>
 	<Script file='battlefield.lua'/>
