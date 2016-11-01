@@ -8,7 +8,7 @@
     <Include file="xml\docks.xml"/>
     <Script file="system\damage_text.lua"/>
     <Script file="system\core.lua"/>
-	  <Script file="system\media.lua"/>
+	<Script file="system\media.lua"/>
     <Script file="system\api.lua"/>
     <Script file="system\utilities.lua"/>
     <Script file="system\alerts.lua"/>

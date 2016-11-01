@@ -8,7 +8,7 @@
 	<Script file='battlefield.lua'/>
 	<Script file='blackmarket.lua'/>
 	<Script file='calendar.lua'/>
-	<Script file='challenges.lua'/>
+	<!-- Script file='challenges.lua'/ Needs complete rework after 7.1 -->
 	<Script file='chat.lua'/>
 	<Script file='character.lua'/>
 	<Script file='collections.lua'/>
