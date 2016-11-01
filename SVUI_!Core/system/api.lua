@@ -1911,7 +1911,7 @@ MOD.Concepts["DropDown"] = function(self, adjustable, frame, width)
 
     if(ddButton) then
         if(ddText) then
-            ddText:SetPoint("RIGHT", ddButton, "LEFT", 2, 0)
+            --ddText:SetPoint("RIGHT", ddButton, "LEFT", 2, 0)
         end
 
         ddButton:ClearAllPoints()
@@ -2276,7 +2276,7 @@ local ModifyBasicScroll = function(self, adjustable, frame, scale, yOffset, scro
 end
 
 local ModifyHybridScroll = function(self, adjustable, frame, scale, yOffset)
-    local bg, track, top, bottom, mid, upButton, downButton
+    local parent, bg, track, top, bottom, mid, upButton, downButton
     bg = frame.BG;
     if(bg) then bg:SetTexture("") end
     track = frame.trackBG or frame.Track;
@@ -2287,9 +2287,11 @@ local ModifyHybridScroll = function(self, adjustable, frame, scale, yOffset)
     if(bottom) then bottom:SetTexture("") end
     mid = frame.ScrollBarMiddle or frame.Middle;
     if(mid) then mid:SetTexture("") end
-    upButton = frame.GetParent().scrollUp or frame.ScrollUpButton;
-    downButton = frame.GetParent().scrollDown or frame.ScrollDownButton;
-
+    parent = frame:GetParent()
+    if parent then 
+        upButton = parent.scrollUp or frame.ScrollUpButton;
+        downButton = parent.scrollDown or frame.ScrollDownButton;
+    end
     if(upButton and downButton) then
         ModifyScrollType1(self, adjustable, frame, scale, yOffset, upButton, downButton)
     elseif(frame.GetOrientation) then
