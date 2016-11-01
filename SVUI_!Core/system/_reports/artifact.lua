@@ -101,7 +101,15 @@ local Report = Reports:NewReport(REPORT_NAME, {
 Report.events = {"PLAYER_ENTERING_WORLD"};
 
 Report.OnEvent = function(self, event, ...)
-	Report.Populate(self)
+	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function () 
+		Report.Populate(self)
+	end)
+	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function () 	
+		Report.Populate(self)
+	end)
+	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function () 
+		Report.Populate(self)
+	end)
 end
 
 Report.Populate = function(self)
@@ -127,15 +135,7 @@ Report.OnEnter = function(self)
 end
 
 Report.OnInit = function(self)
-	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function () 
-		Report.Populate(self)
-	end)
-	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function () 	
-		Report.Populate(self)
-	end)
-	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function () 
-		Report.Populate(self)
-	end)
+
 end
 
 --[[
@@ -153,7 +153,15 @@ local ReportBar = Reports:NewReport(BAR_NAME, {
 ReportBar.events = {"PLAYER_ENTERING_WORLD"};
 
 ReportBar.OnEvent = function(self, event, ...)
-	ReportBar.Populate(self)
+	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function () 
+		ReportBar.Populate(self)
+	end)
+	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function () 	
+		ReportBar.Populate(self)
+	end)
+	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function () 
+		ReportBar.Populate(self)
+	end)
 end
 
 ReportBar.Populate = function(self)
@@ -187,13 +195,5 @@ ReportBar.OnEnter = function(self)
 end
 
 ReportBar.OnInit = function(self)
-	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function () 
-		ReportBar.Populate(self)
-	end)
-	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function () 	
-		ReportBar.Populate(self)
-	end)
-	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function () 
-		ReportBar.Populate(self)
-	end)
+
 end
