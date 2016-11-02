@@ -69,13 +69,13 @@ LOCAL VARS
 local fishingIsKnown, fishingSpell, fishingLure;
 local proxyTest = false;
 local refLures = {
-	{ ["id"] = 6529, 		["bonus"] = 25, 	["skillReq"] = 1, 	["order"] = 10, }, --Shiny Bauble
-	{ ["id"] = 6811, 		["bonus"] = 50, 	["skillReq"] = 50, 	["order"] = 10, }, --Aquadynamic Fish Lens
-	{ ["id"] = 6530, 		["bonus"] = 50, 	["skillReq"] = 50, 	["order"] = 10, }, --Nightcrawlers
-	{ ["id"] = 7307, 		["bonus"] = 75, 	["skillReq"] = 100, ["order"] = 10, }, --Flesh Eating Worm
-	{ ["id"] = 6532, 		["bonus"] = 75, 	["skillReq"] = 100, ["order"] = 10, }, --Bright Baubles
+	{ ["id"] = 6529, 	["bonus"] = 25, 	["skillReq"] = 1, 	["order"] = 10, }, --Shiny Bauble
+	{ ["id"] = 6811, 	["bonus"] = 50, 	["skillReq"] = 50, 	["order"] = 10, }, --Aquadynamic Fish Lens
+	{ ["id"] = 6530, 	["bonus"] = 50, 	["skillReq"] = 50, 	["order"] = 10, }, --Nightcrawlers
+	{ ["id"] = 7307, 	["bonus"] = 75, 	["skillReq"] = 100, ["order"] = 10, }, --Flesh Eating Worm
+	{ ["id"] = 6532, 	["bonus"] = 75, 	["skillReq"] = 100, ["order"] = 10, }, --Bright Baubles
 	{ ["id"] = 34861, 	["bonus"] = 100, 	["skillReq"] = 100, ["order"] = 10, }, --Sharpened Fish Hook
-	{ ["id"] = 6533, 		["bonus"] = 100, 	["skillReq"] = 100, ["order"] = 10, }, --Aquadynamic Fish Attractor
+	{ ["id"] = 6533, 	["bonus"] = 100, 	["skillReq"] = 100, ["order"] = 10, }, --Aquadynamic Fish Attractor
 	{ ["id"] = 62673, 	["bonus"] = 100, 	["skillReq"] = 100, ["order"] = 10, }, --Feathered Lure
 	{ ["id"] = 46006, 	["bonus"] = 100, 	["skillReq"] = 100, ["order"] = 60, }, --Glow Worm
 	{ ["id"] = 68049, 	["bonus"] = 150, 	["skillReq"] = 250, ["order"] = 5,  }, --Heat-Treated Spinning Lure
@@ -90,31 +90,32 @@ tsort(refLures, function(a,b)
 	end
 end);
 local refHats = {
-	{ ["id"] = 93732, 	["weight"] = 10, 	["nocast"] = true 	},  --Darkmoon Fishing Hat
-	{ ["id"] = 33820, 	["weight"] = 50, 	["nocast"] = false 	},  --Weather Beaten Fishing Hat
-	{ ["id"] = 19972, 	["weight"] = 75, 	["nocast"] = false 	},  --Lucky Fishing Hat
-	{ ["id"] = 118380, 	["weight"] = 100, ["nocast"] = false 	},  --Hightfish Cap 7Days WOD
-	{ ["id"] = 118393, 	["weight"] = 100, ["nocast"] = false 	},  --Tentacled Hat 7Days WOD
-	{ ["id"] = 88710, 	["weight"] = 100, ["nocast"] = false 	},  --Nats Hat
-	{ ["id"] = 117405, 	["weight"] = 100, ["nocast"] = false 	},  --Nats Drinking Hat
+	{ ["id"] = 93732, 	["weight"] = 10,	["nocast"] = true 	},  --Darkmoon Fishing Hat
+	{ ["id"] = 33820, 	["weight"] = 50,	["nocast"] = false 	},  --Weather Beaten Fishing Hat
+	{ ["id"] = 19972, 	["weight"] = 75,	["nocast"] = false 	},  --Lucky Fishing Hat
+	{ ["id"] = 118380, 	["weight"] = 100,	["nocast"] = false 	},  --Hightfish Cap 7Days WOD
+	{ ["id"] = 118393, 	["weight"] = 100,	["nocast"] = false 	},  --Tentacled Hat 7Days WOD
+	{ ["id"] = 88710, 	["weight"] = 100,	["nocast"] = false 	},  --Nats Hat
+	{ ["id"] = 117405, 	["weight"] = 100,	["nocast"] = false 	},  --Nats Drinking Hat
 }
 local refPoles = {
 	{ ["id"] = 118381, 	["weight"] = 50 }, --Ephemeral Fishing Pole 24hours WOD
 	{ ["id"] = 44050, 	["weight"] = 33 }, --Kaluak
 	{ ["id"] = 25978, 	["weight"] = 22 }, --Seths Graphite
 	{ ["id"] = 19022, 	["weight"] = 21 }, --Nat Pagles Extreme Angler
-	{ ["id"] = 6367, 		["weight"] = 20 }, --Big Iron
-	{ ["id"] = 6366, 		["weight"] = 15 }, --Darkwood
+	{ ["id"] = 6367, 	["weight"] = 20 }, --Big Iron
+	{ ["id"] = 6366, 	["weight"] = 15 }, --Darkwood
 	{ ["id"] = 84661, 	["weight"] = 32 }, --Dragon
 	{ ["id"] = 19970, 	["weight"] = 40 }, --Arcanite
 	{ ["id"] = 45858, 	["weight"] = 25 }, --Nats Lucky
 	{ ["id"] = 45992, 	["weight"] = 31 }, --Jeweled
 	{ ["id"] = 45991, 	["weight"] = 30 }, --Bone
-	{ ["id"] = 6365, 		["weight"] = 5 	}, --Strong
+	{ ["id"] = 6365, 	["weight"] = 5 	}, --Strong
 	{ ["id"] = 12225, 	["weight"] = 4 	}, --Blump Family
 	{ ["id"] = 46337, 	["weight"] = 3 	}, --Staats
 	{ ["id"] = 84660, 	["weight"] = 10 }, --Pandaren
-	{ ["id"] = 6256, 		["weight"] = 1 	}  --Standard
+	{ ["id"] = 133755,  ["weight"] = 100 }, --Underlight Angler Artifact Legion
+	{ ["id"] = 6256, 	["weight"] = 1 	}  --Standard
 }
 --[[
 ##########################################################
