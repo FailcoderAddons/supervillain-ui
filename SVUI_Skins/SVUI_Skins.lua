@@ -207,10 +207,15 @@ end
 
 function MOD:ADDON_LOADED(event, addon)
 	--print(addon)
+	local apiRefreshed = false;
 	local needsUpdate = false
 	for name, fn in pairs(self.OnLoadAddons) do
 		if(addon:find(name)) then
 			self.Debugging = self.DebugInternal
+			if(not apiRefreshed) then
+				SV:AppendAPI();
+				apiRefreshed = true
+			end
 			if(self:Style(name, fn, event, addon)) then
 				self.OnLoadAddons[name] = nil
 				needsUpdate = true
@@ -223,6 +228,10 @@ function MOD:ADDON_LOADED(event, addon)
 		for name, fn in pairs(self.AddOnQueue) do
 			if(listener[name] and self:IsAddonReady(name)) then
 				self.Debugging = self.DebugExternal
+				if(not apiRefreshed) then
+					SV:AppendAPI();
+					apiRefreshed = true
+				end
 				if(self:Style(name, fn, event, addon)) then
 					self.AddOnQueue[name] = nil
 					needsUpdate = true

@@ -1498,9 +1498,9 @@ API INJECTION
 ]]--
 local MODIFIED_OBJECTS = {};
 
-local function AppendFrameMethods(OBJECT)
+local function AppendFrameMethods(OBJECT, FORCE)
     local objType = OBJECT:GetObjectType()
-    if(not MODIFIED_OBJECTS[objType]) then
+    if(FORCE or (not MODIFIED_OBJECTS[objType])) then
         local META = getmetatable(OBJECT).__index
         if not OBJECT.SetStyle then META.SetStyle = SetStyle end
         if not OBJECT.SetPanelColor then META.SetPanelColor = SetPanelColor end
@@ -1545,14 +1545,18 @@ AppendFrameMethods(CURRENT_OBJECT)
 AppendTextureMethods(CURRENT_OBJECT:CreateTexture())
 AppendFontStringMethods(CURRENT_OBJECT:CreateFontString())
 
-function SV:AppendAPI(obj)
-    AppendFrameMethods(obj)
-end
-
 CURRENT_OBJECT = EnumerateFrames()
 while CURRENT_OBJECT do
     AppendFrameMethods(CURRENT_OBJECT)
     CURRENT_OBJECT = EnumerateFrames(CURRENT_OBJECT)
+end
+
+function SV:AppendAPI()
+    local NEW_OBJECT = EnumerateFrames()
+    while NEW_OBJECT do
+        AppendFrameMethods(NEW_OBJECT, true)
+        NEW_OBJECT = EnumerateFrames(NEW_OBJECT)
+    end
 end
 --[[
 ##########################################################

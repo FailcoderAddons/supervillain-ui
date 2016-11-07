@@ -2139,6 +2139,7 @@ function MOD:Load()
 		dock.Window:ClearAllPoints()
 		dock.Window:SetSize(width, height)
 		dock.Window:SetPoint(anchor, dock.Alert, reverse, 0, 4)
+		dock.Window:SetFrameStrata("BACKGROUND")
 
 		SV:NewAnchor(dock.Bar, location .. " Dock ToolBar");
 		SV:SetAnchorResizing(dock.Bar, dockBarPostSizeFunc, 10, 500, 10, 80);

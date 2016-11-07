@@ -1,6 +1,6 @@
 ## Interface: 70100
 ## Author: Failcoder
-## Version: 1.3.8
+## Version: 1.3.9
 ## Title: |cffFF9900SuperVillain UI: |r|cff00FF00!Core|r
 ## Notes: SVUI [|cff9911FFCore Framework|r].
 ## SavedVariables: SVUI_Global, SVUI_Errors, SVUI_Filters, SVUI_Media, SVUI_Shared

@@ -521,7 +521,7 @@ local function GuildFrameStyle()
 	GuildFactionBar.Panel:SetPoint("TOPLEFT", GuildFactionBar.progress, "TOPLEFT", -1, 1)
 	GuildFactionBar.Panel:SetPoint("BOTTOMRIGHT", GuildFactionBar, "BOTTOMRIGHT", 1, 1)
 
-	-- FIXME GuildRosterContainer:SetStyle("Frame", "Inset")
+	GuildRosterContainer:SetStyle("Frame", "Inset")
 	SV.API:Set("ScrollBar", GuildRosterContainerScrollBar, 4, -4)
 	GuildRosterShowOfflineButton:SetStyle("CheckButton")
 
@@ -547,7 +547,7 @@ local function GuildFrameStyle()
 	GuildMemberRankDropdown:HookScript("OnShow", function() GuildMemberDetailRankText:Hide() end)
 	GuildMemberRankDropdown:HookScript("OnHide", function() GuildMemberDetailRankText:Show() end)
 	GuildNewsFrame:RemoveTextures()
-	-- FIXME GuildNewsContainer:SetStyle("Frame", "Inset")
+	GuildNewsContainer:SetStyle("Frame", "Inset")
 
 	for i = 1, 17 do
 		local button = _G["GuildNewsContainerButton"..i]
