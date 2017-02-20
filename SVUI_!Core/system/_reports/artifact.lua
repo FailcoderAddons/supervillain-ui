@@ -49,11 +49,10 @@ UTILITIES
 local function GetArtifactData()
 	local artID = LAD:GetActiveArtifactID()
 	if not artID then return false end
-
-	local data = nil
+	local data
 	artID, data = LAD:GetArtifactInfo(artID)
 	if not artID then return false end
-	
+
 	return true, data.numRanksPurchased, data.power, data.maxPower , data.numRanksPurchasable
 end
 
@@ -70,7 +69,7 @@ local function SetTooltipText(report)
 		Reports.ToolTip:AddDoubleLine(L["Remaining:"], (" %d "):format(powerToNextLevel - currentPower), 1, 1, 1)
 		Reports.ToolTip:AddDoubleLine(L["Points to Spend:"], format(" %d ", pointsToSpend), 1, 1, 1)
 	else
-		Reports.ToolTip:AddDoubleLine(L["No Artifact"])		
+		Reports.ToolTip:AddDoubleLine(L["No Artifact"])
 	end
 end
 
@@ -101,13 +100,14 @@ local Report = Reports:NewReport(REPORT_NAME, {
 Report.events = {"PLAYER_ENTERING_WORLD"};
 
 Report.OnEvent = function(self, event, ...)
-	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function () 
+
+	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function ()
 		Report.Populate(self)
 	end)
-	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function () 	
+	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function ()
 		Report.Populate(self)
 	end)
-	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function () 
+	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function ()
 		Report.Populate(self)
 	end)
 end
@@ -120,12 +120,11 @@ Report.Populate = function(self)
 	end
 
 	local isEquipped,rank,currentPower,powerToNextLevel,pointsToSpend = GetArtifactData()
-
 	if isEquipped then
 		local text = FormatPower(rank, currentPower,powerToNextLevel,pointsToSpend);
 		self.text:SetText(text)
 	else
-		self.text:SetText(L["No Artifact"])		
+		self.text:SetText(L["No Artifact"])
 	end
 end
 
@@ -135,7 +134,10 @@ Report.OnEnter = function(self)
 end
 
 Report.OnInit = function(self)
-
+	if(not self.InnerData) then
+		self.InnerData = {}
+	end
+	Report.Populate(self)
 end
 
 --[[
@@ -153,13 +155,13 @@ local ReportBar = Reports:NewReport(BAR_NAME, {
 ReportBar.events = {"PLAYER_ENTERING_WORLD"};
 
 ReportBar.OnEvent = function(self, event, ...)
-	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function () 
+	LAD.RegisterCallback(self,"ARTIFACT_ADDED", function ()
 		ReportBar.Populate(self)
 	end)
-	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function () 	
+	LAD.RegisterCallback(self,"ARTIFACT_ACTIVE_CHANGED", function ()
 		ReportBar.Populate(self)
 	end)
-	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function () 
+	LAD.RegisterCallback(self,"ARTIFACT_POWER_CHANGED", function ()
 		ReportBar.Populate(self)
 	end)
 end
@@ -177,11 +179,12 @@ ReportBar.Populate = function(self)
 		bar:SetMinMaxValues(0, powerToNextLevel)
 		bar:SetValue(currentPower)
 		bar:SetStatusBarColor(0.9, 0.64, 0.37)
-		local toSpend = "" 
+		local toSpend = ""
 		if pointsToSpend>0 then
 			toSpend = " (+"..pointsToSpend..")"
 		end
 		self.text:SetText(rank..toSpend)
+		self.barframe:Show()
 	else
 		bar:SetMinMaxValues(0, 1)
 		bar:SetValue(0)
@@ -195,5 +198,12 @@ ReportBar.OnEnter = function(self)
 end
 
 ReportBar.OnInit = function(self)
-
+	if(not self.InnerData) then
+		self.InnerData = {}
+	end
+	ReportBar.Populate(self)
+	if (not self.barframe:IsShown())then
+		self.barframe:Show()
+		self.barframe.icon.texture:SetTexture(SV.media.dock.artifactLabel)
+	end
 end
