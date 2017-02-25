@@ -101,9 +101,29 @@ local SetScenarioData = function(self, title, stageName, currentStage, numStages
 	local objective_rows = 0;
 	local fill_height = 0;
 	local block = self.Block;
+    local mythic_txt = ""
+
 
 	block.HasData = true;
-	if(currentStage ~= 0 or currentStage ~= 8) then
+    local _, _, difficulty, _, _, _, _, mapID = GetInstanceInfo();
+
+	if (difficulty == 8) then
+        local cmLevel, affixes, empowered = C_ChallengeMode.GetActiveKeystoneInfo();
+        local bonus = C_ChallengeMode.GetPowerLevelDamageHealthMod(cmLevel);
+        block.Header.Stage:SetText("Mythic Keystone + " .. cmLevel)
+        cmLevel, affixes, empowered = C_ChallengeMode.GetActiveKeystoneInfo();
+
+        if empowered then
+            mythic_txt = mythic_txt .. "Loot"
+        else
+            mythic_txt = mythic_txt .. "No Loot"
+        end
+        for _, affixID in ipairs(affixes) do
+            local affixName, affixDesc, _ = C_ChallengeMode.GetAffixInfo(affixID);
+            mythic_txt = mythic_txt ..  " - "..affixName
+        end
+
+    elseif (currentStage ~= 0) then
 		block.Header.Stage:SetText("Stage " .. currentStage)
 	else
 		block.Header.Stage:SetText('')
@@ -111,7 +131,8 @@ local SetScenarioData = function(self, title, stageName, currentStage, numStages
 	block.Header.Text:SetText(title)
 	block.Icon:SetTexture(LINE_SCENARIO_ICON)
 
-	local objective_block = block.Objectives;
+
+    local objective_block = block.Objectives;
 	for i = 1, numObjectives do
 		local description, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed, failed = C_Scenario.GetCriteriaInfo(i);
 		if(duration > 0 and elapsed <= duration and not (failed or completed)) then
@@ -127,9 +148,12 @@ local SetScenarioData = function(self, title, stageName, currentStage, numStages
 	local timerHeight = self.Timer:GetHeight()
 
 	if(objective_rows > 0) then
+
 		objective_block:SetHeight(fill_height);
 		objective_block:FadeIn();
-	end
+    end
+
+
 
 	fill_height = fill_height + (LARGE_ROW_HEIGHT + 2) + timerHeight;
 	block:SetHeight(fill_height);
@@ -471,6 +495,7 @@ function MOD:InitializeScenarios()
 	timer.Icon = block.Icon;
 	timer:SetHeight(1);
 	timer:SetAlpha(0)
+
 
 	block.Objectives = MOD.NewObjectiveHeader(block);
 	block.Objectives:SetPoint("TOPLEFT", timer, "BOTTOMLEFT", -4, -4);
