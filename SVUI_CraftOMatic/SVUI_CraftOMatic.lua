@@ -377,8 +377,6 @@ end
 
 function PLUGIN:CheckForModeLoot(msg)
   	local item, amt, item_check = ChatDeFormat(msg, LOOT_ITEM_SELF_MULTIPLE)
-
-
 	if not item then
 	  item = ChatDeFormat(msg, LOOT_ITEM_CREATED_SELF)
 	  	if not item then
