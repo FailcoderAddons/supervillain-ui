@@ -386,6 +386,8 @@ do
 
 				for name,data in pairs(stored) do
 					if type(data) == "table" and data.amount and data.texture then
+						local item_name, lnk, rarity, lvl, mlvl, itype, stype, cnt, ieq, tex, price = GetItemInfo(name);
+						r, g, b, hex = GetItemQualityColor(rarity);
 						PLUGIN.LogWindow:AddMessage("|cff55FF55"..data.amount.." x|r |T".. data.texture ..":16:16:0:0:64:64:4:60:4:60|t".." "..name, r, g, b);
 					end
 				end
