@@ -61,6 +61,14 @@ local SV = _G.SVUI;
 local L = SV.L;
 local PLUGIN = select(2, ...);
 local CONFIGS = SV.defaults[PLUGIN.Schema];
+
+
+local function Set (list)
+	local set = {}
+	for _, l in ipairs(list) do set[l] = true end
+	return set
+end
+
 --[[
 ##########################################################
 LOCAL VARS
@@ -68,6 +76,61 @@ LOCAL VARS
 ]]--
 local fishingIsKnown, fishingSpell, fishingLure;
 local proxyTest = false;
+
+local legionExtraFishLoot = Set {
+	--Azsuna
+	"Leyscale Koi",
+	"Leyshimmer Blenny",
+	"Nar'thalas Hermit",
+	"Ghostly Queenfish",
+	"Skrog Toenail",
+	"Aromatic Murloc Slime",
+	"Pearlescent Conch",
+	"Rusty Queenfish Brooch",
+	--Highmountain
+	"Ancient Highmountain Salmon",
+	"Coldriver Carp",
+	"Mountain Puffer",
+	"Funky Sea Snail",
+	"Salmon Lure",
+	"Frost Worm",
+	"Swollen Murloc Egg",
+	--Stormheim
+	"Thundering Stormray",
+	"Oodelfjisk",
+	"Graybelly Lobster",
+	"Moosehorn Hook",
+	"Silverscale Minnow",
+	"Ancient Vrykul Ring",
+	"Soggy Drakescale",
+	--Val'Sharah
+	"Ancient Mossgill",
+	"Terrorfin",
+	"Thorned Flounder",
+	"Rotten Fishbone",
+	"Nightmare Nightcrawler",
+	"Drowned Thistleleaf",
+	--Suramar
+	"Tainted Runescale Koi",
+	"Seerspine Puffer",
+	"Magic-Eater Frog",
+	"Demonic Detritus",
+	"Sleeping Murloc",
+	"Enchanted Lure",
+	--Ocean
+	"Seabottom Squid",
+	"Axefish",
+	"Ancient Black Barracuda",
+	"Stunned, Angry Shark",
+	"Message in a Beer Bottle",
+	"Axefish Lure",
+	"Decayed Whale Blubber",
+	"Ravenous Fly",
+	--OTHER
+	"Blood of Sargeras",
+	"Drowned Mana"
+}
+
 local refLures = {
 	{ ["id"] = 6529, 	["bonus"] = 25, 	["skillReq"] = 1, 	["order"] = 10, }, --Shiny Bauble
 	{ ["id"] = 6811, 	["bonus"] = 50, 	["skillReq"] = 50, 	["order"] = 10, }, --Aquadynamic Fish Lens
@@ -224,13 +287,22 @@ local function UpdateFishingGear(autoequip)
 	end
 end
 
+
+
+
+
 local function LootProxy(item, name)
 	if(item) then
-		local mask = [[0x100000]];
-		local itemType = GetItemFamily(item);
-		local pass = band(itemType, mask);
-		if pass > 0 then
+		--check for Legion Bonus Items that do fall within this "Family"
+		if legionExtraFishLoot[name]then
 			proxyTest = true;
+		else
+			local mask = [[0x100000]];
+			local itemType = GetItemFamily(item);
+			local pass = band(itemType, mask);
+			if pass > 0 then
+				proxyTest = true;
+			end
 		end
 	end
 end
@@ -266,11 +338,16 @@ do
 	local FishEventHandler = CreateFrame("Frame")
 	local LootProxy = function(item, name)
 		if(item) then
-			local mask = [[0x10000]];
-			local itemType = GetItemFamily(item);
-			local pass = band(itemType, mask);
-			if pass > 0 then
+			--check for Legion Bonus Items that do fall within this "Family"
+			if legionExtraFishLoot[name]then
 				proxyTest = true;
+			else
+				local mask = [[0x10000]];
+				local itemType = GetItemFamily(item);
+				local pass = band(itemType, mask);
+				if pass > 0 then
+					proxyTest = true;
+				end
 			end
 		end
 	end
@@ -406,3 +483,5 @@ function PLUGIN:LoadFishingMode()
 	CONFIGS = SV.db[self.Schema];
 	self:UpdateFishingMode()
 end
+
+
