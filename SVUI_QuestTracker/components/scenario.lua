@@ -80,17 +80,17 @@ SCRIPT HANDLERS
 ]]--
 local TimerBar_OnUpdate = function(self, elapsed)
 	local statusbar = self.Bar
-    statusbar.elapsed = statusbar.elapsed + elapsed;
-    local currentTime = statusbar.duration - statusbar.elapsed
-    local timeString = GetTimeStringFromSeconds(currentTime)
-    local r,g,b = MOD:GetTimerTextColor(statusbar.duration, statusbar.elapsed)
-    if(statusbar.elapsed <= statusbar.duration) then
-        statusbar:SetValue(currentTime);
-        statusbar.TimeLeft:SetText(timeString);
-        statusbar.TimeLeft:SetTextColor(r,g,b);
-    else
-    	self:StopTimer()
-    end
+	statusbar.elapsed = statusbar.elapsed + elapsed;
+	local currentTime = statusbar.duration - statusbar.elapsed
+	local timeString = GetTimeStringFromSeconds(currentTime)
+	local r,g,b = MOD:GetTimerTextColor(statusbar.duration, statusbar.elapsed)
+	if(statusbar.elapsed <= statusbar.duration) then
+		statusbar:SetValue(currentTime);
+		statusbar.TimeLeft:SetText(timeString);
+		statusbar.TimeLeft:SetTextColor(r,g,b);
+	else
+		self:StopTimer()
+	end
 end
 --[[
 ##########################################################
@@ -103,7 +103,7 @@ local SetScenarioData = function(self, title, stageName, currentStage, numStages
 	local block = self.Block;
 
 	block.HasData = true;
-	if(currentStage ~= 0) then
+	if(currentStage ~= 0 or currentStage ~= 8) then
 		block.Header.Stage:SetText("Stage " .. currentStage)
 	else
 		block.Header.Stage:SetText('')
@@ -201,13 +201,21 @@ end
 local SetChallengeMedals = function(self, elapsedTime, ...)
 	self:SetHeight(INNER_HEIGHT);
 	local blockHeight = MOD.Headers["Scenario"].Block:GetHeight();
+	local _, _, difficulty, _, _, _, _, mapID = GetInstanceInfo();
 	MOD.Headers["Scenario"].Block:SetHeight(blockHeight + INNER_HEIGHT + 4);
 	self:FadeIn();
 	self.Bar:SetMinMaxValues(0, elapsedTime);
 	self.Bar:SetValue(elapsedTime);
 
-	for i = 1, select("#", ...) do
-		MEDAL_TIMES[i] = select(i, ...);
+	if(mapID and difficulty == 8) then
+		local zoneName, _, maxTime = C_ChallengeMode.GetMapInfo(mapID);
+		MEDAL_TIMES[1] = maxTime * 0.6;
+		MEDAL_TIMES[2] = maxTime * 0.8;
+		MEDAL_TIMES[3] = maxTime
+	else
+		for i = 1, select("#", ...) do
+			MEDAL_TIMES[i] = select(i, ...);
+		end
 	end
 	LAST_MEDAL = nil;
 	self:UpdateMedals(elapsedTime);
@@ -279,10 +287,20 @@ local UpdateAllTimers = function(self, ...)
 	local timeLeftFound
 	for i = 1, select("#", ...) do
 		local timerID = select(i, ...);
-		local _, elapsedTime, type = GetWorldElapsedTime(timerID);
+
+		if timerID == 0 then
+			timerID = 1
+		end
+
+		local _, elapsedTime, type = GetWorldElapsedTime(1);
 		if ( type == LE_WORLD_ELAPSED_TIMER_TYPE_CHALLENGE_MODE) then
-			local _, _, _, _, _, _, _, mapID = GetInstanceInfo();
-			if ( mapID ) then
+			local _, _, difficulty, _, _, _, _, mapID = GetInstanceInfo();
+			if(mapID and difficulty == 8) then
+				local cmLevel, affixes, empowered = C_ChallengeMode.GetActiveKeystoneInfo();
+				local zoneName, _, maxTime = C_ChallengeMode.GetMapInfo(mapID);
+				self:SetMedals(elapsedTime, maxTime);
+				return;
+			elseif ( mapID ) then
 				self:SetMedals(elapsedTime, GetChallengeModeMapTimes(mapID));
 				return;
 			end
@@ -298,12 +316,17 @@ local UpdateAllTimers = function(self, ...)
 end
 
 local RefreshScenarioObjective = function(self, event, ...)
+
+	local _, _, difficulty, _, _, _, _, _ = GetInstanceInfo();
 	if(C_Scenario.IsInScenario()) then
 		if(event == "PLAYER_ENTERING_WORLD") then
 			self.Timer:UpdateTimers(GetWorldElapsedTimers());
-		elseif(event == "WORLD_STATE_TIMER_START") then
+		elseif(event == "WORLD_STATE_TIMER_START" or event ==  "CHALLENGE_MODE_START" or event ==  "CHALLENGE_MODE_RESET") then
 			self.Timer:UpdateTimers(...)
-		elseif(event == "WORLD_STATE_TIMER_STOP") then
+			if (difficulty == 8) then
+				self.Timer:SetScript("OnUpdate", UpdateAllTimers);
+			end
+		elseif(event == "WORLD_STATE_TIMER_STOP" or event ==  "CHALLENGE_MODE_COMPLETED") then
 			self.Timer:StopTimer()
 		elseif(event == "PROVING_GROUNDS_SCORE_UPDATE") then
 			local score = ...
@@ -470,6 +493,11 @@ function MOD:InitializeScenarios()
 	self:RegisterEvent("SCENARIO_UPDATE", self.UpdateScenarioObjective);
 	self:RegisterEvent("SCENARIO_CRITERIA_UPDATE", self.UpdateScenarioObjective);
 	self:RegisterEvent("SCENARIO_COMPLETED", self.UpdateScenarioObjective);
+
+	self:RegisterEvent("CHALLENGE_MODE_START", self.UpdateScenarioObjective);
+	self:RegisterEvent("CHALLENGE_MODE_COMPLETED", self.UpdateScenarioObjective);
+	self:RegisterEvent("CHALLENGE_MODE_RESET", self.UpdateScenarioObjective);
+
 
 	SV.Events:On("QUEST_UPVALUES_UPDATED", UpdateScenarioLocals, true);
 end
