@@ -183,6 +183,8 @@ local refPoles = {
 	{ ["id"] = 133755,  ["weight"] = 100 }, --Underlight Angler Artifact Legion
 	{ ["id"] = 6256, 	["weight"] = 1 	}  --Standard
 }
+
+
 --[[
 ##########################################################
 LOCAL FUNCTIONS
@@ -294,12 +296,21 @@ end
 
 
 
-local function LootProxy(item, name)
+local function LootProxy(item)
 	if(item) then
 		--check for Legion Bonus Items that do fall within this "Family"
 		if legionExtraFishLoot[name]then
 			proxyTest = true;
-		else
+        else
+            for i=1,GetAchievementNumCriteria(10722) do
+                local description = GetAchievementCriteriaInfo(10722, i)
+                if description == name then
+                    proxyTest = true;
+                    return;
+                end
+            end
+         end
+		if proxyTest == false then
 			local mask = [[0x100000]];
 			local itemType = GetItemFamily(item);
 			local pass = band(itemType, mask);
@@ -344,7 +355,16 @@ do
 			--check for Legion Bonus Items that do fall within this "Family"
 			if legionExtraFishLoot[name]then
 				proxyTest = true;
-			else
+            else
+                for i=1,GetAchievementNumCriteria(10722) do
+                    local description = GetAchievementCriteriaInfo(10722, i)
+                    if description == name then
+                        proxyTest = true;
+                        return;
+                    end
+                end
+            end
+            if proxyTest == false then
 				local mask = [[0x10000]];
 				local itemType = GetItemFamily(item);
 				local pass = band(itemType, mask);
@@ -377,7 +397,8 @@ do
 				if proxyTest == false then return end
 				if not PLUGIN.Fishing.Log[name] then
 					PLUGIN.Fishing.Log[name] = {amount = 0, texture = ""};
-				end
+                end
+
 				local r, g, b, hex = GetItemQualityColor(rarity);
 				local stored = PLUGIN.Fishing.Log
 				local mod = stored[name];
@@ -389,10 +410,14 @@ do
 
 				for name,data in pairs(stored) do
 					if type(data) == "table" and data.amount and data.texture then
-						local item_name, lnk, rarity, lvl, mlvl, itype, stype, cnt, ieq, tex, price = GetItemInfo(name);
-						r, g, b, hex = GetItemQualityColor(rarity);
-						PLUGIN.LogWindow:AddMessage("|cff55FF55"..data.amount.." x|r |T".. data.texture ..":16:16:0:0:64:64:4:60:4:60|t".." "..name, r, g, b);
-					end
+						local item_name, lnk, current_rarity, lvl, mlvl, itype, stype, cnt, ieq, tex, price = GetItemInfo(name);
+                        if(current_rarity) then
+                            r, g, b, hex = GetItemQualityColor(current_rarity);
+						    PLUGIN.LogWindow:AddMessage("|cff55FF55"..data.amount.." x|r |T".. data.texture ..":16:16:0:0:64:64:4:60:4:60|t".." "..name, r, g, b);
+                        else
+                            PLUGIN.LogWindow:AddMessage("|cff55FF55"..data.amount.." x|r |T".. data.texture ..":16:16:0:0:64:64:4:60:4:60|t".." "..name, r, g, b);
+                        end
+                    end
 				end
 				PLUGIN.LogWindow:AddMessage("----------------", 0, 0, 0);
 				PLUGIN.LogWindow:AddMessage("Caught So Far...", 0, 1, 1);
