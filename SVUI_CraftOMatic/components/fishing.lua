@@ -128,7 +128,10 @@ local legionExtraFishLoot = Set {
 	"Ravenous Fly",
 	--OTHER
 	"Blood of Sargeras",
-	"Drowned Mana"
+	"Drowned Mana",
+	"Silver Mackerel",
+	"Big Fountain Goldfish",
+	"Mark of Aquaos",
 }
 
 local refLures = {

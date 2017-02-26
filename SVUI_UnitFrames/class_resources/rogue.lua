@@ -146,7 +146,7 @@ ROGUE COMBO TRACKER
 ##########################################################
 ]]--
 function MOD:CreateClassBar(playerFrame)
-	local max = 6
+	local max = 10
 	local size = 20
 	local coords
 
