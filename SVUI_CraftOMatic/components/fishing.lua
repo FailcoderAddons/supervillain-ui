@@ -180,8 +180,9 @@ local refPoles = {
 	{ ["id"] = 12225, 	["weight"] = 4 	}, --Blump Family
 	{ ["id"] = 46337, 	["weight"] = 3 	}, --Staats
 	{ ["id"] = 84660, 	["weight"] = 10 }, --Pandaren
-	{ ["id"] = 133755,  ["weight"] = 100 }, --Underlight Angler Artifact Legion
+	{ ["id"] = 133755,  	["weight"] = 100 }, --Underlight Angler Artifact Legion
 	{ ["id"] = 6256, 	["weight"] = 1 	}  --Standard
+	{ ["id"] = 120163, 	["weight"] = 3  }, --Thruks
 }
 
 
