@@ -162,7 +162,7 @@ local refHats = {
 	{ ["id"] = 118380, 	["weight"] = 100,	["nocast"] = false 	},  --Hightfish Cap 7Days WOD
 	{ ["id"] = 118393, 	["weight"] = 100,	["nocast"] = false 	},  --Tentacled Hat 7Days WOD
 	{ ["id"] = 88710, 	["weight"] = 100,	["nocast"] = false 	},  --Nats Hat
-	{ ["id"] = 117405, 	["weight"] = 100,	["nocast"] = false 	},  --Nats Drinking Hat
+	{ ["id"] = 117405, 	["weight"] = 100,	["nocast"] = false 	}  --Nats Drinking Hat
 }
 local refPoles = {
 	{ ["id"] = 118381, 	["weight"] = 50 }, --Ephemeral Fishing Pole 24hours WOD
@@ -181,8 +181,8 @@ local refPoles = {
 	{ ["id"] = 46337, 	["weight"] = 3 	}, --Staats
 	{ ["id"] = 84660, 	["weight"] = 10 }, --Pandaren
 	{ ["id"] = 133755,  	["weight"] = 100 }, --Underlight Angler Artifact Legion
-	{ ["id"] = 6256, 	["weight"] = 1 	}  --Standard
-	{ ["id"] = 120163, 	["weight"] = 3  }, --Thruks
+	{ ["id"] = 6256, 	["weight"] = 1 	},  --Standard
+	{ ["id"] = 120163, 	["weight"] = 3  } --Thruks
 }
 
 
