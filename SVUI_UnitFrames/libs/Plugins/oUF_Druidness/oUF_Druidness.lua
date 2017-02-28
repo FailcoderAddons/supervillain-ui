@@ -142,6 +142,8 @@ local UpdateComboPoints = function(self, event, unit)
 	local bar = self.Druidness;
 	local cpoints = bar.Cat;
 
+
+
 	if(bar.PreUpdate) then
 		bar:PreUpdate()
 	end
@@ -152,7 +154,6 @@ local UpdateComboPoints = function(self, event, unit)
 	else
 		current = UnitPower("player", SPELL_POWER_COMBO_POINTS);
 	end
-
 	if(cpoints) then
 		local MAX_COMBO_POINTS = UnitPowerMax("player", SPELL_POWER_COMBO_POINTS);
 		for i=1, MAX_COMBO_POINTS do
@@ -202,6 +203,7 @@ local function Enable(self)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', UpdateVisibility, true)
 		self:RegisterEvent('UPDATE_SHAPESHIFT_FORM', UpdateVisibility, true)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', UpdateComboPoints, true)
+		self:SetScript("OnUpdate", UpdateComboPoints)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', UpdateComboPoints, true)
 		self:RegisterEvent('UNIT_MAXPOWER', UpdateComboPoints, true)
 		self:RegisterUnitEvent('UNIT_DISPLAYPOWER', "player")

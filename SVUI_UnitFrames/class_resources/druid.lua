@@ -122,56 +122,54 @@ local Reposition = function(self)
     bar:ClearAllPoints()
     bar:SetAllPoints(bar.Holder)
 
-    --    chicken:ClearAllPoints()
-    --    chicken:SetAllPoints()
-
-    -- chicken.LunarBar:SetSize(width, adjustedBar)
-    -- chicken.LunarBar:SetStatusBarColor(.13,.32,1)
-
-    -- chicken.Moon:SetSize(height, height)
-    -- chicken.Moon[1]:SetSize(adjustedAnim, adjustedAnim)
-    -- chicken.Moon[2]:SetSize(scaled, scaled)
-
-    -- chicken.SolarBar:SetSize(width, adjustedBar)
-    -- chicken.SolarBar:SetStatusBarColor(1,1,0.21)
-
-    -- chicken.Sun:SetSize(height, height)
-    -- chicken.Sun[1]:SetSize(adjustedAnim, adjustedAnim)
-    -- chicken.Sun[2]:SetSize(scaled, scaled)
-
-    -- chicken.Text:SetPoint("TOPLEFT", chicken, "TOPLEFT", 10, 0)
-    -- chicken.Text:SetPoint("BOTTOMRIGHT", chicken, "BOTTOMRIGHT", -10, 0)
-    -- chicken.Text:SetFont(TRACKER_FONT, scaled, 'OUTLINE')
-
     local max = UnitPowerMax('player', SPELL_POWER_COMBO_POINTS);
     local cat = bar.Cat;
     local size = 20
+
     cat:ClearAllPoints()
     cat:SetAllPoints(bar)
-    print ("I AM HERE 1")
-    for i = 1, max do
-        cat[i]:SetAlpha(1)
-        cat[i]:ClearAllPoints()
-        cat[i]:SetSize(size, size)
-        cat[i].Icon:ClearAllPoints()
-        cat[i].Icon:SetAllPoints(cat[i])
-        cat[i].Icon:SetTexture(comboTextures[random(1,3)])
-        if i==1 then
-            cat[i]:SetPoint("LEFT", cat)
-        else
-            cat[i]:SetPoint("LEFT", cat[i - 1], "RIGHT", -2, 0)
+    if(db.classbar.altComboPoints) then
+        for i = 1, max do
+            cat[i]:SetAlpha(0)
+            cat[i]:ClearAllPoints()
+            --cat[i].Icon:ClearAllPoints()
+            cat[i]:SetSize(size, size)
+           --cat[i].Icon:SetAllPoints(cat[i])
+            cat[i].Icon:SetTexture(comboTextures[random(1,3)])
+            if i==1 then
+                cat[i]:SetPoint("LEFT", cat)
+            else
+                cat[i]:SetPoint("LEFT", cat[i - 1], "RIGHT", -2, 0)
+            end
         end
+        cat.PointShow = nil;
+        cat.PointHide = HidePoint;
+    else
+        for i = 1, max do
+            if cat[i] then
+                cat[i]:SetAlpha(1)
+                cat[i]:ClearAllPoints()
+                cat[i]:SetSize(size, size)
+                --cat[i].Icon:ClearAllPoints()
+                --cat[i].Icon:SetAllPoints(cat[i])
+                cat[i].Icon:SetTexture(comboTextures[random(1,3)])
+                if i==1 then
+                    cat[i]:SetPoint("LEFT", cat)
+                else
+                    cat[i]:SetPoint("LEFT", cat[i - 1], "RIGHT", -2, 0)
+                end
+            end
+        end
+        cat.PointShow = ShowPoint;
+        cat.PointHide = nil;
     end
-    cat.PointShow = ShowPoint;
-    cat.PointHide = nil;
-    print ("I AM HERE 3")
 end
 
 --[[
 ##########################################################
 DRUID ECLIPSE BAR
 ##########################################################
-]]--
+
 local EclipseDirection = function(self)
     local status = GetEclipseDirection()
 
@@ -247,86 +245,14 @@ local EclipseDirection = function(self)
         end
     end
 end
+]]--
+
 
 function MOD:CreateClassBar(playerFrame)
     local bar = CreateFrame('Frame', nil, playerFrame)
     bar:SetFrameLevel(playerFrame.TextGrip:GetFrameLevel() + 30)
     bar:SetSize(100,40)
-    --[[
-        local chicken = CreateFrame('Frame', nil, bar)
-        chicken:SetAllPoints(bar)
 
-        local moon = CreateFrame('Frame', nil, chicken)
-        moon:SetFrameLevel(chicken:GetFrameLevel() + 2)
-        moon:SetSize(40, 40)
-        moon:SetPoint("TOPLEFT", chicken, "TOPLEFT", -4, 0)
-        SV.SpecialFX:SetFXFrame(moon, "shadow")
-        moon.FX:SetFrameLevel(chicken:GetFrameLevel() - 2)
-
-        moon[1] = moon:CreateTexture(nil, "BACKGROUND", nil, 1)
-        moon[1]:SetSize(50, 50)
-        moon[1]:SetPoint("CENTER")
-        moon[1]:SetTexture("Interface\\AddOns\\SVUI_UnitFrames\\assets\\Class\\VORTEX")
-        moon[1]:SetBlendMode("ADD")
-        moon[1]:SetVertexColor(0, 0.5, 1, 0.15)
-        SV.Animate:Orbit(moon[1], 10, false)
-
-        moon[2] = moon:CreateTexture(nil, "OVERLAY", nil, 2)
-        moon[2]:SetSize(40, 40)
-        moon[2]:SetPoint("CENTER")
-        moon[2]:SetTexture("Interface\\AddOns\\SVUI_UnitFrames\\assets\\Class\\DRUID-MOON")
-        moon[1]:Hide()
-        chicken.Moon = moon;
-
-        local lunar = CreateFrame('StatusBar', nil, chicken)
-        lunar:SetPoint("LEFT", moon, "RIGHT", -6, 0)
-        lunar:SetSize(100,40)
-        lunar:SetStatusBarTexture(SV.media.statusbar.lazer)
-        lunar.noupdate = true;
-        lunar:SetMinMaxValues(-1, 1)
-        lunar:SetValue(0)
-        chicken.LunarBar = lunar;
-
-        local solar = CreateFrame('StatusBar', nil, chicken)
-        solar:SetPoint('LEFT', lunar:GetStatusBarTexture(), 'RIGHT')
-        solar:SetSize(100,40)
-        solar:SetStatusBarTexture(SV.media.statusbar.lazer)
-        solar.noupdate = true;
-        solar:SetMinMaxValues(-1, 1)
-        solar:SetValue(0)
-        chicken.SolarBar = solar;
-
-        local sun = CreateFrame('Frame', nil, chicken)
-        sun:SetFrameLevel(chicken:GetFrameLevel() + 2)
-        sun:SetSize(40, 40)
-        sun:SetPoint("LEFT", lunar, "RIGHT", -6, 0)
-        SV.SpecialFX:SetFXFrame(sun, "holy")
-        sun.FX:SetFrameLevel(chicken:GetFrameLevel() - 2)
-
-        sun[1] = sun:CreateTexture(nil, "BACKGROUND", nil, 1)
-        sun[1]:SetSize(50, 50)
-        sun[1]:SetPoint("CENTER")
-        sun[1]:SetTexture("Interface\\AddOns\\SVUI_UnitFrames\\assets\\Class\\VORTEX")
-        sun[1]:SetBlendMode("ADD")
-        sun[1]:SetVertexColor(1, 0.5, 0, 0.15)
-        SV.Animate:Orbit(sun[1], 10, false)
-
-        sun[2] = sun:CreateTexture(nil, "OVERLAY", nil, 2)
-        sun[2]:SetSize(40, 40)
-        sun[2]:SetPoint("CENTER")
-        sun[2]:SetTexture("Interface\\AddOns\\SVUI_UnitFrames\\assets\\Class\\DRUID-SUN")
-        sun[1]:Hide()
-        chicken.Sun = sun;
-
-        chicken.Text = lunar:CreateFontString(nil, 'OVERLAY')
-        chicken.Text:SetPoint("CENTER", chicken, "CENTER", 0, 0)
-        chicken.Text:SetFont(SV.media.font.default, 16, "NONE")
-        chicken.Text:SetShadowOffset(0,0)
-        chicken.Text:SetJustifyH("CENTER")
-
-        chicken.PostUpdatePower = EclipseDirection;
-        chicken.PostUpdateAura = EclipseDirection;
-    ]]--
     local cat = CreateFrame('Frame',nil,bar)
     cat:SetAllPoints(bar)
     local max = 5;
@@ -367,6 +293,10 @@ function MOD:CreateClassBar(playerFrame)
     mana.Text:SetFontObject(SVUI_Font_Unit)
 
     bar.Cat = cat;
+    bar.Cat:SetFrameStrata("HIGH")
+
+
+
     bar.Chicken = chicken;
     bar.Mana = mana;
 
@@ -375,6 +305,7 @@ function MOD:CreateClassBar(playerFrame)
     bar:SetPoint("TOPLEFT", classBarHolder, "TOPLEFT", 0, 0)
     bar.Holder = classBarHolder
     SV:NewAnchor(bar.Holder, L["Classbar"], OnMove)
+
 
     playerFrame.MaxClassPower = 5;
     playerFrame.RefreshClassBar = Reposition;
