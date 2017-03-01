@@ -55,12 +55,14 @@ local comboTextures = {
     [3]=[[Interface\Addons\SVUI_UnitFrames\assets\Class\DRUID-BITE]],
 };
 
+
+
 local ShowPoint = function(self)
     self:SetAlpha(1)
 end
 
 local HidePoint = function(self)
-    self.Icon:SetTexture(comboTextures[random(1,3)])
+    self.Icon:SetTexture(comboTextures[random(1,2)])
     self:SetAlpha(0)
 end
 
@@ -122,9 +124,9 @@ local Reposition = function(self)
     bar:ClearAllPoints()
     bar:SetAllPoints(bar.Holder)
 
-    local max = UnitPowerMax('player', SPELL_POWER_COMBO_POINTS);
+    local max = 5
     local cat = bar.Cat;
-    local size = 20
+    local size = 30
 
     cat:ClearAllPoints()
     cat:SetAllPoints(bar)
@@ -135,7 +137,11 @@ local Reposition = function(self)
             --cat[i].Icon:ClearAllPoints()
             cat[i]:SetSize(size, size)
            --cat[i].Icon:SetAllPoints(cat[i])
-            cat[i].Icon:SetTexture(comboTextures[random(1,3)])
+            if i == max then
+                cat[i].Icon:SetTexture(comboTextures[3])
+            else
+                cat[i].Icon:SetTexture(comboTextures[random(1,2)])
+            end
             if i==1 then
                 cat[i]:SetPoint("LEFT", cat)
             else
@@ -152,7 +158,11 @@ local Reposition = function(self)
                 cat[i]:SetSize(size, size)
                 --cat[i].Icon:ClearAllPoints()
                 --cat[i].Icon:SetAllPoints(cat[i])
-                cat[i].Icon:SetTexture(comboTextures[random(1,3)])
+                if i == max then
+                    cat[i].Icon:SetTexture(comboTextures[3])
+                else
+                    cat[i].Icon:SetTexture(comboTextures[random(1,2)])
+                end
                 if i==1 then
                     cat[i]:SetPoint("LEFT", cat)
                 else
@@ -256,7 +266,7 @@ function MOD:CreateClassBar(playerFrame)
     local cat = CreateFrame('Frame',nil,bar)
     cat:SetAllPoints(bar)
     local max = 5;
-    local size = 20;
+    local size = 30;
     for i = 1, max do
         local cpoint = CreateFrame('Frame',nil, cat)
         cpoint:SetSize(size,size)
@@ -265,7 +275,11 @@ function MOD:CreateClassBar(playerFrame)
         icon:SetSize(size,size)
         icon:SetAllPoints(cpoint)
         icon:SetBlendMode("BLEND")
-        icon:SetTexture(comboTextures[random(1,3)])
+        if i == max then
+           icon:SetTexture(comboTextures[3])
+        else
+         icon:SetTexture(comboTextures[random(1,2)])
+        end
         cpoint.Icon = icon
 
         cat[i] = cpoint
