@@ -72,18 +72,30 @@ local UpdateVisibility = function(self, event)
 
 	if(form) then
 		if (form == BEAR_FORM or form == CAT_FORM) then
-			if(CatOverMana(mana, form)) then
+			if(CatOverMana(mana, form) or GetSpecializationInfo(GetSpecialization()) == 103) then
+				cat:ProxyShow()
+			else
+				if(GetSpecializationInfo(GetSpecialization()) == 103) then
+					cat:ProxyShow()
+				else
+					cat:Hide()
+				end
+			end
+		else
+			if(GetSpecializationInfo(GetSpecialization()) == 103) then
 				cat:ProxyShow()
 			else
 				cat:Hide()
 			end
-		else
-			cat:Hide()
 			mana:Hide()
 		end
 	else
 		mana:Hide()
-		cat:Hide()
+		if(GetSpecializationInfo(GetSpecialization()) ~= 103) then
+			cat:Hide()
+		else
+			cat:ProxyShow()
+		end
 	end
 end
 
