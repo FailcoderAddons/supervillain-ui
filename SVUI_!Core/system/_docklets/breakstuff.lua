@@ -88,14 +88,21 @@ do
 	}
 
 	local AllowedItemIDs = {
-		['109129']='OVERRIDE_MILLABLE',
-		['109128']='OVERRIDE_MILLABLE',
-		['109127']='OVERRIDE_MILLABLE',
-		['109126']='OVERRIDE_MILLABLE',
-		['109125']='OVERRIDE_MILLABLE',
-		['109124']='OVERRIDE_MILLABLE',
-		['123918']='OVERRIDE_PROSPECTABLE',
-		['123919']='OVERRIDE_PROSPECTABLE',
+		['109124']='OVERRIDE_MILLABLE', --Frostweed
+		['109125']='OVERRIDE_MILLABLE', --Fireweed
+		['109126']='OVERRIDE_MILLABLE', --Gorgrond Flytrap
+		['109127']='OVERRIDE_MILLABLE', --Starflower
+		['109128']='OVERRIDE_MILLABLE', --Nagrand Arrowbloom
+		['109129']='OVERRIDE_MILLABLE', --Talador Orchid
+		['124101']='OVERRIDE_MILLABLE', --Aethril
+		['124102']='OVERRIDE_MILLABLE', --Dreamleaf
+		['124103']='OVERRIDE_MILLABLE', --Foxflower
+		['124104']='OVERRIDE_MILLABLE', --Fjarnskaggl
+		['124105']='OVERRIDE_MILLABLE', --Starlight Rose
+		['124106']='OVERRIDE_MILLABLE', --Felwort
+		['128304']='OVERRIDE_MILLABLE', --Yseralline Seed
+		['123918']='OVERRIDE_PROSPECTABLE', --leystone
+		['123919']='OVERRIDE_PROSPECTABLE', --Felslate
 	}
 
 	local function IsThisBreakable(link)
