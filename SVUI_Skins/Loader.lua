@@ -60,6 +60,7 @@ SV.defaults[Schema] = {
 	["enableAddonDock"] = true,
 	["blizzard"] = {
 		["enable"] = true,
+		["artifact"] = true,
 		["bags"] = true,
 		["bmah"] = true,
 		["chat"] = true,
@@ -117,6 +118,7 @@ SV.defaults[Schema] = {
 		["losscontrol"] = true,
 		["itemUpgrade"] = true,
 		["talkingHead"] = true,
+		["orderhall"] = true,
 	},
 	["addons"] = {
 		["enable"] = true,
@@ -444,6 +446,11 @@ function MOD:LoadOptions()
 					pvp = {
 						type = "toggle",
 						name = L["PvP Frames"],
+						desc = L["TOGGLEART_DESC"]
+					},
+					orderhall = {
+						type = "toggle",
+						name = L["Order Hall"],
 						desc = L["TOGGLEART_DESC"]
 					},
 					nonraid = {

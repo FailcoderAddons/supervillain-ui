@@ -46,13 +46,6 @@ if(not MOD) then return end;
 
 local LSM = _G.LibStub("LibSharedMedia-3.0")
 
---Debug
-local Debug
-if AdiDebug then
-	Debug = AdiDebug:GetSink("Nameplates")
-else
-	Debug = function() end
-end
 --[[
 ##########################################################
 LOCAL VARS
@@ -266,7 +259,9 @@ local NPComboColor={
 	[5]={0.33,0.59,0.33},
 	[6]={0.22,0.79,0.22},
 	[7]={0.11,0.99,0.11},
-	[8]={0.11,0.99,0.11}
+	[8]={0.11,0.99,0.11 },
+	[9]={0.11,0.99,0.11},
+	[10]={0.11,0.99,0.11}
 }
 
 
@@ -992,17 +987,19 @@ function UnitFrameMixin:Create(unitframe)
 	self.name:SetJustifyH'CENTER'
 	
 	self.aggroHighlight = h:CreateTexture(nil, 'OVERLAY', nil, 1)
-	self.aggroHighlight:SetTexture("Interface\\RaidFrame\\Raid-FrameHighlights");
-	self.aggroHighlight:SetTexCoord(unpack(AggroTexCoords));
+	--self.aggroHighlight:SetTexture("Interface\\RaidFrame\\Raid-FrameHighlights");
+	--self.aggroHighlight:SetTexCoord(unpack(AggroTexCoords));
+	self.aggroHighlight:SetTexture(SV.media.statusbar.default)
+	self.aggroHighlight:SetVertexColor(1, 1, 1, 0.25)
 	self.aggroHighlight:SetAllPoints(h);
 	self.aggroHighlight:Hide()
 
  	
 
 	self.hoverHighlight = h:CreateTexture(nil, 'ARTWORK', nil, 1)
-	self.hoverHighlight:SetTexture(HighlightTex)
+	self.hoverHighlight:SetTexture(SV.media.statusbar.default)
+	self.hoverHighlight:SetVertexColor(1, 1, 1, 0.25)
 	self.hoverHighlight:SetAllPoints(h)
-	self.hoverHighlight:SetVertexColor(1, 1, 1)
 	self.hoverHighlight:SetBlendMode('ADD')
 	self.hoverHighlight:SetTexCoord(unpack(HiTexCoord))
 	self.hoverHighlight:Hide()
@@ -1218,16 +1215,13 @@ function UnitFrameMixin:UpdateThreat()
 
 	local isTanking, status = UnitDetailedThreatSituation('player', self.displayedUnit)
 	if status ~= nil then
-		Debug("Aggro...")
+
 		if MOD.IsPlayerEffectivelyTank() then
-			Debug("... and I'm the tank")
 			status = math.abs(status - 2)
 		end
 		if status > 0 then
-			Debug("...and I have the threat")
 			tex:SetVertexColor(GetThreatStatusColor(status))
 			if not tex:IsShown() then 
-				Debug("showing the aggroHighlight")
 				tex:Show()
 			end
 			return

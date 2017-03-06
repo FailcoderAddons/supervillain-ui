@@ -526,10 +526,12 @@ local _hook_GameTooltipStatusBar_OnValueChanged = function(self, value)
 	local tooltip = self:GetParent()
 	local unit = select(2, tooltip:GetUnit())
 	if not unit then
-		local mFocus = GetMouseFocus()
-		if mFocus and mFocus:GetAttribute("unit") then
-			unit = mFocus:GetAttribute("unit")
-		end
+		-- We used to get try this but it's broken in 7.1
+		-- local mFocus = GetMouseFocus()
+		-- if mFocus and mFocus:GetAttribute("unit") then
+		-- 	unit = mFocus:GetAttribute("unit")
+		-- end
+		return
 	end
 	local min,max = self:GetMinMaxValues()
 	if((value > 0) and (max == 1)) then

@@ -112,10 +112,10 @@ local _SetThemedBackdrop = function(frame, isBottom)
 end
 
 local _SetBorderTheme = function(self)
-	self.Border.Top:SetPoint("TOPLEFT", SV.Screen, "TOPLEFT", -1, 1)
-	self.Border.Top:SetPoint("TOPRIGHT", SV.Screen, "TOPRIGHT", 1, 1)
-	self.Border.Top:SetHeight(10)
-	self.Border.Top:SetBackdrop({
+	self.Top:SetPoint("TOPLEFT", SV.Screen, "TOPLEFT", -1, 1)
+	self.Top:SetPoint("TOPRIGHT", SV.Screen, "TOPRIGHT", 1, 1)
+	self.Top:SetHeight(10)
+	self.Top:SetBackdrop({
 		bgFile = [[Interface\BUTTONS\WHITE8X8]],
 		edgeFile = [[Interface\BUTTONS\WHITE8X8]],
 		tile = false,
@@ -123,19 +123,19 @@ local _SetBorderTheme = function(self)
 		edgeSize = 1,
 		insets = {left = 0, right = 0, top = 0, bottom = 0}
 	})
-	self.Border.Top:SetBackdropColor(0,0,0,0)
-	self.Border.Top:SetBackdropBorderColor(0,0,0,0)
-	self.Border.Top:SetFrameLevel(0)
-	self.Border.Top:SetFrameStrata('BACKGROUND')
-	self.Border.Top:SetScript("OnShow", function(self)
+	self.Top:SetBackdropColor(0,0,0,0)
+	self.Top:SetBackdropBorderColor(0,0,0,0)
+	self.Top:SetFrameLevel(0)
+	self.Top:SetFrameStrata('BACKGROUND')
+	self.Top:SetScript("OnShow", function(self)
 		self:SetFrameLevel(0)
 		self:SetFrameStrata('BACKGROUND')
 	end)
 
-	self.Border.Bottom:SetPoint("BOTTOMLEFT", SV.Screen, "BOTTOMLEFT", -1, -1)
-	self.Border.Bottom:SetPoint("BOTTOMRIGHT", SV.Screen, "BOTTOMRIGHT", 1, -1)
-	self.Border.Bottom:SetHeight(10)
-	self.Border.Bottom:SetBackdrop({
+	self.Bottom:SetPoint("BOTTOMLEFT", SV.Screen, "BOTTOMLEFT", -1, -1)
+	self.Bottom:SetPoint("BOTTOMRIGHT", SV.Screen, "BOTTOMRIGHT", 1, -1)
+	self.Bottom:SetHeight(10)
+	self.Bottom:SetBackdrop({
 		bgFile = [[Interface\BUTTONS\WHITE8X8]],
 		edgeFile = [[Interface\BUTTONS\WHITE8X8]],
 		tile = false,
@@ -143,11 +143,11 @@ local _SetBorderTheme = function(self)
 		edgeSize = 1,
 		insets = {left = 0, right = 0, top = 0, bottom = 0}
 	})
-	self.Border.Bottom:SetBackdropColor(0,0,0,0)
-	self.Border.Bottom:SetBackdropBorderColor(0,0,0,0)
-	self.Border.Bottom:SetFrameLevel(0)
-	self.Border.Bottom:SetFrameStrata('BACKGROUND')
-	self.Border.Bottom:SetScript("OnShow", function(self)
+	self.Bottom:SetBackdropColor(0,0,0,0)
+	self.Bottom:SetBackdropBorderColor(0,0,0,0)
+	self.Bottom:SetFrameLevel(0)
+	self.Bottom:SetFrameStrata('BACKGROUND')
+	self.Bottom:SetScript("OnShow", function(self)
 		self:SetFrameLevel(0)
 		self:SetFrameStrata('BACKGROUND')
 	end)

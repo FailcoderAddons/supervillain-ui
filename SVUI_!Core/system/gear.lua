@@ -26,15 +26,14 @@ GET ADDON DATA
 ]]--
 local SV = select(2, ...)
 local L = SV.L
-
-local LIUI = LibStub("LibItemUpgradeInfo-1.0");
+local GetDetailedItemLevelInfo = _G.GetDetailedItemLevelInfo
 --[[
 ##########################################################
 LOCAL VARS
 ##########################################################
 ]]--
 local NewHook = hooksecurefunc;
-local ParseItemLevel, ParseGearSlots;
+local ParseGearSlots;
 local GEAR_CACHE, GEARSET_LISTING = {}, {};
 local EquipmentSlots = {
     ["HeadSlot"] = {true,true},
@@ -118,99 +117,6 @@ do
         ["Trinket0Slot"] = {true, false, true}, ["Trinket1Slot"] = {true, false, true}
     }
 
-    local function _justthetip()
-        for i=1, #GameTooltip.shoppingTooltips do
-            if(not GameTooltip.shoppingTooltips[i]:IsShown()) then
-                return GameTooltip.shoppingTooltips[i]
-            end
-        end
-    end
-
-    local function _getHeirloomLevel(unit, itemId)
-        if(not itemId) then return; end
-
-        local baseLevel = UnitLevel(unit)
-        if baseLevel > 85 then
-            for i=1, #_heirlooms90h do
-              if(_heirlooms90h[i] == itemId) then
-                baseLevel = 582
-                break
-              end
-            end
-
-            for i=1, #_heirlooms90n do
-              if(_heirlooms90n[i] == itemId) then
-                baseLevel = 569
-                break
-              end
-            end
-
-            for i=1, #_heirlooms90f do
-              if(_heirlooms90f[i] == itemId) then
-                baseLevel = 548
-                break
-              end
-            end
-
-            return baseLevel
-        elseif baseLevel > 80 then
-            for i=1, #_heirlooms80 do
-                if(_heirlooms80[i] == itemId) then
-                    baseLevel = 80;
-                    break
-                end
-            end
-        end
-
-        if(baseLevel > 80) then
-            return (((baseLevel - 81) * 12.2) + 272)
-        elseif(baseLevel > 67) then
-            return (((baseLevel - 68) * 6) + 130)
-        elseif(baseLevel > 59) then
-            return (((baseLevel - 60) * 3) + 85)
-        end
-        return baseLevel
-    end
-
-    function ParseItemLevel(unit, itemLink)
-        -- local name, link, quality;
-        -- local iLevel = 0;
-        -- if(itemLink and type(itemLink) == "string") then
-        --   name, link, quality, iLevel = GetItemInfo(itemLink)
-        --   local itemId = tonumber(itemLink:match("item:%d+:%d+:%d+:%d+:%d+:%d+:%-?%d+:%-?%d+:%d+:%d+:(%d+)"))
-        --   if iLevel and itemId then
-        --       if(quality == 7) then
-        --           iLevel = _getHeirloomLevel(unit, itemId)
-        --       end
-        --   end
-        -- end
-        -- return iLevel or 0
-        return LIUI:GetUpgradedItemLevel(itemLink) or 0
-    end
-
-    local function _getEquippedItemLevel(unit, itemLink)
-        -- local tooltip = _justthetip();
-        -- if(not tooltip) then return ParseItemLevel(unit, itemLink) end
-        -- tooltip:SetOwner(UIParent, "ANCHOR_NONE");
-        -- tooltip:SetHyperlink(itemLink);
-        -- tooltip:Show();
-
-        -- local iLevel = 0;
-        -- local tname = tooltip:GetName().."TextLeft%s";
-        -- for i = 2, tooltip:NumLines() do
-        --     local text = _G[tname:format(i)]:GetText();
-        --     if(text and text ~= "") then
-        --         local value = tonumber(text:match(iLevelFilter));
-        --         if(value) then
-        --             iLevel = value;
-        --         end
-        --     end
-        -- end
-
-        -- tooltip:Hide();
-        -- return iLevel
-        return LIUI:GetUpgradedItemLevel(itemLink) or 0
-    end
 
     local function _setLevelDisplay(frame, iLevel)
       if(not frame or (not frame.ItemLevel)) then return; end
@@ -261,8 +167,17 @@ do
             local iLink = GetInventoryItemLink(unit, slotId)
             local iLevel;
             if(iLink and type(iLink) == "string") then
-                iLevel = _getEquippedItemLevel(unit, iLink)
+                iLevel = SV:GetItemLevel(iLink)
                 if(iLevel and iLevel > 0) then
+                    -- handle dual weilded weapons properly 
+                    if (slotName == "SecondaryHandSlot") then
+                      local mainslotId = GetInventorySlotInfo("MainHandSlot");
+                      local mainiLink = GetInventoryItemLink(unit, mainslotId)
+                      local mainiLevel = SV:GetItemLevel(mainiLink)
+                      if (iLink and mainiLink) then -- linkid the same - dual wielded
+                        if mainiLevel > iLevel then iLevel = mainiLevel end
+                      end 
+                    end
                     totalSlots = totalSlots + 1;
                     averageLevel = averageLevel + iLevel
                 end
@@ -277,6 +192,14 @@ do
         end
         return averageLevel,totalSlots
     end
+end
+
+function SV:GetItemLevel(itemLink)
+  if (itemLink) then
+    return GetDetailedItemLevelInfo(itemLink) or 0
+  else
+    return 0
+  end
 end
 
 function SV:ParseGearSlots(unit, inspecting, setLevel, setDurability)
@@ -309,7 +232,7 @@ function SV:SetGearLabels(frame, bagID, slotID, itemLink, quality, equipSlot)
   end
 
   if(frame.ItemLevel) then
-    local iLevel = ParseItemLevel('player', itemLink)
+    local iLevel = SV:GetItemLevel(itemLink)
   	if((not SHOW_BAG_LEVEL) or (iLevel <= 1) or (quality == 7) or (not equipSlot:find('INVTYPE'))) then
       frame.ItemLevel:SetText('')
   	else
@@ -318,6 +241,7 @@ function SV:SetGearLabels(frame, bagID, slotID, itemLink, quality, equipSlot)
   	end
   end
 end
+
 
 local function GetActiveGear()
 	local count = GetNumEquipmentSets()

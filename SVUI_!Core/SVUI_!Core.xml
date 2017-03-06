@@ -8,7 +8,7 @@
     <Include file="xml\docks.xml"/>
     <Script file="system\damage_text.lua"/>
     <Script file="system\core.lua"/>
-	  <Script file="system\media.lua"/>
+	<Script file="system\media.lua"/>
     <Script file="system\api.lua"/>
     <Script file="system\utilities.lua"/>
     <Script file="system\alerts.lua"/>
@@ -35,6 +35,7 @@
     <Script file="system\_reports\tokens.lua"/>
     <Script file="system\_reports\guild.lua"/>
     <Script file="system\_reports\reputation_new.lua"/>
+    <Script file="system\_reports\mastery.lua"/>
     <Script file="system\_reports\system.lua"/>
     <Script file="system\_reports\time.lua"/>
     <Script file="system\_reports\dps.lua"/>

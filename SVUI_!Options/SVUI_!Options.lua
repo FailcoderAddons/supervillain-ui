@@ -62,14 +62,6 @@ AceConfigDialog:SetDefaultSize(SV.NameID, GUIWidth, 651);
 SVUIOptions.FilterOptionGroups = {};
 SVUIOptions.FilterOptionSpells = {};
 
---Debug
-local Debug
-if AdiDebug then
-	Debug = AdiDebug:GetSink("SVUIOptions")
-else
-	Debug = function() end
-end
-
 --[[
 ##########################################################
 INIT OPTIONS

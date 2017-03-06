@@ -481,17 +481,14 @@ local function GuildFrameStyle()
 
 	for i = 1, #GuildFrameList do
 		local frame = _G[GuildFrameList[i]]
-		if(frame) then
+		if(frame and frame.RemoveTextures) then
 			frame:RemoveTextures()
 		end
 	end
 
 	for i = 1, #GuildButtonList do
 		local button = _G[GuildButtonList[i]]
-		if(button) then
-			button:RemoveTextures(true)
-			button:SetStyle("Button")
-		end
+		SV.API:Set("Button", button)
 	end
 
 	for i = 1, #GuildCheckBoxList do
@@ -529,20 +526,17 @@ local function GuildFrameStyle()
 	GuildRosterShowOfflineButton:SetStyle("CheckButton")
 
 	for i = 1, 4 do
-		local btn = _G["GuildRosterColumnButton"..i]
-		if(btn) then
-			btn:RemoveTextures(true)
+		local frame = _G["GuildRosterColumnButton"..i]
+		if(frame and frame.RemoveTextures) then
+			frame:RemoveTextures()
 		end
 	end
 
 	SV.API:Set("DropDown", GuildRosterViewDropdown, 200)
 
 	for i = 1, 14 do
-		local btn = _G["GuildRosterContainerButton"..i.."HeaderButton"]
-		if(btn) then
-			btn:RemoveTextures()
-			btn:SetStyle("Button")
-		end
+		local button = _G["GuildRosterContainerButton"..i.."HeaderButton"]
+		SV.API:Set("Button", button)
 	end
 
 	GuildMemberDetailFrame:SetStyle("Frame", "Default", true)
@@ -556,11 +550,10 @@ local function GuildFrameStyle()
 	GuildNewsContainer:SetStyle("Frame", "Inset")
 
 	for i = 1, 17 do
-		local btn = _G["GuildNewsContainerButton"..i]
-		if(btn) then
-			if(btn.header) then btn.header:Die() end
-			btn:RemoveTextures()
-			btn:SetStyle("Button")
+		local button = _G["GuildNewsContainerButton"..i]
+		if(button) then
+			if(button.header) then button.header:Die() end
+			SV.API:Set("Button", button)
 		end
 	end
 
@@ -569,10 +562,8 @@ local function GuildFrameStyle()
 	SV.API:Set("CloseButton", GuildNewsFiltersFrameCloseButton)
 
 	for i = 1, 7 do
-		local btn = _G["GuildNewsFilterButton"..i]
-		if(btn) then
-			btn:SetStyle("CheckButton")
-		end
+		local button = _G["GuildNewsFilterButton"..i]
+		SV.API:Set("CheckButton", button)
 	end
 
 	GuildNewsFiltersFrame:SetPoint("TOPLEFT", GuildFrame, "TOPRIGHT", 4, -20)
@@ -580,9 +571,9 @@ local function GuildFrameStyle()
 	SV.API:Set("ScrollBar", GuildInfoDetailsFrameScrollBar, 4, 4)
 
 	for i = 1, 3 do
-		local tab = _G["GuildInfoFrameTab"..i]
-		if(tab) then
-			tab:RemoveTextures()
+		local frame = _G["GuildInfoFrameTab"..i]
+		if(frame and frame.RemoveTextures) then
+			frame:RemoveTextures()
 		end
 	end
 
@@ -614,7 +605,7 @@ local function GuildFrameStyle()
 			if(child:GetWidth() < 33) then
 				SV.API:Set("CloseButton", child)
 			else
-				child:SetStyle("Button")
+				SV.API:Set("Button", child)
 			end
 		end
 	end
@@ -630,7 +621,7 @@ local function GuildFrameStyle()
 			if(child:GetWidth() < 33) then
 				SV.API:Set("CloseButton", child)
 			else
-				child:SetStyle("Button")
+				SV.API:Set("Button", child)
 			end
 		end
 	end
@@ -642,7 +633,6 @@ local function GuildFrameStyle()
 	for i = 1, 8 do
 		local button = _G["GuildPerksContainerButton"..i]
 		if button then
-			button:RemoveTextures()
 			SV.API:Set("ItemButton", button, nil, true)
 			local icon = button.icon or button.Icon
 			if icon then
@@ -657,7 +647,6 @@ local function GuildFrameStyle()
 	for i = 1, 8 do
 		local button = _G["GuildRewardsContainerButton"..i]
 		if button then
-			button:RemoveTextures()
 			SV.API:Set("ItemButton", button)
 		end
 	end

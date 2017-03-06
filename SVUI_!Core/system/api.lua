@@ -1445,10 +1445,12 @@ function SV:UI_SCALE_CHANGED(event)
         self.Screen:ClearAllPoints()
         self.Screen:SetPoint("CENTER")
         local ignoreChange = false;
+        local testScale1 = 0
+        local testScale2 = 0
 
         if(managedScale) then
-            local testScale1 = parsefloat(UIParent:GetScale(), 5);
-            local testScale2 = parsefloat(gxScale, 5);
+            testScale1 = parsefloat(UIParent:GetScale(), 5);
+            testScale2 = parsefloat(gxScale, 5);
 
             if(event == "PLAYER_LOGIN" and (testScale1 ~= testScale2)) then
                 SetCVar("useUiScale", 1)
@@ -1496,9 +1498,9 @@ API INJECTION
 ]]--
 local MODIFIED_OBJECTS = {};
 
-local function AppendFrameMethods(OBJECT)
+local function AppendFrameMethods(OBJECT, FORCE)
     local objType = OBJECT:GetObjectType()
-    if(not MODIFIED_OBJECTS[objType]) then
+    if(FORCE or (not MODIFIED_OBJECTS[objType])) then
         local META = getmetatable(OBJECT).__index
         if not OBJECT.SetStyle then META.SetStyle = SetStyle end
         if not OBJECT.SetPanelColor then META.SetPanelColor = SetPanelColor end
@@ -1543,14 +1545,18 @@ AppendFrameMethods(CURRENT_OBJECT)
 AppendTextureMethods(CURRENT_OBJECT:CreateTexture())
 AppendFontStringMethods(CURRENT_OBJECT:CreateFontString())
 
-function SV:AppendAPI(obj)
-    AppendFrameMethods(obj)
-end
-
 CURRENT_OBJECT = EnumerateFrames()
 while CURRENT_OBJECT do
     AppendFrameMethods(CURRENT_OBJECT)
     CURRENT_OBJECT = EnumerateFrames(CURRENT_OBJECT)
+end
+
+function SV:AppendAPI()
+    local NEW_OBJECT = EnumerateFrames()
+    while NEW_OBJECT do
+        AppendFrameMethods(NEW_OBJECT, true)
+        NEW_OBJECT = EnumerateFrames(NEW_OBJECT)
+    end
 end
 --[[
 ##########################################################
@@ -1909,7 +1915,7 @@ MOD.Concepts["DropDown"] = function(self, adjustable, frame, width)
 
     if(ddButton) then
         if(ddText) then
-            ddText:SetPoint("RIGHT", ddButton, "LEFT", 2, 0)
+            --ddText:SetPoint("RIGHT", ddButton, "LEFT", 2, 0)
         end
 
         ddButton:ClearAllPoints()
@@ -2274,7 +2280,7 @@ local ModifyBasicScroll = function(self, adjustable, frame, scale, yOffset, scro
 end
 
 local ModifyHybridScroll = function(self, adjustable, frame, scale, yOffset)
-    local bg, track, top, bottom, mid, upButton, downButton
+    local parent, bg, track, top, bottom, mid, upButton, downButton
     bg = frame.BG;
     if(bg) then bg:SetTexture("") end
     track = frame.trackBG or frame.Track;
@@ -2285,9 +2291,11 @@ local ModifyHybridScroll = function(self, adjustable, frame, scale, yOffset)
     if(bottom) then bottom:SetTexture("") end
     mid = frame.ScrollBarMiddle or frame.Middle;
     if(mid) then mid:SetTexture("") end
-    upButton = frame.GetParent().scrollUp or frame.ScrollUpButton;
-    downButton = frame.GetParent().scrollDown or frame.ScrollDownButton;
-
+    parent = frame:GetParent()
+    if parent then 
+        upButton = parent.scrollUp or frame.ScrollUpButton;
+        downButton = parent.scrollDown or frame.ScrollDownButton;
+    end
     if(upButton and downButton) then
         ModifyScrollType1(self, adjustable, frame, scale, yOffset, upButton, downButton)
     elseif(frame.GetOrientation) then

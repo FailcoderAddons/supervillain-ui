@@ -1,4 +1,4 @@
-﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
     <Font name="SVUI_Font_Super_Text" inherits="SVUI_Font_Number" virtual="true">
         <Shadow>
             <Offset>
@@ -867,4 +867,14 @@
             </PlayerModel>
         </Frames>
     </Frame>
+    <Button name="SVUI_LetsRideButton" inherits="SecureActionButtonTemplate" parent="UIParent" frameStrata="LOW" hidden="false">
+        <Attributes>
+            <Attribute name="type" type="string" value="macro"/>
+        </Attributes>
+        <Scripts>
+            <PreClick>
+
+            </PreClick>
+        </Scripts>    
+    </Button>
 </Ui>

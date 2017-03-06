@@ -48,12 +48,6 @@ local TextColors = {
 	[4]={0.5,1,0.1},
 	[5]={0.1,1,0.1}
 };
-local Debug
-if AdiDebug then
-	Debug = AdiDebug:GetSink("oUF_Druidness")
-else
-	Debug = function() end
-end
 
 local ProxyShow = function(self)
 	if(not self.isEnabled) then return end
@@ -78,18 +72,30 @@ local UpdateVisibility = function(self, event)
 
 	if(form) then
 		if (form == BEAR_FORM or form == CAT_FORM) then
-			if(CatOverMana(mana, form)) then
+			if(CatOverMana(mana, form) or GetSpecializationInfo(GetSpecialization()) == 103) then
+				cat:ProxyShow()
+			else
+				if(GetSpecializationInfo(GetSpecialization()) == 103) then
+					cat:ProxyShow()
+				else
+					cat:Hide()
+				end
+			end
+		else
+			if(GetSpecializationInfo(GetSpecialization()) == 103) then
 				cat:ProxyShow()
 			else
 				cat:Hide()
 			end
-		else
-			cat:Hide()
 			mana:Hide()
 		end
 	else
 		mana:Hide()
-		cat:Hide()
+		if(GetSpecializationInfo(GetSpecialization()) ~= 103) then
+			cat:Hide()
+		else
+			cat:ProxyShow()
+		end
 	end
 end
 
@@ -148,6 +154,8 @@ local UpdateComboPoints = function(self, event, unit)
 	local bar = self.Druidness;
 	local cpoints = bar.Cat;
 
+
+
 	if(bar.PreUpdate) then
 		bar:PreUpdate()
 	end
@@ -158,10 +166,8 @@ local UpdateComboPoints = function(self, event, unit)
 	else
 		current = UnitPower("player", SPELL_POWER_COMBO_POINTS);
 	end
-
 	if(cpoints) then
 		local MAX_COMBO_POINTS = UnitPowerMax("player", SPELL_POWER_COMBO_POINTS);
-		Debug("max combo points/current: ", MAX_COMBO_POINTS,current)
 		for i=1, MAX_COMBO_POINTS do
 			if(i <= current) then
 				if cpoints[i] then
@@ -209,6 +215,7 @@ local function Enable(self)
 		self:RegisterEvent('PLAYER_TALENT_UPDATE', UpdateVisibility, true)
 		self:RegisterEvent('UPDATE_SHAPESHIFT_FORM', UpdateVisibility, true)
 		self:RegisterEvent('PLAYER_TARGET_CHANGED', UpdateComboPoints, true)
+		self:SetScript("OnUpdate", UpdateComboPoints)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', UpdateComboPoints, true)
 		self:RegisterEvent('UNIT_MAXPOWER', UpdateComboPoints, true)
 		self:RegisterUnitEvent('UNIT_DISPLAYPOWER', "player")

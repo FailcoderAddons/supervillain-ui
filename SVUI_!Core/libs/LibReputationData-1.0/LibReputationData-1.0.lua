@@ -1,4 +1,4 @@
-local MAJOR, MINOR = "LibReputationData-1.0", 1
+local MAJOR, MINOR = "LibReputationData-1.0", 2
 
 assert(_G.LibStub, MAJOR .. " requires LibStub")
 local lib = _G.LibStub:NewLibrary(MAJOR, MINOR)
@@ -184,7 +184,7 @@ end
 function private.PLAYER_ENTERING_WORLD(event)
 	TimerAfter(3, function()
 		frame:RegisterEvent("COMBAT_TEXT_UPDATE")
-		frame:RegisterEvent("UPDATE_FACTION")
+		--frame:RegisterEvent("UPDATE_FACTION")
 		EnsureFactionsLoaded()
 	end)
 end

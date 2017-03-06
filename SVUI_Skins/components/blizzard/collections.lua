@@ -352,6 +352,18 @@ local function CollectionsJournalStyle()
 	end
 
 	SV.API:Set("Tab", CollectionsJournalTab5)
+
+	SV.API:Set("Window", WardrobeFrame, true, true, 1, 3, 3)
+
+	WardrobeTransmogFrame:RemoveTextures()
+	WardrobeTransmogFrame.Inset:RemoveTextures()
+	WardrobeTransmogFrame.Model:SetStyle("!_Frame", 'Model')
+	WardrobeTransmogFrame.OutfitHelpBox:SetStyle("!_Frame", 'Premium')
+	WardrobeTransmogFrame.ApplyButton:SetStyle("Button")
+	WardrobeTransmogFrame.SpecButton:SetStyle("Button")
+	SV.API:Set("DropDown", WardrobeTransmogFrame.SpecDropDown)
+	SV.API:Set("DropDown", WardrobeTransmogFrame.OutfitDropDown)
+
 	WardrobeCollectionFrame:RemoveTextures()
 	WardrobeCollectionFrameSearchBox:SetStyle("Editbox")
 	WardrobeCollectionFrame.FilterButton:RemoveTextures(true)

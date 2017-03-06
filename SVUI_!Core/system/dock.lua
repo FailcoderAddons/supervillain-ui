@@ -48,7 +48,6 @@ ADDON
 local SV = select(2, ...);
 local L = SV.L;
 local MOD = SV:NewPackage("Dock", L["Docks"]);
-MOD.Border = {};
 --[[
 ##########################################################
 LOCALS
@@ -86,6 +85,13 @@ THEMEABLE ITEMS
 ]]--
 MOD.ButtonSound = SV.Sounds:Blend("DockButton", "Buttons", "Levers");
 MOD.ErrorSound = SV.Sounds:Blend("Malfunction", "Sparks", "Wired");
+
+local function getParentAnchor(location)
+	if (location:find("BOTTOM")) then
+		return MOD.Bottom;
+	end
+	return MOD.Top;
+end
 
 local function copyTable(tab)
 	local copy = {};
@@ -272,15 +278,15 @@ end
 
 local function ScreenBorderVisibility()
 	if SV.db.Dock.bottomPanel then
-		SVUIDock_BottomBorder:Show()
+		SVUI_DockBarBottom:Show()
 	else
-		SVUIDock_BottomBorder:Hide()
+		SVUI_DockBarBottom:Hide()
 	end
 
 	if SV.db.Dock.topPanel then
-		SVUIDock_TopBorder:Show()
+		SVUI_DockBarTop:Show()
 	else
-		SVUIDock_TopBorder:Hide()
+		SVUI_DockBarTop:Hide()
 	end
 end
 
@@ -409,11 +415,24 @@ function MOD.SetThemedBackdrop(frame, forceTop)
 	frame.UpdateBackdrop = UpdateBackdrop;
 end
 
+function SV:AdjustTopDockBar(size) 
+	MOD.Top:ClearAllPoints()
+	if (not size) then
+		MOD.Top:SetPoint("TOPLEFT", 0, 0);
+		MOD.Top:SetPoint("TOPRIGHT", 0, 0);
+		MOD.Top:SetAlpha(1)
+	else
+		MOD.Top:SetPoint("TOPLEFT", 0, -size);
+		MOD.Top:SetPoint("TOPRIGHT", 0, -size);
+		MOD.Top:SetAlpha(0)
+	end
+end
+
 function MOD:SetBorderTheme()
-	self.Border.Top:SetPoint("TOPLEFT", SV.Screen, "TOPLEFT", -1, 1)
-	self.Border.Top:SetPoint("TOPRIGHT", SV.Screen, "TOPRIGHT", 1, 1)
-	self.Border.Top:SetHeight(10)
-	self.Border.Top:SetBackdrop({
+	self.Top:SetPoint("TOPLEFT", SV.Screen, "TOPLEFT", -1, 1)
+	self.Top:SetPoint("TOPRIGHT", SV.Screen, "TOPRIGHT", 1, 1)
+	self.Top:SetHeight(10)
+	self.Top:SetBackdrop({
 		bgFile = SV.media.background.button,
 		edgeFile = [[Interface\BUTTONS\WHITE8X8]],
 		tile = false,
@@ -421,19 +440,19 @@ function MOD:SetBorderTheme()
 		edgeSize = 1,
 		insets = {left = 0, right = 0, top = 0, bottom = 0}
 	})
-	self.Border.Top:SetBackdropColor(unpack(SV.media.color.dark))
-	self.Border.Top:SetBackdropBorderColor(0,0,0,1)
-	self.Border.Top:SetFrameLevel(0)
-	self.Border.Top:SetFrameStrata('BACKGROUND')
-	self.Border.Top:SetScript("OnShow", function(self)
+	self.Top:SetBackdropColor(unpack(SV.media.color.dark))
+	self.Top:SetBackdropBorderColor(0,0,0,1)
+	self.Top:SetFrameLevel(0)
+	self.Top:SetFrameStrata('BACKGROUND')
+	self.Top:SetScript("OnShow", function(self)
 		self:SetFrameLevel(0)
 		self:SetFrameStrata('BACKGROUND')
 	end)
 
-	self.Border.Bottom:SetPoint("BOTTOMLEFT", SV.Screen, "BOTTOMLEFT", -1, -1)
-	self.Border.Bottom:SetPoint("BOTTOMRIGHT", SV.Screen, "BOTTOMRIGHT", 1, -1)
-	self.Border.Bottom:SetHeight(10)
-	self.Border.Bottom:SetBackdrop({
+	self.Bottom:SetPoint("BOTTOMLEFT", SV.Screen, "BOTTOMLEFT", -1, -1)
+	self.Bottom:SetPoint("BOTTOMRIGHT", SV.Screen, "BOTTOMRIGHT", 1, -1)
+	self.Bottom:SetHeight(10)
+	self.Bottom:SetBackdrop({
 		bgFile = SV.media.background.button,
 		edgeFile = [[Interface\BUTTONS\WHITE8X8]],
 		tile = false,
@@ -441,11 +460,11 @@ function MOD:SetBorderTheme()
 		edgeSize = 1,
 		insets = {left = 0, right = 0, top = 0, bottom = 0}
 	})
-	self.Border.Bottom:SetBackdropColor(unpack(SV.media.color.dark))
-	self.Border.Bottom:SetBackdropBorderColor(0,0,0,1)
-	self.Border.Bottom:SetFrameLevel(0)
-	self.Border.Bottom:SetFrameStrata('BACKGROUND')
-	self.Border.Bottom:SetScript("OnShow", function(self)
+	self.Bottom:SetBackdropColor(unpack(SV.media.color.dark))
+	self.Bottom:SetBackdropBorderColor(0,0,0,1)
+	self.Bottom:SetFrameLevel(0)
+	self.Bottom:SetFrameStrata('BACKGROUND')
+	self.Bottom:SetScript("OnShow", function(self)
 		self:SetFrameLevel(0)
 		self:SetFrameStrata('BACKGROUND')
 	end)
@@ -1495,6 +1514,8 @@ end
 DOCKS
 ##########################################################
 ]]--
+MOD.Top = _G["SVUI_DockBarTop"];
+MOD.Bottom = _G["SVUI_DockBarBottom"];
 MOD.TopCenter = _G["SVUI_DockTopCenter"];
 MOD.BottomCenter = _G["SVUI_DockBottomCenter"];
 
@@ -1999,8 +2020,6 @@ function MOD:Load()
 
 	-- [[ TOP AND BOTTOM BORDERS ]] --
 
-	self.Border.Top = CreateFrame("Frame", "SVUIDock_TopBorder", SV.Screen);
-	self.Border.Bottom = CreateFrame("Frame", "SVUIDock_BottomBorder", SV.Screen);
 	self:SetBorderTheme();
 	ScreenBorderVisibility();
 
@@ -2014,11 +2033,12 @@ function MOD:Load()
 		local barReverse = SV:GetReversePoint(barAnchor);
 		local isBottom = settings[3];
 		local vertMod = isBottom and 1 or -1
+		local anchorParent = getParentAnchor(anchor);
 
 		dock.Bar:SetParent(SV.Screen)
 		dock.Bar:ClearAllPoints()
 		dock.Bar:SetSize(width, buttonsize)
-		dock.Bar:SetPoint(anchor, SV.Screen, anchor, (2 * mod), (2 * vertMod))
+		dock.Bar:SetPoint(anchor, anchorParent, anchor, (2 * mod), (2 * vertMod))
 
 		local highlight = CreateFrame("Frame", nil, dock.Bar)
 		highlight:SetFrameStrata("BACKGROUND")
@@ -2119,6 +2139,7 @@ function MOD:Load()
 		dock.Window:ClearAllPoints()
 		dock.Window:SetSize(width, height)
 		dock.Window:SetPoint(anchor, dock.Alert, reverse, 0, 4)
+		dock.Window:SetFrameStrata("BACKGROUND")
 
 		SV:NewAnchor(dock.Bar, location .. " Dock ToolBar");
 		SV:SetAnchorResizing(dock.Bar, dockBarPostSizeFunc, 10, 500, 10, 80);

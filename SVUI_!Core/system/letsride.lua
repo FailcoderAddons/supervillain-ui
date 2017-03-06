@@ -73,9 +73,21 @@ local function MountInfo(index)
 	return C_MountJournal.GetDisplayedMountInfo(index)
 end
 
+local function CheckFallbackDruidShaman()
+	local _,class,_ = UnitClass('player')
+	if (not IsMounted() and (class == "DRUID" or class == "SHAMAN")) then
+	-- If we fail to mount, but we're a druid or shaman, we have a backup plan...
+	-- JV: Working on this... TBC 
+	end
+
+end
+
 local function MountUp(index)
 	local _, _, _, _, _, _, _, _, _, _, _, id = MountInfo(index);
-	if id then C_MountJournal.SummonByID(id) end
+	if id then 
+		C_MountJournal.SummonByID(id) 
+		CheckFallbackDruidShaman()
+	end
 end
 
 local UnMount = C_MountJournal.Dismiss
@@ -365,7 +377,7 @@ local function InitializeLetsRide()
 
 	local scrollFrame = MountJournal.ListScrollFrame;
 	local scrollBar = _G["MountJournalListScrollFrameScrollBar"]
-  local buttons = scrollFrame.buttons;
+  	local buttons = scrollFrame.buttons;
 
 	for i = 1, #buttons do
 		local button = buttons[i]

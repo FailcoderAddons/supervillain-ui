@@ -309,31 +309,31 @@ end
 ##########################################################
 ]]--
 
--- DOCK_EMBEDS["Details"] = function(self)
--- 	if(not IsAddOnLoaded("Details")) then return false end
--- 	local width = self:GetWidth()
--- 	local height = SV.Dock.BottomRight.Window:GetHeight();
+ DOCK_EMBEDS["Details"] = function(self)
+ 	if(not IsAddOnLoaded("Details")) then return false end
+ 	local width = self:GetWidth()
+ 	local height = SV.Dock.BottomRight.Window:GetHeight();
 
--- 	if(DetailsBaseFrame1) then
--- 		DetailsBaseFrame1:ClearAllPoints()
--- 		DetailsBaseFrame1:SetParent(self)
--- 		DetailsBaseFrame1:SetSize(width - 4, height - 4)
--- 		DetailsBaseFrame1:SetPoint("BOTTOM", self, "BOTTOM", 0, 2)
--- 		DetailsBaseFrame1:SetMovable(false);
--- 		if(DetailsRowFrame1) then
--- 			DetailsRowFrame1:ClearAllPoints()
--- 			DetailsRowFrame1:SetParent(self)
--- 			DetailsRowFrame1:SetAllPoints(DetailsBaseFrame1)
--- 			self.Framelink = DetailsRowFrame1
--- 		else
--- 			self.Framelink = DetailsBaseFrame1
--- 		end
--- 		_detalhes.move_janela_func = SV.fubar
--- 		return true
--- 	else
--- 		return false
--- 	end
--- end
+ 	if(DetailsBaseFrame1) then
+ 		DetailsBaseFrame1:ClearAllPoints()
+ 		DetailsBaseFrame1:SetParent(self)
+ 		DetailsBaseFrame1:SetSize(width - 4, height - 4)
+ 		DetailsBaseFrame1:SetPoint("BOTTOM", self, "BOTTOM", 0, 2)
+ 		DetailsBaseFrame1:SetMovable(false);
+ 		if(DetailsRowFrame1) then
+ 			DetailsRowFrame1:ClearAllPoints()
+ 			DetailsRowFrame1:SetParent(self)
+ 			DetailsRowFrame1:SetAllPoints(DetailsBaseFrame1)
+ 			self.Framelink = DetailsRowFrame1
+ 		else
+ 			self.Framelink = DetailsBaseFrame1
+ 		end
+ 		_detalhes.move_janela_func = SV.fubar
+ 		return true
+ 	else
+ 		return false
+ 	end
+end
 
 --[[
 ##########################################################

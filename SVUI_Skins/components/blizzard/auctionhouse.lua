@@ -75,7 +75,7 @@ local AuctionTextFields = {
 AUCTIONFRAME MODR
 ##########################################################
 ]]--
-local _hook_FilterButton_SetType = function(button)
+local _hook_FilterButton_SetUp = function(button)
 	if(button) then
 		local normalTexture = _G[button:GetName().."NormalTexture"];
 		normalTexture:SetTexture("")
@@ -124,15 +124,15 @@ local function AuctionStyle()
 	AuctionProgressFrameCancelButton:GetNormalTexture():SetTexCoord(0.67, 0.37, 0.61, 0.26)
 	AuctionProgressFrameCancelButton:SetSize(28, 28)
 	AuctionProgressFrameCancelButton:SetPoint("LEFT", AuctionProgressBar, "RIGHT", 8, 0)
-	AuctionProgressBarIcon:SetTexCoord(0.67, 0.37, 0.61, 0.26)
+	AuctionProgressBar.Icon:SetTexCoord(0.67, 0.37, 0.61, 0.26)
 
-	local AuctionProgressBarBG = CreateFrame("Frame", nil, AuctionProgressBarIcon:GetParent())
-	AuctionProgressBarBG:WrapPoints(AuctionProgressBarIcon)
+	local AuctionProgressBarBG = CreateFrame("Frame", nil, AuctionProgressBar.Icon:GetParent())
+	AuctionProgressBarBG:WrapPoints(AuctionProgressBar.Icon)
 	AuctionProgressBarBG:SetStyle("!_Frame", "Default")
-	AuctionProgressBarIcon:SetParent(AuctionProgressBarBG)
+	AuctionProgressBar.Icon:SetParent(AuctionProgressBarBG)
 
-	AuctionProgressBarText:ClearAllPoints()
-	AuctionProgressBarText:SetPoint("CENTER")
+	AuctionProgressBar.Text:ClearAllPoints()
+	AuctionProgressBar.Text:SetPoint("CENTER")
 	AuctionProgressBar:RemoveTextures()
 	AuctionProgressBar:SetStyle("Frame", "Default")
 	AuctionProgressBar:SetStatusBarTexture(SV.media.statusbar.default)
@@ -195,7 +195,7 @@ local function AuctionStyle()
 	AuctionFrameBrowse.bg2:SetPoint("BOTTOMRIGHT", AuctionFrame, "BOTTOMRIGHT", -8, 40)
 	AuctionFrameBrowse.bg2:SetFrameLevel(AuctionFrameBrowse.bg2:GetFrameLevel() - 1)
 
-	hooksecurefunc("FilterButton_SetType", _hook_FilterButton_SetType)
+	hooksecurefunc("FilterButton_SetUp", _hook_FilterButton_SetUp)
 
 	for _,field in pairs(AuctionTextFields) do
 		--_G[field]:RemoveTextures()
