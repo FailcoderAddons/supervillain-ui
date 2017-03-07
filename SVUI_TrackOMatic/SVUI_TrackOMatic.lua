@@ -136,7 +136,7 @@ local Rotate_Arrow = function(self, angle)
 end
 
 local UnitTracker_OnUpdate = function(self, elapsed)
-    if self.elapsed and self.elapsed > (self.throttle or 0.08) then
+    --[[if self.elapsed and self.elapsed > (self.throttle or 0.08) then
         if(self.Trackable) then
             local distance, angle = TriangulateUnit("target", true)
             if not angle then
@@ -190,6 +190,7 @@ local UnitTracker_OnUpdate = function(self, elapsed)
     else
         self.elapsed = (self.elapsed or 0) + elapsed
     end
+    --]]
 end
 
 local QuestTracker_OnUpdate = function(self, elapsed)

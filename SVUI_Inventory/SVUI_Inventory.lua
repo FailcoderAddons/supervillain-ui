@@ -1427,6 +1427,7 @@ do
 		StyleBagToolButton(frame.sortButton, MOD.media.cleanupIcon)
 		frame.sortButton.ttText = L["Sort Bank"]
 		frame.sortButton.ttText2 = L["[SHIFT + CLICK]"]
+
 		frame.sortButton.ttText2desc = L["Filtered Cleanup (Default Sorting)"]
 		frame.sortButton:SetScript("OnEnter", Tooltip_Show)
 		frame.sortButton:SetScript("OnLeave", Tooltip_Hide)
