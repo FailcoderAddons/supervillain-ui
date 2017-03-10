@@ -233,12 +233,25 @@ function SV:SetGearLabels(frame, bagID, slotID, itemLink, quality, equipSlot)
 
   if(frame.ItemLevel) then
     local iLevel = SV:GetItemLevel(itemLink)
-  	if((not SHOW_BAG_LEVEL) or (iLevel <= 1) or (quality == 7) or (not equipSlot:find('INVTYPE'))) then
-      frame.ItemLevel:SetText('')
-  	else
-  		local key = (iLevel < (AVG_LEVEL - 10)) and 0 or (iLevel > (AVG_LEVEL + 10)) and 1 or 2;
-      frame.ItemLevel:SetFormattedText("%s%d|r", COLOR_KEYS[key], iLevel)
-  	end
+    local  itemName, _, _, iLevelInfo , _, _, itemSubType, _, _, _, _
+    local overall, equipped = GetAverageItemLevel()
+
+    if(itemLink) then
+      itemName, _, _, iLevelInfo , _, _, itemSubType, _, _, _, _ = GetItemInfo(itemLink)
+    end
+    if((not SHOW_BAG_LEVEL) or (iLevel <= 1) or (quality == 7) or (not equipSlot:find('INVTYPE'))) then
+        if (itemSubType ==  "Artifact Relic") then
+            local key = (iLevelInfo < (equipped - 10)) and 0 or (iLevelInfo > (equipped + 10)) and 1 or 2;
+            frame.ItemLevel:SetFormattedText("%s%d|r", COLOR_KEYS[key], iLevelInfo)
+        else
+            frame.ItemLevel:SetText('')
+        end
+    else
+        local key = (iLevel < (equipped - 10)) and 0 or (iLevel > (equipped + 10)) and 1 or 2;
+        frame.ItemLevel:SetFormattedText("%s%d|r", COLOR_KEYS[key], iLevel)
+    end
+
+
   end
 end
 

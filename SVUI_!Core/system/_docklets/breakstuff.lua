@@ -106,9 +106,11 @@ do
 	}
 
 	local function IsThisBreakable(link)
-		local _, _, quality = GetItemInfo(link)
+		local _, _, quality,_, _, _,itemSubType = GetItemInfo(link)
 		if(IsEquippableItem(link) and quality and quality > 1 and quality < 5) then
 			return not BreakableFilter["SafeItems"][match(link, 'item:(%d+):')]
+        elseif (itemSubType ==  "Artifact Relic")  then
+            return not BreakableFilter["SafeItems"][match(link, 'item:(%d+):')]
 		end
 	end
 
