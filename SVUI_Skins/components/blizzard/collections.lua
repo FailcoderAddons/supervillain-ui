@@ -17,6 +17,7 @@ local Schema = MOD.Schema;
 HELPERS
 ##########################################################
 ]]--
+
 local FAV_ICON = SV.media.icon.star
 local NORMAL_COLOR = {r = 1, g = 1, b = 1}
 local SELECTED_COLOR = {r = 1, g = 1, b = 0}
@@ -316,7 +317,7 @@ local function CollectionsJournalStyle()
 	ToyBox.iconsFrame:SetStyle("!_Frame", 'Model')
 	ToyBox.progressBar:RemoveTextures()
 	ToyBox.progressBar:SetStatusBarTexture([[Interface\BUTTONS\WHITE8X8]])
-	ToyBox.progressBar:SetStyle("Frame", "Bar", true, 2, 2, 2)
+	--ToyBox.progressBar:SetStyle("Frame", "Bar", true, 2, 2, 2)
 	SV.API:Set("PageButton", ToyBox.navigationFrame.prevPageButton, false, true)
 	SV.API:Set("PageButton", ToyBox.navigationFrame.nextPageButton)
 
@@ -382,9 +383,10 @@ local function CollectionsJournalStyle()
 	WardrobeFrameUpdateSlots()
 	--hooksecurefunc("WardrobeCollectionFrame_OnShow", WardrobeFrameUpdateModels)
 end 
---[[ 
+--[[
 ########################################################## 
 MOD LOADING
 ##########################################################
 ]]--
-MOD:SaveBlizzardStyle("Blizzard_Collections", CollectionsJournalStyle)
+--MOD:SaveBlizzardStyle("Blizzard_Collections", CollectionsJournalStyle)
+

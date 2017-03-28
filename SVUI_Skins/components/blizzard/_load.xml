@@ -11,7 +11,7 @@
 	<!-- Script file='challenges.lua'/ Needs complete rework after 7.1 -->
 	<Script file='chat.lua'/>
 	<Script file='character.lua'/>
-	<Script file='collections.lua'/>
+	<!-- Script file=<Script file='collections.lua'/> -->
 	<Script file='encounterjournal.lua'/>
 	<Script file='friends.lua'/>
 	<Script file='garrison.lua'/>
