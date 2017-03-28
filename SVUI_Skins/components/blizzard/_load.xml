@@ -21,7 +21,7 @@
 	<Script file='itemsocketing.lua'/>
 	<Script file='itemupgrade.lua'/>
 	<Script file='keybinding.lua'/>
-	<Script file='lfd.lua'/>
+	<!--<Script file='lfd.lua'/> -->
 	<Script file='macro.lua'/>
 	<Script file='petbattle.lua'/>
 	<Script file='pvp.lua'/>
