@@ -65,8 +65,8 @@ local private = {} -- private space for the event handlers
 lib.frame = lib.frame or _G.CreateFrame("Frame")
 local frame = lib.frame
 frame:UnregisterAllEvents() -- deactivate old versions
-frame:SetScript("OnEvent", function(_, event, ...) private[event](event, ...) end)
-frame:RegisterEvent("PLAYER_ENTERING_WORLD")
+--frame:SetScript("OnEvent", function(_, event, ...) private[event](event, ...) end)
+--frame:RegisterEvent("PLAYER_ENTERING_WORLD")
 
 local function CopyTable(tbl)
 	if not tbl then return {} end
