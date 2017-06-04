@@ -103,32 +103,27 @@ local SetScenarioData = function(self, title, stageName, currentStage, numStages
 	local block = self.Block;
     local mythic_txt = ""
 
-
 	block.HasData = true;
     local _, _, difficulty, _, _, _, _, mapID = GetInstanceInfo();
 
 	if (difficulty == 8) then
         local cmLevel, affixes, empowered = C_ChallengeMode.GetActiveKeystoneInfo();
         local bonus = C_ChallengeMode.GetPowerLevelDamageHealthMod(cmLevel);
-        block.Header.Stage:SetText("Mythic Keystone + " .. cmLevel)
+
         cmLevel, affixes, empowered = C_ChallengeMode.GetActiveKeystoneInfo();
 
-        if empowered then
-            mythic_txt = mythic_txt .. "Loot"
-        else
-            mythic_txt = mythic_txt .. "No Loot"
-        end
         for _, affixID in ipairs(affixes) do
             local affixName, affixDesc, _ = C_ChallengeMode.GetAffixInfo(affixID);
-            mythic_txt = mythic_txt ..  " - "..affixName
+            mythic_txt = mythic_txt.." - "..affixName;
         end
-
+		block.Header.Stage:SetText("|cFFFFFF00"..title .. ' +' .. cmLevel .. "|cFFFFFFFF" .. mythic_txt)
+		
     elseif (currentStage ~= 0) then
-		block.Header.Stage:SetText("Stage " .. currentStage)
+		block.Header.Stage:SetText('Stage ' .. currentStage .. ' - ' .. "|cFFFFFF00"..title)
 	else
 		block.Header.Stage:SetText('')
+		block.Header.Stage:SetText("|cFFFFFF00"..title)
 	end
-	block.Header.Text:SetText(title)
 	block.Icon:SetTexture(LINE_SCENARIO_ICON)
 
 
@@ -225,24 +220,24 @@ end
 local SetChallengeMedals = function(self, elapsedTime, ...)
 	self:SetHeight(INNER_HEIGHT);
 	local blockHeight = MOD.Headers["Scenario"].Block:GetHeight();
-	local _, _, difficulty, _, _, _, _, mapID = GetInstanceInfo();
+	local cmID = C_ChallengeMode.GetActiveChallengeMapID();
+	local _, _, difficulty = GetInstanceInfo();
 	MOD.Headers["Scenario"].Block:SetHeight(blockHeight + INNER_HEIGHT + 4);
 	self:FadeIn();
 	self.Bar:SetMinMaxValues(0, elapsedTime);
 	self.Bar:SetValue(elapsedTime);
 
-	if(mapID and difficulty == 8) then
-		local zoneName, _, maxTime = C_ChallengeMode.GetMapInfo(mapID);
-		MEDAL_TIMES[1] = maxTime * 0.6;
-		MEDAL_TIMES[2] = maxTime * 0.8;
-		MEDAL_TIMES[3] = maxTime
+	if(cmID and difficulty == 8) then
+		local zoneName, _, maxTime = C_ChallengeMode.GetMapInfo(cmID);
+		MEDAL_TIMES[1] = maxTime * 0.6; -- 3 chest
+		MEDAL_TIMES[2] = maxTime * 0.8; -- 2 chest
+		MEDAL_TIMES[3] = maxTime -- 1 chest
 	else
 		for i = 1, select("#", ...) do
 			MEDAL_TIMES[i] = select(i, ...);
 		end
 	end
 	LAST_MEDAL = nil;
-	self:UpdateMedals(elapsedTime);
 	self:UpdateMedals(elapsedTime);
 end
 
@@ -308,7 +303,6 @@ local UpdateChallengeTimer = function(self, elapsedTime)
 end
 
 local UpdateAllTimers = function(self, ...)
-	local timeLeftFound
 	for i = 1, select("#", ...) do
 		local timerID = select(i, ...);
 
@@ -316,12 +310,13 @@ local UpdateAllTimers = function(self, ...)
 			timerID = 1
 		end
 
-		local _, elapsedTime, type = GetWorldElapsedTime(1);
+		local _, elapsedTime, type = GetWorldElapsedTime(timerID);
 		if ( type == LE_WORLD_ELAPSED_TIMER_TYPE_CHALLENGE_MODE) then
 			local _, _, difficulty, _, _, _, _, mapID = GetInstanceInfo();
-			if(mapID and difficulty == 8) then
+			local cmID = C_ChallengeMode.GetActiveChallengeMapID();
+			if(cmID and difficulty == 8) then
 				local cmLevel, affixes, empowered = C_ChallengeMode.GetActiveKeystoneInfo();
-				local zoneName, _, maxTime = C_ChallengeMode.GetMapInfo(mapID);
+				local _, _, maxTime = C_ChallengeMode.GetMapInfo(cmID);
 				self:SetMedals(elapsedTime, maxTime);
 				return;
 			elseif ( mapID ) then
@@ -386,6 +381,7 @@ local RefreshScenarioObjective = function(self, event, ...)
 
 	self:RefreshHeight()
 end
+
 --[[
 ##########################################################
 CORE FUNCTIONS
