@@ -76,8 +76,8 @@ local MOD = SV.Dock;
 LOCALS
 ##########################################################
 ]]--
-local HEARTH_SPELLS = {556,50977,18960,126892,193753};
-local HEARTH_ITEMS = {6948,110560,64488,54452,93672,28585,128353,140192,142542};
+local HEARTH_SPELLS = {556,50977,18960,126892,193753,222695};
+local HEARTH_ITEMS = {6948,110560,64488,54452,93672,28585,128353,140192};
 local HEARTH_LEFT_CLICK, HEARTH_RIGHT_CLICK = 6948, 110560;
 local HEARTH_HEADER = "HearthStone";
 
@@ -151,6 +151,7 @@ end
 local function UpdateHearthOptions()
 	HEARTH_LEFT_CLICK = SV.db.Dock.hearthOptions.left;
 	HEARTH_RIGHT_CLICK = SV.db.Dock.hearthOptions.right;
+	HEARTH_ALT_CLICK = SV.db.Dock.hearthOptions.altclick;
 
 	local leftClick = GetHearthOption(HEARTH_LEFT_CLICK);
 	if(leftClick and type(leftClick) == "string") then
@@ -169,16 +170,19 @@ local Hearth_OnEnter = function(self)
 	GameTooltip:AddLine(HELPFRAME_STUCK_HEARTHSTONE_HEADER, 1, 1, 0)
 	GameTooltip:AddLine(" ", 1, 1, 1)
 	local location = GetBindLocation()
-	GameTooltip:AddDoubleLine(LOCATION_COLON, location, 1, 0.5, 0, 1, 1, 1)
+	GameTooltip:AddDoubleLine(L["Hearth Location:"], location, 1, 0.5, 0, 1, 1, 1)
 	if InCombatLockdown() then return end
-	local remaining = GetMacroCooldown(6948)
-	GameTooltip:AddDoubleLine(L["Time Remaining"], remaining, 1, 0.5, 0, 1, 1, 1)
+	local remaining1 = GetMacroCooldown(SV.db.Dock.hearthOptions.left);
+	local remaining2 = GetMacroCooldown(SV.db.Dock.hearthOptions.right);
 	local text1 = self:GetAttribute("tipText")
 	local text2 = self:GetAttribute("tipExtraText")
 	GameTooltip:AddLine(" ", 1, 1, 1)
 	GameTooltip:AddDoubleLine("[Left-Click]", text1, 0, 1, 0, 1, 1, 1)
+	GameTooltip:AddDoubleLine(L["Time Remaining:"], remaining1, 1, 0.5, 0, 1, 1, 1)
 	if(text2 and text2 ~= "") then
+		GameTooltip:AddLine(" ", 1, 1, 1)
 		GameTooltip:AddDoubleLine("[Right-Click]", text2, 0, 1, 0, 1, 1, 1)
+		GameTooltip:AddDoubleLine(L["Time Remaining:"], remaining2, 1, 0.5, 0, 1, 1, 1)
 	end
 	GameTooltip:AddLine(" ", 1, 1, 1)
 	GameTooltip:AddDoubleLine("|cff0099FFSHIFT|r + Left-Click", "Left Click Options", 0, 1, 0, 0.5, 1, 0.5)
@@ -324,8 +328,21 @@ local function LoadMiscTools()
 	end
 
 	-- HEARTH BUTTON
-	HEARTH_HEADER = GetHearthOption(6948);
-
+	
+	--Vanilla Hearth
+	if(IsSpellKnown(6948)) then
+		HEARTH_HEADER = GetHearthOption(6948);
+		return;
+	--Dalaran Hearth
+	elseif (IsSpellKnown(140192)) then
+		HEARTH_HEADER = GetHearthOption(140192);
+		return;
+	--Garrison Hearth
+	elseif (IsSpellKnown(110560)) then
+		HEARTH_HEADER = GetHearthOption(110560);
+		return;
+	end
+	
 	if(SV.db.Dock.dockTools.hearth and (not SVUI_Hearth)) then
 		if(HEARTH_HEADER and type(HEARTH_HEADER) == "string") then
 			local hearth = SV.Dock:SetDockButton("BottomLeft", HEARTH_HEADER, "SVUI_Hearth", SV.media.dock.hearthIcon, Hearth_OnEnter, "SecureActionButtonTemplate")
