@@ -17,7 +17,6 @@ local Schema = MOD.Schema;
 HELPERS
 ##########################################################
 ]]--
-
 local FAV_ICON = SV.media.icon.star
 local NORMAL_COLOR = {r = 1, g = 1, b = 1}
 local SELECTED_COLOR = {r = 1, g = 1, b = 0}
@@ -318,8 +317,8 @@ local function CollectionsJournalStyle()
 	ToyBox.progressBar:RemoveTextures()
 	ToyBox.progressBar:SetStatusBarTexture([[Interface\BUTTONS\WHITE8X8]])
 	--ToyBox.progressBar:SetStyle("Frame", "Bar", true, 2, 2, 2)
-	SV.API:Set("PageButton", ToyBox.navigationFrame.prevPageButton, false, true)
-	SV.API:Set("PageButton", ToyBox.navigationFrame.nextPageButton)
+	SV.API:Set("PageButton", ToyBox.PagingFrame.PrevPageButton, false, true)
+	SV.API:Set("PageButton", ToyBox.PagingFrame.NextPageButton)
 
 	HeirloomsJournal:RemoveTextures()
 	HeirloomsJournal.SearchBox:SetStyle("Editbox")
@@ -331,8 +330,8 @@ local function CollectionsJournalStyle()
 	HeirloomsJournal.progressBar:RemoveTextures()
 	HeirloomsJournal.progressBar:SetStatusBarTexture([[Interface\BUTTONS\WHITE8X8]])
 	HeirloomsJournal.progressBar:SetStyle("Frame", "Bar", true, 2, 2, 2)
-	SV.API:Set("PageButton", HeirloomsJournal.navigationFrame.prevPageButton, false, true)
-	SV.API:Set("PageButton", HeirloomsJournal.navigationFrame.nextPageButton)
+	SV.API:Set("PageButton", HeirloomsJournal.PagingFrame.PrevPageButton, false, true)
+	SV.API:Set("PageButton", HeirloomsJournal.PagingFrame.NextPageButton)
 
 	SV.API:Set("DropDown", HeirloomsJournalClassDropDown)
 
@@ -369,24 +368,23 @@ local function CollectionsJournalStyle()
 	WardrobeCollectionFrameSearchBox:SetStyle("Editbox")
 	WardrobeCollectionFrame.FilterButton:RemoveTextures(true)
 	WardrobeCollectionFrame.FilterButton:SetStyle("Button")
-	WardrobeCollectionFrame.ModelsFrame:RemoveTextures()
-	WardrobeCollectionFrame.ModelsFrame:SetStyle("!_Frame", 'Premium')
+	--WardrobeCollectionFrame.ModelsFrame:RemoveTextures()
+	--WardrobeCollectionFrame.ModelsFrame:SetStyle("!_Frame", 'Premium')
 	SV.API:Set("DropDown", WardrobeCollectionFrameWeaponDropDown)
 
 	WardrobeCollectionFrame.progressBar:RemoveTextures()
 	WardrobeCollectionFrame.progressBar:SetStatusBarTexture([[Interface\BUTTONS\WHITE8X8]])
 	WardrobeCollectionFrame.progressBar:SetStyle("Frame", "Bar", true, 2, 2, 2)
-	SV.API:Set("PageButton", WardrobeCollectionFrame.NavigationFrame.PrevPageButton, false, true)
-	SV.API:Set("PageButton", WardrobeCollectionFrame.NavigationFrame.NextPageButton)
+	SV.API:Set("PageButton", WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.PrevPageButton, false, true)
+	SV.API:Set("PageButton", WardrobeCollectionFrame.ItemsCollectionFrame.PagingFrame.NextPageButton)
 
 	WardrobeFrameUpdateModels()
 	WardrobeFrameUpdateSlots()
 	--hooksecurefunc("WardrobeCollectionFrame_OnShow", WardrobeFrameUpdateModels)
 end 
---[[
+--[[ 
 ########################################################## 
 MOD LOADING
 ##########################################################
 ]]--
---MOD:SaveBlizzardStyle("Blizzard_Collections", CollectionsJournalStyle)
-
+MOD:SaveBlizzardStyle("Blizzard_Collections", CollectionsJournalStyle)
