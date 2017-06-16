@@ -8,7 +8,6 @@
 	<Script file='battlefield.lua'/>
 	<Script file='blackmarket.lua'/>
 	<Script file='calendar.lua'/>
-	<!-- Script file='challenges.lua'/ Needs complete rework after 7.1 -->
 	<Script file='chat.lua'/>
 	<Script file='character.lua'/>
 	<Script file='collections.lua'/>
@@ -21,7 +20,6 @@
 	<Script file='itemsocketing.lua'/>
 	<Script file='itemupgrade.lua'/>
 	<Script file='keybinding.lua'/>
-	<!--<Script file='lfd.lua'/> -->
 	<Script file='macro.lua'/>
 	<Script file='petbattle.lua'/>
 	<Script file='pvp.lua'/>
