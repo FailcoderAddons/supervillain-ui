@@ -22,6 +22,7 @@
 	<Script file='keybinding.lua'/>
 	<Script file='lfd.lua'/>
 	<Script file='macro.lua'/>
+	<Script file='obliterum.lua'/>
 	<Script file='petbattle.lua'/>
 	<Script file='pvp.lua'/>
 	<Script file='quest.lua'/>
