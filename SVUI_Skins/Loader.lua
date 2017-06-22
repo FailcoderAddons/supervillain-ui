@@ -119,6 +119,7 @@ SV.defaults[Schema] = {
 		["itemUpgrade"] = true,
 		["talkingHead"] = true,
 		["orderhall"] = true,
+		["obliterum"] = true,
 	},
 	["addons"] = {
 		["enable"] = true,
@@ -521,6 +522,11 @@ function MOD:LoadOptions()
 					itemUpgrade = {
 						type = "toggle",
 						name = L["Item Upgrade"],
+						desc = L["TOGGLEART_DESC"]
+					},
+					obliterum = {
+						type = "toggle",
+						name = L["Obliterum Forge"],
 						desc = L["TOGGLEART_DESC"]
 					}
 				}
