@@ -1929,11 +1929,7 @@ function MOD:Load()
 		self:RegisterEvent("CHAT_MSG_BN_WHISPER")
 	end
 	
-	--fix for 7.2 - if not inside instance, load chat bubbles
-	local _, _, difficulty, _, _, _, _, mapID = GetInstanceInfo();
-	if (difficulty == 0) then
-		self:LoadChatBubbles()
-	end
+	self:LoadChatBubbles();
 
 	SV.Events:On("DOCK_FADE_IN", DockFadeInChat, true);
 	SV.Events:On("DOCK_FADE_OUT", DockFadeOutChat, true);
