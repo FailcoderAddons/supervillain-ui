@@ -31,10 +31,12 @@ local function OblitFrameStyle()
 	SV.API:Set("Button", ObliterumForgeFrame.ObliterateButton, true)
 	SV.API:Set("ItemButton", ObliterumForgeFrame.ItemSlot, nil, true)
 	
-	-- Item Slot
-	ObliterumForgeFrame.ItemSlot:SetWidth(75)
-	ObliterumForgeFrame.ItemSlot:SetHeight(75)
-
+	-- Movable Window
+	ObliterumForgeFrame:SetMovable(true)
+	ObliterumForgeFrame:EnableMouse(true)
+	ObliterumForgeFrame:RegisterForDrag("LeftButton")
+	ObliterumForgeFrame:SetScript("OnDragStart", ObliterumForgeFrame.StartMoving)
+	ObliterumForgeFrame:SetScript("OnDragStop", ObliterumForgeFrame.StopMovingOrSizing)
 end
 --[[ 
 ########################################################## 
