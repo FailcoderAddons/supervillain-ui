@@ -65,9 +65,9 @@ local function SetTooltipText(report)
 	if isEquipped then
 		local calc1 = (currentPower / powerToNextLevel) * 100;
 		Reports.ToolTip:AddDoubleLine(L["Rank:"], (" %d "):format(rank), 1, 1, 1)
-		Reports.ToolTip:AddDoubleLine(L["Current Artifact Power:"], (" %d  /  %d (%d%%)"):format(currentPower, powerToNextLevel, calc1), 1, 1, 1)
-		Reports.ToolTip:AddDoubleLine(L["Remaining:"], (" %d "):format(powerToNextLevel - currentPower), 1, 1, 1)
-		Reports.ToolTip:AddDoubleLine(L["Points to Spend:"], format(" %d ", pointsToSpend), 1, 1, 1)
+		Reports.ToolTip:AddDoubleLine(L["Current Artifact Power:"], (" %s  /  %s (%d%%)"):format(currentPower, powerToNextLevel, calc1), 1, 1, 1)
+		Reports.ToolTip:AddDoubleLine(L["Remaining:"], (" %s "):format(powerToNextLevel - currentPower), 1, 1, 1)
+		Reports.ToolTip:AddDoubleLine(L["Points to Spend:"], format(" %s ", pointsToSpend), 1, 1, 1)
 	else
 		Reports.ToolTip:AddDoubleLine(L["No Artifact"])
 	end
