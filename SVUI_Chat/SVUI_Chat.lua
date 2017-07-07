@@ -1929,7 +1929,8 @@ function MOD:Load()
 		self:RegisterEvent("CHAT_MSG_BN_WHISPER")
 	end
 	
-	self:LoadChatBubbles();
+	-- Removing temporarily.
+	--self:LoadChatBubbles();
 
 	SV.Events:On("DOCK_FADE_IN", DockFadeInChat, true);
 	SV.Events:On("DOCK_FADE_OUT", DockFadeOutChat, true);
