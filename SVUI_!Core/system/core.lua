@@ -896,7 +896,9 @@ end
 ---- ################# ----
 ---- THE CLEANING LADY ----
 ---- ################# ----
-local LemonPledge = 0;
+
+-- Causing script ran too long errors post 7.2.5
+--[[local LemonPledge = 0;
 local Consuela = CreateFrame("Frame")
 Consuela:RegisterAllEvents()
 Consuela:SetScript("OnEvent", function(self, event)
@@ -907,4 +909,4 @@ Consuela:SetScript("OnEvent", function(self, event)
         collectgarbage("collect");
         LemonPledge = 0;
     end
-end)
+end)]]--
