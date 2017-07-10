@@ -826,6 +826,7 @@ local NextPage_OnClick = function(self)
 	if CURRENT_PAGE ~= MAX_PAGE then
 		CURRENT_PAGE = CURRENT_PAGE + 1;
 		self.parent:SetPage(CURRENT_PAGE)
+		PlayThemeSong();
 	end
 end
 
@@ -874,7 +875,7 @@ end
 
 function SV.Setup:LoadInstaller(autoLoaded)
 	local old = SVUILib:GetSafeData()
-  preset_mediastyle = old.preset_mediastyle or "default";
+	preset_mediastyle = old.preset_mediastyle or "default";
 	preset_barstyle = old.preset_barstyle or "default";
 	preset_unitstyle = old.preset_unitstyle or "default";
 	preset_groupstyle = old.preset_groupstyle or "default";
@@ -1236,8 +1237,6 @@ function SV.Setup:LoadInstaller(autoLoaded)
 	SVUI_InstallerFrame:Show()
 	SVUI_InstallerFrame:SetPage(1)
 	if(not autoLoaded) then
-		PlayThemeSong()
-	else
-		SV.Timers:ExecuteTimer(PlayThemeSong, 5)
+		PlayThemeSong();
 	end
 end
