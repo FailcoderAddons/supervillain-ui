@@ -120,6 +120,7 @@ SV.defaults[Schema] = {
 		["talkingHead"] = true,
 		["orderhall"] = true,
 		["obliterum"] = true,
+		["orderhalltalent"] = true,
 	},
 	["addons"] = {
 		["enable"] = true,
@@ -527,6 +528,11 @@ function MOD:LoadOptions()
 					obliterum = {
 						type = "toggle",
 						name = L["Obliterum Forge"],
+						desc = L["TOGGLEART_DESC"]
+					},
+					orderhalltalent = {
+						type = "toggle",
+						name = L["Order Hall Talents"],
 						desc = L["TOGGLEART_DESC"]
 					}
 				}
