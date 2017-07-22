@@ -1,4 +1,5 @@
-﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+	<Script file='test.lua'/>
 	<Script file='achievement.lua'/>
 	<Script file='alert.lua'/>
 	<Script file='archeology.lua'/>
@@ -23,12 +24,13 @@
 	<Script file='lfd.lua'/>
 	<Script file='macro.lua'/>
 	<Script file='obliterum.lua'/>
+	<Script file='orderhall.lua'/>
+	<Script file='orderhalltalents.lua'/>
 	<Script file='petbattle.lua'/>
 	<Script file='pvp.lua'/>
 	<Script file='quest.lua'/>
 	<Script file='raid.lua'/>
 	<Script file='reforging.lua'/>
-	<Script file='orderhall.lua'/>
 	<Script file='spellbook.lua'/>
 	<Script file='talents.lua'/>
 	<Script file='timemanager.lua'/>
