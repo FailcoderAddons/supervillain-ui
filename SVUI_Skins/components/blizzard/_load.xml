@@ -25,7 +25,6 @@
 	<Script file='macro.lua'/>
 	<Script file='obliterum.lua'/>
 	<Script file='orderhall.lua'/>
-	<Script file='orderhalltalents.lua'/>
 	<Script file='petbattle.lua'/>
 	<Script file='pvp.lua'/>
 	<Script file='quest.lua'/>
