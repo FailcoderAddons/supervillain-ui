@@ -46,6 +46,13 @@ local LAD = LibStub("LibArtifactData-1.0");
 UTILITIES
 ##########################################################
 ]]--
+local percColors = {
+	"|cff0CD809",
+	"|cffE8DA0F",
+	"|cffFF9000",
+	"|cffD80909"
+}
+
 local function GetArtifactData()
 	local artID = LAD:GetActiveArtifactID()
 	if not artID then return false end
@@ -74,7 +81,8 @@ local function SetTooltipText(report)
 end
 
 local function FormatPower(rank, currentPower, powerForNextPoint, pointsToSpend)
-	local currentText = ("%d(+%d) %d/%d"):format(rank, pointsToSpend, currentPower, powerForNextPoint);
+	local calc1 = (currentPower / powerForNextPoint) * 100;
+	local currentText = ("Traits: %d (%s%d%%|r)"):format(rank, percColors[calc1 >= 75 and 1 or (calc1 >= 50 and calc1 < 75) and 2 or (calc1 >= 25 and calc1 < 50) and 3 or (calc1 >= 0 and calc1 < 25) and 4], calc1);
 	return currentText
 end
 
