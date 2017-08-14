@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70200
 ## Author: Failcoder
 ## Version: 1.0.0
 ## Title: |cffFF9900SVUI Theme: |r|cff00EFFFSimple|r
