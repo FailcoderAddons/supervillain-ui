@@ -536,7 +536,8 @@ local function GuildFrameStyle()
 
 	for i = 1, 14 do
 		local button = _G["GuildRosterContainerButton"..i.."HeaderButton"]
-		SV.API:Set("Button", button)
+		button:RemoveTextures()
+		button:SetStyle("Button")
 	end
 
 	GuildMemberDetailFrame:SetStyle("Frame", "Default", true)
