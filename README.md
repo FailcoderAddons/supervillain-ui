@@ -25,11 +25,10 @@ If you're looking for the most up to date information about what's happening wit
 
 ## Release Version
 
-This is the development version of SuperVillain UI and as such things may be severely broken at times as we work on fixing issues and building awesome new features. If you're not comfortable with life on the bleeding edge (but then what sort of SuperVillain are you? A no-risk-taking, don't rock the boat, live life safe Supervillain? We have a name for that... it's called "A Politician" :P) and all that that entails then you should stick with the release version.
+This is the development version of SuperVillain UI and as such things may be severely broken at times as we work on fixing issues and building awesome new features. If you're not comfortable with life on the bleeding edge (but then what sort of SuperVillain are you? A no-risk-taking, don't rock the boat, live life safe Supervillain? We have a name for that... it's called "A Politician" :P) and all that that entails then you should stick with the release version... which is currently also this version. Welcome to true Supervillainy!
 
-If you are looking for the most current release version (non-development) you can find it at [WowInterface](http://www.wowinterface.com/downloads/info23519-SuperVillainUI.html#info) or [Curse](http://www.curse.com/addons/wow/supervillain-ui)
 
 ## License
 
 SuperVillain UI is licensed under the The MIT License.
-Copyright (c) 2010-2016, Failcoder (Steve Jackson), joev (Joe Vaughan).
+Copyright (c) 2010-2017, Failcoder (Steve Jackson), joev (Joe Vaughan), joeymagz (Joe Miraglia)
