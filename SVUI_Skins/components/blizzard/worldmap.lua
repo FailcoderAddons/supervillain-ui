@@ -146,14 +146,14 @@ local function WorldMapStyle()
   --print('test WorldMapStyle 1')
   WorldMapDetailFrame:SetStyle("Frame", "Blackout")
 
-  WorldMapFrameSizeDownButton:SetFrameLevel(999)
-  WorldMapFrameSizeUpButton:SetFrameLevel(999)
+  --WorldMapFrameSizeDownButton:SetFrameLevel(999)
+  --WorldMapFrameSizeUpButton:SetFrameLevel(999)
   WorldMapFrameCloseButton:SetFrameLevel(999)
 
   --print('test WorldMapStyle 2')
   SV.API:Set("CloseButton", WorldMapFrameCloseButton)
-  SV.API:Set("ArrowButton", WorldMapFrameSizeDownButton, "down")
-  SV.API:Set("ArrowButton", WorldMapFrameSizeUpButton, "up")
+  --SV.API:Set("ArrowButton", WorldMapFrameSizeDownButton, "down")
+  --SV.API:Set("ArrowButton", WorldMapFrameSizeUpButton, "up")
   SV.API:Set("DropDown", WorldMapLevelDropDown)
   SV.API:Set("DropDown", WorldMapZoneMinimapDropDown)
   SV.API:Set("DropDown", WorldMapContinentDropDown)
@@ -178,6 +178,13 @@ local function WorldMapStyle()
   --SV.API:Set("InfoButton", WorldMapFrameTutorialButton)
   --WorldMapFrameTutorialButton:SetPoint("LEFT", WorldMapFrameNavBar.Panel, "RIGHT", -50, 0)
 
+  -- Movable Window
+  WorldMapFrame:SetMovable(true)
+  WorldMapFrame:EnableMouse(true)
+  WorldMapFrame:RegisterForDrag("LeftButton")
+  WorldMapFrame:SetScript("OnDragStart", WorldMapFrame.StartMoving)
+  WorldMapFrame:SetScript("OnDragStop", WorldMapFrame.StopMovingOrSizing)
+  
   WorldMap_OnShow()
 end
 --[[
