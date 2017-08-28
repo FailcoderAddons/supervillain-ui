@@ -1,4 +1,4 @@
-## Interface: 70200
+## Interface: 70300
 ## Author: Failcoder
 ## Version: 1.3.9
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00UnitFrames|r
