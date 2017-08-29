@@ -677,8 +677,8 @@ function MOD:PLAYER_REGEN_ENABLED()
 end
 
 function MOD:PLAYER_REGEN_DISABLED()
-	WorldMapFrameSizeDownButton:Disable()
-	WorldMapFrameSizeUpButton:Disable()
+	--WorldMapFrameSizeDownButton:Disable()
+	--WorldMapFrameSizeUpButton:Disable()
 end
 --[[
 ##########################################################
