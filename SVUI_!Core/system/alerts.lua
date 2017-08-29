@@ -194,7 +194,7 @@ CORE FUNCTIONS
 ]]--
 local MAX_STATIC_POPUPS = 4
 local SysPop_Event_Show = function(self)
-	PlaySound("igMainMenuOpen");
+	PlaySound(SOUNDKIT.IG_MAINMENU_OPEN);
 
 	local dialog = SV.SystemAlert[self.which];
 	local OnShow = dialog.OnShow;
@@ -320,7 +320,7 @@ local SysPop_Event_Click = function(self, index)
 end
 
 local SysPop_Event_Hide = function(self)
-	PlaySound("igMainMenuClose");
+	PlaySound(SOUNDKIT.IG_MAINMENU_CLOSE);
 
 	SysPop_Close_Table();
 
