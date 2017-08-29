@@ -1264,7 +1264,7 @@ do
 		frame.bagsButton:SetScript("OnEnter", Tooltip_Show)
 		frame.bagsButton:SetScript("OnLeave", Tooltip_Hide)
 		local BagBtn_OnClick = function()
-			PlaySound("igMainMenuOption");
+			PlaySound(SOUNDKIT.IG_MAINMENU_OPTION);
 			if(BagFilters and BagFilters:IsShown()) then
 				ToggleFrame(BagFilters)
 			end
@@ -1471,7 +1471,7 @@ do
 			frame.bagsButton:SetScript("OnEnter", Tooltip_Show)
 			frame.bagsButton:SetScript("OnLeave", Tooltip_Hide)
 			local BagBtn_OnClick = function()
-				PlaySound("igMainMenuOption");
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION);
 				if(BagFilters and BagFilters:IsShown()) then
 					ToggleFrame(BagFilters)
 				end
@@ -1493,7 +1493,7 @@ do
 			frame.purchaseBagButton:SetScript("OnEnter", Tooltip_Show)
 			frame.purchaseBagButton:SetScript("OnLeave", Tooltip_Hide)
 			local PurchaseBtn_OnClick = function()
-				PlaySound("igMainMenuOption");
+				PlaySound(SOUNDKIT.IG_MAINMENU_OPTION);
 				local _, full = GetNumBankSlots()
 				if not full then
 					SV:StaticPopup_Show("BUY_BANK_SLOT")
@@ -1525,7 +1525,7 @@ do
 				if(not IsReagentBankUnlocked()) then
 					SV:StaticPopup_Show("CONFIRM_BUY_REAGENTBANK_TAB");
 				else
-					PlaySound("igMainMenuOption");
+					PlaySound(SOUNDKIT.IG_MAINMENU_OPTION);
 					if(_G["SVUI_ReagentContainerFrame"]:IsShown()) then
 						_G["SVUI_ReagentContainerFrame"]:Hide()
 					else
