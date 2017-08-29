@@ -897,7 +897,7 @@ function MOD:RunSortingProcess(func, groupsDefaults, altFunc)
 	local bagGroups = {}
 	return function(groups)
 		if(altFunc and IsShiftKeyDown()) then
-			PlaySound("UI_BagSorting_01");
+			PlaySound(SOUNDKIT.UI_BAG_SORTING_01);
 			altFunc()
 		else
 			if SortUpdateTimer:IsShown() then
