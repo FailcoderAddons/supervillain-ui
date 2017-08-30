@@ -1,6 +1,6 @@
 ## Interface: 70300
 ## Author: Failcoder
-## Version: 1.3.9
+## Version: 1.4.0
 ## Title: |cffFF9900SuperVillain UI: |r|cff00FF00!Options|r
 ## Notes: SVUI [|cff9911FFConfig Options|r]
 ## RequiredDeps: SVUI_!Core
