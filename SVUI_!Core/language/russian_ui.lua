@@ -87,8 +87,10 @@ L["|cff00FFFFThe Double Down|r"] = true;
 --[[NORMAL INSTALLER TEXTS]]--
 L["This is SVUI version %s!"] = true;
 L["Before I can turn you loose, persuing whatever villainy you feel will advance your professional career ... I need to ask some questions and turn a few screws first."] = true;
-L["At any time you can get to the config options by typing the command /sv. For quick changes to frame, bar or color sets, call your henchman by clicking the button on the bottom right of your screen. (Its the one with his stupid face on it)"] = true;
+L["At any time you can get to the config options by typing the command /sv. For quick changes to frame, bar or color sets, call your henchman by clicking the button on the bottom right of your screen. (Its the one with his stupid face on it)"] = "В любой момент вы можете перейти к настройкам, набрав команду /sv. Для быстрых изменений в наборе фреймов, баров или цветов вызовите своего приятеля, нажав кнопку в правом нижнем углу экрана. (Это тот, с его глупым лицом на нем)";
 L["CHOOSE_OR_DIE"] = CHOOSE_FACTION.." "..OR_CAPS.." "..HIT.." "..CONTINUE;
+L[CONTINUE] = "ПРОДОЛЖАТЬ";
+L[PREVIOUS] = "ПРЕДЫДУЩИЙ";
 L["Whether you want to or not, you will be needing a communicator so other villains can either update you on their doings-of-evil or inform you about the MANY abilities of Chuck Norris"] = true;
 L["The chat windows function the same as standard chat windows, you can right click the tabs and drag them, rename them, slap them around, you know... whatever. Clickity-click to setup your chat windows."] = true;
 L["Your current resolution is %s, this is considered a %s resolution."] = true;

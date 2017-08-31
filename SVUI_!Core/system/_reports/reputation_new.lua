@@ -71,14 +71,17 @@ end
 local function DoTooltip(self)
 	Reports:SetDataTip(self)
 	local factionIndex, faction = LRD:GetReputationInfo()
-
 	if not factionIndex then
 		Reports.ToolTip:AddLine("No Watched Factions")
 	else
 		Reports.ToolTip:AddLine(faction.name)
 		Reports.ToolTip:AddLine(' ')
 		Reports.ToolTip:AddDoubleLine(STANDING..':', faction.standing, 1, 1, 1)
-		Reports.ToolTip:AddDoubleLine(REPUTATION..':', format('%d / %d (%d%%)', faction.value - faction.min, faction.max - faction.min, (faction.value - faction.min) / (faction.max - faction.min) * 100), 1, 1, 1)
+		if (faction.standing == "Exalted") then
+			Reports.ToolTip:AddDoubleLine(REPUTATION..':', '24,000 / 24,000 (100%)', 1, 1, 1)
+		else
+			Reports.ToolTip:AddDoubleLine(REPUTATION..':', format('%d / %d (%d%%)', faction.value - faction.min, faction.max - faction.min, (faction.value - faction.min) / (faction.max - faction.min) * 100), 1, 1, 1)
+		end
 	end
 	Reports.ToolTip:AddLine(" ", 1, 1, 1)
 	Reports.ToolTip:AddDoubleLine("[Click]", "Change Watched Faction", 0,1,0, 0.5,1,0.5)

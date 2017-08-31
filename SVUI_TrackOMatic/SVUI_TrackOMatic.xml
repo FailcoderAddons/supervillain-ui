@@ -76,7 +76,7 @@
         </Layers>
     </Frame>
 
-    <Script file='Loader.lua'/>
+    <!--- <Script file='Loader.lua'/>
     <Include file='components\_load.xml'/>
-    <Script file='SVUI_TrackOMatic.lua'/>
+    <Script file='SVUI_TrackOMatic.lua'/> --->
 </Ui>

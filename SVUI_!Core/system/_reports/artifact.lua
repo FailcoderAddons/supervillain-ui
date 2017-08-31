@@ -46,6 +46,13 @@ local LAD = LibStub("LibArtifactData-1.0");
 UTILITIES
 ##########################################################
 ]]--
+local percColors = {
+	"|cff0CD809",
+	"|cffE8DA0F",
+	"|cffFF9000",
+	"|cffD80909"
+}
+
 local function GetArtifactData()
 	local artID = LAD:GetActiveArtifactID()
 	if not artID then return false end
@@ -65,16 +72,17 @@ local function SetTooltipText(report)
 	if isEquipped then
 		local calc1 = (currentPower / powerToNextLevel) * 100;
 		Reports.ToolTip:AddDoubleLine(L["Rank:"], (" %d "):format(rank), 1, 1, 1)
-		Reports.ToolTip:AddDoubleLine(L["Current Artifact Power:"], (" %d  /  %d (%d%%)"):format(currentPower, powerToNextLevel, calc1), 1, 1, 1)
-		Reports.ToolTip:AddDoubleLine(L["Remaining:"], (" %d "):format(powerToNextLevel - currentPower), 1, 1, 1)
-		Reports.ToolTip:AddDoubleLine(L["Points to Spend:"], format(" %d ", pointsToSpend), 1, 1, 1)
+		Reports.ToolTip:AddDoubleLine(L["Current Artifact Power:"], (" %s  /  %s (%d%%)"):format(currentPower, powerToNextLevel, calc1), 1, 1, 1)
+		Reports.ToolTip:AddDoubleLine(L["Remaining:"], (" %s "):format(powerToNextLevel - currentPower), 1, 1, 1)
+		Reports.ToolTip:AddDoubleLine(L["Points to Spend:"], format(" %s ", pointsToSpend), 1, 1, 1)
 	else
 		Reports.ToolTip:AddDoubleLine(L["No Artifact"])
 	end
 end
 
 local function FormatPower(rank, currentPower, powerForNextPoint, pointsToSpend)
-	local currentText = ("%d(+%d) %d/%d"):format(rank, pointsToSpend, currentPower, powerForNextPoint);
+	local calc1 = (currentPower / powerForNextPoint) * 100;
+	local currentText = ("Traits: %d (%s%d%%|r)"):format(rank, percColors[calc1 >= 75 and 1 or (calc1 >= 50 and calc1 < 75) and 2 or (calc1 >= 25 and calc1 < 50) and 3 or (calc1 >= 0 and calc1 < 25) and 4], calc1);
 	return currentText
 end
 

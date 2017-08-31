@@ -75,32 +75,35 @@ local Incentive_OnHide = function(button)
   ActionButton_HideOverlayGlow(check)
 end
 
-local _hook_QueueStatusFrame_Update = function(self)
-  for i=1, #self.StatusEntries do
-    local node = self.StatusEntries[i];
-    if(node.RoleIcon1) then
-      node.RoleIcon1:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-    end
-    if(node.RoleIcon2) then
-      node.RoleIcon2:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-    end
-    if(node.RoleIcon3) then
-      node.RoleIcon3:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-    end
-    if(node.HealersFound) then
-      node.HealersFound.Cover:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-      node.HealersFound.Texture:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-    end
-    if(node.TanksFound) then
-      node.TanksFound.Cover:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-      node.TanksFound.Texture:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-    end
-    if(node.DamagersFound) then
-      node.DamagersFound.Cover:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-      node.DamagersFound.Texture:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
-    end
-  end
-end
+-- Removed for 7.2
+--[[local _hook_QueueStatusFrame_Update = function(self)
+	if #self.StatusEntriesPool > 1 then
+		for i=1, #self.StatusEntriesPool do
+			local node = self.StatusEntriesPool[i];
+			if(node.RoleIcon1) then
+				node.RoleIcon1:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+			end
+			if(node.RoleIcon2) then
+				node.RoleIcon2:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+			end
+			if(node.RoleIcon3) then
+				node.RoleIcon3:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+			end
+			if(node.HealersFound) then
+				node.HealersFound.Cover:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+				node.HealersFound.Texture:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+			end
+			if(node.TanksFound) then
+				node.TanksFound.Cover:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+				node.TanksFound.Texture:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+			end
+			if(node.DamagersFound) then
+				node.DamagersFound.Cover:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+				node.DamagersFound.Texture:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
+			end
+		end
+	end
+end]]--
 
 local LFDQueueRandom_OnUpdate = function()
   LFDQueueFrame:RemoveTextures()
@@ -261,9 +264,9 @@ local function LFDFrameStyle()
   RaidFinderQueueFrameRoleButtonLeader.leadIcon:SetSize(50, 50)
   RaidFinderQueueFrameRoleButtonLeader.leadIcon:SetAlpha(0.4)
 
-  if(QueueStatusFrame and QueueStatusFrame.StatusEntries) then
-    for i=1, #QueueStatusFrame.StatusEntries do
-      local node = QueueStatusFrame.StatusEntries[i];
+  if(QueueStatusFrame and QueueStatusFrame.StatusEntriesPool) then
+    for i=1, #QueueStatusFrame.StatusEntriesPool do
+      local node = QueueStatusFrame.StatusEntriesPool[i];
       if(node.RoleIcon1) then
         node.RoleIcon1:SetTexture("Interface\\AddOns\\SVUI_Skins\\artwork\\UI-LFG-ICON-ROLES")
       end
@@ -288,7 +291,8 @@ local function LFDFrameStyle()
     end
   end
 
-  hooksecurefunc('QueueStatusFrame_Update', _hook_QueueStatusFrame_Update)
+  --Removed for 7.2
+  --hooksecurefunc('QueueStatusFrame_Update', _hook_QueueStatusFrame_Update)
 
   hooksecurefunc('LFG_DisableRoleButton', function(self)
     local check = self.checkButton or self.CheckButton

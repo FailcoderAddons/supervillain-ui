@@ -21,7 +21,7 @@ local CreateFrame, UIParent = CreateFrame, UIParent
 Scripts
 -------------------------------------------------------------------------------]]
 local function Button_OnClick(frame)
-	PlaySound("gsTitleOptionExit")
+	PlaySound(PlaySoundKitID and "gsTitleOptionExit" or 799)
 	frame.obj:Hide()
 end
 

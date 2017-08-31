@@ -485,7 +485,8 @@ function MOD:Load()
 
 	ObjectiveTrackerFrame:UnregisterAllEvents();
 	ObjectiveTrackerFrame:SetParent(SV.Hidden);
-
+	if (ObjectiveTrackerFrame:IsVisible() or ObjectiveTrackerFrame:IsShown()) then ObjectiveTrackerFrame:Hide(); end
+	
 	self.Headers["Popups"]:Refresh()
 
 	SV.Events:On("DOCK_EXPANDED", ExpandQuestTracker, true);

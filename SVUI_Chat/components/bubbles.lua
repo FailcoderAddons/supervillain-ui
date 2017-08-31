@@ -20,12 +20,19 @@ GET ADDON DATA
 local SV = _G['SVUI']
 local L = SV.L;
 local MOD = SV.Chat;
+local bubbles = SV.db.Chat.bubbles;
 --[[
 ##########################################################
 CHAT BUBBLES
 ##########################################################
 ]]--
 function MOD:LoadChatBubbles()
+	local inInstance, instanceType = IsInInstance();
+	local posX, posY = GetPlayerMapPosition("player");
+	if (posX == 0 and posY == 0) or inInstance then
+		SV.db.Chat.bubbles = false
+	end
+	
 	if(SV.db.Chat.bubbles == true) then
 		local ChatBubbleHandler = CreateFrame("Frame", nil, UIParent)
 

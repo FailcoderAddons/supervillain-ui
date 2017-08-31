@@ -1,4 +1,4 @@
-## Interface: 70100
+## Interface: 70300
 ## Author: Failcoder
 ## Version: 1.0.09
 ## Title: |cffFF9900SVUI Plugin: |r|cffFF69B4Craft-O-Matic|r

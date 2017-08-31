@@ -1,4 +1,4 @@
---[[ $Id: CallbackHandler-1.0.lua 18 2014-10-16 02:52:20Z mikk $ ]]
+--[[ $Id: CallbackHandler-1.0.lua 1131 2015-06-04 07:29:24Z nevcairiel $ ]]
 local MAJOR, MINOR = "CallbackHandler-1.0", 6
 local CallbackHandler = LibStub:NewLibrary(MAJOR, MINOR)
 
@@ -235,3 +235,4 @@ end
 -- CallbackHandler purposefully does NOT do explicit embedding. Nor does it
 -- try to upgrade old implicit embeds since the system is selfcontained and
 -- relies on closures to work.
+

@@ -398,14 +398,14 @@ local function SetLargeWorldMap()
 		end
 	end
 
-	WorldMapFrameSizeUpButton:Hide()
-	WorldMapFrameSizeDownButton:Show()
+	--WorldMapFrameSizeUpButton:Hide()
+	--WorldMapFrameSizeDownButton:Show()
 end
 
 local function SetSmallWorldMap()
 	if InCombatLockdown() then return end
-	WorldMapFrameSizeUpButton:Show()
-	WorldMapFrameSizeDownButton:Hide()
+	--WorldMapFrameSizeUpButton:Show()
+	--WorldMapFrameSizeDownButton:Hide()
 end
 
 local function AdjustMapSize()
@@ -485,7 +485,8 @@ local function UpdateWorldMapConfig()
 	if InCombatLockdown()then return end
 	if(not MOD.WorldMapHooked) then
 		NewHook("WorldMap_ToggleSizeUp", AdjustMapSize)
-		NewHook("WorldMap_ToggleSizeDown", SetSmallWorldMap)
+		--Removed for 7.3
+		--NewHook("WorldMap_ToggleSizeDown", SetSmallWorldMap)
 		MOD.WorldMapHooked = true
 	end
 	AdjustMapSize()
@@ -667,8 +668,8 @@ function MOD:ADDON_LOADED(event, addon)
 end
 
 function MOD:PLAYER_REGEN_ENABLED()
-	WorldMapFrameSizeDownButton:Enable()
-	WorldMapFrameSizeUpButton:Enable()
+	--WorldMapFrameSizeDownButton:Enable()
+	--WorldMapFrameSizeUpButton:Enable()
 	if(self.CombatLocked) then
 		self:RefreshMiniMap()
 		self.CombatLocked = nil
@@ -676,8 +677,8 @@ function MOD:PLAYER_REGEN_ENABLED()
 end
 
 function MOD:PLAYER_REGEN_DISABLED()
-	WorldMapFrameSizeDownButton:Disable()
-	WorldMapFrameSizeUpButton:Disable()
+	--WorldMapFrameSizeDownButton:Disable()
+	--WorldMapFrameSizeUpButton:Disable()
 end
 --[[
 ##########################################################

@@ -953,14 +953,10 @@ do
 		end
 	end
 
-	local _hook_OnHyperlinkLeave = function(self, refString)
-		-- JV: 20161025 FIXME: (7.1) Lazyfix for Chat window reset causing this to fire with no refString. Longterm: figure out why! 
-		if(not CHAT_HOVER_URL or not refString) then return; end
-		local token = refString:match("^([^:]+)")
-		if _linkTokens[token] then
-			HideUIPanel(GameTooltip)
-			ACTIVE_HYPER_LINK = nil;
-		end
+	local _hook_OnHyperlinkLeave = function(self)
+		if(not CHAT_HOVER_URL) then return; end
+		HideUIPanel(GameTooltip)
+		ACTIVE_HYPER_LINK = nil;
 	end
 
 	local _hook_OnMessageScrollChanged = function(self)
@@ -1932,8 +1928,9 @@ function MOD:Load()
 		self:RegisterEvent("CHAT_MSG_WHISPER")
 		self:RegisterEvent("CHAT_MSG_BN_WHISPER")
 	end
-
-	self:LoadChatBubbles()
+	
+	-- Removing temporarily.
+	--self:LoadChatBubbles();
 
 	SV.Events:On("DOCK_FADE_IN", DockFadeInChat, true);
 	SV.Events:On("DOCK_FADE_OUT", DockFadeOutChat, true);
