@@ -365,7 +365,7 @@ local RefreshScenarioObjective = function(self, event, ...)
 					if(not scenariocompleted) then
 						self:Set(title, stageName, currentStage, numStages, stageDescription, numObjectives)
 						if(currentStage > 1) then
-							PlaySound("UI_Scenario_Stage_End");
+							PlaySound(PlaySoundKitID and "UI_Scenario_Stage_End" or 31757);
 						end
 					else
 						self.Timer:StopTimer()
