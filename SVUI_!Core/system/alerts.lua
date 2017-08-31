@@ -167,7 +167,7 @@ SV.SystemAlert["IMPORT_PROFILE_PROMPT"] = {
 	OnAccept = SV.fubar
 };
 SV.SystemAlert["MASTER_PROFILE_PROMPT"] = {
-	text = L["This character need to have a profile installed and I can see that you have a master profile set. Would you like to use that instead of the installer?"],
+	text = L["This character needs to have a profile installed and I can see that you have a master profile set. Would you like to use that instead of the installer?"],
 	button1 = YES,
 	button2 = NO,
 	timeout = 0,
