@@ -253,11 +253,11 @@ local UpdateChallengeMedals = function(self, elapsedTime)
 			end
 			if(LAST_MEDAL and LAST_MEDAL ~= i) then
 				if(LAST_MEDAL == CHALLENGE_MEDAL_GOLD) then
-					PlaySound("UI_Challenges_MedalExpires_GoldtoSilver");
+					PlaySound(SOUNDKIT.UI_70_CHALLENGE_MODE_KEYSTONE_UPGRADE);
 				elseif(LAST_MEDAL == CHALLENGE_MEDAL_SILVER) then
-					PlaySound("UI_Challenges_MedalExpires_SilvertoBronze");
+					PlaySound(SOUNDKIT.UI_70_CHALLENGE_MODE_KEYSTONE_UPGRADE);
 				else
-					PlaySound("UI_Challenges_MedalExpires");
+					PlaySound(SOUNDKIT.UI_70_CHALLENGE_MODE_COMPLETE_NO_UPGRADE);
 				end
 			end
 			LAST_MEDAL = i;
