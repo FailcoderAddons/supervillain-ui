@@ -58,6 +58,13 @@ end
 SV.defaults[Schema] = {
 	["enable"] = true,
 	["enableAddonDock"] = true,
+	["quickjoin"] = {
+		["enable"] = true,
+		["toastwidth"] = 400,
+		["toastheight"] = 35,
+		["growth"] = "BOTTOM",
+		["maxtoast"] = 5,
+	},
 	["blizzard"] = {
 		["enable"] = true,
 		["artifact"] = true,
@@ -225,8 +232,15 @@ function MOD:LoadOptions()
 			    get = function(key) return SV.db[Schema].addons.enable end,
 			    set = function(key,value) SV.db[Schema].addons.enable = value; SV:StaticPopup_Show("RL_CLIENT") end
 			},
-			addons = {
+			quickjoinEnable = {
 				order = 4,
+				name = "Quick Join Toast Styling",
+				type = "toggle",
+				get = function(key) return SV.db[Schema].quickjoin.enable end,
+			    set = function(key,value) SV.db[Schema].quickjoin.enable = value; SV:StaticPopup_Show("RL_CLIENT") end
+			},
+			addons = {
+				order = 5,
 				type = "group",
 				name = "Addon Styling",
 				get = function(key) return SV.db[Schema].addons[key[#key]] end,
@@ -236,7 +250,7 @@ function MOD:LoadOptions()
 				args = AddonConfigOptions()
 			},
 			blizzard = {
-				order = 300,
+				order = 6,
 				type = "group",
 				name = "Individual Mods",
 				get = function(key) return SV.db[Schema].blizzard[key[#key]] end,
@@ -528,6 +542,62 @@ function MOD:LoadOptions()
 						type = "toggle",
 						name = L["Obliterum Forge"],
 						desc = L["TOGGLEART_DESC"]
+					}
+				},
+			},
+			quickjoin = {
+				order = 6,
+				type = "group",
+				name = "Quick Join Toast Settings",
+				get = function(key) return SV.db[Schema].quickjoin[key[#key]] end,
+				set = function(key,value) SV.db[Schema].quickjoin[key[#key]] = value; SV:StaticPopup_Show("RL_CLIENT") end,
+				guiInline = true,
+				args = {
+					toastwidth = {
+						order = 1,
+						type = 'range',
+						name = L["Toast Width"],
+						desc = L["The width that each individual toast will be. Default: 400"],
+						width = 'double',
+						min = 100,
+						max = 600,
+						step = 1,
+						get = function()return SV.db.Skins.quickjoin.toastwidth end,
+						set = function(a,b) SV.db.Skins.quickjoin.toastwidth = b; SV:RefreshToast(false);  end,
+					},
+					toastheight = {
+						order = 2,
+						type = 'range',
+						name = L["Toast Height"],
+						desc = L["The height that each individual toast will be. Default: 35"],
+						width = 'double',
+						min = 10,
+						max = 50,
+						step = 1,
+						get = function()return SV.db.Skins.quickjoin.toastheight end,
+						set = function(a,b) SV.db.Skins.quickjoin.toastheight = b; SV:RefreshToast(false);  end,
+					},
+					growth = {
+						order = 3,
+						type = 'select',
+						name = L["            Growth Direction"],
+						desc = L["The direction that toasts will grow in."],
+						width = 'normal',
+						values = { ["TOP"] = "Up", ["BOTTOM"] = "Down" },
+						get = function(a)return SV.db.Skins.quickjoin.growth end,
+						set = function(a,b) SV.db.Skins.quickjoin.growth = b; SV:RefreshToast(true);  end,
+					},
+					maxtoast = {
+						order = 4,
+						type = 'range',
+						name = L["Max Toasts"],
+						desc = L["Maximum number of toasts to display at once."],
+						width = 'normal',
+						min = 1,
+						max = 10,
+						step = 1,
+						get = function()return SV.db.Skins.quickjoin.maxtoast end,
+						set = function(a,b) SV.db.Skins.quickjoin.maxtoast = b; SV:RefreshToast(false); end,
 					}
 				}
 			}
