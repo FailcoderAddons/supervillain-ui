@@ -93,7 +93,7 @@ local function initializeToastVault()
 		padding = padding * -1;
 	end
 
-	ToastVault:SetPoint("CENTER", UIParent);
+	ToastVault:SetAllPoints(UIParent);
 	ToastVault:SetClampedToScreen(true);
 	
 	ToastVault.secretVault = {};
