@@ -52,8 +52,7 @@ local AchievementItemButtons = {
 	"AchievementFrameAchievementsContainerButton3",
 	"AchievementFrameAchievementsContainerButton4",
 	"AchievementFrameAchievementsContainerButton5",
-	"AchievementFrameAchievementsContainerButton6",
-	"AchievementFrameAchievementsContainerButton7",
+	"AchievementFrameAchievementsContainerButton6"
 }
 
 local _hook_DescriptionColor = function(self, r, g, b)
@@ -243,8 +242,8 @@ local function AchievementStyle()
 	end)
 
 	hooksecurefunc("AchievementFrameSummary_UpdateAchievements", _hook_AchievementsUpdate)
-
-	for i = 1, #AchievementItemButtons do
+	
+	for i=1, #AchievementItemButtons do
 		local gName = AchievementItemButtons[i]
 		local button = _G[gName]
 
@@ -254,7 +253,7 @@ local function AchievementStyle()
 			local hdesc = _G[gName.."HiddenDescription"]
 			local icon = _G[gName.."Icon"]
 			local track = _G[gName.."Tracked"]
-
+			
 			if(hl) then hl:Die() end
 
 			button:RemoveTextures(true)
@@ -283,6 +282,7 @@ local function AchievementStyle()
 				local bling = _G[gName.."IconBling"]
 				local over = _G[gName.."IconOverlay"]
 				local tex = _G[gName.."IconTexture"]
+				
 				if(bling) then bling:Die() end
 				if(over) then over:Die() end
 				if(tex) then
@@ -291,8 +291,8 @@ local function AchievementStyle()
 				end
 
 				icon:SetStyle("!_Frame", "Default")
-				icon:SetHeight(icon:GetHeight()-14)
-				icon:SetWidth(icon:GetWidth()-14)
+				icon:SetHeight(icon:GetHeight())
+				icon:SetWidth(icon:GetWidth())
 				icon:ClearAllPoints()
 				icon:SetPoint("LEFT", 6, 0)
 			end
@@ -346,8 +346,8 @@ local function AchievementStyle()
 			_G[d.."IconBling"]:Die()
 			_G[d.."IconOverlay"]:Die()
 			_G[d.."Icon"]:SetStyle("!_Frame", "Default")
-			_G[d.."Icon"]:SetHeight(_G[d.."Icon"]:GetHeight()-14)
-			_G[d.."Icon"]:SetWidth(_G[d.."Icon"]:GetWidth()-14)
+			_G[d.."Icon"]:SetHeight(_G[d.."Icon"]:GetHeight())
+			_G[d.."Icon"]:SetWidth(_G[d.."Icon"]:GetWidth())
 			_G[d.."Icon"]:ClearAllPoints()
 			_G[d.."Icon"]:SetPoint("LEFT", 6, 0)
 			_G[d.."IconTexture"]:SetTexCoord(unpack(_G.SVUI_ICON_COORDS))
