@@ -28,9 +28,11 @@ local ToastMinion = CreateFrame("Frame", "SVUI_ToastMinion");
 local ToastVault;
 local anchor = "";
 
+ToastMinion:RegisterEvent("SOCIAL_QUEUE_UPDATE");
+ToastMinion:RegisterEvent("ADDON_LOADED");
 
 local function SummonToast(friendName, queueText, queueDesc, id, parent)
-	local superToast = CreateFrame("Frame", "qjToastFrame"..id, parent or UIParent);
+	local superToast = CreateFrame("Frame", "qjToastFrame"..id, parent);
 	superToast:SetPoint(SV.db.Skins.quickjoin.growth);
 	superToast:SetSize(SV.db.Skins.quickjoin.toastwidth, SV.db.Skins.quickjoin.toastheight);
 	superToast.id = id;
@@ -80,7 +82,13 @@ local function SummonToast(friendName, queueText, queueDesc, id, parent)
 end
 
 local function initializeToastVault()
-	ToastVault = CreateFrame("Frame", "ToastVaultFrame", UIParent);
+	if (ToastVault ~= nil) then return; end
+	
+	ToastVault = CreateFrame("Frame", "ToastVault", UIParent);
+	ToastVault:ClearAllPoints();
+	ToastVault:SetPoint("TOP", UIParent, SV.db.Skins.quickjoin.xoffset, SV.db.Skins.quickjoin.yoffset);
+	SV:RefreshToast(false);
+	ToastVault:SetClampedToScreen(true);
 	
 	if (SV.db.Skins.quickjoin.growth == "TOP") then
 		anchor = "BOTTOM";
@@ -92,9 +100,6 @@ local function initializeToastVault()
 	if (SV.db.Skins.quickjoin.growth == "BOTTOM") then
 		padding = padding * -1;
 	end
-
-	ToastVault:SetAllPoints(UIParent);
-	ToastVault:SetClampedToScreen(true);
 	
 	ToastVault.secretVault = {};
 	ToastVault.toast = {};
@@ -137,7 +142,7 @@ local function initializeToastVault()
 		self:handleToast();
 	end;
 	
-	ToastVault.handleToast = function(self)
+	ToastVault.handleToast = function(self)	
 		if(#self.secretVault == 0) then
 			return;
 		end;
@@ -313,8 +318,14 @@ function ToastMinion:OnEvent(event, ...)
 				end
 			end
 		end
+	elseif (event == "ADDON_LOADED") then
+		-- Initialize Toast Systems
+		-- If we don't initialize, then there won't be any toasting to our victories.
+		initializeToastVault();
 	end
 end
+
+ToastMinion:SetScript("OnEvent", ToastMinion.OnEvent);
 
 function SV:RefreshToast(growChange)
 	if (not growChange) then
@@ -326,6 +337,14 @@ function SV:RefreshToast(growChange)
 	else
 		SV:StaticPopup_Show("RL_CLIENT");
 	end
+end
+
+function SV:MoveToast()
+	local xoffset = ToastVault_MOVE:GetLeft();
+	local yoffset = ToastVault_MOVE:GetTop();
+	SV.db.Skins.quickjoin.xoffset = xoffset;
+	SV.db.Skins.quickjoin.yoffset = yoffset;
+	ToastVault:SetPoint("TOP", UIParent, SV.db.Skins.quickjoin.xoffset, SV.db.Skins.quickjoin.yoffset);
 end
 --[[ 
 ########################################################## 
@@ -339,18 +358,15 @@ local function QuickJoinStyle()
 	
 	-- Hide the goofball default Blizz toasts that like to show up offscreen and ruin our Evil plans!
 	QuickJoinToastButton.Toast:Hide();
-	QuickJoinToastButton.Toast2:Hide();	
+	QuickJoinToastButton.Toast2:Hide();
 	
-	-- Initialize Toast Systems
-	-- If we don't initialize, then there won't be any toasting to our victories...
-	initializeToastVault();
+	SV:NewAnchor(ToastVault, L["Quick Join Toast Anchor"]);
+	SV:MoveToast();	
 	
-	SV:NewAnchor(ToastVault, L["Quick Join Toast Anchor"]);	
-	
-	SV:RefreshToast();
-	
-	ToastMinion:RegisterEvent("SOCIAL_QUEUE_UPDATE");
-	ToastMinion:SetScript("OnEvent", ToastMinion.OnEvent);
+	SV:AddSlashCommand("addtoast", "Display test quick join toast", function()
+		ToastVault:addToast("Supervillain", "RAID: Chamber of the Avatar", "lfglist", 9999);
+		SV:AddonMessage(SV.db.Skins.quickjoin.xoffset .. ", " .. SV.db.Skins.quickjoin.yoffset);
+	end);
 end
 --[[ 
 ########################################################## 
