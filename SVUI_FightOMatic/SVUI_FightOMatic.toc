@@ -9,9 +9,12 @@
 ## X-SVUIName: Fight-O-Matic
 ## X-SVUISchema: FightOMatic
 ## X-Email: munglunch@gmail.com
-
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: All Rights Reserved
 ## X-Category: Interface Enhancements
+## X-Curse-Packaged-Version: 1.4.0
+## X-Curse-Project-Name: SuperVillain UI
+## X-Curse-Project-ID: supervillain-ui
+## X-Curse-Repository-ID: wow/supervillain-ui/mainline
 
 SVUI_FightOMatic.xml
