@@ -7,3 +7,4 @@
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: MIT
 ## X-Category: Interface Enhancements
+#@release@ and #@release@
