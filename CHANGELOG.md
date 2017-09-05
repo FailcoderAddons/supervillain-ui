@@ -1,3 +1,9 @@
+######v1.4
+* Full 7.3 compatibility
+* New Feature - Added Quick Join Toast modification
+* Tons of skin fixes
+* Bug fixes galore
+
 ######v1.3.5
 * Some skin fixes for many blizz frames
 * Fixed guild bank background issue
