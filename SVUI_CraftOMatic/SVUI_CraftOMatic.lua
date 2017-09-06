@@ -449,7 +449,7 @@ function PLUGIN:EndJobModes()
 	self:ChangeModeGear()
 	self.ModeAlert:Hide();
 	SV:SCTMessage("Mode Disabled", 1, 0.35, 0);
-	PlaySound("UndeadExploration");
+	PlaySound(PlaySoundKitID and "UndeadExploration" or 4142);
 	self:CraftingReset()
 end
 
