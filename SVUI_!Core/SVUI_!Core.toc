@@ -1,6 +1,6 @@
 ## Interface: 70300
 ## Author: Failcoder
-## Version: 1.4.0
+## Version: 1.4.1
 ## Title: |cffFF9900SuperVillain UI: |r|cff00FF00!Core|r
 ## Notes: SVUI [|cff9911FFCore Framework|r].
 ## SavedVariables: SVUI_Global, SVUI_Errors, SVUI_Filters, SVUI_Media, SVUI_Shared
@@ -12,7 +12,7 @@
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: MIT
 ## X-Category: Interface Enhancements
-## X-Curse-Packaged-Version: 1.4.0
+## X-Curse-Packaged-Version: 1.4.1
 ## X-Curse-Project-Name: SuperVillain UI
 ## X-Curse-Project-ID: supervillain-ui
 ## X-Curse-Repository-ID: wow/supervillain-ui/mainline

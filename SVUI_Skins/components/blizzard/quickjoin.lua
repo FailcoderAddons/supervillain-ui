@@ -63,6 +63,7 @@ local function SummonToast(friendName, queueText, queueDesc, id, parent)
 		self:GetParent():GetParent():close();
 	end);
 	
+	-- Make sure windows are not open for longer than 10 seconds.
 	if (time() > cTime + 10) then
 		self:GetParent():GetParent():close();
 	end
@@ -131,6 +132,7 @@ local function initializeToastVault()
 		end
 		
 		--Sort the table by oldest to newest. Reverse for newest to oldest.
+		--If growth is DOWN then oldest will be at bottom and vice versa
 		table.sort(self.toast, function(toast1, toast2)
 			return toast1.id < toast2.id;
 		end);

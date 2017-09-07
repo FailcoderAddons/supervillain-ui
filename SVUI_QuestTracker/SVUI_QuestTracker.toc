@@ -1,6 +1,6 @@
 ## Interface: 70300
 ## Author: Failcoder
-## Version: 1.4.0
+## Version: 1.4.1
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00QuestTracker|r
 ## Notes: QuestTracker Plugin for [|cff9911FFSVUI|r].
 ## OptionalDeps: LibSharedMedia-3.0
@@ -11,7 +11,7 @@
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: MIT
 ## X-Category: Interface Enhancements
-## X-Curse-Packaged-Version: 1.4.0
+## X-Curse-Packaged-Version: 1.4.1
 ## X-Curse-Project-Name: SuperVillain UI
 ## X-Curse-Project-ID: supervillain-ui
 ## X-Curse-Repository-ID: wow/supervillain-ui/mainline

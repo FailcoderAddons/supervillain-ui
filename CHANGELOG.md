@@ -1,6 +1,9 @@
+######v1.4.1
+* Quick Join Toast skin now positions properly
+
 ######v1.4
 * Full 7.3 compatibility
-* New Feature - Added Quick Join Toast modification
+* New Feature - Added Quick Join Toast skin
 * Tons of skin fixes
 * Bug fixes galore
 
