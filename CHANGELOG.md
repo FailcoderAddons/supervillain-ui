@@ -1,3 +1,6 @@
+######v1.4.2
+* Curse build should have all features now
+
 ######v1.4.1
 * Quick Join Toast skin now positions properly
 
