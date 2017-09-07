@@ -64,6 +64,8 @@ SV.defaults[Schema] = {
 		["toastheight"] = 35,
 		["growth"] = "BOTTOM",
 		["maxtoast"] = 5,
+		["xoffset"] = 3,
+		["yoffset"] = -283,
 	},
 	["blizzard"] = {
 		["enable"] = true,

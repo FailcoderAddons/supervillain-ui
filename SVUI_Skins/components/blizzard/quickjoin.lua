@@ -44,6 +44,7 @@ local function SummonToast(friendName, queueText, queueDesc, id, parent)
 
 	SV.API:Set("Button", superToast);
 	
+	local cTime = time();
 	superToast.animation = superToast:CreateAnimationGroup();
 	superToast.animation.fadeIn = superToast.animation:CreateAnimation("Alpha");
 	superToast.animation.fadeIn:SetDuration(0.6);
@@ -61,6 +62,10 @@ local function SummonToast(friendName, queueText, queueDesc, id, parent)
 	superToast.animation.fadeOut:SetScript("OnFinished", function(self)
 		self:GetParent():GetParent():close();
 	end);
+	
+	if (time() > cTime + 10) then
+		self:GetParent():GetParent():close();
+	end
 	
 	superToast.close = function(self)
 		ToastVault:close(self.id);
@@ -83,6 +88,7 @@ end
 
 local function initializeToastVault()
 	if (ToastVault ~= nil) then return; end
+	if (SV.db.Skins.quickjoin.enable ~= true) then return; end
 	
 	ToastVault = CreateFrame("Frame", "ToastVault", UIParent);
 	ToastVault:ClearAllPoints();
@@ -145,7 +151,7 @@ local function initializeToastVault()
 	ToastVault.handleToast = function(self)	
 		if(#self.secretVault == 0) then
 			return;
-		end;
+		end
 		
 		local tIndex = -1;
 		local nToastID = self.next + 1;
@@ -287,7 +293,7 @@ function ToastMinion:OnEvent(event, ...)
 					roleText = "("..roles["TANK"].."/"..roles["HEALER"].."/"..roles["DAMAGER"]..")";
 					]]--
 					
-					ToastVault:addToast(playerName, activityName..": "..name, "lfglist", getQueues[1].queueData.lfgListID);
+					ToastVault:addToast(playerName, activityName..": "..name, "lfglist", getQueues[1].queueData.lfgListID, time());
 					--SV:AddonMessage(playerName .. " joined a group: " .. activityName..": "..name .. "lfglist" .. getQueues[1].queueData.lfgListID);
 				end
 			else
@@ -313,7 +319,7 @@ function ToastMinion:OnEvent(event, ...)
 					end
 				end
 				if (eQueue) then
-					ToastVault:addToast(playerName, allQueues, "lfg", guid);
+					ToastVault:addToast(playerName, allQueues, "lfg", guid, time());
 					--SV:AddonMessage(playerName .. " joined a group: " .. allQueues .. "lfg" .. guid);
 				end
 			end
@@ -340,11 +346,9 @@ function SV:RefreshToast(growChange)
 end
 
 function SV:MoveToast()
-	local xoffset = ToastVault_MOVE:GetLeft();
-	local yoffset = ToastVault_MOVE:GetTop();
-	SV.db.Skins.quickjoin.xoffset = xoffset;
-	SV.db.Skins.quickjoin.yoffset = yoffset;
-	ToastVault:SetPoint("TOP", UIParent, SV.db.Skins.quickjoin.xoffset, SV.db.Skins.quickjoin.yoffset);
+	ToastVault:SetPoint("TOP", ToastVault_MOVE, 0, 0);
+	SV.db.Skins.quickjoin.xoffset = ToastVault_MOVE:GetLeft();
+	SV.db.Skins.quickjoin.yoffset = ToastVault_MOVE:GetTop();
 end
 --[[ 
 ########################################################## 
@@ -361,11 +365,10 @@ local function QuickJoinStyle()
 	QuickJoinToastButton.Toast2:Hide();
 	
 	SV:NewAnchor(ToastVault, L["Quick Join Toast Anchor"]);
-	SV:MoveToast();	
+	SV:MoveToast();
 	
 	SV:AddSlashCommand("addtoast", "Display test quick join toast", function()
 		ToastVault:addToast("Supervillain", "RAID: Chamber of the Avatar", "lfglist", 9999);
-		SV:AddonMessage(SV.db.Skins.quickjoin.xoffset .. ", " .. SV.db.Skins.quickjoin.yoffset);
 	end);
 end
 --[[ 
