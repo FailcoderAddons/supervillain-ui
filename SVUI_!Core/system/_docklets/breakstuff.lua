@@ -102,8 +102,10 @@ do
 		['124105']='OVERRIDE_MILLABLE', --Starlight Rose
 		['124106']='OVERRIDE_MILLABLE', --Felwort
 		['128304']='OVERRIDE_MILLABLE', --Yseralline Seed
-		['123918']='OVERRIDE_PROSPECTABLE', --leystone
+		['151565']='OVERRIDE_MILLABLE', --Astral Glory
+		['123918']='OVERRIDE_PROSPECTABLE', --Leystone
 		['123919']='OVERRIDE_PROSPECTABLE', --Felslate
+		['151564']='OVERRIDE_PROSPECTABLE', --Empyrium
 	}
 
 	local function IsThisBreakable(link)
