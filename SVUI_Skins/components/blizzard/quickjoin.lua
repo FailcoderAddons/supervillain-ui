@@ -293,7 +293,7 @@ function ToastMinion:OnEvent(event, ...)
 					roleText = "("..roles["TANK"].."/"..roles["HEALER"].."/"..roles["DAMAGER"]..")";
 					]]--
 					
-					ToastVault:addToast(playerName, activityName..": "..name, "lfglist", getQueues[1].queueData.lfgListID, time());
+					ToastVault:addToast(playerName, activityName..": "..name, "lfglist", getQueues[1].queueData.lfgListID);
 					--SV:AddonMessage(playerName .. " joined a group: " .. activityName..": "..name .. "lfglist" .. getQueues[1].queueData.lfgListID);
 				end
 			else
@@ -319,7 +319,7 @@ function ToastMinion:OnEvent(event, ...)
 					end
 				end
 				if (eQueue) then
-					ToastVault:addToast(playerName, allQueues, "lfg", guid, time());
+					ToastVault:addToast(playerName, allQueues, "lfg", guid);
 					--SV:AddonMessage(playerName .. " joined a group: " .. allQueues .. "lfg" .. guid);
 				end
 			end
