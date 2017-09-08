@@ -1234,7 +1234,11 @@ function UnitFrameMixin:UpdateStatusBar()
 	self.healthBar:SetStatusBarTexture(config.StatusbarTexture, 'BACKGROUND', 1)
 	self.castBar:SetStatusBarTexture(config.StatusbarTexture, 'BACKGROUND', 1)
 	if not UnitIsUnit(self.displayedUnit,'player') then 
-		self.level:SetText(UnitLevel(self.displayedUnit))
+		if UnitLevel(self.displayedUnit) == -1 then
+			self.level:SetText('??')
+		else
+			self.level:SetText(UnitLevel(self.displayedUnit))
+		end
 
 		if config.SuperStyled and MOD.IsEliteUnit(self.displayedUnit) then 
 			self.healthBar.eliteborder:Show() 
