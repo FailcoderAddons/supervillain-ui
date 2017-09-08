@@ -58,7 +58,7 @@ local function BarberShopStyle()
 	BarberShopFrameMoneyFrame:SetStyle("Frame", "Inset")
 	BarberShopFrameMoneyFrame:SetPoint("TOP", lastframe, "BOTTOM", 0, -10)
 
-	BarberShopFrameBackground:Die()
+	--BarberShopFrameBackground:Die()
 	BarberShopBannerFrameBGTexture:Die()
 	BarberShopBannerFrame:Die()
 

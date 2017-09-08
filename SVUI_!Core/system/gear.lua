@@ -33,8 +33,11 @@ LOCAL VARS
 ##########################################################
 ]]--
 local NewHook = hooksecurefunc;
+local EquipmentManager_UnpackLocation = EquipmentManager_UnpackLocation
+local C_EquipmentSet = C_EquipmentSet
 local ParseGearSlots;
 local GEAR_CACHE, GEARSET_LISTING = {}, {};
+local setNum;
 local EquipmentSlots = {
     ["HeadSlot"] = {true,true},
     ["NeckSlot"] = {true,false},
@@ -53,6 +56,7 @@ local EquipmentSlots = {
     ["Trinket0Slot"] = {true,false,true},
     ["Trinket1Slot"] = {true,false,true}
 }
+
 --[[
 	Quick explaination of what Im doing with all of these locals...
 	Unlike many of the other modules, Inventory has to continuously
@@ -210,70 +214,66 @@ function SV:ParseGearSlots(unit, inspecting, setLevel, setDurability)
 end
 
 function SV:SetGearLabels(frame, bagID, slotID, itemLink, quality, equipSlot)
-  quality = quality or 0;
-  equipSlot = equipSlot or '';
+	quality = quality or 0;
+	equipSlot = equipSlot or '';
 
-  if(frame.GearInfo) then
-    local loc = format("%d_%d", bagID, slotID);
-    if((not SHOW_BAG_SET) or (not GEARSET_LISTING[loc])) then
-      frame.GearInfo:SetText('')
-  	else
-      local setNumber = #GEARSET_LISTING[loc] < 4 and #GEARSET_LISTING[loc] or 3;
-  		if(setNumber == 1) then
-        frame.GearInfo:SetFormattedText("|cffffffaa%s|r", encodeSub(GEARSET_LISTING[loc][1], 1, 4))
-  		elseif(setNumber == 2) then
-        frame.GearInfo:SetFormattedText("|cffffffaa%s %s|r", encodeSub(GEARSET_LISTING[loc][1], 1, 4), encodeSub(GEARSET_LISTING[loc][2], 1, 4))
-  		elseif(setNumber == 3) then
-        frame.GearInfo:SetFormattedText("|cffffffaa%s %s %s|r", encodeSub(GEARSET_LISTING[loc][1], 1, 4), encodeSub(GEARSET_LISTING[loc][2], 1, 4), encodeSub(GEARSET_LISTING[loc][3], 1, 4))
-  		else
-        frame.GearInfo:SetText('')
-  		end
-  	end
-  end
+	if(frame.GearInfo) then
+		local loc = format("%d_%d", bagID, slotID);
+		if((not SHOW_BAG_SET) or (not GEARSET_LISTING[loc])) then
+			frame.GearInfo:SetText('')
+		else
+			local setNumber = #GEARSET_LISTING[loc] < 4 and #GEARSET_LISTING[loc] or 3;
+			if(setNumber == 1) then
+				frame.GearInfo:SetFormattedText("|cffffffaa%s|r", encodeSub(GEARSET_LISTING[loc][1], 1, 4))
+			elseif(setNumber == 2) then
+				frame.GearInfo:SetFormattedText("|cffffffaa%s %s|r", encodeSub(GEARSET_LISTING[loc][1], 1, 4), encodeSub(GEARSET_LISTING[loc][2], 1, 4))
+			elseif(setNumber == 3) then
+				frame.GearInfo:SetFormattedText("|cffffffaa%s %s %s|r", encodeSub(GEARSET_LISTING[loc][1], 1, 4), encodeSub(GEARSET_LISTING[loc][2], 1, 4), encodeSub(GEARSET_LISTING[loc][3], 1, 4))
+			else
+				frame.GearInfo:SetText('')
+			end
+		end
+	end
+	
+	if(frame.ItemLevel) then
+		local iLevel = SV:GetItemLevel(itemLink)
+		local itemName, _, _, iLevelInfo, _, _, itemSubType, _, _, _, _
+		local overall, equipped = GetAverageItemLevel()
 
-  if(frame.ItemLevel) then
-    local iLevel = SV:GetItemLevel(itemLink)
-    local  itemName, _, _, iLevelInfo , _, _, itemSubType, _, _, _, _
-    local overall, equipped = GetAverageItemLevel()
-
-    if(itemLink) then
-      itemName, _, _, iLevelInfo , _, _, itemSubType, _, _, _, _ = GetItemInfo(itemLink)
-    end
-    if((not SHOW_BAG_LEVEL) or (iLevel <= 1) or (quality == 7) or (not equipSlot:find('INVTYPE'))) then
-        if (itemSubType ==  "Artifact Relic") then
-            local key = (iLevelInfo < (equipped - 10)) and 0 or (iLevelInfo > (equipped + 10)) and 1 or 2;
-            frame.ItemLevel:SetFormattedText("%s%d|r", COLOR_KEYS[key], iLevelInfo)
-        else
-            frame.ItemLevel:SetText('')
-        end
-    else
-        local key = (iLevel < (equipped - 10)) and 0 or (iLevel > (equipped + 10)) and 1 or 2;
-        frame.ItemLevel:SetFormattedText("%s%d|r", COLOR_KEYS[key], iLevel)
-    end
-
-
-  end
+		if(itemLink) then
+			itemName, _, _, iLevelInfo, _, _, itemSubType, _, _, _, _ = GetItemInfo(itemLink)
+		end
+		if((not SHOW_BAG_LEVEL) or (iLevel <= 1) or (quality == 7) or (not equipSlot:find('INVTYPE'))) then
+			if (itemSubType ==  "Artifact Relic") then
+				local key = (iLevelInfo < (equipped - 10)) and 0 or (iLevelInfo > (equipped + 10)) and 1 or 2;
+				frame.ItemLevel:SetFormattedText("%s%d|r", COLOR_KEYS[key], iLevelInfo)
+			else
+				frame.ItemLevel:SetText('')
+			end
+		else
+			local key = (iLevel < (equipped - 10)) and 0 or (iLevel > (equipped + 10)) and 1 or 2;
+			frame.ItemLevel:SetFormattedText("%s%d|r", COLOR_KEYS[key], iLevel)
+		end
+	end
 end
 
-
 local function GetActiveGear()
-	local count = GetNumEquipmentSets()
 	local resultSpec = GetSpecialization()
-  local _, sname = GetSpecializationInfo(resultSpec)
+	local _, sname = GetSpecializationInfo(resultSpec)
 	local resultSet
 
-  BG_SET = SV.db.Gear.battleground.equipmentset
+	BG_SET = SV.db.Gear.battleground.equipmentset
 	SPEC_SET = "none"
 
 	if(sname) then
-    SPEC_SET = SV.db.Gear.specialization[sname] or SPEC_SET
+		SPEC_SET = SV.db.Gear.specialization[sname] or SPEC_SET
 	end
 
-	if(count == 0) then
+	if(not C_EquipmentSet.GetNumEquipmentSets()) then
 		return resultSpec,false
 	end
-	for i=1, count do
-		local setName,_,_,setUsed = GetEquipmentSetInfo(i)
+	for i=1, C_EquipmentSet.GetNumEquipmentSets() do
+		local setName,_,_,setUsed = C_EquipmentSet.GetEquipmentSetInfo(i)
 		if setUsed then
 			resultSet = setName
 			break
@@ -339,36 +339,42 @@ local function RefreshInspectedGear()
 end
 
 local function UpdateLocals()
-  SPEC_SWAP = SV.db.Gear.specialization.enable
-  BG_SWAP = SV.db.Gear.battleground.enable
+	SPEC_SWAP = SV.db.Gear.specialization.enable
+	BG_SWAP = SV.db.Gear.battleground.enable
 	SHOW_CHAR_LEVEL = SV.db.Gear.labels.characterItemLevel
-  SHOW_BAG_LEVEL = SV.db.Gear.labels.inventoryItemLevel
-  SHOW_CHAR_SET = SV.db.Gear.labels.characterGearSet
-  SHOW_BAG_SET = SV.db.Gear.labels.inventoryGearSet
+	SHOW_BAG_LEVEL = SV.db.Gear.labels.inventoryItemLevel
+	SHOW_CHAR_SET = SV.db.Gear.labels.characterGearSet
+	SHOW_BAG_SET = SV.db.Gear.labels.inventoryGearSet
 	SHOW_DURABILITY = SV.db.Gear.durability.enable
 	ONLY_DAMAGED = SV.db.Gear.durability.onlydamaged
 	MAX_LEVEL, AVG_LEVEL = GetAverageItemLevel()
 end
 
 function SV:BuildEquipmentMap()
-  UpdateLocals()
+	UpdateLocals()
 	for key, gearData in pairs(GEARSET_LISTING) do
 		twipe(gearData);
 	end
-	local set, player, bank, bags, slotIndex, bagIndex, loc, _;
-	for i = 1, GetNumEquipmentSets() do
-		set = GetEquipmentSetInfo(i);
-		GEAR_CACHE = GetEquipmentSetLocations(set);
-		if(GEAR_CACHE) then
-			for key, location in pairs(GEAR_CACHE) do
-				if(type(location) ~= "string") then
-					player, bank, bags, _, slotIndex, bagIndex = EquipmentManager_UnpackLocation(location);
-					if((bank or bags) and (slotIndex and bagIndex)) then
-						loc = format("%d_%d", bagIndex, slotIndex);
-						GEARSET_LISTING[loc] = GEARSET_LISTING[loc] or {};
-            local gslCount = #GEARSET_LISTING[loc] + 1
-						GEARSET_LISTING[loc][gslCount] = set;
-					end
+	
+	if (not C_EquipmentSet.GetNumEquipmentSets()) then
+		return
+	end
+	
+	local name, player, bank, bags, slotIndex, bagIndex, loc, _;
+	local equipmentSetIDs = C_EquipmentSet.GetEquipmentSetIDs();
+	
+	for i = 1, C_EquipmentSet.GetNumEquipmentSets() do
+		name = C_EquipmentSet.GetEquipmentSetInfo(equipmentSetIDs[i]);
+		local equipmentSetID = C_EquipmentSet.GetEquipmentSetID(name);
+		GEAR_CACHE = C_EquipmentSet.GetItemLocations(equipmentSetID);
+		for _, location in pairs(GEAR_CACHE) do
+			if(type(location) ~= "string") then
+				player, bank, bags, _, slotIndex, bagIndex = EquipmentManager_UnpackLocation(location);
+				if((bank or bags) and (slotIndex and bagIndex)) then
+					loc = format("%d_%d", bagIndex, slotIndex);
+					GEARSET_LISTING[loc] = GEARSET_LISTING[loc] or {};
+					local gslCount = #GEARSET_LISTING[loc] + 1
+					GEARSET_LISTING[loc][gslCount] = name;
 				end
 			end
 		end
@@ -400,7 +406,7 @@ function SV:GearSwap()
 		if(inDungeon and dungeonType == "pvp" or dungeonType == "arena") then
 			if BG_SET ~= "none" and BG_SET ~= gearSet then
 				LIVESET = BG_SET;
-				UseEquipmentSet(BG_SET)
+				C_EquipmentSet.UseEquipmentSet(BG_SET)
 			end
 			return
 		end
@@ -408,7 +414,7 @@ function SV:GearSwap()
 
 	if(SPEC_SWAP and (SPEC_SET ~= "none" and SPEC_SET ~= gearSet)) then
 		LIVESET = SPEC_SET;
-		UseEquipmentSet(SPEC_SET)
+		C_EquipmentSet.UseEquipmentSet(SPEC_SET)
 	end
 end
 
@@ -435,26 +441,26 @@ end
 
 local function InitializeGearInfo()
 	MSG_PREFIX = L["You have equipped equipment set: "]
-  SHOW_CHAR_LEVEL = SV.db.Gear.labels.characterItemLevel
-  SHOW_BAG_LEVEL = SV.db.Gear.labels.inventoryItemLevel
-  SHOW_CHAR_SET = SV.db.Gear.labels.characterGearSet
-  SHOW_BAG_SET = SV.db.Gear.labels.inventoryGearSet
+	SHOW_CHAR_LEVEL = SV.db.Gear.labels.characterItemLevel
+	SHOW_BAG_LEVEL = SV.db.Gear.labels.inventoryItemLevel
+	SHOW_CHAR_SET = SV.db.Gear.labels.characterGearSet
+	SHOW_BAG_SET = SV.db.Gear.labels.inventoryGearSet
 	SHOW_DURABILITY = SV.db.Gear.durability.enable
 	ONLY_DAMAGED = SV.db.Gear.durability.onlydamaged
 	MAX_LEVEL, AVG_LEVEL = GetAverageItemLevel()
 
 
-  LoadAddOn("Blizzard_InspectUI")
-  SetDisplayStats("Character")
-  SetDisplayStats("Inspect")
+	LoadAddOn("Blizzard_InspectUI")
+	SetDisplayStats("Character")
+	SetDisplayStats("Inspect")
   
-  GearHandler:RegisterEvent("PLAYER_ENTERING_WORLD")
+	GearHandler:RegisterEvent("PLAYER_ENTERING_WORLD")
 	GearHandler:RegisterEvent("UPDATE_INVENTORY_DURABILITY")
 	GearHandler:RegisterEvent("PLAYER_EQUIPMENT_CHANGED")
 	GearHandler:RegisterEvent("SOCKET_INFO_UPDATE")
 	GearHandler:RegisterEvent("COMBAT_RATING_UPDATE")
 	GearHandler:RegisterEvent("MASTERY_UPDATE")
-  GearHandler:RegisterEvent("EQUIPMENT_SWAP_FINISHED")
+	GearHandler:RegisterEvent("EQUIPMENT_SWAP_FINISHED")
 	GearHandler:SetScript("OnEvent", GearHandler_OnEvent)
 
 	NewHook('InspectFrame_UpdateTabs', Gear_UpdateTabs)

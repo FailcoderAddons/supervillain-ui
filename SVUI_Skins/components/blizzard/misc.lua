@@ -372,6 +372,7 @@ local function MiscStyles()
 
 		SV.API:Set("Window", MailFrame)
 		SV.API:Set("CloseButton", MailFrameCloseButton)
+
 		SV.API:Set("PageButton", InboxPrevPageButton, false, true)
 		SV.API:Set("PageButton", InboxNextPageButton)
 
@@ -437,7 +438,16 @@ local function MiscStyles()
 		OpenMailMoneyButton:SetStyle("Button")
 		OpenMailMoneyButtonIconTexture:SetTexCoord(unpack(_G.SVUI_ICON_COORDS))
 		OpenMailMoneyButtonIconTexture:InsetPoints()
-
+		
+		-- Add Open All Mail button
+		SV.API:Set("Button", OpenAllMail);
+		OpenAllMail:SetPoint("TOPRIGHT", MailFrame, -20, -30);
+		
+		-- Fix for mail title text
+		InboxTitleText:SetPoint("CENTER", MailFrame, "TOP", 0, -15);
+		SendMailTitleText:SetPoint("CENTER", MailFrame, "TOP", 0, -15);
+		OpenMailTitleText:SetPoint("CENTER", MailFrame, "TOP", 0, -15);
+		
 		for i = 1, INBOXITEMS_TO_DISPLAY do
 			local slot = _G["MailItem"..i]
 			if(slot) then

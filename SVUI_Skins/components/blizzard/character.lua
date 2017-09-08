@@ -193,7 +193,7 @@ local function EquipmentFlyout_OnShow()
 end
 
 local function Reputation_OnShow()
-	for i = 1, GetNumFactions()do
+	for i = 1, GetNumFactions() do
 		local bar = _G["ReputationBar"..i.."ReputationBar"]
 		if bar then
 			 bar:SetStatusBarTexture(SV.media.statusbar.default)
@@ -303,6 +303,8 @@ local function CharacterFrameStyle()
 	CharacterFrameExpandButton:SetFrameLevel(CharacterModelFrame:GetFrameLevel() + 5)
 	]]--
 	SV.API:Set("CloseButton", ReputationDetailCloseButton)
+	SV.API:Set("Window", ReputationDetailFrame)
+	SV.API:Set("Tooltip", ReputationParagonTooltip)
 	SV.API:Set("CloseButton", TokenFramePopupCloseButton)
 	ReputationDetailAtWarCheckBox:SetStyle("CheckButton")
 	ReputationDetailMainScreenCheckBox:SetStyle("CheckButton")

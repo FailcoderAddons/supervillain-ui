@@ -168,7 +168,7 @@ local AddAutoPopUp = function(self, questID, popUpType, noCheck)
 		self:Reset()
 		self:Refresh();
 		MOD:UpdateDimensions();
-		PlaySound("UI_AutoQuestComplete")
+		PlaySound(SOUNDKIT.UI_AUTO_QUEST_COMPLETE)
 		self:SetHeight(self.CurrentHeight)
 	end
 end

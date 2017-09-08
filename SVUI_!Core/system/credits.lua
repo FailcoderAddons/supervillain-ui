@@ -20,7 +20,7 @@ local PRINTED_TEMPLATE = [[
 |cffff9900SUPERVILLAIN CREDITS:|r
 |cff4f4f4f---------------------------------------------|r
 |cffff9900CREATED BY:|r  Failcoder
-|cffff9900MAINTAINED BY:|r  joev
+|cffff9900MAINTAINED BY:|r  joev  JoeyMagz
 |cff4f4f4f---------------------------------------------|r
 |cffff9900CODE GRANTS BY:|r  Azilroka, Sortokk, Kkthnx
 |cff4f4f4f---------------------------------------------|r

@@ -45,69 +45,73 @@ Format: ID, Cap
 ##########################################################
 ]]--
 local ARCHAEOLOGY_TOKENS={
-	{ 829, 250},
-	{ 1174, 200},
-	{ 398, 200},
-	{ 821, 250},
-	{ 384, 200},
-	{ 393, 200},
-	{ 1172, 200},
-	{ 1173, 200},
-	{ 754, 200},
-	{ 677, 200},
-	{ 400, 200},
-	{ 394, 200},
-	{ 828, 250},
-	{ 397, 200},
-	{ 676, 200},
-	{ 401, 200},
-	{ 385, 200},
-	{ 399, 200}
+	{ 384, 200},   --Cata Dwarf Fragments
+	{ 385, 200},   --Cata Troll Fragments
+	{ 393, 200},   --Cata fossil Fragments
+	{ 394, 200},   --Cata Night elf Fragments
+	{ 397, 200},   --BC Orc Fragments
+	{ 398, 200},   --BC Draenei Fragments
+	{ 399, 200},   --WotLK Vrykul Fragments
+	{ 400, 200},   --WotLK Nerubian Fragments
+	{ 401, 200},   --Cata Tol'vir Fragments
+	{ 676, 200},   --MoP Pandaren Fragments
+	{ 677, 200},   --MoP Mogu Fragments
+	{ 754, 200},   --MoP Mantid Fragments
+	{ 821, 250},   --WoD Draenor Clans Fragments
+	{ 828, 250},   --WoD Ogre Fragments
+	{ 829, 250},   --WoD arakkoa fragments
+	{ 1172, 200},  --Lgn Highborne Fragments
+	{ 1173, 200},  --Lgn Highmountain Fragments
+	{ 1174, 200}   --Lgn Demonic Fragments
 }
 
 local JEWELCRAFTING_TOKENS={
-	{ 61, 0},
-	{ 361, 0},
-	{ 1008, 0}
+	{ 61, 0},   --WotLK Dalaran Token
+	{ 361, 0},  --Cata Illustrious Token
+	{ 1008, 0}  --WoD Secret of Draenor Jewelcrafting
 }
 
 local COOKING_TOKENS={
-	{ 81, 0},
-	{ 402, 0}
+	{ 81, 0},  --Mop Epicureans award
+	{ 402, 0}  --MoP Ironpaw Token
 }
 
 local DUNGEON_TOKENS={
-	{ 1166, 0},
-	{ 1191, 5000},
-	{ 1273, 10},
-	{ 776, 20},
-	{ 1129, 20},
-	{ 994, 20},
+	{ 776, 20},    --MoP Warforged Seal
+	{ 994, 20},    --WoD Seal of Tempered Fate
+	{ 1129, 20},   --WoD Seal of Inevitable Fate
+	{ 1166, 0},    --Timwarped Badges
+	{ 1191, 5000}, --Valor
+	{ 1273, 6}     --Lgn Seal of Broken Fate
 }
 
 local GARRISON_TOKENS={
-	{ 823, 0},
-	{ 824, 10000},
-	{ 1101, 100000}
+	{ 823, 0},      --WoD Apexis
+	{ 824, 10000},  --WoD Garrison Resources 
+	{ 1101, 100000} --WoD Oil
 }
 
 local LEGION_TOKENS={
-	{ 1220, 0},
-	{ 1155, 300},
-	{ 1275, 0},
-	{ 1226, 2000},
-	{ 1154, 500},
-	{ 1149, 5000},
-	{ 1268, 1000}
+	{ 1149, 5000},    --Lgn Sightless Eye
+	{ 1154, 500},     --Lgn Shadowy Coin 
+	{ 1155, 300},     --Lgn Ancient Mana
+	{ 1220, 0},       --Lgn Orderhall Resources
+	{ 1226, 0},       --Lgn Nethershards
+	{ 1268, 1000},    --Lgn Timeworn Artifact
+	{ 1275, 0},       --Lgn Curious Coin
+	{ 1342, 1000},    --Lgn Legionfall War Supplies
+	{ 1416, 2000000}, --Lgn Coins of Air
+	{ 1506, 40},      --Lgn Argus Waystone
+	{ 1508, 1500}     --Lgn Veiled Argunite	
 }
 
 local PVP_TOKENS={
-	{ 391, 300}
+	{ 391, 300}  --Cata Tol barad Commendations
 }
 
 local MISC_TOKENS={
-	{ 777, 0 },
-	{ 416, 0 }
+	{ 416, 0 },  --Cata Mark of the World Tree
+	{ 777, 0 }   --MoP Timeless Coins
 }
 
 local sort_menu_fn = function(a,b) return a.text < b.text end;

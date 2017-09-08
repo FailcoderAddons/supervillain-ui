@@ -45,7 +45,10 @@ local FriendsFrameList1 = {
 	"FriendsFramePendingButton4",
 	"ChannelFrameDaughterFrame",
 	"AddFriendFrame",
-	"AddFriendNoteFrame"
+	"AddFriendNoteFrame",
+	"QuickJoinFrame",
+	"QuickJoinScrollFrame",
+	"QuickJoinRoleSelectionFrame"
 };
 -- local FriendsFrameList2 = {
 -- 	"FriendsFrameBroadcastInputLeft",
@@ -167,6 +170,7 @@ local function FriendsFrameStyle()
 	SV.API:Set("ScrollBar", FriendsFrameFriendsScrollFrame, 5)
 	SV.API:Set("ScrollBar", WhoListScrollFrame, 5)
 	SV.API:Set("ScrollBar", ChannelRosterScrollFrame, 5)
+	SV.API:Set("ScrollBar", QuickJoinScrollFrame, 5)
 	
 	FriendsFrameStatusDropDown:SetPoint('TOPLEFT', FriendsTabHeader, 'TOPLEFT', 0, -27)
 	SV.API:Set("DropDown", FriendsFrameStatusDropDown, 70)
@@ -189,6 +193,12 @@ local function FriendsFrameStyle()
 	FriendsFrameBattlenetFrame.BroadcastButton:SetScript('OnClick', function()
 		SV:StaticPopup_Show("SET_BN_BROADCAST")
 	end)
+	
+	QuickJoinFrame.JoinQueueButton:RemoveTextures();
+	QuickJoinFrame.JoinQueueButton:SetStyle("Button");
+	QuickJoinFrame.JoinQueueButton:ClearAllPoints();
+	QuickJoinFrame.JoinQueueButton:SetPoint("BOTTOMRIGHT", QuickJoinFrame, "BOTTOMRIGHT", -6, 2);
+	
 	FriendsFrameBattlenetFrame.Tag:SetFontObject(SVUI_Font_Narrator)
 	AddFriendNameEditBox:SetStyle("Editbox")
 	AddFriendFrame:SetStyle("!_Frame", "Transparent", true)

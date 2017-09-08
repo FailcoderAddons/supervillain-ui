@@ -19,11 +19,11 @@ HELPERS
 ##########################################################
 ]]--
 local function OrderHallCommandBar_OnShow()
-	SV:AdjustTopDockBar(18)
+	SV:AdjustTopDockBar(18);
 end
 
 local function OrderHallCommandBar_OnHide()
-	SV:AdjustTopDockBar(0)
+	SV:AdjustTopDockBar();
 end
 --[[ 
 ########################################################## 
@@ -31,20 +31,45 @@ STYLE
 ##########################################################
 ]]--
 local function OrderHallStyle()
-	--print('test OrderHallStyle')
 	if SV.db.Skins.blizzard.enable ~= true or SV.db.Skins.blizzard.orderhall ~= true then
 		return 
 	end 
-	--print('begin OrderHallStyle')
-	--OrderHallCommandBar:RemoveTextures()
-	--OrderHallCommandBar:SetStyle("Inset")
-	--OrderHallCommandBar:DisableDrawLayer("BACKGROUND")
+	
+	local frame = OrderHallTalentFrame;
+	
+	-- Set API
+	SV.API:Set("Window", frame, true);
+	SV.API:Set("Button", frame.BackButton, nil, true);
+	
+	--Reposition the back button slightly (if there is one)
+	--This should only occur inside the Chromie scenario
+	frame.BackButton:SetPoint("BOTTOMRIGHT", frame, "BOTTOMRIGHT", -15, 10);
+	
 	OrderHallCommandBar:SetStyle("!_Frame", "")
 	SV.API:Set("IconButton", OrderHallCommandBar.WorldMapButton, [[Interface\ICONS\INV_Misc_Map02]])
-	OrderHallCommandBar:HookScript("OnShow", OrderHallCommandBar_OnShow)
+	
+	local inOrderHall = C_Garrison.IsPlayerInGarrison(LE_GARRISON_TYPE_7_0);
+	if (inOrderHall) then
+		OrderHallCommandBar:HookScript("OnShow", OrderHallCommandBar_OnShow);
+		frame.currencyButton = CreateFrame("Frame", nil, frame);
+		frame.currencyButton:SetPoint("TOPRIGHT", frame, "TOPRIGHT", -85, -35);
+		frame.currencyButton:SetHeight(20);
+		frame.currencyButton:SetWidth(20);
+		frame.currencyButton:CreateTexture("resources");
+		resources:SetAllPoints();
+		resources:SetTexture("Interface\\ICONS\\INV_Garrison_Resource");
+	end
+	
 	OrderHallCommandBar:HookScript("OnHide", OrderHallCommandBar_OnHide)
-	SV:AdjustTopDockBar(18)
-end 
+	
+	-- Movable Talent Window
+	frame:SetMovable(true);
+	frame:EnableMouse(true);
+	frame:RegisterForDrag("LeftButton");
+	frame:SetScript("OnDragStart", frame.StartMoving);
+	frame:SetScript("OnDragStop", frame.StopMovingOrSizing);
+	
+end
 --[[ 
 ########################################################## 
 MOD LOADING

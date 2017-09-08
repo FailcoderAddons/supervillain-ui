@@ -124,7 +124,7 @@ local function CacheBonusData(questID, xp, money)
 	if(iscomplete or #data.rewards <= 0) then
 		CACHED_BONUS_DATA[questID] = nil;
 		COMPLETED_BONUS_DATA[questID] = true;
-		PlaySound("UI_Scenario_Stage_End");
+		PlaySound(SOUNDKIT.UI_SCENARIO_STAGE_END);
 	end
 end
 
@@ -304,7 +304,8 @@ local SetBonusRow = function(self, index, questID, subCount)
 	else
 		CACHED_BONUS_DATA[questID] = nil;
 		COMPLETED_BONUS_DATA[questID] = true;
-		PlaySoundKitID(45142);
+		PlaySound(45142);
+		--PlaySoundKitID(45142);
 		return index, 0;
 	end
 end

@@ -826,6 +826,7 @@ local NextPage_OnClick = function(self)
 	if CURRENT_PAGE ~= MAX_PAGE then
 		CURRENT_PAGE = CURRENT_PAGE + 1;
 		self.parent:SetPage(CURRENT_PAGE)
+		PlayThemeSong();
 	end
 end
 
@@ -874,7 +875,7 @@ end
 
 function SV.Setup:LoadInstaller(autoLoaded)
 	local old = SVUILib:GetSafeData()
-  preset_mediastyle = old.preset_mediastyle or "default";
+	preset_mediastyle = old.preset_mediastyle or "default";
 	preset_barstyle = old.preset_barstyle or "default";
 	preset_unitstyle = old.preset_unitstyle or "default";
 	preset_groupstyle = old.preset_groupstyle or "default";
@@ -905,7 +906,7 @@ function SV.Setup:LoadInstaller(autoLoaded)
 		frame.Next.text = frame.Next:CreateFontString(nil, "OVERLAY")
 		frame.Next.text:SetFont(SV.media.font.flash, 18, "OUTLINE")
 		frame.Next.text:SetPoint("CENTER")
-		frame.Next.text:SetText(CONTINUE)
+		frame.Next.text:SetText(L[CONTINUE])
 		frame.Next:Disable()
 		frame.Next.parent = frame
 		frame.Next:SetScript("OnClick", NextPage_OnClick)
@@ -932,7 +933,7 @@ function SV.Setup:LoadInstaller(autoLoaded)
 		frame.Prev.text = frame.Prev:CreateFontString(nil, "OVERLAY")
 		frame.Prev.text:SetFont(SV.media.font.flash, 18, "OUTLINE")
 		frame.Prev.text:SetPoint("CENTER")
-		frame.Prev.text:SetText(PREVIOUS)
+		frame.Prev.text:SetText(L[PREVIOUS])
 		frame.Prev:Disable()
 		frame.Prev.parent = frame
 		frame.Prev:SetScript("OnClick", PreviousPage_OnClick)
@@ -1236,8 +1237,6 @@ function SV.Setup:LoadInstaller(autoLoaded)
 	SVUI_InstallerFrame:Show()
 	SVUI_InstallerFrame:SetPage(1)
 	if(not autoLoaded) then
-		PlayThemeSong()
-	else
-		SV.Timers:ExecuteTimer(PlayThemeSong, 5)
+		PlayThemeSong();
 	end
 end

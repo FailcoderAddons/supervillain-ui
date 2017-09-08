@@ -234,7 +234,7 @@ do
 	end
 
 	local RaidMarkButton_OnClick = function(self, button)
-		PlaySound("UChatScrollButton")
+		PlaySound(SOUNDKIT.U_CHAT_SCROLL_BUTTON)
 		SetRaidTarget("target", button ~= "RightButton" and self:GetID() or 0)
 		self:GetParent():FadeOut(0.2, 1, 0, true)
 	end
@@ -517,7 +517,7 @@ local function StupidHatEventHandler()
 			item[i] = GetInventoryItemID("player", i) or 0
 			for j, baditem in pairs(Reactions.StupidHat[i]) do
 				if item[i] == baditem then
-					PlaySound("RaidWarning", "master")
+					PlaySound(SOUNDKIT.RAID_WARNING)
 					RaidNotice_AddMessage(RaidWarningFrame, format("%s %s", CURRENTLY_EQUIPPED, GetItemInfo(item[i]).."!!!"), ChatTypeInfo["RAID_WARNING"])
 					print(format("|cffff3300%s %s", CURRENTLY_EQUIPPED, GetItemInfo(item[i]).."!!!|r"))
 				end
