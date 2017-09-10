@@ -30,7 +30,9 @@ MACRO UI MODR
 ]]--
 local function MacroUIStyle()
 	if SV.db.Skins.blizzard.enable ~= true or SV.db.Skins.blizzard.macro ~= true then return end
-
+	
+	local bStrata = "DIALOG";
+	
 	SV.API:Set("Window", MacroFrame, true)
 	SV.API:Set("CloseButton", MacroFrameCloseButton)
 	SV.API:Set("ScrollBar", MacroButtonScrollFrame)
@@ -42,7 +44,7 @@ local function MacroUIStyle()
 	for i = 1, #MacroButtonList do
 		local button = _G[MacroButtonList[i]]
 		if(button) then
-			button:SetFrameStrata("DIALOG")
+			button:SetFrameStrata(bStrata)
 			SV.API:Set("Button", button)
 		end
 	end 
@@ -98,8 +100,7 @@ local function MacroUIStyle()
 		c:SetPoint("TOPLEFT", MacroFrame, "TOPRIGHT", 5, -2)
 	end)
 
-	MacroFrameSelectedMacroButton:SetFrameStrata(parentStrata)
-	MacroFrameSelectedMacroButton:SetFrameLevel(parentLevel + 1)
+	MacroFrameSelectedMacroButton:SetFrameStrata(bStrata)
 	MacroFrameSelectedMacroButton:RemoveTextures()
 	MacroFrameSelectedMacroButton:SetStyle("ActionSlot")
 	MacroFrameSelectedMacroButtonIcon:SetTexCoord(unpack(_G.SVUI_ICON_COORDS))
