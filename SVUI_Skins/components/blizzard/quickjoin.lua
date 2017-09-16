@@ -27,6 +27,7 @@ local pvp = C_PvP;
 local ToastMinion = CreateFrame("Frame", "SVUI_ToastMinion");
 local ToastVault;
 local anchor = "";
+local addonLoaded;
 
 ToastMinion:RegisterEvent("SOCIAL_QUEUE_UPDATE");
 ToastMinion:RegisterEvent("ADDON_LOADED");
@@ -261,6 +262,9 @@ end
 
 function ToastMinion:OnEvent(event, ...)
 	if (event == "SOCIAL_QUEUE_UPDATE") then
+		--Check the time, make sure we're not less than 10 seconds
+		if (time() - addonLoaded <= 10) then return; end
+		
 		local guid, numAdded = ...;
 
 		if (numAdded == 0 or socQueue.GetGroupMembers(guid) == nil) then
@@ -283,20 +287,8 @@ function ToastMinion:OnEvent(event, ...)
 					local id, activityID, name, comment, voiceChat, iLvl, honorLevel, age, numBNetFriends, numCharFriends, numGuildMates, isDelisted, leaderName, numMembers = lfg.GetSearchResultInfo(getQueues[1].queueData.lfgListID);
 					
 					local activityName, shortName, categoryID, groupID, minItemLevel, filters, minLevel, maxPlayers, displayType, _, useHonorLevel = lfg.GetActivityInfo(activityID);
-					
-					-- Roles
-					-- I might expand the toast frame to include roles at a later date
-					--[[
-					local roles = {TANK = 0, HEALER = 0, DAMAGER = 0};
-					for i=1,numMembers do
-						local role, class, classLocalized = lfg.GetSearchResultMemberInfo(getQueues[1].queueData.lfgListID, i);
-						roles[role] = roles[role] + 1;
-					end
-					roleText = "("..roles["TANK"].."/"..roles["HEALER"].."/"..roles["DAMAGER"]..")";
-					]]--
-					
+					-- as long as queues are eligible to be joined, add the toast
 					ToastVault:addToast(playerName, activityName..": "..name, "lfglist", getQueues[1].queueData.lfgListID);
-					--SV:AddonMessage(playerName .. " joined a group: " .. activityName..": "..name .. "lfglist" .. getQueues[1].queueData.lfgListID);
 				end
 			else
 				local allQueues = "";
@@ -322,11 +314,13 @@ function ToastMinion:OnEvent(event, ...)
 				end
 				if (eQueue) then
 					ToastVault:addToast(playerName, allQueues, "lfg", guid);
-					--SV:AddonMessage(playerName .. " joined a group: " .. allQueues .. "lfg" .. guid);
 				end
 			end
 		end
 	elseif (event == "ADDON_LOADED") then
+		-- Get the time and store it for ^ up there.
+		addonLoaded = time();
+		
 		-- Initialize Toast Systems
 		-- If we don't initialize, then there won't be any toasting to our victories.
 		initializeToastVault();
