@@ -425,7 +425,10 @@ local function LoadGarrisonStyle()
 	end
 
 	local a1, p, a2, x, y = GarrisonLandingPageTab1:GetPoint()
-	GarrisonLandingPageTab1:SetPoint(a1, p, a2, x, (y - 15))
+	GarrisonLandingPageTab1:SetPoint(a1, p, a2, x, 16)
+	GarrisonLandingPageTab1:SetFrameStrata("HIGH");
+	GarrisonLandingPageTab2:SetFrameStrata("HIGH");
+	GarrisonLandingPageTab3:SetFrameStrata("HIGH");
 	SV.API:Set("Tab", GarrisonLandingPageTab1, nil, 10, 4)
 	SV.API:Set("Tab", GarrisonLandingPageTab2, nil, 10, 4)
 	SV.API:Set("Tab", GarrisonLandingPageTab3, nil, 10, 4)
