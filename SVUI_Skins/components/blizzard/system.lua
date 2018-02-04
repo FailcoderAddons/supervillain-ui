@@ -471,8 +471,8 @@ local function SystemPanelQue()
 	LFDRoleCheckPopupRoleButtonTank.checkButton:SetFrameLevel(LFDRoleCheckPopupRoleButtonTank.checkButton:GetFrameLevel() + 1)
 	LFDRoleCheckPopupRoleButtonDPS.checkButton:SetFrameLevel(LFDRoleCheckPopupRoleButtonDPS.checkButton:GetFrameLevel() + 1)
 	LFDRoleCheckPopupRoleButtonHealer.checkButton:SetFrameLevel(LFDRoleCheckPopupRoleButtonHealer.checkButton:GetFrameLevel() + 1)
-	for i = 1, 3 do
-		for j = 1, 3 do
+	for i = 1, 4 do
+		for j = 1, 4 do
 			_G["StaticPopup"..i.."Button"..j]:SetStyle("Button")
 			_G["StaticPopup"..i.."EditBox"]:SetStyle("Editbox")
 			_G["StaticPopup"..i.."MoneyInputFrameGold"]:SetStyle("Editbox")
