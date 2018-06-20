@@ -151,11 +151,11 @@
     <Frame name="SVUI_MinimapInfoBottom" parent="Minimap">
         <Size x="240" y="28"/>
         <Anchors>
-            <Anchor point="BOTTOMRIGHT" relativeTo="SVUI_MinimapFrame" relativePoint="BOTTOMRIGHT" x="2" y="-3" />
+            <Anchor point="BOTTOMRIGHT" relativeTo="$parent" relativePoint="BOTTOMRIGHT" x="0" y="-3" />
         </Anchors>
         <Layers>
             <Layer level="ARTWORK">
-                <FontString parentKey="Text" inherits="SVUI_Font_MinimapInfo" text="..." justifyH="CENTER" justifyV="MIDDLE" setAllPoints="true" />
+                <FontString parentKey="Text" inherits="SVUI_Font_MinimapInfo" text="..." justifyH="RIGHT" justifyV="MIDDLE" setAllPoints="true" />
             </Layer>
         </Layers>
     </Frame>
