@@ -1,3 +1,8 @@
+######v1.4.3
+* Updated readme with FailcoderAddons link from failcoder
+* Updated InfoBottom to justify center for issue #161
+
+
 ######v1.4.2
 * Curse build should have all features now
 

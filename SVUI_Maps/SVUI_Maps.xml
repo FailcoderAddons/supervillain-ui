@@ -155,7 +155,7 @@
         </Anchors>
         <Layers>
             <Layer level="ARTWORK">
-                <FontString parentKey="Text" inherits="SVUI_Font_MinimapInfo" text="..." justifyH="RIGHT" justifyV="MIDDLE" setAllPoints="true" />
+                <FontString parentKey="Text" inherits="SVUI_Font_MinimapInfo" text="..." justifyH="CENTER" justifyV="MIDDLE" setAllPoints="true" />
             </Layer>
         </Layers>
     </Frame>
