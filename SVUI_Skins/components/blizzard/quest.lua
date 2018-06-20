@@ -140,7 +140,7 @@ local function QuestFrameStyle()
 
 	QuestInfoItemHighlight:RemoveTextures()
 	QuestInfoItemHighlight:SetStyle("Frame", "Icon")
-	QuestInfoItemHighlight:SetSize(148, 40)
+	QuestInfoItemHighlight:SetSize(148, 50)
 
 	local choiceBG = QuestInfoItemHighlight:CreateTexture(nil, "BACKGROUND")
 	choiceBG:SetAllPoints(QuestInfoItemHighlight)
@@ -214,7 +214,7 @@ local function QuestFrameStyle()
 		texture:SetTexCoord(unpack(_G.SVUI_ICON_COORDS))
 		texture:SetDrawLayer("OVERLAY")
 		texture:SetPoint("TOPLEFT", 2, -2)
-		texture:SetSize(texture:GetWidth() - 2, texture:GetHeight() - 2)
+		texture:SetSize(texture:GetWidth(), texture:GetHeight())
 		_G["QuestProgressItem"..j.."Count"]:SetDrawLayer("OVERLAY")
 	end
 
@@ -229,8 +229,8 @@ local function QuestFrameStyle()
 	SV.API:Set("ScrollBar", QuestRewardScrollFrame)
 	SV.API:Set("ScrollBar", QuestGreetingScrollFrame)
 
-	hooksecurefunc("QuestFrame_ShowQuestPortrait", Hook_QuestNPCModel)
 	hooksecurefunc("QuestFrame_SetTitleTextColor", Hook_QuestFrame_SetTitleTextColor)
+	hooksecurefunc("QuestFrame_ShowQuestPortrait", Hook_QuestNPCModel)
 
 	SV.NPC:Register(QuestFrame, QuestFrameNpcNameText)
 end
