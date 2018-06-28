@@ -108,7 +108,7 @@ local LEGION_TOKENS={
 	{ 1508, 1500}     --Lgn Veiled Argunite	
 }
 
-local BDA_TOKENS={
+local BFA_TOKENS={
 	{ 1565, 1000},    --BfA Rich Azerite
 	{ 1710, 0},       --BfA Seafarer's Dubloon
 	{ 1560, 0},       --BfA War Resources
