@@ -1,6 +1,6 @@
 ## Interface: 70300
 ## Author: Failcoder
-## Version: 1.4.0
+## Version: 1.4.2
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00Action Bars|r
 ## Notes: Action Bar Plugin for [|cff9911FFSVUI|r].
 ## OptionalDeps: LibSharedMedia-3.0, LibActionButton-1.0
@@ -9,8 +9,11 @@
 ## X-SVUISchema: ActionBars
 ## X-Embeds: LibActionButton-1.0
 ## X-Email: munglunch@gmail.com
-
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: MIT
+## X-Curse-Packaged-Version: 1.4.2
+## X-Curse-Project-Name: SuperVillain UI
+## X-Curse-Project-ID: supervillain-ui
+## X-Curse-Repository-ID: wow/supervillain-ui/mainline
 
 SVUI_ActionBars.xml

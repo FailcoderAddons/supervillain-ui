@@ -30,6 +30,7 @@
 	<Script file='quest.lua'/>
 	<Script file='raid.lua'/>
 	<Script file='reforging.lua'/>
+	<Script file='quickjoin.lua'/>
 	<Script file='spellbook.lua'/>
 	<Script file='talents.lua'/>
 	<Script file='timemanager.lua'/>

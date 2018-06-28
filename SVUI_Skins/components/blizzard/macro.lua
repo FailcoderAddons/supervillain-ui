@@ -30,9 +30,10 @@ MACRO UI MODR
 ]]--
 local function MacroUIStyle()
 	if SV.db.Skins.blizzard.enable ~= true or SV.db.Skins.blizzard.macro ~= true then return end
-
+	
+	local bStrata = "DIALOG";
+	
 	SV.API:Set("Window", MacroFrame, true)
-
 	SV.API:Set("CloseButton", MacroFrameCloseButton)
 	SV.API:Set("ScrollBar", MacroButtonScrollFrame)
 	SV.API:Set("ScrollBar", MacroFrameScrollFrame)
@@ -40,16 +41,11 @@ local function MacroUIStyle()
 
 	MacroFrame:SetWidth(360)
 
-	local parentStrata = MacroFrame:GetFrameStrata()
-	local parentLevel = MacroFrame:GetFrameLevel()
-
 	for i = 1, #MacroButtonList do
 		local button = _G[MacroButtonList[i]]
 		if(button) then
-			button:SetFrameStrata(parentStrata)
-			button:SetFrameLevel(parentLevel + 1)
-			button:RemoveTextures()
-			button:SetStyle("Button")
+			button:SetFrameStrata(bStrata)
+			SV.API:Set("Button", button)
 		end
 	end 
 
@@ -81,29 +77,30 @@ local function MacroUIStyle()
 
 	MacroPopupFrame:RemoveTextures()
 	MacroPopupFrame:SetStyle("Frame", 'Transparent')
-
+	MacroPopupFrame.BorderBox:RemoveTextures()
+	SV.API:Set("EditBox", MacroPopupEditBox)
 	MacroPopupScrollFrameScrollBar:RemoveTextures()
-	MacroPopupScrollFrameScrollBar:SetStyle("Frame", "Pattern")
-	MacroPopupScrollFrameScrollBar.Panel:SetPoint("TOPLEFT", 51, 2)
-	MacroPopupScrollFrameScrollBar.Panel:SetPoint("BOTTOMRIGHT", -4, 4)
-	MacroPopupEditBox:SetStyle("Editbox")
+	--MacroPopupScrollFrameScrollBar:SetStyle("ScrollBar", "Pattern")
+	--MacroPopupScrollFrameScrollBar.Panel:SetPoint("TOPLEFT", 51, 2)
+	--MacroPopupScrollFrameScrollBar.Panel:SetPoint("BOTTOMRIGHT", -4, 4)
+	--MacroPopupEditBox:SetStyle("Editbox")
 	MacroPopupNameLeft:SetTexture("")
 	MacroPopupNameMiddle:SetTexture("")
 	MacroPopupNameRight:SetTexture("")
+	MacroPopupCancelButton:SetPoint("BOTTOM", MacroPopupFrame, "BOTTOMLEFT", 0, -25)
 
 	MacroFrameInset:Die()
 
 	MacroButtonContainer:RemoveTextures()
 	SV.API:Set("ScrollBar", MacroButtonScrollFrame)
-	MacroButtonScrollFrameScrollBar:SetStyle("!_Frame", "Inset")
+	MacroButtonScrollFrameScrollBar:SetStyle("Frame", "Inset")
 
 	MacroPopupFrame:HookScript("OnShow", function(c)
 		c:ClearAllPoints()
 		c:SetPoint("TOPLEFT", MacroFrame, "TOPRIGHT", 5, -2)
 	end)
 
-	MacroFrameSelectedMacroButton:SetFrameStrata(parentStrata)
-	MacroFrameSelectedMacroButton:SetFrameLevel(parentLevel + 1)
+	MacroFrameSelectedMacroButton:SetFrameStrata(bStrata)
 	MacroFrameSelectedMacroButton:RemoveTextures()
 	MacroFrameSelectedMacroButton:SetStyle("ActionSlot")
 	MacroFrameSelectedMacroButtonIcon:SetTexCoord(unpack(_G.SVUI_ICON_COORDS))

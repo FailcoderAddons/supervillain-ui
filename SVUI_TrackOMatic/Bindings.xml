@@ -1,5 +1,0 @@
-<Bindings>
-  <Binding name="SVUITRACK_DOODAD" category="ADDONS" header="SVUITRACK" runOnUp="false">
-    SVUIToggleTrackingDoodad()
-  </Binding>
-</Bindings>

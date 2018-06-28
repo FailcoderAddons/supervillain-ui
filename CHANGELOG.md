@@ -1,3 +1,22 @@
+######v1.4.3
+* Updated readme with FailcoderAddons link from failcoder
+* Updated InfoBottom to no longer offset right and overlap the border for issue #161
+* Removed extraneous size change for issue #160
+* Reordered NPC Model function calls for issue #176
+
+
+######v1.4.2
+* Curse build should have all features now
+
+######v1.4.1
+* Quick Join Toast skin now positions properly
+
+######v1.4
+* Full 7.3 compatibility
+* New Feature - Added Quick Join Toast skin
+* Tons of skin fixes
+* Bug fixes galore
+
 ######v1.3.5
 * Some skin fixes for many blizz frames
 * Fixed guild bank background issue

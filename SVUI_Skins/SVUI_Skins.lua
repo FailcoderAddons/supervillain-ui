@@ -318,7 +318,12 @@ end
 
 function MOD:Load()
 	SV.private.Docks = SV.private.Docks or {"None", "None"}
-
+	
+	-- ArtifactWatchBar
+	ArtifactWatchBar:Hide();
+	ArtifactWatchBar.OverlayFrame:Hide();
+	MainMenuBar:Hide();		
+			
 	local alert = CreateFrame('Frame', nil, UIParent);
 	alert:SetStyle("!_Frame", 'Transparent');
 	alert:SetSize(250, 70);

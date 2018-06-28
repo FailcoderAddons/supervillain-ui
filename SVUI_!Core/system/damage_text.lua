@@ -13,7 +13,7 @@ local type 	= type;
 FORCIBLY CHANGE THE GAME WORLD COMBAT TEXT FONT
 ##########################################################
 ]]--
-local FONT_NAME = "DAMAGE_TEXT_FONT";
+local FONT_NAME = "helsinki";
 
 local MAIN_DIR = "Fonts\\%s.ttf";
 local BASE_DIR = "Interface\\AddOns\\SVUI_!Core\\%s.ttf";
