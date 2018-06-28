@@ -84,7 +84,7 @@ local DUNGEON_TOKENS={
 	{ 1129, 20},   --WoD Seal of Inevitable Fate
 	{ 1166, 0},    --Timwarped Badges
 	{ 1191, 5000}, --Valor
-	{ 1273, 6}     --Lgn Seal of Broken Fate
+	{ 1273, 6},    --Lgn Seal of Broken Fate
 	{ 1580, 5}     --BfA Seal of Wartorn Fate
 }
 
@@ -113,6 +113,7 @@ local BFA_TOKENS={
 	{ 1710, 0},       --BfA Seafarer's Dubloon
 	{ 1560, 0},       --BfA War Resources
 	{ 1587, 1000},    --BfA War Supplies
+}
 
 local PVP_TOKENS={
 	{ 391, 300}  --Cata Tol barad Commendations
