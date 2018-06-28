@@ -73,7 +73,7 @@ ITEM PARSING
 ]]--
 do
   local SkellyKeys = {
-	[GetSpellInfo(159826)] = true, -- Monelite Skeleton Key
+	[GetSpellInfo(269064)] = true, -- Monelite Skeleton Key
 	[GetSpellInfo(195881)] = true, -- Jeweled Lockpick
 	[GetSpellInfo(130100)] = true, -- Ghostly Skeleton Key
 	[GetSpellInfo(94574)] = true, -- Obsidium Skeleton Key
