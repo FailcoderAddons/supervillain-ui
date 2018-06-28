@@ -62,9 +62,9 @@ local ARCHAEOLOGY_TOKENS={
 	{ 829, 250},   --WoD arakkoa fragments
 	{ 1172, 200},  --Lgn Highborne Fragments
 	{ 1173, 200},  --Lgn Highmountain Fragments
-	{ 1174, 200}   --Lgn Demonic Fragments
-	{ 1534, 200}   --BfA Zandalari Archarology Fragments
-	{ 1535, 200}   --BfA Drust Archaeology Fragments
+	{ 1174, 200},  --Lgn Demonic Fragments
+	{ 1534, 200},  --BfA Zandalari Archarology Fragments
+	{ 1535, 200},  --BfA Drust Archaeology Fragments
 }
 
 local JEWELCRAFTING_TOKENS={
