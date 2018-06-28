@@ -58,7 +58,7 @@ local WMP_XY_COORD = false;
 local WMM_XY_COORD = false;
 local WM_TINY = false;
 local MM_COLOR = "darkest"
-local MM_BRDR = 0
+local MM_BRDR = 0 --#TODO figure out why this is 0 then used to try and offset things.
 local MM_SIZE = 240
 local MM_BTN_SIZE = 30
 local MM_BTN_ROW = 8
@@ -900,7 +900,7 @@ function MOD:Load()
 	self.InfoTop.Panel:SetPoint("BOTTOMRIGHT", self.InfoTop.Text, "BOTTOMRIGHT", 4, -4);
 	self.InfoTop.Panel:SetAttribute("panelLocked", true);
 
-	self.InfoBottom:SetPoint("BOTTOMRIGHT", self.Holder, "BOTTOMRIGHT", 2, -3)
+	self.InfoBottom:SetPoint("BOTTOMRIGHT", self.Holder, "BOTTOMRIGHT", -MM_BRDR, -3)
 	self.InfoBottom:SetSize(MM_WIDTH, 28)
 	self.InfoBottom:SetFrameLevel(Minimap:GetFrameLevel() + 1)
 

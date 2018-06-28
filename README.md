@@ -15,7 +15,7 @@ SuperVillain UI is designed to work with the latest live expansion of World of W
 * Click "Download a ZIP" and save the ZIP wherever you like :)
 * Open the ZIP and copy all the SVUI_ folders into your WoW Interface\Addons folder
 * Start WoW
-* Post bugs (yes, there are still plenty :>) here: https://github.com/failcoder/supervillain-ui/Issues
+* Post bugs (yes, there are still plenty :>) here: https://github.com/FailcoderAddons/supervillain-ui/Issues
 
 ## Communications
 If you're looking for the most up to date information about what's happening with SuperVillain UI, Mentalo commands you to (please) join the authors (and other SuperVillains) on Discord: https://discord.gg/4VJdSsc
