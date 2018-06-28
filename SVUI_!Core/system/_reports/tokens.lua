@@ -63,6 +63,8 @@ local ARCHAEOLOGY_TOKENS={
 	{ 1172, 200},  --Lgn Highborne Fragments
 	{ 1173, 200},  --Lgn Highmountain Fragments
 	{ 1174, 200}   --Lgn Demonic Fragments
+	{ 1534, 200}   --BfA Zandalari Archarology Fragments
+	{ 1535, 200}   --BfA Drust Archaeology Fragments
 }
 
 local JEWELCRAFTING_TOKENS={
@@ -83,6 +85,7 @@ local DUNGEON_TOKENS={
 	{ 1166, 0},    --Timwarped Badges
 	{ 1191, 5000}, --Valor
 	{ 1273, 6}     --Lgn Seal of Broken Fate
+	{ 1580, 5}     --BfA Seal of Wartorn Fate
 }
 
 local GARRISON_TOKENS={
@@ -104,6 +107,12 @@ local LEGION_TOKENS={
 	{ 1506, 40},      --Lgn Argus Waystone
 	{ 1508, 1500}     --Lgn Veiled Argunite	
 }
+
+local BDA_TOKENS={
+	{ 1565, 1000},    --BfA Rich Azerite
+	{ 1710, 0},       --BfA Seafarer's Dubloon
+	{ 1560, 0},       --BfA War Resources
+	{ 1587, 1000},    --BfA War Supplies
 
 local PVP_TOKENS={
 	{ 391, 300}  --Cata Tol barad Commendations
@@ -157,6 +166,7 @@ local function CacheTokenData(self)
 	AddTokenTableToMenu(self, GARRISON_TOKENS, key)
 	AddTokenTableToMenu(self, DUNGEON_TOKENS, key)
 	AddTokenTableToMenu(self, LEGION_TOKENS, key)
+	AddTokenTableToMenu(self, BFA_TOKENS, key)
 	AddTokenTableToMenu(self, PVP_TOKENS, key)
 	AddTokenTableToMenu(self, MISC_TOKENS, key)
 
@@ -236,6 +246,10 @@ Report.OnEnter = function(self)
 	Reports.ToolTip:AddLine(" ")
 	Reports.ToolTip:AddLine("Legion")
 	TokenInquiryTable(LEGION_TOKENS)
+	
+	Reports.ToolTip:AddLine(" ")
+	Reports.ToolTip:AddLine("Battle for Azeroth")
+	TokenInquiryTable(BFA_TOKENS)
 
 
 	Reports.ToolTip:AddLine(" ")
