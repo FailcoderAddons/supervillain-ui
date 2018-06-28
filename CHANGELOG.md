@@ -3,7 +3,9 @@
 * Updated InfoBottom to no longer offset right and overlap the border for issue #161
 * Removed extraneous size change for issue #160
 * Reordered NPC Model function calls for issue #176
-
+* Added BfA Currencies to tokens.lua report
+* Added BfA Breakables to breakstuff.lua
+* Added Dark Iron Dwarf racial to misc.lua Docklet as a Hearthstone option
 
 ######v1.4.2
 * Curse build should have all features now
