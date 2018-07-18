@@ -32,7 +32,7 @@ local HelpFrameButtonList = {
 	"HelpFrameOpenTicketHelpTopIssues",
 	"HelpFrameOpenTicketHelpOpenTicket",
 	"HelpFrameKnowledgebaseSearchButton",
-	"HelpFrameKnowledgebaseNavBarHomeButton",
+	--"HelpFrameKnowledgebaseNavBarHomeButton",
 	"HelpFrameCharacterStuckStuck",
 	"GMChatOpenLog",
 	"HelpFrameTicketSubmit",
@@ -122,8 +122,8 @@ local function HelpFrameStyle()
 	end 
 	HelpFrameKnowledgebaseSearchBox:ClearAllPoints()
 	HelpFrameKnowledgebaseSearchBox:SetPoint("TOPLEFT", HelpFrameMainInset, "TOPLEFT", 13, -10)
-	HelpFrameKnowledgebaseNavBarOverlay:Die()
-	HelpFrameKnowledgebaseNavBar:RemoveTextures()
+	--HelpFrameKnowledgebaseNavBarOverlay:Die()
+	--HelpFrameKnowledgebaseNavBar:RemoveTextures()
 	HelpFrame:RemoveTextures(true)
 	HelpFrame:SetStyle("Frame", "Window")
 	HelpFrameKnowledgebaseSearchBox:SetStyle("Editbox")

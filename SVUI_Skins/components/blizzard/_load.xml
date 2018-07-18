@@ -1,5 +1,4 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/">
-	<Script file='test.lua'/>
 	<Script file='achievement.lua'/>
 	<Script file='alert.lua'/>
 	<Script file='archeology.lua'/>

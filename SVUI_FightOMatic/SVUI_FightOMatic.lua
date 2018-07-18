@@ -550,7 +550,7 @@ function PLUGIN:UpdateCommunicator()
 		self.Scanning = true
 		PopulateScans()
 	else
-		local mapID = GetCurrentMapAreaID()
+		local mapID = C_AdventureMap.GetMapID()
 		if(mapID) then
 			local points = PVP_NODES[mapID]
 			if(points) then

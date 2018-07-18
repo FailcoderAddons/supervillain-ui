@@ -168,19 +168,22 @@ do
 
         for slotName, flags in pairs(_slots) do
             local slotId = GetInventorySlotInfo(slotName);
-            local iLink = GetInventoryItemLink(unit, slotId)
+            local iLink = GetInventoryItemLink(unit, slotId);
+			local itemID, altItemID, name, _, _, _, _, _, _, _, _, altOnTop = C_ArtifactUI.GetArtifactInfo();
             local iLevel;
             if(iLink and type(iLink) == "string") then
-                iLevel = SV:GetItemLevel(iLink)
+                iLevel = SV:GetItemLevel(iLink);
+				local relicLevel = GetRelicItemLevel(iLink) * 5;
+				iLevel = iLevel + relicLevel;
                 if(iLevel and iLevel > 0) then
-                    -- handle dual weilded weapons properly 
+                    -- handle dual weilded weapons properly
                     if (slotName == "SecondaryHandSlot") then
-                      local mainslotId = GetInventorySlotInfo("MainHandSlot");
-                      local mainiLink = GetInventoryItemLink(unit, mainslotId)
-                      local mainiLevel = SV:GetItemLevel(mainiLink)
-                      if (iLink and mainiLink) then -- linkid the same - dual wielded
-                        if mainiLevel > iLevel then iLevel = mainiLevel end
-                      end 
+						local mainslotId = GetInventorySlotInfo("MainHandSlot");
+						local mainiLink = GetInventoryItemLink(unit, mainslotId)
+						local mainiLevel = SV:GetItemLevel(mainiLink)
+						relicLevel = GetRelicItemLevel(mainiLink) * 5;
+						mainiLevel = mainiLevel + relicLevel;
+						iLevel = mainiLevel;
                     end
                     totalSlots = totalSlots + 1;
                     averageLevel = averageLevel + iLevel
@@ -205,6 +208,26 @@ function SV:GetItemLevel(itemLink)
     return 0
   end
 end
+
+function GetRelicItemLevel(itemLink)
+	-- make sure the linked item is a weapon, otherwise weird things happen
+	local itemName, _, _, iLevelInfo, _, itemType, itemSubType, _, _, _, _ = GetItemInfo(itemLink)
+
+	
+	local attuned = 0;
+	
+	if (checkName == itemName) or (checkAltName == itemName) then
+		for i=1, 3 do
+			isAttuned, canAttune = C_ArtifactUI.GetEquippedArtifactRelicAttuneInfo(i);
+			if isAttuned then
+				attuned = attuned + 1;
+			end
+		end
+	end
+	
+	return attuned;
+end
+
 
 function SV:ParseGearSlots(unit, inspecting, setLevel, setDurability)
     local category = (inspecting) and "Inspect" or "Character";

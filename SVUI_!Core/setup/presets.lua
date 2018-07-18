@@ -925,7 +925,7 @@ local function LoadPageData()
 		--PAGE 7
 		{
 			["REQUIRED"] = "ActionBars",
-			["SubTitle"] = ACTIONBAR_LABEL.." "..SETTINGS,
+			["SubTitle"] = "Test "..SETTINGS,
 
 			["Desc1"] = L["Choose a layout for your action bars."],
 			["Desc2"] = L["Sometimes you need big buttons, sometimes you don't. Your choice here."],

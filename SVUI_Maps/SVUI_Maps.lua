@@ -58,7 +58,7 @@ local WMP_XY_COORD = false;
 local WMM_XY_COORD = false;
 local WM_TINY = false;
 local MM_COLOR = "darkest"
-local MM_BRDR = 0 --#TODO figure out why this is 0 then used to try and offset things.
+local MM_BRDR = 0
 local MM_SIZE = 240
 local MM_BTN_SIZE = 30
 local MM_BTN_ROW = 8
@@ -288,7 +288,10 @@ end
 local function UpdateMiniMapCoords()
 	if(WMP_XY_COORD and WorldMapFrame:IsShown()) then return end
 	local skip = IsInInstance()
-	local playerX, playerY = GetPlayerMapPosition("player")
+    local cmap = C_Map.GetBestMapForUnit("player")
+	local player = C_Map.GetPlayerMapPosition(cmap, "player");
+    local playerX = player.x
+    local playerY = player.y
 	if((not skip) and (playerX ~= 0 and playerY ~= 0)) then
 		playerX = parsefloat(100 * playerX, 2)
 		playerY = parsefloat(100 * playerY, 2)
@@ -322,7 +325,10 @@ local function UpdateWorldMapCoords()
 
 	if(WMP_XY_COORD) then
 		local skip = IsInInstance()
-		local playerX, playerY = GetPlayerMapPosition("player")
+		local cmap = C_Map.GetBestMapForUnit("player")
+	    local player = C_Map.GetPlayerMapPosition(cmap, "player");
+        local playerX = player.x
+        local playerY = player.y
 		if((not skip) and (playerX ~= 0 and playerY ~= 0)) then
 			playerX = parsefloat(100 * playerX, 2)
 			playerY = parsefloat(100 * playerY, 2)
@@ -341,10 +347,10 @@ local function UpdateWorldMapCoords()
 	end
 
 	if(WMM_XY_COORD) then
-		local scale = WorldMapDetailFrame:GetEffectiveScale()
-		local width = WorldMapDetailFrame:GetWidth()
-		local height = WorldMapDetailFrame:GetHeight()
-		local centerX, centerY = WorldMapDetailFrame:GetCenter()
+		local scale = WorldMapFrame:GetEffectiveScale()
+		local width = WorldMapFrame:GetWidth()
+		local height = WorldMapFrame:GetHeight()
+		local centerX, centerY = WorldMapFrame:GetCenter()
 		local cursorX, cursorY = GetCursorPosition()
 		local mouseX = (cursorX / scale - (centerX - (width / 2))) / width;
 		local mouseY = (centerY + (height / 2) - cursorY / scale) / height;
@@ -361,14 +367,14 @@ local function UpdateWorldMapCoords()
 		end
 	end
 
-	if(WM_ALPHA and (not WorldMapFrame_InWindowedMode())) then
+	--[[if(WM_ALPHA and (not WorldMapFrame_InWindowedMode())) then
 		local speed = GetUnitSpeed("player")
 		if(speed ~= 0) then
 			WorldMapFrame:SetAlpha(0.2)
 		else
 			WorldMapFrame:SetAlpha(1)
 		end
-	end
+	end]]--
 end
 
 --[[
@@ -411,7 +417,7 @@ end
 local function AdjustMapSize()
 	if InCombatLockdown() then return end
 
-	if WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
+	--[[if WORLDMAP_SETTINGS.size == WORLDMAP_FULLMAP_SIZE then
 		WorldMapFrame:SetPoint("TOP", SV.Screen, "TOP", 0, 0)
 	end
 
@@ -419,7 +425,7 @@ local function AdjustMapSize()
 		BlackoutWorld:SetTexture("")
 	else
 		BlackoutWorld:SetColorTexture(0, 0, 0, 1)
-	end
+	end--]]
 end
 
 local function UpdateWorldMapConfig()
@@ -483,12 +489,12 @@ local function UpdateWorldMapConfig()
 	end
 
 	if InCombatLockdown()then return end
-	if(not MOD.WorldMapHooked) then
+	--[[if(not MOD.WorldMapHooked) then
 		NewHook("WorldMap_ToggleSizeUp", AdjustMapSize)
 		--Removed for 7.3
 		--NewHook("WorldMap_ToggleSizeDown", SetSmallWorldMap)
 		MOD.WorldMapHooked = true
-	end
+	end--]]
 	AdjustMapSize()
 end
 --[[
@@ -839,7 +845,7 @@ function MOD:Load()
 	MinimapBorderTop:Hide()
 	MinimapZoomIn:Hide()
 	MinimapZoomOut:Hide()
-	MiniMapVoiceChatFrame:Hide()
+	--MiniMapVoiceChatFrame:Hide()
 	MinimapNorthTag:Die()
 	GameTimeFrame:Hide()
 	MinimapZoneTextButton:Hide()
@@ -922,8 +928,8 @@ function MOD:Load()
 		WorldMapFrame:HookScript('OnHide', _hook_WorldMapFrame_OnHide)
 	end
 
-	WorldMapCoords:SetFrameLevel(WorldMapDetailFrame:GetFrameLevel() + 1);
-	WorldMapCoords:SetFrameStrata(WorldMapDetailFrame:GetFrameStrata());
+	WorldMapCoords:SetFrameLevel(QuestLogPopupDetailFrame:GetFrameLevel() + 1);
+	WorldMapCoords:SetFrameStrata(QuestLogPopupDetailFrame:GetFrameStrata());
 	WorldMapCoords.Player.Name:SetText(PLAYER);
 	WorldMapCoords.Mouse.Name:SetText(MOUSE_LABEL);
 

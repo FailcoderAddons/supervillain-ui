@@ -49,7 +49,7 @@ TRANSMOG MODR
 ]]--
 local function TransmogStyle()
 	if SV.db.Skins.blizzard.enable ~= true or SV.db.Skins.blizzard.transmogrify ~= true then return end
-
+	
 	TransmogrifyFrame:SetSize(500, 600)
 	SV.API:Set("Window", TransmogrifyFrame, true)
 
@@ -71,7 +71,7 @@ local function TransmogStyle()
 	SV.API:Set("CloseButton", TransmogrifyArtFrameCloseButton)
 	TransmogrifyArtFrame:RemoveTextures()
 
-	for p, a9 in pairs(TransmogSlotList)do 
+	for p, a9 in pairs(TransmogSlotList) do 
 		local icon = _G["TransmogrifyFrame"..a9 .."SlotIconTexture"]
 		local a9 = _G["TransmogrifyFrame"..a9 .."Slot"]
 		if a9 then

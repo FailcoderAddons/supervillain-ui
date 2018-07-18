@@ -1419,9 +1419,10 @@ local function RemoveDefaults()
 
 	MainMenuBar:EnableMouse(false)
 	MainMenuBar:SetAlpha(0)
-	MainMenuExpBar:UnregisterAllEvents()
+	--[[MainMenuExpBar:UnregisterAllEvents()
 	MainMenuExpBar:Hide()
-	MainMenuExpBar:SetParent(removalManager)
+	MainMenuExpBar:SetParent(removalManager)]]--
+    
 	local maxChildren = MainMenuBar:GetNumChildren();
 	for i = 1, maxChildren do
 		local child = select(i, MainMenuBar:GetChildren())
@@ -1431,9 +1432,9 @@ local function RemoveDefaults()
 			child:SetParent(removalManager)
 		end
 	end
-	ReputationWatchBar:UnregisterAllEvents()
-	ReputationWatchBar:Hide()
-	ReputationWatchBar:SetParent(removalManager)
+	--ReputationBar:UnregisterAllEvents()
+	--ReputationBar:Hide()
+	--ReputationBar:SetParent(removalManager)
 	MainMenuBarArtFrame:UnregisterEvent("ACTIONBAR_PAGE_CHANGED")
 	MainMenuBarArtFrame:UnregisterEvent("ADDON_LOADED")
 	MainMenuBarArtFrame:Hide()

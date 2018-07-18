@@ -18,7 +18,7 @@ HELPERS
 ##########################################################
 ]]--
 local MacroButtonList = {
-	"MacroSaveButton", "MacroCancelButton", "MacroDeleteButton", "MacroNewButton", "MacroExitButton", "MacroEditButton", "MacroFrameTab1", "MacroFrameTab2", "MacroPopupOkayButton", "MacroPopupCancelButton"
+	"MacroSaveButton", "MacroCancelButton", "MacroDeleteButton", "MacroNewButton", "MacroExitButton", "MacroEditButton", "MacroFrameTab1", "MacroFrameTab2", "MacroPopupFrame.BorderBox.OkayButton", "MacroPopupFrame.BorderBox.CancelButton"
 }
 local MacroButtonList2 = {
 	"MacroDeleteButton", "MacroNewButton", "MacroExitButton"
@@ -87,8 +87,7 @@ local function MacroUIStyle()
 	MacroPopupNameLeft:SetTexture("")
 	MacroPopupNameMiddle:SetTexture("")
 	MacroPopupNameRight:SetTexture("")
-	MacroPopupCancelButton:SetPoint("BOTTOM", MacroPopupFrame, "BOTTOMLEFT", 0, -25)
-
+	MacroPopupFrame.BorderBox.CancelButton:SetPoint("BOTTOM", MacroPopupFrame, "BOTTOMLEFT", 0, -25)
 	MacroFrameInset:Die()
 
 	MacroButtonContainer:RemoveTextures()
