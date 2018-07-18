@@ -73,6 +73,7 @@ ITEM PARSING
 ]]--
 do
   local SkellyKeys = {
+	[GetSpellInfo(269064)] = true, -- Monelite Skeleton Key
 	[GetSpellInfo(195881)] = true, -- Jeweled Lockpick
 	[GetSpellInfo(130100)] = true, -- Ghostly Skeleton Key
 	[GetSpellInfo(94574)] = true, -- Obsidium Skeleton Key
@@ -103,9 +104,19 @@ do
 		['124106']='OVERRIDE_MILLABLE', --Felwort
 		['128304']='OVERRIDE_MILLABLE', --Yseralline Seed
 		['151565']='OVERRIDE_MILLABLE', --Astral Glory
+		['152505']='OVERRIDE_MILLABLE', --Riverbud
+		['152506']='OVERRIDE_MILLABLE', --Star Moss
+		['152507']='OVERRIDE_MILLABLE', --Akunda's Bite
+		['152508']='OVERRIDE_MILLABLE', --Winter's Kiss
+		['152509']='OVERRIDE_MILLABLE', --Siren's Pollen
+		['152510']='OVERRIDE_MILLABLE', --Anchor Weed
+		['152511']='OVERRIDE_MILLABLE', --Sea Stalk
 		['123918']='OVERRIDE_PROSPECTABLE', --Leystone
 		['123919']='OVERRIDE_PROSPECTABLE', --Felslate
 		['151564']='OVERRIDE_PROSPECTABLE', --Empyrium
+		['152512']='OVERRIDE_PROSPECTABLE', --Monelite
+		['152513']='OVERRIDE_PROSPECTABLE', --Platinum Ore
+		['152579']='OVERRIDE_PROSPECTABLE', --Storm Silver Ore
 	}
 
 	local function IsThisBreakable(link)
