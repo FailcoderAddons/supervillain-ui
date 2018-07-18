@@ -1,6 +1,6 @@
-## Interface: 70300
+## Interface: 80000
 ## Author: Failcoder, Azilroka, Sortokk
-## Version: 1.4.2
+## Version: 1.5
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00Skins|r
 ## Notes: SVUI [|cff9911FFSkins System and AddOn Frames|r].
 ## SavedVariables: SVUIUI_STYLE_GLOBAL
@@ -13,9 +13,5 @@
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: MIT
 ## X-Category: Interface Enhancements
-## X-Curse-Packaged-Version: 1.4.2
-## X-Curse-Project-Name: SuperVillain UI
-## X-Curse-Project-ID: supervillain-ui
-## X-Curse-Repository-ID: wow/supervillain-ui/mainline
 
 SVUI_Skins.xml

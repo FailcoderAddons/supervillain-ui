@@ -178,7 +178,7 @@ local function TalentFrameStyle()
 	end)
 
 	--[[ PVP TALENTS ]]--
-	PlayerTalentFramePVPTalents:RemoveTextures()
+	--[[PlayerTalentFramePVPTalents:RemoveTextures()
 	PlayerTalentFramePVPTalents.Talents:RemoveTextures()
 	PlayerTalentFramePVPTalents.Talents:SetStyle("!_Frame", "Inset")
 	for i = 1, 6 do
@@ -215,7 +215,7 @@ local function TalentFrameStyle()
 				end
 			end
 		end
-	end)
+	end)--]]
 end
 --[[
 ##########################################################

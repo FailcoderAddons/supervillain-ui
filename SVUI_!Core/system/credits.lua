@@ -142,7 +142,7 @@ local function RollCredits()
 end
 
 local function ShowIssueString()
-  local WEEKDAY, MONTHNUM, DAYNUM, YEARNUM = CalendarGetDate();
+  local WEEKDAY, MONTHNUM, DAYNUM, YEARNUM = C_DateAndTime.GetTodaysDate();
   local ISSUE_TEXT = ("Issue: #%d, Volume: #%d"):format(DAYNUM, MONTHNUM);
   local flavorKey = random(1,2);
   local flavorList = FLAVOR_TEXTS[flavorKey];

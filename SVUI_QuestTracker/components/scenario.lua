@@ -48,7 +48,7 @@ local GENERIC_FRACTION_STRING 	= _G.GENERIC_FRACTION_STRING;
 local CHALLENGE_MEDAL_GOLD   	= _G.CHALLENGE_MEDAL_GOLD;
 local CHALLENGE_MEDAL_SILVER    = _G.CHALLENGE_MEDAL_SILVER;
 local CHALLENGE_MEDAL_TEXTURES  = _G.CHALLENGE_MEDAL_TEXTURES;
-local CHALLENGES_TIMER_NO_MEDAL = _G.CHALLENGES_TIMER_NO_MEDAL;
+local CHALLENGE_MODE_COMPLETE_TIME_EXPIRED = _G.CHALLENGE_MODE_COMPLETE_TIME_EXPIRED;
 local LE_WORLD_ELAPSED_TIMER_TYPE_CHALLENGE_MODE = _G.LE_WORLD_ELAPSED_TIMER_TYPE_CHALLENGE_MODE;
 local LE_WORLD_ELAPSED_TIMER_TYPE_PROVING_GROUND = _G.LE_WORLD_ELAPSED_TIMER_TYPE_PROVING_GROUND;
 --[[
@@ -129,7 +129,7 @@ local SetScenarioData = function(self, title, stageName, currentStage, numStages
 
     local objective_block = block.Objectives;
 	for i = 1, numObjectives do
-		local description, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed, failed = C_Scenario.GetCriteriaInfo(i);
+		local description, criteriaType, completed, quantity, totalQuantity, flags, assetID, quantityString, criteriaID, duration, elapsed, failed, kills = C_Scenario.GetCriteriaInfo(i);
 		if(duration > 0 and elapsed <= duration and not (failed or completed)) then
 			objective_rows = objective_block:SetTimer(objective_rows, duration, elapsed);
 			fill_height = fill_height + (INNER_HEIGHT + 2);
@@ -137,7 +137,7 @@ local SetScenarioData = function(self, title, stageName, currentStage, numStages
 		if(description and description ~= '') then
 			objective_rows = objective_block:SetInfo(objective_rows, description, completed, failed);
 			fill_height = fill_height + (INNER_HEIGHT + 2);
-		end
+		end		
 	end
 
 	local timerHeight = self.Timer:GetHeight()
@@ -217,24 +217,23 @@ local StopTimer = function(self)
 	MOD.Headers["Scenario"].Block:SetHeight((blockHeight - timerHeight) + 1);
 end
 
-local SetChallengeMedals = function(self, elapsedTime, ...)
+local SetChallengeMedals = function(self, elapsedTime, maxTime)
 	self:SetHeight(INNER_HEIGHT);
 	local blockHeight = MOD.Headers["Scenario"].Block:GetHeight();
 	local cmID = C_ChallengeMode.GetActiveChallengeMapID();
-	local _, _, difficulty = GetInstanceInfo();
 	MOD.Headers["Scenario"].Block:SetHeight(blockHeight + INNER_HEIGHT + 4);
 	self:FadeIn();
-	self.Bar:SetMinMaxValues(0, elapsedTime);
+	self.Bar.timeLimit = maxTime;
+	self.Bar:SetMinMaxValues(0, maxTime);
 	self.Bar:SetValue(elapsedTime);
 
-	if(cmID and difficulty == 8) then
-		local zoneName, _, maxTime = C_ChallengeMode.GetMapInfo(cmID);
+	if(cmID) then
 		MEDAL_TIMES[1] = maxTime * 0.6; -- 3 chest
 		MEDAL_TIMES[2] = maxTime * 0.8; -- 2 chest
 		MEDAL_TIMES[3] = maxTime -- 1 chest
 	else
-		for i = 1, select("#", ...) do
-			MEDAL_TIMES[i] = select(i, ...);
+		for i = 1, select("#", maxTime) do
+			MEDAL_TIMES[i] = select(i, maxTime);
 		end
 	end
 	LAST_MEDAL = nil;
@@ -267,14 +266,14 @@ local UpdateChallengeMedals = function(self, elapsedTime)
 		end
 	end
 
-	self.Bar.TimeLeft:SetText(CHALLENGES_TIMER_NO_MEDAL);
+	self.Bar.TimeLeft:SetText(GetTimeStringFromSeconds(elapsedTime));
 	self.Bar:SetValue(0);
 	self.Bar.medalTime = nil;
 	self:SetHeight(1)
 	self.Icon:SetTexture(LINE_FAILED_ICON);
 
 	if(LAST_MEDAL and LAST_MEDAL ~= 0) then
-		PlaySound("UI_Challenges_MedalExpires");
+		PlaySound(SOUNDKIT.UI_70_CHALLENGE_MODE_COMPLETE_NO_UPGRADE);
 	end
 
 	LAST_MEDAL = 0;
@@ -305,25 +304,15 @@ end
 local UpdateAllTimers = function(self, ...)
 	for i = 1, select("#", ...) do
 		local timerID = select(i, ...);
-
-		if timerID == 0 then
-			timerID = 1
-		end
-
 		local _, elapsedTime, type = GetWorldElapsedTime(timerID);
-		if ( type == LE_WORLD_ELAPSED_TIMER_TYPE_CHALLENGE_MODE) then
-			local _, _, difficulty, _, _, _, _, mapID = GetInstanceInfo();
+		if (type == LE_WORLD_ELAPSED_TIMER_TYPE_CHALLENGE_MODE) then
 			local cmID = C_ChallengeMode.GetActiveChallengeMapID();
-			if(cmID and difficulty == 8) then
-				local cmLevel, affixes, empowered = C_ChallengeMode.GetActiveKeystoneInfo();
+			if(cmID) then
 				local _, _, maxTime = C_ChallengeMode.GetMapInfo(cmID);
 				self:SetMedals(elapsedTime, maxTime);
 				return;
-			elseif ( mapID ) then
-				self:SetMedals(elapsedTime, GetChallengeModeMapTimes(mapID));
-				return;
 			end
-		elseif ( type == LE_WORLD_ELAPSED_TIMER_TYPE_PROVING_GROUND ) then
+		elseif (type == LE_WORLD_ELAPSED_TIMER_TYPE_PROVING_GROUND) then
 			local diffID, currWave, maxWave, duration = C_Scenario.GetProvingGroundsInfo()
 			if (duration > 0) then
 				self:StartTimer(elapsedTime, duration, diffID, currWave, maxWave)
@@ -335,7 +324,6 @@ local UpdateAllTimers = function(self, ...)
 end
 
 local RefreshScenarioObjective = function(self, event, ...)
-
 	local _, _, difficulty, _, _, _, _, _ = GetInstanceInfo();
 	if(C_Scenario.IsInScenario()) then
 		if(event == "PLAYER_ENTERING_WORLD") then
@@ -482,8 +470,7 @@ function MOD:InitializeScenarios()
 	timer.Bar.Wave:SetText('')
 
 	timer.Bar.TimeLeft = timer.Bar:CreateFontString(nil,"OVERLAY");
-	timer.Bar.TimeLeft:SetPoint("TOPLEFT", timer.Bar.Wave, "TOPRIGHT", 4, 0);
-	timer.Bar.TimeLeft:SetPoint("BOTTOMRIGHT", timer.Bar, "BOTTOMRIGHT", 0, 0);
+	timer.Bar.TimeLeft:SetPoint("TOPLEFT", timer.Bar, "TOPRIGHT", 4, -4);
 	timer.Bar.TimeLeft:SetFontObject(SVUI_Font_Quest_Number);
 	timer.Bar.TimeLeft:SetTextColor(1,1,1)
 	timer.Bar.TimeLeft:SetText('')

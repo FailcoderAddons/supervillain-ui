@@ -1,6 +1,6 @@
-## Interface: 70300
+## Interface: 80000
 ## Author: Failcoder
-## Version: 1.4.2
+## Version: 1.5
 ## Title: |cffFF9900SuperVillain UI: |r|cff00FF00!Options|r
 ## Notes: SVUI [|cff9911FFConfig Options|r]
 ## RequiredDeps: SVUI_!Core
@@ -10,9 +10,5 @@
 ## X-License: MIT
 ## X-Category: Interface Enhancements
 ## X-MKName: Options
-## X-Curse-Packaged-Version: 1.4.2
-## X-Curse-Project-Name: SuperVillain UI
-## X-Curse-Project-ID: supervillain-ui
-## X-Curse-Repository-ID: wow/supervillain-ui/mainline
 
 SVUI_!Options.xml

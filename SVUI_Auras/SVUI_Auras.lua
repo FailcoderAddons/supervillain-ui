@@ -186,7 +186,7 @@ do
 					self.time:SetText("")
 					self:SetScript("OnUpdate", nil)
 				end
-				if count > 1 then
+				if count then
 					self.count:SetText(count)
 				else
 					self.count:SetText("")
