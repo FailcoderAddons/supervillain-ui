@@ -1,3 +1,8 @@
+######v1.5
+* Updated UI for BFA pre-patch
+* Bugs still remain, but I will work on them over time.
+* TODO: UnitFrames/Auras
+
 ######v1.4.3
 * Updated readme with FailcoderAddons link from failcoder
 * Updated InfoBottom to no longer offset right and overlap the border for issue #161
