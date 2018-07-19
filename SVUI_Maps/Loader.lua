@@ -54,7 +54,7 @@ SV.defaults[Schema] = {
 		["PocketPlot"] = true,
 	},
 	["customIcons"] = true,
-	["tinyWorldMap"] = true,
+	["tinyWorldMap"] = false,
 	["calendarShortcut"] = true,
 	["trackingShortcut"] = true,
 	["size"] = 240,

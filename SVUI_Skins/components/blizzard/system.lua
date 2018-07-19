@@ -351,7 +351,7 @@ local SystemFrameList18 = {
 local SystemFrameList19 = {
 	"RecordLoopbackSoundButton",
 	"PlayLoopbackSoundButton",
-	"AudioOptionsVoicePanelChatMode1KeyBindingButton",
+	"AudioOptionsVoicePanel.PushToTalkKeybindButton",
 	"InterfaceOptionsSocialPanelTwitterLoginButton",
 	"CompactUnitFrameProfilesSaveButton",
 	"CompactUnitFrameProfilesDeleteButton",
@@ -699,8 +699,8 @@ local function SystemPanelQue()
 		end
 	end
 
-	AudioOptionsVoicePanelChatMode1KeyBindingButton:ClearAllPoints()
-	AudioOptionsVoicePanelChatMode1KeyBindingButton:SetPoint("CENTER", AudioOptionsVoicePanelBinding, "CENTER", 0, -10)
+    --AudioOptionsVoicePanel.PushToTalkKeybindButton:ClearAllPoints()
+	--AudioOptionsVoicePanel.PushToTalkKeybindButton:SetPoint("CENTER", AudioOptionsVoicePanelBinding, "CENTER", 0, -10)
 	if(CompactUnitFrameProfilesRaidStylePartyFrames) then CompactUnitFrameProfilesRaidStylePartyFrames:SetStyle("CheckButton") end
 	if(CompactUnitFrameProfilesGeneralOptionsFrameResetPositionButton) then CompactUnitFrameProfilesGeneralOptionsFrameResetPositionButton:SetStyle("Button") end
 

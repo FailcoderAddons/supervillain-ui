@@ -42,8 +42,8 @@ local AceConfig = LibStub("AceConfig-3.0");
 local AceConfigDialog = LibStub("AceConfigDialog-3.0");
 local AceVillainWidgets = AceVillainWidgets;
 local GameTooltip = GameTooltip;
-local GetNumEquipmentSets = GetNumEquipmentSets;
-local GetEquipmentSetInfo = GetEquipmentSetInfo;
+local GetNumEquipmentSets = C_EquipmentSet.GetNumEquipmentSets()
+local GetEquipmentSetInfo
 local sortingFunction = function(arg1, arg2) return arg1 < arg2 end
 local GUIWidth = SV.LowRez and 890 or 1090;
 local playerRealm = GetRealmName()
@@ -1042,8 +1042,8 @@ SV.Options.args.Core.args.Extras = {
 
 local function GetGearSetList()
 	local t = {["none"] = L["No Change"]}
-	for i = 1, GetNumEquipmentSets() do
-		local name = GetEquipmentSetInfo(i)
+	for i = 1, GetNumEquipmentSets do
+		local name = C_EquipmentSet.GetEquipmentSetInfo(i)
 		if name then
 			t[name] = name
 		end
@@ -1095,7 +1095,7 @@ SV.Options.args.Core.args.Gear = {
 			order = 1,
 			type = 'description',
 			name = function()
-				if(GetNumEquipmentSets()==0) then
+				if(GetNumEquipmentSets==0) then
 					return ("%s\n|cffFF0000Must create an equipment set to use some of these features|r"):format(L["EQUIPMENT_DESC"])
 				else
 					return L["EQUIPMENT_DESC"]
@@ -1107,7 +1107,7 @@ SV.Options.args.Core.args.Gear = {
 			type = "group",
 			name = L["Specialization"],
 			guiInline = true,
-			disabled = function() return GetNumEquipmentSets() == 0 end,
+			disabled = function() return GetNumEquipmentSets == 0 end,
 			args = GetGearSpecs();
 		},
 		battleground = {
@@ -1115,7 +1115,7 @@ SV.Options.args.Core.args.Gear = {
 			type = "group",
 			name = L["Battleground"],
 			guiInline = true,
-			disabled = function()return GetNumEquipmentSets() == 0 end,
+			disabled = function()return GetNumEquipmentSets == 0 end,
 			args = {
 				enable = {
 					type = "toggle",

@@ -363,9 +363,9 @@ local function QuickJoinStyle()
 	SV:NewAnchor(ToastVault, L["Quick Join Toast Anchor"]);
 	SV:MoveToast();
 	
-	SV:AddSlashCommand("addtoast", "Display test quick join toast", function()
+	--[[SV:AddSlashCommand("addtoast", "Display test quick join toast", function()
 		ToastVault:addToast("Supervillain", "RAID: Chamber of the Avatar", "lfglist", 9999);
-	end);
+	end);]]--
 end
 --[[ 
 ########################################################## 

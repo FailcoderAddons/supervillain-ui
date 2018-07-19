@@ -1,6 +1,6 @@
-## Interface: 70300
+## Interface: 80000
 ## Author: S.Jackson
-## Version: 1.4.2
+## Version: 1.5
 ## Title: |cffFF9900SVUI Plugin: |r|cffFF69B4Fight-O-Matic|r
 ## Notes: Supervillain UI [|cff9911FFPvP Tools|r].
 ## SavedVariables: SVUI_Public_FightOMatic
@@ -12,9 +12,5 @@
 ## X-Donate: PayPal:munglunch@gmail.com
 ## X-License: All Rights Reserved
 ## X-Category: Interface Enhancements
-## X-Curse-Packaged-Version: 1.4.2
-## X-Curse-Project-Name: SuperVillain UI
-## X-Curse-Project-ID: supervillain-ui
-## X-Curse-Repository-ID: wow/supervillain-ui/mainline
 
 SVUI_FightOMatic.xml

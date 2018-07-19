@@ -229,8 +229,8 @@ local function QuestFrameStyle()
 	SV.API:Set("ScrollBar", QuestRewardScrollFrame)
 	SV.API:Set("ScrollBar", QuestGreetingScrollFrame)
 
-	hooksecurefunc("QuestFrame_SetTitleTextColor", Hook_QuestFrame_SetTitleTextColor)
 	hooksecurefunc("QuestFrame_ShowQuestPortrait", Hook_QuestNPCModel)
+	hooksecurefunc("QuestFrame_SetTitleTextColor", Hook_QuestFrame_SetTitleTextColor)
 
 	SV.NPC:Register(QuestFrame, QuestFrameNpcNameText)
 end

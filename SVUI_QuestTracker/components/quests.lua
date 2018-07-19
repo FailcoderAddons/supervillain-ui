@@ -275,7 +275,7 @@ do
 		itembutton:RegisterEvent('UPDATE_EXTRA_ACTIONBAR');
 		itembutton:RegisterEvent('BAG_UPDATE_COOLDOWN');
 		itembutton:RegisterEvent('BAG_UPDATE_DELAYED');
-		itembutton:RegisterEvent('WORLD_MAP_UPDATE');
+		--itembutton:RegisterEvent('WORLD_MAP_UPDATE');
 		itembutton:RegisterEvent('QUEST_LOG_UPDATE');
 		itembutton:RegisterEvent('QUEST_POI_UPDATE');
 
@@ -1059,24 +1059,22 @@ CORE FUNCTIONS
 function MOD:UpdateObjectives(event, ...)
 	if(event == "ZONE_CHANGED_NEW_AREA") then
 		if(not WorldMapFrame:IsShown() and GetCVarBool("questPOI")) then
-			SetMapToCurrentZone();
-			CURRENT_MAP_ID = GetCurrentMapAreaID();
+			CURRENT_MAP_ID = C_Map.GetBestMapForUnit("player")
 			UpdateCachedDistance();
 			self.Headers["Quests"]:LiteReset()
 			self.Headers["Quests"]:Refresh(event, ...)
 		end
 	elseif(event == "ZONE_CHANGED") then
-		local inMicroDungeon = IsPlayerInMicroDungeon();
+		--[[local inMicroDungeon = IsPlayerInMicroDungeon();
 		if(inMicroDungeon ~= self.inMicroDungeon) then
 			if(not WorldMapFrame:IsShown() and GetCVarBool("questPOI")) then
-				SetMapToCurrentZone();
-				CURRENT_MAP_ID = GetCurrentMapAreaID();
+				CURRENT_MAP_ID = C_Map.GetBestMapForUnit("player")
 				UpdateCachedDistance();
 				self.Headers["Quests"]:LiteReset()
 				self.Headers["Quests"]:Refresh(event, ...)
 			end
 			self.inMicroDungeon = inMicroDungeon;
-		end
+		end--]]
 	else
 		if(event == "QUEST_ACCEPTED" or event == "QUEST_WATCH_LIST_CHANGED") then
 			local questLogIndex, questID, isTracked;

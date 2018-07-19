@@ -37,10 +37,10 @@ local ChatFrameWipeList = {
 	"ChatConfigFrame",
 	"ChatConfigBackgroundFrame",
 	"ChatConfigCategoryFrame",
-	"ChatConfigChatSettingsClassColorLegend",
+	--"ChatConfigChatSettingsClassColorLegend",
 	"ChatConfigChatSettingsLeft",
 	"ChatConfigChannelSettingsLeft",
-	"ChatConfigChannelSettingsClassColorLegend",
+	--"ChatConfigChannelSettingsClassColorLegend",
 	"ChatConfigOtherSettingsCombat",
 	"ChatConfigOtherSettingsPVP",
 	"ChatConfigOtherSettingsSystem",
@@ -49,12 +49,12 @@ local ChatFrameWipeList = {
 	"CombatConfigMessageSourcesDoneBy",
 	"CombatConfigMessageSourcesDoneTo",
 	"CombatConfigColorsUnitColors",
-	"CombatConfigColorsHighlighting",
-	"CombatConfigColorsColorizeUnitName",
-	"CombatConfigColorsColorizeSpellNames",
-	"CombatConfigColorsColorizeDamageNumber",
-	"CombatConfigColorsColorizeDamageSchool",
-	"CombatConfigColorsColorizeEntireLine",
+	--"CombatConfigColorsHighlighting",
+	"CombatConfigColorsColorizeUnitNameCheck",
+	"CombatConfigColorsColorizeSpellNamesCheck",
+	"CombatConfigColorsColorizeDamageNumberCheck",
+	"CombatConfigColorsColorizeDamageSchoolCheck",
+	"CombatConfigColorsColorizeEntireLineCheck",
 	"ChatConfigFrameDefaultButton",
 	"ChatConfigFrameRedockButton",
 	"ChatConfigFrameOkayButton",
@@ -66,8 +66,8 @@ local ChatFrameWipeList = {
 	"ChatConfigFrameCancelButton",
 	"ChatConfigCategoryFrame",
 	"ChatConfigBackgroundFrame",
-	"ChatConfigChatSettingsClassColorLegend",
-	"ChatConfigChannelSettingsClassColorLegend",
+	--"ChatConfigChatSettingsClassColorLegend",
+	--"ChatConfigChannelSettingsClassColorLegend",
 	"ChatConfigCombatSettingsFilters",
 	"ChatConfigCombatSettingsFiltersScrollFrame",
 	"CombatConfigColorsHighlighting",
@@ -145,16 +145,20 @@ local ChatMenu_OnShow = function(self)
 end
 
 local _hook_ChatConfig_UpdateCheckboxes = function(frame)
+    if (not FCF_GetCurrentChatFrame()) then
+        return;
+    end
+    
 	local checkBoxTable = frame.checkBoxTable;
 	local checkBoxNameString = frame:GetName().."CheckBox";
-	local boxHeight = ChatConfigOtherSettingsCombatCheckBox1:GetHeight() or 20
-  local colorsHeight = ChatConfigChatSettingsLeftCheckBox1Check:GetHeight() or 20
+	local boxHeight = 20
+    local colorsHeight = 20
 
 	local checkbox, baseName;
-
+    
 	for index, value in ipairs(checkBoxTable) do
 		baseName = checkBoxNameString..index;
-		checkbox = _G[baseName];
+		checkbox = _G[baseName.."Check"];
 		if(checkbox) then
 			if(not checkbox.Panel) then
 				checkbox:RemoveTextures()
@@ -237,7 +241,7 @@ local function ChatStyle()
 		end
 	end
 
-	hooksecurefunc("ChatConfig_UpdateCheckboxes", _hook_ChatConfig_UpdateCheckboxes)
+	--hooksecurefunc("ChatConfig_UpdateCheckboxes", _hook_ChatConfig_UpdateCheckboxes)
 	-- do
 	-- 	local chatchannellist = GetChannelList()
 	-- 	local CreateChatChannelList = _G.CreateChatChannelList;
@@ -305,8 +309,8 @@ local function ChatStyle()
 	-- 	local info = select(i, GetChatWindowChannels(3))
 	-- 	print(info)
 	-- end
-	_hook_ChatConfig_UpdateCheckboxes(ChatConfigChatSettingsLeft)
-	_hook_ChatConfig_UpdateCheckboxes(ChatConfigChannelSettingsLeft)
+	--_hook_ChatConfig_UpdateCheckboxes(ChatConfigChatSettingsLeft)
+	--_hook_ChatConfig_UpdateCheckboxes(ChatConfigChannelSettingsLeft)
 end
 --[[
 ##########################################################
