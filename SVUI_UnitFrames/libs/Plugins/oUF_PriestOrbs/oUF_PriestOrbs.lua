@@ -12,7 +12,7 @@ local GetSpecialization = _G.GetSpecialization;
 local UnitLevel 		= _G.UnitLevel;
 local UnitBuff 			= _G.UnitBuff;
 
-local SPELL_POWER_SHADOW_ORBS = _G.SPELL_POWER_SHADOW_ORBS;
+local SHADOW_ORBS = _G.SHADOW_ORBS;
 
 if select(2, UnitClass('player')) ~= "PRIEST" then return end
 
@@ -27,10 +27,11 @@ local SHADOW_ORBS_SHOW_LEVEL = SHADOW_ORBS_SHOW_LEVEL
 local HOLY_ORBS_SHOW_LEVEL = 44
 local DISC_ORBS_SHOW_LEVEL = 44
 
+--[[ 8.0.1
 local EVANGELISM = GetSpellInfo(81662) or GetSpellInfo(81661) or GetSpellInfo(81660)
 local DARK_EVANGELISM = GetSpellInfo(87118) or GetSpellInfo(87117)
 local SERENDIPITY = GetSpellInfo(63733)
-
+--]]
 local OrbColors = {
 	[1] = {1, 1, 0},
 	[2] = {1, 1, 0},
@@ -43,11 +44,16 @@ local function Update(self, event, unit)
 	local numOrbs, invalid = 0, false
 	local spec = GetSpecialization()
 	local level = UnitLevel("player")
+    local _, class = UnitClass("player")
 	local color = OrbColors[spec]
 	local name, _, icon, count
-	if(spec == SPEC_PRIEST_SHADOW and level >= SHADOW_ORBS_SHOW_LEVEL) then
+    if (false and class == "PRIEST") then
+        numOrbs = UnitPower("player", SHADOW_ORBS)
+        pb:Show()
+	--[[ 8.0.1 Priest Fixes
+    if(spec == SPEC_PRIEST_SHADOW and level >= SHADOW_ORBS_SHOW_LEVEL) then
 		if (DARK_EVANGELISM) then
-			numOrbs = UnitPower("player", SPELL_POWER_SHADOW_ORBS)
+			numOrbs = UnitPower("player", SHADOW_ORBS)
 			pb:Show()
 		end;
 	elseif(spec == SPEC_PRIEST_DISC and level >= DISC_ORBS_SHOW_LEVEL) then
@@ -62,6 +68,7 @@ local function Update(self, event, unit)
 			numOrbs = count or 0
 			pb:Show()
 		end;
+    --]]
 	else
 		invalid = true;
 		pb:Hide()
