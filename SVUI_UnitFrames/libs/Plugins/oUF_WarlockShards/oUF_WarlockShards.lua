@@ -41,8 +41,8 @@ local Update = function(self, event, unit, powerType)
 
 	if spec then
 		local colors = shardColor[spec]
-		local numShards = UnitPower("player", SPELL_POWER_SOUL_SHARDS);
-		bar.MaxCount = UnitPowerMax("player", SPELL_POWER_SOUL_SHARDS);
+		local numShards = UnitPower("player", Enum.PowerType.SoulShards);
+		bar.MaxCount = UnitPowerMax("player", Enum.PowerType.SoulShards);
 
 		if not bar:IsShown() then
 			bar:Show()
