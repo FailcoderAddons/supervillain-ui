@@ -61,7 +61,7 @@ local UNIT_SPELLCAST_START = function(self, event, unit, spell)
 	if(self.unit ~= unit) or not unit then return end
 
 	local castbar = self.Castbar
-	local name, _, text, texture, startTime, endTime, tradeskill, castid, interrupt = UnitCastingInfo(unit)
+	local name, text, texture, startTime, endTime, tradeskill, castid, interrupt, spellID = UnitCastingInfo(unit)
 	if(not name) then
 		castbar:Hide()
 		return
