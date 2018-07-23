@@ -91,7 +91,7 @@ local function Enable(self, unit)
 		bar.__owner = self
 		bar.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent('UNIT_POWER', Path)
+		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", Path)
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", Path)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', Path)
@@ -117,7 +117,7 @@ end
 local function Disable(self)
 	local bar = self.WarlockShards
 	if(bar) then
-		self:UnregisterEvent('UNIT_POWER', Path)
+		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 		self:UnregisterEvent("PLAYER_TALENT_UPDATE", Path)
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD", Path)
 		self:UnregisterEvent('UNIT_DISPLAYPOWER', Path)
