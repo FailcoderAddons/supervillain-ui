@@ -602,7 +602,7 @@ local UpdateBarAuras = function(self, cache, unit, index, filter, visible, isEne
 	local timeNow = GetTime()
 	local auras = self.Bars;
 
-	local name, rank, texture, count, debuffType, duration, timeLeft, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff = UnitAura(unit, index, filter);
+	local name, texture, count, debuffType, duration, timeLeft, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff = UnitAura(unit, index, filter);
 
 	if(self.forceShow) then
 		spellID = DEMO_SPELLS[random(1, #DEMO_SPELLS)];

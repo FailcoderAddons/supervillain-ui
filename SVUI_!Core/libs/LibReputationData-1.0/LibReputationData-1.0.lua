@@ -193,7 +193,7 @@ function private.COMBAT_TEXT_UPDATE(event, type, name, amount)
 	if (type == "FACTION") then
 		if IsInGuild() then
 			-- Check name for guild reputation
-			if name == GUILD then
+			if name == GUILD_NAME then
 				name = (GetGuildInfo("player"))
 				if not name or name == "" then return end
 			end
