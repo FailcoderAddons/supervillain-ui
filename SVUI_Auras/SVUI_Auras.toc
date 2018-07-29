@@ -1,6 +1,6 @@
 ## Interface: 80000
 ## Author: Failcoder
-## Version: 1.5
+## Version: 1.5.1
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00Auras|r
 ## Notes: Aura Plugin for [|cff9911FFSVUI|r].
 ## OptionalDeps: LibSharedMedia-3.0

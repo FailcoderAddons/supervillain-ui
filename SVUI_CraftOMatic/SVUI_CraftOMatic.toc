@@ -1,6 +1,6 @@
 ## Interface: 80000
 ## Author: Failcoder
-## Version: 1.5
+## Version: 1.5.1
 ## Title: |cffFF9900SVUI Plugin: |r|cffFF69B4Craft-O-Matic|r
 ## Notes: Supervillain UI [|cff9911FFProfession Tools|r].
 ## RequiredDeps: SVUI_!Core

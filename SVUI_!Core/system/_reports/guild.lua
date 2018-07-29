@@ -37,7 +37,7 @@ GUILD STATS
 local playerName = UnitName("player");
 local playerRealm = GetRealmName();
 
-local StatEvents = {"PLAYER_ENTERING_WORLD","GUILD_ROSTER_UPDATE","GUILD_XP_UPDATE","PLAYER_GUILD_UPDATE","GUILD_MOTD"};
+local StatEvents = {"PLAYER_ENTERING_WORLD","GUILD_ROSTER_UPDATE","GUILD_CHALLENGE_UPDATED","PLAYER_GUILD_UPDATE","GUILD_MOTD"};
 local HEX_COLOR = "22CFFF";
 local TEXT_PATTERN = "%s: |cff22CFFF%d|r";
 local pattern1 = ("|cff22CFFF%s"):format(GUILD_EXPERIENCE_CURRENT);
@@ -173,7 +173,7 @@ local Report = Reports:NewReport(REPORT_NAME, {
 	icon = [[Interface\Addons\SVUI_!Core\assets\icons\SVUI]]
 });
 
-Report.events = {"PLAYER_ENTERING_WORLD","GUILD_ROSTER_UPDATE","GUILD_XP_UPDATE","PLAYER_GUILD_UPDATE","GUILD_MOTD"};
+Report.events = {"PLAYER_ENTERING_WORLD","GUILD_ROSTER_UPDATE","GUILD_CHALLENGE_UPDATED","PLAYER_GUILD_UPDATE","GUILD_MOTD"};
 
 Report.OnInit = function(self)
 	if(not self.InnerData) then

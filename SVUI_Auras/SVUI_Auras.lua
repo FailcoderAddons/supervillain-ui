@@ -169,7 +169,7 @@ do
 		if(attribute == "index") then
 			local filter = self:GetParent():GetAttribute("filter")
 			local unit = self:GetParent():GetAttribute("unit")
-			local name, _, icon, count, dispelType, val, expires, caster = UnitAura(unit, auraIndex, filter)
+			local name, icon, count, dispelType, val, expires, caster = UnitAura(unit, auraIndex, filter)
 			if name then
 				if val > 0 and expires then
 					local timeLeft = expires - GetTime()
@@ -186,7 +186,7 @@ do
 					self.time:SetText("")
 					self:SetScript("OnUpdate", nil)
 				end
-				if count then
+				if count > 0 then
 					self.count:SetText(count)
 				else
 					self.count:SetText("")

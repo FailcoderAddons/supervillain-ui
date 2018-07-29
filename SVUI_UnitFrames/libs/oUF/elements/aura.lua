@@ -487,7 +487,7 @@ local UpdateIconAuras = function(self, cache, unit, index, filter, visible, isEn
 		name, rank, texture = GetSpellInfo(spellID)
 		count, debuffType, duration, timeLeft, caster, isStealable, shouldConsolidate, canApplyAura, isBossDebuff = 5, 'Magic', 0, 60, 'player', nil, nil, nil, nil
 	else
-		name, rank, texture, count, debuffType, duration, timeLeft, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff = UnitAura(unit, index, filter);
+		name, texture, count, debuffType, duration, timeLeft, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff, _, nameplateShowAll = UnitAura(unit, index, filter);
 	end
 
 	if(name) then
@@ -602,7 +602,7 @@ local UpdateBarAuras = function(self, cache, unit, index, filter, visible, isEne
 	local timeNow = GetTime()
 	local auras = self.Bars;
 
-	local name, rank, texture, count, debuffType, duration, timeLeft, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff = UnitAura(unit, index, filter);
+	local name, texture, count, debuffType, duration, timeLeft, caster, isStealable, shouldConsolidate, spellID, canApplyAura, isBossDebuff = UnitAura(unit, index, filter);
 
 	if(self.forceShow) then
 		spellID = DEMO_SPELLS[random(1, #DEMO_SPELLS)];

@@ -106,8 +106,8 @@ local Enable = function(self, unit)
 		self:RegisterEvent('UNIT_CONNECTION', Path)
 		self:RegisterEvent('UNIT_FACTION', Path)
 		self:RegisterEvent('UNIT_MAXPOWER', Path)
-		self:RegisterEvent('UNIT_POWER', Path)
-		self:RegisterUnitEvent("UNIT_POWER", unit);
+		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
+		self:RegisterUnitEvent("UNIT_POWER_UPDATE", unit);
 		self:RegisterUnitEvent("UNIT_MAXPOWER", unit);
 
 
@@ -123,7 +123,7 @@ local Disable = function(self)
 	local power = self.Power
 	if(power) then
 		self:UnregisterEvent('UNIT_POWER_FREQUENT', Path)
-		self:UnregisterEvent('UNIT_POWER', Path)
+		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 		self:UnregisterEvent('UNIT_POWER_BAR_SHOW', Path)
 		self:UnregisterEvent('UNIT_POWER_BAR_HIDE', Path)
 		self:UnregisterEvent('UNIT_DISPLAYPOWER', Path)

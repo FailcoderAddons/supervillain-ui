@@ -714,7 +714,7 @@ EventFunc["LOOT_READY"] = function(autoLoot)
 	if drops > 0 then
 		for i = 1, drops do
 			local slot = SVUI_LootFrame.slots[i] or MakeSlots(i)
-			local textureID, item, quantity, quality, locked, isQuestItem, questId, isActive = GetLootSlotInfo(i)
+			local textureID, item, quantity, _, quality, locked, isQuestItem, questId, isActive = GetLootSlotInfo(i)
 			local color = ITEM_QUALITY_COLORS[quality]
 			if quantity and quantity > 1 then
 				slot.count:SetText(quantity)
