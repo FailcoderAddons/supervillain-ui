@@ -277,7 +277,8 @@ local function Enable(self, unit)
 		MonkStaggerBar:UnregisterEvent'PLAYER_ENTERING_WORLD'
 		MonkStaggerBar:UnregisterEvent'PLAYER_SPECIALIZATION_CHANGED'
 		MonkStaggerBar:UnregisterEvent'UNIT_DISPLAYPOWER'
-		MonkStaggerBar:UnregisterEvent'UPDATE_VEHICLE_ACTION_BAR'
+		MonkStaggerBar:UnregisterEvent'UPDATE_VEHICLE_ACTIONBAR'
+        MonkStaggerBar:UnregisterEvent'UNIT_EXITED_VEHICLE'
 
 		return true
 	end
@@ -296,7 +297,8 @@ local function Disable(self)
 		MonkStaggerBar:UnregisterEvent'PLAYER_ENTERING_WORLD'
 		MonkStaggerBar:UnregisterEvent'PLAYER_SPECIALIZATION_CHANGED'
 		MonkStaggerBar:UnregisterEvent'UNIT_DISPLAYPOWER'
-		MonkStaggerBar:UnregisterEvent'UPDATE_VEHICLE_ACTION_BAR'
+		MonkStaggerBar:UnregisterEvent'UPDATE_VEHICLE_ACTIONBAR'
+        MonkStaggerBar:UnregisterEvent'UNIT_EXITED_VEHICLE'
 	end
 end
 
