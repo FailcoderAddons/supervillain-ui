@@ -61,7 +61,7 @@ local UNIT_SPELLCAST_START = function(self, event, unit, spell)
 	if(self.unit ~= unit) or not unit then return end
 
 	local castbar = self.Castbar
-	local name, text, texture, startTime, endTime, tradeskill, castid, interrupt, spellID = UnitCastingInfo(unit)
+	local name, text, texture, startTime, endTime, tradeskill, castid, interrupt = UnitCastingInfo(unit)
 	if(not name) then
 		castbar:Hide()
 		return
@@ -249,7 +249,7 @@ local UNIT_SPELLCAST_CHANNEL_START = function(self, event, unit, spellname)
 	if (self.unit ~= unit) or not unit then return end
 
 	local castbar = self.Castbar
-	local name, _, text, texture, startTime, endTime, isTrade, interrupt = UnitChannelInfo(unit)
+	local name, text, texture, startTime, endTime, isTrade, interrupt = UnitChannelInfo(unit)
 	if (not name) then return end
 
 	endTime = endTime / 1e3

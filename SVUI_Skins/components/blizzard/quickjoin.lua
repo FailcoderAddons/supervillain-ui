@@ -270,7 +270,7 @@ function ToastMinion:OnEvent(event, ...)
 		if (numAdded == 0 or socQueue.GetGroupMembers(guid) == nil) then
 			return;
 		end
-	
+
 		local members, playerName, color;
 	
 		if (socQueue.GetGroupMembers(guid) ~= nil) then

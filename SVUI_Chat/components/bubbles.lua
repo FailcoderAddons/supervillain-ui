@@ -28,7 +28,10 @@ CHAT BUBBLES
 ]]--
 function MOD:LoadChatBubbles()
 	local inInstance, instanceType = IsInInstance();
-	local posX, posY = GetPlayerMapPosition("player");
+    local cmap = C_Map.GetBestMapForUnit("player")
+    local position = C_Map.GetPlayerMapPosition(cmap, "player");
+    local posX = position.x
+    local posY = position.y
 	if (posX == 0 and posY == 0) or inInstance then
 		SV.db.Chat.bubbles = false
 	end

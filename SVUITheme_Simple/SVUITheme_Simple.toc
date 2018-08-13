@@ -1,6 +1,6 @@
 ## Interface: 80000
 ## Author: Failcoder
-## Version: 1.5
+## Version: 1.5.3
 ## Title: |cffFF9900SVUI Theme: |r|cff00EFFFSimple|r
 ## Notes: Theme for [|cff9911FFSVUI Framework|r].
 ## RequiredDeps: SVUI_!Core

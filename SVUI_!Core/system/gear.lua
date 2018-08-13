@@ -218,14 +218,14 @@ function GetRelicItemLevel(itemLink)
 	
 	if (checkName == itemName) or (checkAltName == itemName) then
 		for i=1, 3 do
-			isAttuned, canAttune = C_ArtifactUI.GetEquippedArtifactRelicAttuneInfo(i);
+			isAttuned, canAttune = true, true;
 			if isAttuned then
 				attuned = attuned + 1;
 			end
 		end
 	end
 	
-	return attuned;
+	return 3;
 end
 
 

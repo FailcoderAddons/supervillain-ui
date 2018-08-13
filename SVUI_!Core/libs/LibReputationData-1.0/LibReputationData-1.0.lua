@@ -50,7 +50,8 @@ end
 
 local function GetFactionIndex(factionName)
 	for i = 1, #allFactions do
-		local name, _, _, _, _, _, _, _, _, _, _, _, _ = GetFLocalFactionInfo(i);
+		local name,  _, standingID, bottomValue, topValue, earnedValue, _,
+		_, isHeader, isCollapsed, hasRep, isWatched, isChild, factionID, hasBonus, lfgBonus = GetFactionInfo(i);
 		if name == factionName then return i end
 	end
 end
@@ -58,7 +59,7 @@ end
 local function GetFactionData(factionIndex)
 
 	local name, _, standingID, bottomValue, topValue, earnedValue, _,
-		_, isHeader, isCollapsed, hasRep, isWatched, isChild, factionID = GetFactionInfo(factionIndex)
+		_, isHeader, isCollapsed, hasRep, isWatched, isChild, factionID, hasBonus, lfgBonus = GetFactionInfo(factionIndex)
 	if not name then return nil end
 
 	if isWatched then watchedFaction = factionIndex end

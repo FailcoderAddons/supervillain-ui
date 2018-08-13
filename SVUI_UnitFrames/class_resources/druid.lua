@@ -124,7 +124,7 @@ local Reposition = function(self)
     bar:ClearAllPoints()
     bar:SetAllPoints(bar.Holder)
 
-    local max = 5
+    local max = UnitPowerMax("player", Enum.PowerType.ComboPoints);
     local cat = bar.Cat;
     local size = 30
 
@@ -265,7 +265,7 @@ function MOD:CreateClassBar(playerFrame)
 
     local cat = CreateFrame('Frame',nil,bar)
     cat:SetAllPoints(bar)
-    local max = 5;
+    local max = UnitPowerMax("player", Enum.PowerType.ComboPoints);
     local size = 30;
     for i = 1, max do
         local cpoint = CreateFrame('Frame',nil, cat)

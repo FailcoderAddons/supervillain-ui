@@ -289,9 +289,9 @@ local function UpdateMiniMapCoords()
 	if(WMP_XY_COORD and WorldMapFrame:IsShown()) then return end
 	local skip = IsInInstance()
     local cmap = C_Map.GetBestMapForUnit("player")
-	local player = C_Map.GetPlayerMapPosition(cmap, "player");
-    local playerX = player.x
-    local playerY = player.y
+    local position = C_Map.GetPlayerMapPosition(cmap, "player");
+    local playerX = position.x
+    local playerY = position.y
 	if((not skip) and (playerX ~= 0 and playerY ~= 0)) then
 		playerX = parsefloat(100 * playerX, 2)
 		playerY = parsefloat(100 * playerY, 2)
@@ -326,9 +326,9 @@ local function UpdateWorldMapCoords()
 	if(WMP_XY_COORD) then
 		local skip = IsInInstance()
 		local cmap = C_Map.GetBestMapForUnit("player")
-	    local player = C_Map.GetPlayerMapPosition(cmap, "player");
-        local playerX = player.x
-        local playerY = player.y
+	    local position = C_Map.GetPlayerMapPosition(cmap, "player");
+        local playerX = position.x
+        local playerY = position.y
 		if((not skip) and (playerX ~= 0 and playerY ~= 0)) then
 			playerX = parsefloat(100 * playerX, 2)
 			playerY = parsefloat(100 * playerY, 2)
@@ -566,7 +566,11 @@ local Tour_OnClick = function(self, btn)
 		local zoneText = GetRealZoneText() or UNKNOWN;
 		local subZone = GetSubZoneText() or UNKNOWN;
 		local edit_box = ChatEdit_ChooseBoxForSend();
-		local x, y = GetPlayerMapPosition("player");
+        local cmap = C_Map.GetBestMapForUnit("player")
+        local position = C_Map.GetPlayerMapPosition(cmap, "player");
+        local x = position.x
+        local y = position.y
+
 		x = tonumber(parsefloat(100 * x, 0));
 		y = tonumber(parsefloat(100 * y, 0));
 		local coords = ("%d, %d"):format(x, y);
