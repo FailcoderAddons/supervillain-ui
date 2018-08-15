@@ -287,12 +287,12 @@ end
 
 local function UpdateMiniMapCoords()
 	if(WMP_XY_COORD and WorldMapFrame:IsShown()) then return end
-	local skip = IsInInstance()
+    if (IsInInstance()) then return end
     local cmap = C_Map.GetBestMapForUnit("player")
     local position = C_Map.GetPlayerMapPosition(cmap, "player");
     local playerX = position.x
     local playerY = position.y
-	if((not skip) and (playerX ~= 0 and playerY ~= 0)) then
+	if((playerX ~= 0 and playerY ~= 0)) then
 		playerX = parsefloat(100 * playerX, 2)
 		playerY = parsefloat(100 * playerY, 2)
 		if(playerX ~= 0 and playerY ~= 0) then
@@ -322,14 +322,14 @@ end
 
 local function UpdateWorldMapCoords()
 	if(not WorldMapFrame:IsShown()) then return end
-
+    if (IsInInstance()) then return end
+    
 	if(WMP_XY_COORD) then
-		local skip = IsInInstance()
 		local cmap = C_Map.GetBestMapForUnit("player")
 	    local position = C_Map.GetPlayerMapPosition(cmap, "player");
         local playerX = position.x
         local playerY = position.y
-		if((not skip) and (playerX ~= 0 and playerY ~= 0)) then
+		if((playerX ~= 0 and playerY ~= 0)) then
 			playerX = parsefloat(100 * playerX, 2)
 			playerY = parsefloat(100 * playerY, 2)
 			if(playerX ~= 0 and playerY ~= 0) then
