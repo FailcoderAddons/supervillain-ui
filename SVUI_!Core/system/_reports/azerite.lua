@@ -52,27 +52,27 @@ local percColors = {
 	"|cffD80909"
 }
 
-local isEquipped = C_AzeriteItem.FindActiveAzeriteItem();
-
-
 local function SetTooltipText(report)
 	Reports:SetDataTip(report);
 	
 	Reports.ToolTip:AddLine(L["Heart of Azeroth"]);
 	Reports.ToolTip:AddLine(" ");
+    
+    local azeriteItemLocation = C_AzeriteItem.FindActiveAzeriteItem(); 
+	
+	if (not azeriteItemLocation) then
+        Reports.ToolTip:AddDoubleLine(L["No Heart of Azeroth"]);
+		return; 
+    end
 
-	if isEquipped then
-        local xp, totalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(isEquipped);
-	    local currentLevel = C_AzeriteItem.GetPowerLevel(isEquipped); 
-        local xpToNextLevel = totalLevelXP - xp; 
-		local calc1 = (xp / totalLevelXP) * 100;
+	local xp, totalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(azeriteItemLocation);
+    local currentLevel = C_AzeriteItem.GetPowerLevel(azeriteItemLocation); 
+    local xpToNextLevel = totalLevelXP - xp; 
+    local calc1 = (xp / totalLevelXP) * 100;
 
-		Reports.ToolTip:AddDoubleLine(L["Current Level:"], (" %d "):format(currentLevel), 1, 1, 1);
-		Reports.ToolTip:AddDoubleLine(L["Current Artifact Power:"], (" %s  /  %s (%d%%)"):format(BreakUpLargeNumbers(xp), BreakUpLargeNumbers(totalLevelXP), calc1), 1, 1, 1);
-		Reports.ToolTip:AddDoubleLine(L["Remaining:"], (" %s "):format(BreakUpLargeNumbers(xpToNextLevel)), 1, 1, 1);
-	else
-		Reports.ToolTip:AddDoubleLine(L["No Heart of Azeroth"]);
-	end
+    Reports.ToolTip:AddDoubleLine(L["Current Level:"], (" %d "):format(currentLevel), 1, 1, 1);
+    Reports.ToolTip:AddDoubleLine(L["Current Artifact Power:"], (" %s  /  %s (%d%%)"):format(BreakUpLargeNumbers(xp), BreakUpLargeNumbers(totalLevelXP), calc1), 1, 1, 1);
+    Reports.ToolTip:AddDoubleLine(L["Remaining:"], (" %s "):format(BreakUpLargeNumbers(xpToNextLevel)), 1, 1, 1);
 end
 
 local function FormatPower(level, currXP, totalLevel, nextLevel)
@@ -100,7 +100,7 @@ local Report = Reports:NewReport(REPORT_NAME, {
 	icon = [[Interface\Addons\SVUI_!Core\assets\icons\SVUI]]
 });
 
-Report.events = {"PLAYER_ENTERING_WORLD","AZERITE_ITEM_EXPERIENCE_CHANGED"};
+Report.events = {"PLAYER_ENTERING_WORLD"};
 
 Report.OnEvent = function(self, event, ...)
     if (event == "AZERITE_ITEM_EXPERIENCE_CHANGED") then
@@ -114,16 +114,19 @@ Report.Populate = function(self)
 		self.text:SetJustifyH("CENTER");
 		self.barframe:Hide();
 	end
-
-	if isEquipped then
-        local xp, totalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(isEquipped);
-	    local currentLevel = C_AzeriteItem.GetPowerLevel(isEquipped); 
-        local xpToNextLevel = totalLevelXP - xp; 
-		local text = FormatPower(currentLevel, xp, totalLevelXP, xpToNextLevel);
-		self.text:SetText(text);
-	else
-		self.text:SetText(L["No Heart of Azeroth"]);
-	end
+    
+    local azeriteItemLocation = C_AzeriteItem.FindActiveAzeriteItem(); 
+	
+	if (not azeriteItemLocation) then
+        Reports.ToolTip:AddDoubleLine(L["No Heart of Azeroth"]);
+		return; 
+    end
+	
+    local xp, totalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(azeriteItemLocation);
+    local currentLevel = C_AzeriteItem.GetPowerLevel(azeriteItemLocation); 
+    local xpToNextLevel = totalLevelXP - xp; 
+    local text = FormatPower(currentLevel, xp, totalLevelXP, xpToNextLevel);
+    self.text:SetText(text);
 end
 
 Report.OnEnter = function(self)
@@ -150,7 +153,7 @@ local ReportBar = Reports:NewReport(BAR_NAME, {
 	icon = [[Interface\Addons\SVUI_!Core\assets\icons\SVUI]]
 });
 
-ReportBar.events = {"PLAYER_ENTERING_WORLD","AZERITE_ITEM_EXPERIENCE_CHANGED"};
+ReportBar.events = {"PLAYER_ENTERING_WORLD"};
 
 ReportBar.OnEvent = function(self, event, ...)
     if (event == "AZERITE_ITEM_EXPERIENCE_CHANGED") then
@@ -164,22 +167,25 @@ ReportBar.Populate = function(self)
 		self.barframe.icon.texture:SetTexture(SV.media.dock.azeriteLabel);
 	end
 	local bar = self.barframe.bar;
-
-	if isEquipped then
-        local xp, totalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(isEquipped);
-	    local currentLevel = C_AzeriteItem.GetPowerLevel(isEquipped); 
-        local xpToNextLevel = totalLevelXP - xp; 
-		bar:SetMinMaxValues(0, totalLevelXP);
-		bar:SetValue(xp);
-		bar:SetStatusBarColor(0.9, 0.64, 0.37);
-		local toSpend = "Level "..currentLevel;
-		self.text:SetText(toSpend);
-		self.barframe:Show();
-	else
-		bar:SetMinMaxValues(0, 1);
+    
+    local azeriteItemLocation = C_AzeriteItem.FindActiveAzeriteItem(); 
+	
+	if (not azeriteItemLocation) then
+        bar:SetMinMaxValues(0, 1);
 		bar:SetValue(0);
 		self.text:SetText(L["No Heart of Azeroth"]);
-	end
+		return; 
+    end
+
+    local xp, totalLevelXP = C_AzeriteItem.GetAzeriteItemXPInfo(azeriteItemLocation);
+    local currentLevel = C_AzeriteItem.GetPowerLevel(azeriteItemLocation); 
+    local xpToNextLevel = totalLevelXP - xp; 
+    bar:SetMinMaxValues(0, totalLevelXP);
+    bar:SetValue(xp);
+    bar:SetStatusBarColor(0.9, 0.64, 0.37);
+    local toSpend = "Level "..currentLevel;
+    self.text:SetText(toSpend);
+    self.barframe:Show();
 end
 
 ReportBar.OnEnter = function(self)
