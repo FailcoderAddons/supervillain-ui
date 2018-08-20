@@ -652,7 +652,7 @@ local function GuildFrameStyle()
 		end
 	end
 
-	local maxCalendarEvents = CalendarGetNumGuildEvents();
+	local maxCalendarEvents = GetNumGuildEvents();
 	local scrollFrame = GuildInfoFrameApplicantsContainer;
   	local offset = HybridScrollFrame_GetOffset(scrollFrame);
   	local buttonIndex,counter = 0,0;

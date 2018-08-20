@@ -87,8 +87,8 @@ end
 local Update = function(self, event, unit, powerType)
 	if self.unit ~= unit or (powerType and powerType ~= 'HOLY_POWER') then return end
 	local bar = self.HolyPower;
-	local baseCount = UnitPower('player',SPELL_POWER_HOLY_POWER)
-	local maxCount = UnitPowerMax('player',SPELL_POWER_HOLY_POWER)
+	local baseCount = UnitPower('player',Enum.PowerType.HolyPower)
+	local maxCount = UnitPowerMax('player',Enum.PowerType.HolyPower)
 	for i=1,maxCount do
 		if i <= baseCount then
 			bar[i]:SetAlpha(1)

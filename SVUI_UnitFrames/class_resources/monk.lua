@@ -66,7 +66,7 @@ local Reposition = function(self)
 	local db = SV.db.UnitFrames.player
 	self.KungFu.DrunkenMaster.isEnabled = db.classbar.enableStagger;
 	local bar = self.KungFu;
-	local max = self.MaxClassPower;
+	local max = UnitPowerMax("player", Enum.PowerType.Chi);
 	local size = db.classbar.height
 	local width = size * max;
 	bar.Holder:SetSize(width, size)
@@ -103,7 +103,7 @@ MONK HARMONY
 ##########################################################
 ]]--
 function MOD:CreateClassBar(playerFrame)
-	local max = 6
+	local max = UnitPowerMax("player", Enum.PowerType.Chi)
 	local bar = CreateFrame("Frame", nil, playerFrame)
 	bar:SetFrameLevel(playerFrame.TextGrip:GetFrameLevel() + 30)
 	for i=1, max do
@@ -167,7 +167,7 @@ function MOD:CreateClassBar(playerFrame)
 	bar.Holder = classBarHolder
 	SV:NewAnchor(bar.Holder, L["Classbar"], OnMove)
 
-	playerFrame.MaxClassPower = max
+	playerFrame.MaxClassPower = max;
 	playerFrame.RefreshClassBar = Reposition
 
 	playerFrame.KungFu = bar

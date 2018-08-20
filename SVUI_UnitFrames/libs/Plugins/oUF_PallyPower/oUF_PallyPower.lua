@@ -53,7 +53,7 @@ local function Enable(self, unit)
 		hp.__owner = self
 		hp.ForceUpdate = ForceUpdate
 
-		self:RegisterEvent('UNIT_POWER', Path)
+		self:RegisterEvent('UNIT_POWER_UPDATE', Path)
 
 		return true
 	end
@@ -62,7 +62,7 @@ end
 local function Disable(self)
 	local hp = self.HolyPower
 	if(hp) then
-		self:UnregisterEvent('UNIT_POWER', Path)
+		self:UnregisterEvent('UNIT_POWER_UPDATE', Path)
 	end
 end
 

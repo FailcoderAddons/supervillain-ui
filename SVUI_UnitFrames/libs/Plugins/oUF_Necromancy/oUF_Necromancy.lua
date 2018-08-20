@@ -83,7 +83,7 @@ local Enable = function(self, unit)
 		runes.ForceUpdate = ForceUpdate
 		self:RegisterEvent("PLAYER_TALENT_UPDATE", UpdateAllRuneTypes)
 		self:RegisterEvent("RUNE_POWER_UPDATE", UpdateRune, true)
-		self:RegisterEvent("RUNE_TYPE_UPDATE", UpdateType, true)	--I have no idea why this won't fire on initial login.
+		--self:RegisterEvent("RUNE_TYPE_UPDATE", UpdateType, true)	--8.0.1
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", UpdateAllRuneTypes)
 
 		if not runes.UpdateAllRuneTypes then runes.UpdateAllRuneTypes = UpdateAllRuneTypes end
@@ -109,7 +109,7 @@ local Disable = function(self)
 		runes:SetScript('OnUpdate', nil)
 		self:UnregisterEvent("PLAYER_TALENT_UPDATE", UpdateAllRuneTypes)
 		self:UnregisterEvent("RUNE_POWER_UPDATE", UpdateRune)
-		self:UnregisterEvent("RUNE_TYPE_UPDATE", UpdateType)
+		--self:UnregisterEvent("RUNE_TYPE_UPDATE", UpdateType) -- 8.0.1
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD", UpdateAllRuneTypes)
 	end
 end

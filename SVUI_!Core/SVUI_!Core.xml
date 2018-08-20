@@ -24,7 +24,8 @@
     <Include file="setup\_load.xml"/>
 
     <Script file="system\slash.lua"/>
-
+    
+    <Script file="system\_reports\azerite.lua"/>
     <Script file="system\_reports\bags.lua"/>
     <Script file="system\_reports\cta.lua"/>
     <Script file="system\_reports\durability.lua"/>

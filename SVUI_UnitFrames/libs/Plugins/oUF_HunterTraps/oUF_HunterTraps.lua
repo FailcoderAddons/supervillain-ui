@@ -20,26 +20,25 @@ local TRAP_MASTERY_ID = 63458;
 local TRAP_MASTERY = IsSpellKnown(TRAP_MASTERY_ID);
 local ENHANCED_TRAPS_ID = 157751;
 local ENHANCED_TRAPS = IsSpellKnown(ENHANCED_TRAPS_ID);
-local FIRE_TRAP = GetSpellInfo(13813);
-local FROST_TRAP = GetSpellInfo(1499);
-local ICE_TRAP = GetSpellInfo(13809);
-local SNAKE_TRAP, SNAKE_RANK, SNAKE_ICON = GetSpellInfo(34600);
+--local FIRE_TRAP = GetSpellInfo(13813);
+local FROST_TRAP = GetSpellInfo(187650);
+local TAR_TRAP = GetSpellInfo(187698);
+--local SNAKE_TRAP, SNAKE_RANK, SNAKE_ICON = GetSpellInfo(34600);
 
-local FIRE_COLOR = {1,0.25,0};
+--local FIRE_COLOR = {1,0.25,0};
 local FROST_COLOR = {0.5,1,1};
-local ICE_COLOR = {0.1,0.9,1};
+--local ICE_COLOR = {0.1,0.9,1};
+local TAR_COLOR = {0,0,0};
 local SNAKE_COLOR = {0.2,0.8,0};
 --/script print(IsSpellKnown(34600))
 --/script print(IsSpellKnown(13809))
-local TRAP_IDS = {
-	[1] = FIRE_TRAP, 
-	[2] = FROST_TRAP, 
-	[3] = ICE_TRAP,
+local TRAP_IDS = { 
+	[1] = FROST_TRAP, 
+	[2] = TAR_TRAP,
 };
 local TRAP_COLORS = {
-	[1] = FIRE_COLOR, 
-	[2] = FROST_COLOR, 
-	[3] = ICE_COLOR,
+	[1] = FROST_COLOR, 
+	[2] = TAR_COLOR,
 };
 
 local HAS_SNAKE_TRAP = false;
@@ -93,9 +92,9 @@ local Update = function(self, event, ...)
 			TRAP_COLORS[3] = SNAKE_COLOR
 			HAS_SNAKE_TRAP = true
 		else
-			TRAP_IDS[3] = ICE_TRAP
-			TRAP_COLORS[3] = ICE_COLOR
-			HAS_SNAKE_TRAP = false
+		    TRAP_IDS[2] = TAR_TRAP
+		    TRAP_COLORS[2] = TAR_COLOR
+		    HAS_SNAKE_TRAP = false
 		end
 		bar[3]:Update(nil, HAS_SNAKE_TRAP, true)
 	end
@@ -122,7 +121,7 @@ local Update = function(self, event, ...)
 	end
 
 	if bar:IsShown() then		
-		for i = 1, 3 do
+		for i = 1, 2 do
 			--bar[i]:SetStatusBarColor(unpack(TRAP_COLORS[i]))
 			if(name and TRAP_IDS[i] == name and isReady == 1) then
 				bar[i]:Show()
@@ -181,7 +180,7 @@ local function Enable(self, unit)
 			TRAP_COLORS[3] = ICE_COLOR
 			HAS_SNAKE_TRAP = false
 		end
-		for i = 1, 3 do
+		for i = 1, 2 do
 			if not bar[i] then
 				bar[i] = CreateFrame("Statusbar", nil, bar)
 				bar[i]:SetPoint("LEFT", bar, "LEFT", (trapSize * (i - 1)), 0)

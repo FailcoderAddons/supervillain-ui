@@ -211,7 +211,7 @@ local function EncounterJournalStyle()
   EncounterJournalEncounterFrameInfoResetButton:SetStyle("Button")
 
   EncounterJournalNavBar:RemoveTextures(true)
-  EncounterJournalNavBarOverlay:RemoveTextures(true)
+  --EncounterJournalNavBarOverlay:RemoveTextures(true)
   EncounterJournalNavBarOverflowButton:RemoveTextures(true)
   EncounterJournalNavBarHomeButton:RemoveTextures(true)
   EncounterJournalNavBarHomeButton:SetStyle("Button")

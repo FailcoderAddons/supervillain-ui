@@ -250,7 +250,7 @@ local function Enable(self, unit)
 		stagger.ForceUpdate = ForceUpdate
 
 		self:RegisterEvent("PLAYER_ENTERING_WORLD", Update)
-		self:RegisterEvent("UNIT_POWER", Update)
+		self:RegisterEvent("UNIT_POWER_UPDATE", Update)
 		self:RegisterEvent("PLAYER_LEVEL_UP", Update)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', Path)
 		self:RegisterEvent('UPDATE_SHAPESHIFT_FORM', Path)
@@ -277,7 +277,8 @@ local function Enable(self, unit)
 		MonkStaggerBar:UnregisterEvent'PLAYER_ENTERING_WORLD'
 		MonkStaggerBar:UnregisterEvent'PLAYER_SPECIALIZATION_CHANGED'
 		MonkStaggerBar:UnregisterEvent'UNIT_DISPLAYPOWER'
-		MonkStaggerBar:UnregisterEvent'UPDATE_VEHICLE_ACTION_BAR'
+		MonkStaggerBar:UnregisterEvent'UPDATE_VEHICLE_ACTIONBAR'
+        MonkStaggerBar:UnregisterEvent'UNIT_EXITED_VEHICLE'
 
 		return true
 	end
@@ -286,7 +287,7 @@ end
 local function Disable(self)
 	if self.KungFu then
 		self:UnregisterEvent("PLAYER_ENTERING_WORLD", Update)
-		self:UnregisterEvent("UNIT_POWER", Update)
+		self:UnregisterEvent("UNIT_POWER_UPDATE", Update)
 		self:UnregisterEvent("PLAYER_LEVEL_UP", Update)
 		self:UnregisterEvent("UNIT_DISPLAYPOWER", Path)
 		self:UnregisterEvent('UPDATE_SHAPESHIFT_FORM', Path)
@@ -296,7 +297,8 @@ local function Disable(self)
 		MonkStaggerBar:UnregisterEvent'PLAYER_ENTERING_WORLD'
 		MonkStaggerBar:UnregisterEvent'PLAYER_SPECIALIZATION_CHANGED'
 		MonkStaggerBar:UnregisterEvent'UNIT_DISPLAYPOWER'
-		MonkStaggerBar:UnregisterEvent'UPDATE_VEHICLE_ACTION_BAR'
+		MonkStaggerBar:UnregisterEvent'UPDATE_VEHICLE_ACTIONBAR'
+        MonkStaggerBar:UnregisterEvent'UNIT_EXITED_VEHICLE'
 	end
 end
 

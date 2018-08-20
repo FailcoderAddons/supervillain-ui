@@ -270,12 +270,12 @@ function ToastMinion:OnEvent(event, ...)
 		if (numAdded == 0 or socQueue.GetGroupMembers(guid) == nil) then
 			return;
 		end
-	
+
 		local members, playerName, color;
 	
 		if (socQueue.GetGroupMembers(guid) ~= nil) then
 			members = SocialQueueUtil_SortGroupMembers(socQueue.GetGroupMembers(guid));
-			playerName, color = SocialQueueUtil_GetNameAndColor(members[1]);
+			playerName, color, selfRelationship = SocialQueueUtil_GetRelationshipInfo(members[1].guid);
 		end
 		
 		playerName = color..playerName.."|r";
@@ -363,9 +363,11 @@ local function QuickJoinStyle()
 	SV:NewAnchor(ToastVault, L["Quick Join Toast Anchor"]);
 	SV:MoveToast();
 	
-	--[[SV:AddSlashCommand("addtoast", "Display test quick join toast", function()
+	--[[
+    SV:AddSlashCommand("addtoast", "Display test quick join toast", function()
 		ToastVault:addToast("Supervillain", "RAID: Chamber of the Avatar", "lfglist", 9999);
-	end);]]--
+	end);
+    --]]
 end
 --[[ 
 ########################################################## 

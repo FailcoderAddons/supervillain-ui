@@ -555,14 +555,14 @@ local function AddCachedQuest(questLogIndex)
 		local i = GetQuestWatchIndex(questLogIndex)
 		if(i) then
 			local distanceSq, onContinent = GetDistanceSqToQuest(questLogIndex)
-			local questID, _, _, numObjectives, _, completed, _, _, duration, elapsed, questType, isTask, isStory, isOnMap, hasLocalPOI = GetQuestWatchInfo(i);
+			local questID, _, _, numObjectives, _, completed, _, _, duration, elapsed, questType, isTask, isBounty, isStory, isOnMap, hasLocalPOI, isHidden, isWarCampaign = GetQuestWatchInfo(i);
 
 			if(not CACHED_QUESTS[questID]) then
 				local title, level, suggestedGroup = GetQuestLogTitle(questLogIndex)
 				local link, texture, _, showCompleted = GetQuestLogSpecialItemInfo(questLogIndex)
-				local mapID, floorNumber = 0,0
+				local mapID, zoneMapID = 0,0
 				if(not WorldMapFrame:IsShown()) then
-					mapID, floorNumber = GetQuestWorldMapAreaID(questID)
+					mapID, zoneMapID = C_TaskQuest.GetQuestZoneID(questID)
 				else
 					WORLDMAP_UPDATE = true;
 				end

@@ -101,7 +101,7 @@ local Reposition = function(self)
 	bar:SetAllPoints(bar.Holder)
 
 	local points = bar.Combo;
-	local max = UnitPowerMax('player', SPELL_POWER_COMBO_POINTS);
+	local max = UnitPowerMax("player", Enum.PowerType.ComboPoints);
 
 	points:ClearAllPoints()
 	points:SetAllPoints(bar)
@@ -146,7 +146,7 @@ ROGUE COMBO TRACKER
 ##########################################################
 ]]--
 function MOD:CreateClassBar(playerFrame)
-	local max = 10
+	local max = UnitPowerMax("player", Enum.PowerType.ComboPoints)
 	local size = 20
 	local coords
 
@@ -188,7 +188,7 @@ function MOD:CreateClassBar(playerFrame)
 	bar.Holder = classBarHolder
 	SV:NewAnchor(bar.Holder, L["Classbar"], OnMove)
 
-	playerFrame.MaxClassPower = 5;
+	playerFrame.MaxClassPower = max;
 	playerFrame.RefreshClassBar = Reposition;
 	playerFrame.HyperCombo = bar
 	return 'HyperCombo'
