@@ -587,7 +587,7 @@ local function SystemPanelQue()
 	InterfaceOptionsFrame:SetScript("OnDragStop", function(self)
 		self:StopMovingOrSizing()
 	end)
-	if IsMacClient() then
+	--[[if IsMacClient() then
 		MacOptionsFrame:SetStyle("!_Frame", "Default")
 		MacOptionsFrameHeader:SetTexture("")
 		MacOptionsFrameHeader:ClearAllPoints()
@@ -618,7 +618,7 @@ local function SystemPanelQue()
 		MacOptionsButtonKeybindings:SetPoint("LEFT",MacOptionsFrameOkay, -99,0)
 		MacOptionsFrameDefaults:SetWidth(96)
 		MacOptionsFrameDefaults:SetHeight(22)
-	end
+	end]]
 	OpacityFrame:RemoveTextures()
 	OpacityFrame:SetStyle("!_Frame", "Transparent", true)
 
@@ -718,9 +718,9 @@ local function SystemPanelQue()
 			SV.API:Set("ScrollBar", this)
 		end
 	end
-	
+
 	--print('test SystemPanelQue 2')
-	if(MacOptionsFrame) then
+	--[[if(MacOptionsFrame) then
 		MacOptionsFrame:RemoveTextures()
 		MacOptionsFrame:SetStyle("!_Frame")
 		MacOptionsButtonCompress:SetStyle("Button")
@@ -750,7 +750,7 @@ local function SystemPanelQue()
 		MacOptionsFrameCancel:ClearAllPoints()
 		MacOptionsFrameCancel:SetPoint("LEFT", MacOptionsFrameOkay, "RIGHT", 2, 0)
 		MacOptionsFrameCancel:SetWidth(MacOptionsFrameCancel:GetWidth() - 6)
-	end
+	end]]
 
 	--print('test SystemPanelQue 3')
 	ReportCheatingDialog:RemoveTextures()

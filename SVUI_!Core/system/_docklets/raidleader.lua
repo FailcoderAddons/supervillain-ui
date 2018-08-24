@@ -121,7 +121,11 @@ function MOD:LoadRaidLeaderTools()
 
 	local dock = self.RaidTool.Parent
 
-	self.RaidTool.Menu = CreateFrame("Frame", "SVUI_RaidToolMenu", self.RaidTool, "SecureHandlerClickTemplate");
+	self.RaidTool.Menu = CreateFrame("Frame", "SVUI_RaidToolMenu", self.RaidTool, "SecureHandlerBaseTemplate");
+	self.RaidTool.Menu:SetScript("OnMouseUp", function(panel, ...)
+		SecureHandler_OnClick(panel, "_onclick", ...);
+	end)
+
 	self.RaidTool.Menu:SetStyle("Frame", 'Transparent');
 	self.RaidTool.Menu:SetWidth(120);
 	self.RaidTool.Menu:SetHeight(140);
