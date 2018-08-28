@@ -219,7 +219,8 @@ local function QuestFrameStyle()
 	end
 
 	QuestNPCModel:RemoveTextures()
-	QuestNPCModel:SetStyle("Frame", "Model")
+	--QuestNPCModel:SetStyle("Frame", "Model")
+	QuestNPCModel:SetStyle("Model", "Frame")
 
 	QuestNPCModelTextFrame:RemoveTextures()
 	QuestNPCModelTextFrame:SetStyle("Frame", "Default")
@@ -229,8 +230,8 @@ local function QuestFrameStyle()
 	SV.API:Set("ScrollBar", QuestRewardScrollFrame)
 	SV.API:Set("ScrollBar", QuestGreetingScrollFrame)
 
-	hooksecurefunc("QuestFrame_ShowQuestPortrait", Hook_QuestNPCModel)
 	hooksecurefunc("QuestFrame_SetTitleTextColor", Hook_QuestFrame_SetTitleTextColor)
+	hooksecurefunc("QuestFrame_ShowQuestPortrait", Hook_QuestNPCModel)
 
 	SV.NPC:Register(QuestFrame, QuestFrameNpcNameText)
 end
