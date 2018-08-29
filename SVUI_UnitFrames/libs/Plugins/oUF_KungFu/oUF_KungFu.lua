@@ -24,7 +24,7 @@ local GetShapeshiftFormID 			= _G.GetShapeshiftFormID;
 local UnitAura         				= _G.UnitAura;
 local UnitHasVehiclePlayerFrameUI 	= _G.UnitHasVehiclePlayerFrameUI;
 local MonkStaggerBar 				= _G.MonkStaggerBar;
-local SPELL_POWER_CHI 				= _G.SPELL_POWER_CHI;
+local SPELL_POWER_CHI 				= Enum.PowerType.Chi; -- _G.SPELL_POWER_CHI wasn't resolving properly to 12 the way it needed to
 
 
 local parent, ns = ...
@@ -243,6 +243,7 @@ end
 local function Enable(self, unit)
 	if(unit ~= 'player') then return end
 	local bar = self.KungFu
+	local maxBars = UnitPowerMax("player", 12)
 
 	if bar then
 		local stagger = bar.DrunkenMaster
@@ -254,8 +255,8 @@ local function Enable(self, unit)
 		self:RegisterEvent("PLAYER_LEVEL_UP", Update)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', Path)
 		self:RegisterEvent('UPDATE_SHAPESHIFT_FORM', Path)
-
-		for i = 1, 6 do
+		
+		for i = 1, maxBars do
 			if not bar[i]:GetStatusBarTexture() then
 				bar[i]:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
 			end
@@ -264,7 +265,7 @@ local function Enable(self, unit)
 			bar[i]:SetFrameLevel(bar:GetFrameLevel() + 1)
 			bar[i]:GetStatusBarTexture():SetHorizTile(false)
 		end
-		bar.numPoints = 6
+		bar.numPoints = maxBars
 
 		if(stagger:IsObjectType'StatusBar' and not stagger:GetStatusBarTexture()) then
 			stagger:SetStatusBarTexture(0.91, 0.75, 0.25)
