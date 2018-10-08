@@ -307,7 +307,7 @@ local UNIT_SPELLCAST_CHANNEL_UPDATE = function(self, event, unit, spellname)
 	if(self.unit ~= unit) or not unit then return end
 
 	local castbar = self.Castbar
-	local name, _, text, texture, startTime, endTime, oldStart = UnitChannelInfo(unit)
+	local name, text, texture, startTime, endTime = UnitChannelInfo(unit)
 	if(not name or not castbar:IsShown()) then
 		return
 	end
@@ -331,6 +331,23 @@ local UNIT_SPELLCAST_CHANNEL_UPDATE = function(self, event, unit, spellname)
 end
 
 local UNIT_SPELLCAST_CHANNEL_STOP = function(self, event, unit, spellname)
+	if(self.unit ~= unit) or not unit then return end
+
+	local castbar = self.Castbar
+	if(castbar:IsShown()) then
+		castbar.channeling = nil
+		castbar.interrupt = nil
+
+		castbar:SetValue(castbar.max)
+		castbar:Hide()
+
+		if(castbar.PostChannelStop) then
+			return castbar:PostChannelStop(unit, spellname)
+		end
+	end
+end
+
+local UNIT_SPELLCAST_INTERRUPTED = function(self, event, unit, spellname)
 	if(self.unit ~= unit) or not unit then return end
 
 	local castbar = self.Castbar
