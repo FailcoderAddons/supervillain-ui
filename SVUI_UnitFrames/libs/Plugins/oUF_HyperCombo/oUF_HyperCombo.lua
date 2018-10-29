@@ -31,6 +31,7 @@ local UnitBuff         			= _G.UnitBuff;
 local MAX_COMBO_POINTS      	= _G.MAX_COMBO_POINTS;
 local GetSpellInfo      		= _G.GetSpellInfo;
 local GetComboPoints  			= _G.GetComboPoints;
+local SPELL_POWER_COMBO_POINTS = Enum.PowerType.ComboPoints;
 
 local parent, ns = ...
 local oUF = ns.oUF
@@ -45,9 +46,10 @@ local TextColors = {
 };
 
 local Update = function(self, event, unit)
-	if(not (unit == 'player')) then return end
+	if(unit and unit ~= self.unit) then return end
 	local bar = self.HyperCombo;
 	local cpoints = bar.Combo;
+	
 	local current = 0
 	if(UnitHasVehicleUI'player') then
 		current = UnitPower("vehicle", SPELL_POWER_COMBO_POINTS);
