@@ -81,7 +81,7 @@ local Reposition = function(self)
     bar:ClearAllPoints()
     bar:SetAllPoints(bar.Holder)
 	local tmp = 0.67
-	for i = 1, max do
+	for i = 1, 6 do
 		local chi = tmp - (i * 0.1)
 		bar[i]:ClearAllPoints()
 		bar[i]:SetHeight(size)
@@ -106,7 +106,7 @@ function MOD:CreateClassBar(playerFrame)
 	local max = UnitPowerMax("player", Enum.PowerType.Chi)
 	local bar = CreateFrame("Frame", nil, playerFrame)
 	bar:SetFrameLevel(playerFrame.TextGrip:GetFrameLevel() + 30)
-	for i=1, max do
+	for i=1, 6 do
 		local coords = CHI_COORDS[i]
 		bar[i] = CreateFrame("StatusBar", nil, bar)
 		bar[i]:SetStatusBarTexture(ORB_ICON)

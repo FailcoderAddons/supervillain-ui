@@ -174,7 +174,7 @@ local Fader_OnEvent = function(self, event, arg)
 		self.fails = true;
 		self.isokey = nil;
 		self.fails_a = nil 
-	elseif event == "UNIT_SPELLCAST_INTERRUPTED" then 
+	elseif event == "UNIT_SPELLCAST_INTERRUPTED" then
 		self.fails = nil;
 		self.isokey = nil;
 		self.fails_a = true 
