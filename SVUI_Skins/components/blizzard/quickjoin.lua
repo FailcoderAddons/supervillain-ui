@@ -284,11 +284,11 @@ function ToastMinion:OnEvent(event, ...)
 		if getQueues ~= nil then
 			if (getQueues[1].queueData.queueType == "lfglist") then
 				if (getQueues[1].eligible) then
-					local id, activityID, name, comment, voiceChat, iLvl, honorLevel, age, numBNetFriends, numCharFriends, numGuildMates, isDelisted, leaderName, numMembers = lfg.GetSearchResultInfo(getQueues[1].queueData.lfgListID);
+					local id = lfg.GetSearchResultInfo(getQueues[1].queueData.lfgListID);
 					
-					local activityName, shortName, categoryID, groupID, minItemLevel, filters, minLevel, maxPlayers, displayType, _, useHonorLevel = lfg.GetActivityInfo(activityID);
+					local activityName, shortName, categoryID, groupID, minItemLevel, filters, minLevel, maxPlayers, displayType, _, useHonorLevel = lfg.GetActivityInfo(id.activityID);
 					-- as long as queues are eligible to be joined, add the toast
-					ToastVault:addToast(playerName, activityName..": "..name, "lfglist", getQueues[1].queueData.lfgListID);
+					ToastVault:addToast(playerName, activityName..": "..id.name, "lfglist", getQueues[1].queueData.lfgListID);
 				end
 			else
 				local allQueues = "";

@@ -57,8 +57,8 @@ local function StripQuestMapFrame()
   local WorldMapFrame = _G.WorldMapFrame;
 
   WorldMapFrame.BorderFrame:RemoveTextures(true)
-  WorldMapFrame.BorderFrame.ButtonFrameEdge:SetTexture("")
-  WorldMapFrame.BorderFrame.InsetBorderTop:SetTexture("")
+  --WorldMapFrame.BorderFrame.ButtonFrameEdge:SetTexture("")
+  --WorldMapFrame.BorderFrame.InsetBorderTop:SetTexture("")
   --print('test StripQuestMapFrame 1')
   --print('test StripQuestMapFrame 2')
   QuestMapFrame:RemoveTextures(true)
