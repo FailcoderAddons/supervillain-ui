@@ -486,7 +486,7 @@ _G.SVUILetsRide = function()
 		}
 	end
 
-	local continent = GetCurrentMapContinent()
+	local continent = WorldMapFrame:GetMapID()
 	local checkList = SV.private.Mounts.types
 	local letsFly = (IsFlyableArea() and (continent ~= 962 and continent ~= 7))
 	local letsSwim = IsSwimming()
