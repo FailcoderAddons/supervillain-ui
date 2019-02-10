@@ -500,6 +500,10 @@ local RegisterEvents = function(fontstr, tagstr)
 		local tagevents = tagEvents[tag]
 		if(tagevents) then
 			for event in tagevents:gmatch'%S+' do
+				-- TODO find where UNIT_POWER even comes from and update properly
+				if(event == "UNIT_POWER") then
+					event = "UNIT_POWER_UPDATE"
+				end
 				RegisterEvent(fontstr, event)
 			end
 		end

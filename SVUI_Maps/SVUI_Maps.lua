@@ -843,7 +843,7 @@ function MOD:Load()
 	self.Holder.Circle:SetVertexColor(0,0,0)
 	self.Holder.Circle:Hide()
 
-	ShowUIPanel(SpellBookFrame)
+	--ShowUIPanel(SpellBookFrame)
 	HideUIPanel(SpellBookFrame)
 	MinimapBorder:Hide()
 	MinimapBorderTop:Hide()

@@ -24,7 +24,7 @@ local GetShapeshiftFormID 			= _G.GetShapeshiftFormID;
 local UnitAura         				= _G.UnitAura;
 local UnitHasVehiclePlayerFrameUI 	= _G.UnitHasVehiclePlayerFrameUI;
 local MonkStaggerBar 				= _G.MonkStaggerBar;
-local SPELL_POWER_CHI 				= _G.SPELL_POWER_CHI;
+local SPELL_POWER_CHI 				= Enum.PowerType.Chi; -- _G.SPELL_POWER_CHI wasn't resolving properly to 12 the way it needed to
 
 
 local parent, ns = ...
@@ -126,22 +126,12 @@ local Update = function(self, event, unit)
 	if(unit and unit ~= self.unit) then return end
 	local bar = self.KungFu
 	local stagger = bar.DrunkenMaster
+	local spec = GetSpecialization()
 
 	if(bar.PreUpdate) then bar:PreUpdate(event) end
 
 	local light = UnitPower("player", SPELL_POWER_CHI)
 	local numPoints = UnitPowerMax("player", SPELL_POWER_CHI)
-
-	for i = 1, numPoints do
-		local orb = bar[i]
-		if(orb) then
-			if i <= light then
-				orb:Show()
-			else
-				orb:Hide()
-			end
-		end
-	end
 
 	if UnitHasVehicleUI("player") then
 		bar:Hide()
@@ -149,16 +139,29 @@ local Update = function(self, event, unit)
 		bar:Show()
 	end
 
-	if bar.numPoints ~= numPoints then
-		if numPoints == 6 then
-			bar[5]:Show()
-			bar[6]:Show()
-		elseif numPoints == 5 then
-			bar[5]:Show()
-			bar[6]:Hide()
-		else
-			bar[5]:Hide()
-			bar[6]:Hide()
+	if spec == 3 then -- magic number 3 is windwalker
+		if bar.numPoints ~= numPoints then
+			if numPoints == 6 then
+				bar[5]:Show()
+				bar[6]:Show()
+			elseif numPoints == 5 then
+				bar[5]:Show()
+				bar[6]:Hide()
+			else
+				bar[5]:Hide()
+				bar[6]:Hide()
+			end
+		end
+	end
+
+	for i = 1, 6 do
+		local orb = bar[i]
+		if(orb) then
+			if i <= light then
+				orb:Show()
+			else
+				orb:Hide()
+			end
 		end
 	end
 
@@ -243,6 +246,7 @@ end
 local function Enable(self, unit)
 	if(unit ~= 'player') then return end
 	local bar = self.KungFu
+	local maxBars = UnitPowerMax("player", SPELL_POWER_CHI)
 
 	if bar then
 		local stagger = bar.DrunkenMaster
@@ -254,7 +258,7 @@ local function Enable(self, unit)
 		self:RegisterEvent("PLAYER_LEVEL_UP", Update)
 		self:RegisterEvent('UNIT_DISPLAYPOWER', Path)
 		self:RegisterEvent('UPDATE_SHAPESHIFT_FORM', Path)
-
+		
 		for i = 1, 6 do
 			if not bar[i]:GetStatusBarTexture() then
 				bar[i]:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
@@ -264,7 +268,7 @@ local function Enable(self, unit)
 			bar[i]:SetFrameLevel(bar:GetFrameLevel() + 1)
 			bar[i]:GetStatusBarTexture():SetHorizTile(false)
 		end
-		bar.numPoints = 6
+		bar.numPoints = maxBars
 
 		if(stagger:IsObjectType'StatusBar' and not stagger:GetStatusBarTexture()) then
 			stagger:SetStatusBarTexture(0.91, 0.75, 0.25)

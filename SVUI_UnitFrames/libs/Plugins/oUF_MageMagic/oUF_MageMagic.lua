@@ -73,7 +73,7 @@ end
 
 local GetResources = {
 	[1] = function(self, event, ...)
-		SPELLCOUNT = UnitPower("player", SPELL_POWER_ARCANE_CHARGES);
+		SPELLCOUNT = UnitPower("player", 16);-- hard coded change - variable is returning incorrect value SPELL_POWER_ARCANE_CHARGES);
 		return 0,0
 	end,
 	[2] = function(self, event, ...)

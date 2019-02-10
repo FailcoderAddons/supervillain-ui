@@ -1229,7 +1229,7 @@ do
 			local button = _G[name]
 			local icon = _G[name.."Icon"]
 
-			local actionName, subtext, actionIcon, isToken, isActive, autoCastAllowed, autoCastEnabled = GetPetActionInfo(i)
+			local actionName, actionIcon, isToken, isActive, autoCastAllowed, autoCastEnabled = GetPetActionInfo(i)
 			local restrictedAction = PET_RESTRICTIONS[actionName];
 
 			if(not isToken) then

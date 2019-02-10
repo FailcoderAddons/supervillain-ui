@@ -81,7 +81,7 @@ local Hook_QuestInfoItem_OnClick = function(self)
 	_G.QuestInfoItemHighlight:Show()
 end
 
-local Hook_QuestNPCModel = function(self, _, _, _, x, y)
+local Hook_QuestNPCModel = function(self, _, _, _, _, x, y)
 	_G.QuestNPCModel:ClearAllPoints()
 	_G.QuestNPCModel:SetPoint("TOPLEFT", self, "TOPRIGHT", x + 18, y)
 end
@@ -219,7 +219,8 @@ local function QuestFrameStyle()
 	end
 
 	QuestNPCModel:RemoveTextures()
-	QuestNPCModel:SetStyle("Frame", "Model")
+	--QuestNPCModel:SetStyle("Frame", "Model")
+	QuestNPCModel:SetStyle("Model", "Frame")
 
 	QuestNPCModelTextFrame:RemoveTextures()
 	QuestNPCModelTextFrame:SetStyle("Frame", "Default")
@@ -229,8 +230,8 @@ local function QuestFrameStyle()
 	SV.API:Set("ScrollBar", QuestRewardScrollFrame)
 	SV.API:Set("ScrollBar", QuestGreetingScrollFrame)
 
-	hooksecurefunc("QuestFrame_ShowQuestPortrait", Hook_QuestNPCModel)
 	hooksecurefunc("QuestFrame_SetTitleTextColor", Hook_QuestFrame_SetTitleTextColor)
+	hooksecurefunc("QuestFrame_ShowQuestPortrait", Hook_QuestNPCModel)
 
 	SV.NPC:Register(QuestFrame, QuestFrameNpcNameText)
 end

@@ -695,8 +695,8 @@ local function MiscStyles()
 		TradeRecipientEnchantInset:Die()
 		TradeRecipientMoneyInset:Die()
 		TradeRecipientMoneyBg:Die()
-		TradeFramePlayerPortrait:Die()
-		TradeFrameRecipientPortrait:Die()
+		--TradeFramePlayerPortrait:Die()
+		--TradeFrameRecipientPortrait:Die()
 
 		SV.API:Set("Window", TradeFrame, true)
 
