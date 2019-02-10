@@ -247,6 +247,7 @@ local function Enable(self, unit)
 	if(unit ~= 'player') then return end
 	local bar = self.KungFu
 	local maxBars = UnitPowerMax("player", SPELL_POWER_CHI)
+	local maxBars = UnitPowerMax("player", 12)
 
 	if bar then
 		local stagger = bar.DrunkenMaster
@@ -260,6 +261,7 @@ local function Enable(self, unit)
 		self:RegisterEvent('UPDATE_SHAPESHIFT_FORM', Path)
 		
 		for i = 1, 6 do
+		for i = 1, maxBars do
 			if not bar[i]:GetStatusBarTexture() then
 				bar[i]:SetStatusBarTexture([=[Interface\TargetingFrame\UI-StatusBar]=])
 			end
