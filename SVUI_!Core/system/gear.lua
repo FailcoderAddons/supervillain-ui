@@ -167,23 +167,22 @@ do
         local averageLevel,totalSlots = 0,0;
 
         for slotName, flags in pairs(_slots) do
+            local iLevel
             local slotId = GetInventorySlotInfo(slotName);
             local iLink = GetInventoryItemLink(unit, slotId);
 			local itemID, altItemID, name, _, _, _, _, _, _, _, _, altOnTop = C_ArtifactUI.GetArtifactInfo();
-            local iLevel;
             if(iLink and type(iLink) == "string") then
-                iLevel = SV:GetItemLevel(iLink);
+                iLevel = SV:GetItemLevel(iLink)
 				local relicLevel = GetRelicItemLevel(iLink) * 5;
 				iLevel = iLevel + relicLevel;
                 if(iLevel and iLevel > 0) then
-                    -- handle dual weilded weapons properly
+                    -- handle dual wielded artifact weapons properly
                     if (slotName == "SecondaryHandSlot") then
 						local mainslotId = GetInventorySlotInfo("MainHandSlot");
 						local mainiLink = GetInventoryItemLink(unit, mainslotId)
-						local mainiLevel = SV:GetItemLevel(mainiLink)
+						local mainiLevel = SV:GetItemLevel(mainiLink);
 						relicLevel = GetRelicItemLevel(mainiLink) * 5;
-						mainiLevel = mainiLevel + relicLevel;
-						iLevel = mainiLevel;
+						iLevel = mainiLevel + relicLevel;
                     end
                     totalSlots = totalSlots + 1;
                     averageLevel = averageLevel + iLevel
@@ -202,18 +201,16 @@ do
 end
 
 function SV:GetItemLevel(itemLink)
-  if (itemLink) then
-    return GetDetailedItemLevelInfo(itemLink) or 0
-  else
-    return 0
-  end
+    if (itemLink) then
+        return GetDetailedItemLevelInfo(itemLink) or 0
+      else
+        return 0
+    end
 end
 
 function GetRelicItemLevel(itemLink)
 	-- make sure the linked item is a weapon, otherwise weird things happen
 	local itemName, _, _, iLevelInfo, _, itemType, itemSubType, _, _, _, _ = GetItemInfo(itemLink)
-
-	
 	local attuned = 0;
 	
 	if (checkName == itemName) or (checkAltName == itemName) then
@@ -225,7 +222,7 @@ function GetRelicItemLevel(itemLink)
 		end
 	end
 	
-	return 3;
+	return attuned;
 end
 
 
@@ -259,7 +256,7 @@ function SV:SetGearLabels(frame, bagID, slotID, itemLink, quality, equipSlot)
 	end
 	
 	if(frame.ItemLevel) then
-		local iLevel = SV:GetItemLevel(itemLink)
+        local iLevel = SV:GetItemLevel(itemLink)
 		local itemName, _, _, iLevelInfo, _, _, itemSubType, _, _, _, _
 		local overall, equipped = GetAverageItemLevel()
 
