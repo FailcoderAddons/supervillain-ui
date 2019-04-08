@@ -346,7 +346,7 @@ local function CharacterFrameStyle()
 	CharacterModelFrameBackgroundBotRight:SetTexture("")
 
 	CharacterModelFrame:SetStyle("!_Frame", "Model")
-
+    
 	--PaperDollTitlesPane:RemoveTextures()
 	--PaperDollTitlesPaneScrollChild:RemoveTextures()
 	--PaperDollTitlesPane:SetStyle("Frame", 'Inset')
