@@ -70,6 +70,7 @@ MIRROR BARS
 ##########################################################
 ]]--
 local MirrorBarEventFrame = CreateFrame("Frame", nil)
+
 local mirrorYOffset={
 	["BREATH"] = 96,
 	["EXHAUSTION"] = 119,
@@ -108,7 +109,6 @@ local MirrorBar_Start = function(self, min, max, s, t, text)
 		self:Show()
 	end
 end
-
 
 local function MirrorBarRegistry(barType)
 	if RegisteredMirrorBars[barType] then

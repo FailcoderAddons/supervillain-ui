@@ -100,7 +100,7 @@ local Report = Reports:NewReport(REPORT_NAME, {
 	icon = [[Interface\Addons\SVUI_!Core\assets\icons\SVUI]]
 });
 
-Report.events = {"PLAYER_ENTERING_WORLD"};
+Report.events = {"PLAYER_ENTERING_WORLD", "AZERITE_ITEM_EXPERIENCE_CHANGED"};
 
 Report.OnEvent = function(self, event, ...)
     if (event == "AZERITE_ITEM_EXPERIENCE_CHANGED") then
@@ -153,7 +153,7 @@ local ReportBar = Reports:NewReport(BAR_NAME, {
 	icon = [[Interface\Addons\SVUI_!Core\assets\icons\SVUI]]
 });
 
-ReportBar.events = {"PLAYER_ENTERING_WORLD"};
+ReportBar.events = {"PLAYER_ENTERING_WORLD", "AZERITE_ITEM_EXPERIENCE_CHANGED"};
 
 ReportBar.OnEvent = function(self, event, ...)
     if (event == "AZERITE_ITEM_EXPERIENCE_CHANGED") then
