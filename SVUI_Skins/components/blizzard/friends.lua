@@ -125,6 +125,7 @@ local function FriendsFrameStyle()
 	SV.API:Set("Window", FriendsFrame)
 
 	FriendsFrameInset:RemoveTextures()
+    FriendsFrame.NineSlice:RemoveTextures(true);
 	WhoFrameListInset:RemoveTextures()
 	WhoFrameEditBoxInset:RemoveTextures()
 	SV.API:Set("EditBox", WhoFrameEditBoxInset)

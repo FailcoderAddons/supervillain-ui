@@ -347,36 +347,19 @@ local function CharacterFrameStyle()
 
 	CharacterModelFrame:SetStyle("!_Frame", "Model")
     
-	--PaperDollTitlesPane:RemoveTextures()
-	--PaperDollTitlesPaneScrollChild:RemoveTextures()
-	--PaperDollTitlesPane:SetStyle("Frame", 'Inset')
-	--PaperDollTitlesPane:HookScript("OnShow", PaperDollTitlesPane_OnShow)
-
-	-- PaperDollEquipmentManagerPane:SetStyle("Frame", 'Inset')
-	-- PaperDollEquipmentManagerPaneEquipSet:SetStyle("Button")
-	-- PaperDollEquipmentManagerPaneSaveSet:SetStyle("Button")
-	-- PaperDollEquipmentManagerPaneEquipSet:SetWidth(PaperDollEquipmentManagerPaneEquipSet:GetWidth()-8)
-	-- PaperDollEquipmentManagerPaneSaveSet:SetWidth(PaperDollEquipmentManagerPaneSaveSet:GetWidth()-8)
-	-- PaperDollEquipmentManagerPaneEquipSet:SetPoint("TOPLEFT", PaperDollEquipmentManagerPane, "TOPLEFT", 8, 0)
-	-- PaperDollEquipmentManagerPaneSaveSet:SetPoint("LEFT", PaperDollEquipmentManagerPaneEquipSet, "RIGHT", 4, 0)
-	-- PaperDollEquipmentManagerPaneEquipSet.ButtonBackground:SetTexture("")
-
-	-- PaperDollEquipmentManagerPane:HookScript("OnShow", PaperDollEquipmentManagerPane_OnShow)
-
+    CharacterFrame.NineSlice:RemoveTextures(true);
+    
 	for i = 1, 4 do
 		 SV.API:Set("Tab", _G["CharacterFrameTab"..i])
 	end
 
 	ReputationFrame:RemoveTextures(true)
-	--ReputationListScrollFrameScrollBar:RemoveTextures()
-	--ReputationListScrollFrameScrollBar:SetStyle("Frame", "Inset")
 	ReputationDetailFrame:RemoveTextures()
 	ReputationDetailFrame:SetStyle("Frame", "Inset", true)
 	ReputationDetailFrame:SetPoint("TOPLEFT", ReputationFrame, "TOPRIGHT", 4, -28)
 	ReputationFrame:HookScript("OnShow", Reputation_OnShow)
 	hooksecurefunc("ExpandFactionHeader", Reputation_OnShow)
 	hooksecurefunc("CollapseFactionHeader", Reputation_OnShow)
-	--TokenFrameContainer:SetStyle("Frame", 'Inset')
 
 	TokenFrame:HookScript("OnShow", function()
 		for i = 1, GetCurrencyListSize() do

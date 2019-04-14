@@ -364,6 +364,7 @@ local function MiscStyles()
 	if(SV.db.Skins.blizzard.mail) then
 		InboxFrame:RemoveTextures()
 		MailFrameInset:Die()
+        MailFrame.NineSlice:RemoveTextures(true);
 		SendMailMoneyBg:Die()
 		SendMailMoneyInset:RemoveTextures()
 		SendMailFrame:RemoveTextures()

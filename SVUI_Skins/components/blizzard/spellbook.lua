@@ -194,6 +194,8 @@ local function SpellBookStyle()
 
 	SV.API:Set("Window", SpellBookFrame, false, false, 1, 3, 3)
 	SV.API:Set("CloseButton", SpellBookFrameCloseButton)
+    
+    SpellBookFrame.NineSlice:RemoveTextures(true);
 
 	if(SpellBookFrameInset) then
 		SpellBookFrameInset:RemoveTextures()
