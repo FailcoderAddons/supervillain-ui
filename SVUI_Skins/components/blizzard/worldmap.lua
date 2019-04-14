@@ -50,7 +50,6 @@ local function StripQuestMapFrame()
     local WorldMapFrame = _G.WorldMapFrame;
 
     WorldMapFrame.BorderFrame:RemoveTextures(true);
-    WorldMapFrame.BorderFrame.NineSlice:RemoveTextures(true);
     
     WorldMapFrame.NavBar:RemoveTextures(true);
     WorldMapFrame.NavBar.overlay:RemoveTextures(true);
