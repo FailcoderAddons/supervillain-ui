@@ -170,58 +170,61 @@ local function _hook_EncounterJournal_LootUpdate()
 end
 
 local function EncounterJournalStyle()
-	if SV.db.Skins.blizzard.enable ~= true or SV.db.Skins.blizzard.encounterjournal ~= true then
-		 return
-	end
+    if SV.db.Skins.blizzard.enable ~= true or SV.db.Skins.blizzard.encounterjournal ~= true then
+         return
+    end
 
-	EncounterJournal:RemoveTextures(true)
-  EncounterJournalInstanceSelect:RemoveTextures(true)
-  EncounterJournalInset:RemoveTextures(true)
+    EncounterJournal:RemoveTextures(true)
+    EncounterJournalInstanceSelect:RemoveTextures(true)
+    EncounterJournalInset:RemoveTextures(true)
+    EncounterJournal.NineSlice:RemoveTextures(true);
+    EncounterJournalNavBar.overlay:RemoveTextures(true);
 
-  EncounterJournalEncounterFrame:RemoveTextures(true)
-  EncounterJournalEncounterFrameInfo:RemoveTextures(true)
-  EncounterJournalEncounterFrameInfoDifficulty:RemoveTextures(true)
-  EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:RemoveTextures(true)
+    EncounterJournalEncounterFrame:RemoveTextures(true)
+    EncounterJournalEncounterFrameInfo:RemoveTextures(true)
+    EncounterJournalEncounterFrameInfoDifficulty:RemoveTextures(true)
+    EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:RemoveTextures(true)
 
-  ChangeTabHelper(EncounterJournalEncounterFrameInfoOverviewTab, 10)
-  ChangeTabHelper(EncounterJournalEncounterFrameInfoLootTab, 0, -10)
-  ChangeTabHelper(EncounterJournalEncounterFrameInfoBossTab, 0, -10)
-  ChangeTabHelper(EncounterJournalEncounterFrameInfoModelTab, 0, -20)
+    ChangeTabHelper(EncounterJournalEncounterFrameInfoOverviewTab, 10)
+    ChangeTabHelper(EncounterJournalEncounterFrameInfoLootTab, 0, -10)
+    ChangeTabHelper(EncounterJournalEncounterFrameInfoBossTab, 0, -10)
+    ChangeTabHelper(EncounterJournalEncounterFrameInfoModelTab, 0, -20)
 
-  EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollBar:RemoveTextures()
-  EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetTextColor(1,1,0)
-  EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildLoreDescription:SetTextColor(1,1,1)
-  EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChild.overviewDescription.Text:SetTextColor(1,1,1)
+    EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollBar:RemoveTextures()
+    EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildTitle:SetTextColor(1,1,0)
+    EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChildLoreDescription:SetTextColor(1,1,1)
+    EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChild.overviewDescription.Text:SetTextColor(1,1,1)
 
-  EncounterJournalSearchResults:RemoveTextures(true)
-  SV.API:Set("EditBox", EncounterJournalSearchBox)
+    EncounterJournalSearchResults:RemoveTextures(true)
+    SV.API:Set("EditBox", EncounterJournalSearchBox)
 
-  EncounterJournal:SetStyle("Frame", "Window")
-  EncounterJournalInset:SetStyle("!_Frame", "Window2")
-  EncounterJournalInset:SetPanelColor("darkest")
+    EncounterJournal:SetStyle("Frame", "Window")
+    EncounterJournalInset:SetStyle("!_Frame", "Window2")
+    EncounterJournalInset:SetPanelColor("darkest")
 
-  SV.API:Set("ScrollBar", EncounterJournalInstanceSelectScrollFrame)
-  SV.API:Set("ScrollBar", EncounterJournalEncounterFrameInfoBossesScrollFrame)
-  SV.API:Set("ScrollBar", EncounterJournalEncounterFrameInfoOverviewScrollFrame)
-  SV.API:Set("ScrollBar", EncounterJournalEncounterFrameInfoLootScrollFrame)
-  SV.API:Set("ScrollBar", EncounterJournalEncounterFrameInfoDetailsScrollFrame)
-  SV.API:Set("DropDown", EncounterJournalInstanceSelectTierDropDown)
-  SV.API:Set("CloseButton", EncounterJournalCloseButton)
 
-  EncounterJournalEncounterFrameInfoResetButton:SetStyle("Button")
+    SV.API:Set("ScrollBar", EncounterJournalInstanceSelectScrollFrame)
+    SV.API:Set("ScrollBar", EncounterJournalEncounterFrameInfoBossesScrollFrame)
+    SV.API:Set("ScrollBar", EncounterJournalEncounterFrameInfoOverviewScrollFrame)
+    SV.API:Set("ScrollBar", EncounterJournalEncounterFrameInfoLootScrollFrame)
+    SV.API:Set("ScrollBar", EncounterJournalEncounterFrameInfoDetailsScrollFrame)
+    SV.API:Set("DropDown", EncounterJournalInstanceSelectTierDropDown)
+    SV.API:Set("CloseButton", EncounterJournalCloseButton)
 
-  EncounterJournalNavBar:RemoveTextures(true)
-  --EncounterJournalNavBarOverlay:RemoveTextures(true)
-  EncounterJournalNavBarOverflowButton:RemoveTextures(true)
-  EncounterJournalNavBarHomeButton:RemoveTextures(true)
-  EncounterJournalNavBarHomeButton:SetStyle("Button")
-  EncounterJournalNavBarOverflowButton:SetStyle("Button")
-  EncounterJournalEncounterFrameInfoDifficulty:SetStyle("Button")
-  EncounterJournalEncounterFrameInfoDifficulty:SetFrameLevel(EncounterJournalEncounterFrameInfoDifficulty:GetFrameLevel() + 10)
-  EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:SetStyle("Button")
-  EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:SetFrameLevel(EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:GetFrameLevel() + 10)
+    EncounterJournalEncounterFrameInfoResetButton:SetStyle("Button")
 
-  if(EncounterJournalSuggestFrame) then
+    EncounterJournalNavBar:RemoveTextures(true)
+    --EncounterJournalNavBarOverlay:RemoveTextures(true)
+    EncounterJournalNavBarOverflowButton:RemoveTextures(true)
+    EncounterJournalNavBarHomeButton:RemoveTextures(true)
+    EncounterJournalNavBarHomeButton:SetStyle("Button")
+    EncounterJournalNavBarOverflowButton:SetStyle("Button")
+    EncounterJournalEncounterFrameInfoDifficulty:SetStyle("Button")
+    EncounterJournalEncounterFrameInfoDifficulty:SetFrameLevel(EncounterJournalEncounterFrameInfoDifficulty:GetFrameLevel() + 10)
+    EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:SetStyle("Button")
+    EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:SetFrameLevel(EncounterJournalEncounterFrameInfoLootScrollFrameFilterToggle:GetFrameLevel() + 10)
+
+    if(EncounterJournalSuggestFrame) then
     SV.API:Set("PageButton", EncounterJournalSuggestFrameNextButton)
     SV.API:Set("PageButton", EncounterJournalSuggestFramePrevButton, false, true)
     if(EncounterJournalSuggestFrame.Suggestion1 and EncounterJournalSuggestFrame.Suggestion1.button) then
@@ -236,66 +239,66 @@ local function EncounterJournalStyle()
       EncounterJournalSuggestFrame.Suggestion3.centerDisplay.button:RemoveTextures(true)
       EncounterJournalSuggestFrame.Suggestion3.centerDisplay.button:SetStyle("Button")
     end
-  end
+    end
 
-  local tabBaseName = "EncounterJournalInstanceSelect";
-  if(_G[tabBaseName .. "SuggestTab"]) then
+    local tabBaseName = "EncounterJournalInstanceSelect";
+    if(_G[tabBaseName .. "SuggestTab"]) then
     _G[tabBaseName .. "SuggestTab"]:RemoveTextures(true)
     _G[tabBaseName .. "SuggestTab"]:SetStyle("Button")
-  end
-  if(_G[tabBaseName .. "DungeonTab"]) then
+    end
+    if(_G[tabBaseName .. "DungeonTab"]) then
     _G[tabBaseName .. "DungeonTab"]:RemoveTextures(true)
     _G[tabBaseName .. "DungeonTab"]:SetStyle("Button")
-  end
-  if(_G[tabBaseName .. "RaidTab"]) then
+    end
+    if(_G[tabBaseName .. "RaidTab"]) then
     _G[tabBaseName .. "RaidTab"]:RemoveTextures(true)
     _G[tabBaseName .. "RaidTab"]:SetStyle("Button")
-  end
-  if(_G[tabBaseName .. "LootJournalTab"]) then
+    end
+    if(_G[tabBaseName .. "LootJournalTab"]) then
     _G[tabBaseName .. "LootJournalTab"]:RemoveTextures(true)
     _G[tabBaseName .. "LootJournalTab"]:SetStyle("Button")
-  end
+    end
 
-  local bgParent = EncounterJournal.encounter.instance
-  local loreParent = EncounterJournal.encounter.instance.loreScroll
+    local bgParent = EncounterJournal.encounter.instance
+    local loreParent = EncounterJournal.encounter.instance.loreScroll
 
-  bgParent.loreBG:SetPoint("TOPLEFT", bgParent, "TOPLEFT", 0, 0)
-  bgParent.loreBG:SetPoint("BOTTOMRIGHT", bgParent, "BOTTOMRIGHT", 0, 90)
+    bgParent.loreBG:SetPoint("TOPLEFT", bgParent, "TOPLEFT", 0, 0)
+    bgParent.loreBG:SetPoint("BOTTOMRIGHT", bgParent, "BOTTOMRIGHT", 0, 90)
 
-  SV.API:Set("Frame", loreParent, "Pattern")
-  --loreParent:SetPanelColor("dark")
-  loreParent.child.lore:SetTextColor(1, 1, 1)
-  EncounterJournal.encounter.infoFrame.description:SetTextColor(1, 1, 1)
+    SV.API:Set("Frame", loreParent, "Pattern")
+    --loreParent:SetPanelColor("dark")
+    loreParent.child.lore:SetTextColor(1, 1, 1)
+    EncounterJournal.encounter.infoFrame.description:SetTextColor(1, 1, 1)
 
-  loreParent:SetFrameLevel(loreParent:GetFrameLevel() + 10)
+    loreParent:SetFrameLevel(loreParent:GetFrameLevel() + 10)
 
-  local frame = EncounterJournal.instanceSelect.scroll.child
-  local index = 1
-  local instanceButton = frame["instance"..index];
-  while instanceButton do
+    local frame = EncounterJournal.instanceSelect.scroll.child
+    local index = 1
+    local instanceButton = frame["instance"..index];
+    while instanceButton do
       Outline(instanceButton)
       index = index + 1;
       instanceButton = frame["instance"..index]
-  end
+    end
 
-  local bulletParent = EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChild;
-  if (bulletParent.Bullets and #bulletParent.Bullets > 0) then
+    local bulletParent = EncounterJournalEncounterFrameInfoOverviewScrollFrameScrollChild;
+    if (bulletParent.Bullets and #bulletParent.Bullets > 0) then
       for i = 1, #bulletParent.Bullets do
           local bullet = bulletParent.Bullets[1];
           bullet.Text:SetTextColor(1,1,1)
       end
-  end
+    end
 
-  EncounterJournal.instanceSelect.raidsTab:GetFontString():SetTextColor(1, 1, 1);
+    EncounterJournal.instanceSelect.raidsTab:GetFontString():SetTextColor(1, 1, 1);
 
-  SV.API:Set("DropDown", LootJournalViewDropDown)
+    SV.API:Set("DropDown", LootJournalViewDropDown)
 
-  hooksecurefunc("EncounterJournal_SetBullets", _hook_EncounterJournal_SetBullets)
-  hooksecurefunc("EncounterJournal_ListInstances", _hook_EncounterJournal_ListInstances)
-  hooksecurefunc("EncounterJournal_ToggleHeaders", _hook_EncounterJournal_ToggleHeaders)
-  hooksecurefunc("EncounterJournal_LootUpdate", _hook_EncounterJournal_LootUpdate)
+    hooksecurefunc("EncounterJournal_SetBullets", _hook_EncounterJournal_SetBullets)
+    hooksecurefunc("EncounterJournal_ListInstances", _hook_EncounterJournal_ListInstances)
+    hooksecurefunc("EncounterJournal_ToggleHeaders", _hook_EncounterJournal_ToggleHeaders)
+    hooksecurefunc("EncounterJournal_LootUpdate", _hook_EncounterJournal_LootUpdate)
 
-  _hook_EncounterJournal_ToggleHeaders()
+    _hook_EncounterJournal_ToggleHeaders()
 end
 --[[
 ##########################################################
