@@ -85,35 +85,35 @@ WORLDMAP MODR
 ##########################################################
 ]]--
 local function WorldMapStyle()
-  --print('test WorldMapStyle')
-  if SV.db.Skins.blizzard.enable ~= true or SV.db.Skins.blizzard.worldmap ~= true then return end
+    --print('test WorldMapStyle')
+    if SV.db.Skins.blizzard.enable ~= true or SV.db.Skins.blizzard.worldmap ~= true then return end
 
-  SV.API:Set("Window", WorldMapFrame, true, true)
-  SV.API:Set("ScrollBar", QuestScrollFrame)
-  SV.API:Set("ScrollBar", WorldMapQuestScrollFrame)
-  SV.API:Set("ScrollBar", WorldMapQuestDetailScrollFrame, 4)
-  SV.API:Set("ScrollBar", WorldMapQuestRewardScrollFrame, 4)
+    SV.API:Set("Window", WorldMapFrame, true, true)
+    SV.API:Set("ScrollBar", QuestScrollFrame)
+    SV.API:Set("ScrollBar", WorldMapQuestScrollFrame)
+    SV.API:Set("ScrollBar", WorldMapQuestDetailScrollFrame, 4)
+    SV.API:Set("ScrollBar", WorldMapQuestRewardScrollFrame, 4)
 
-  QuestScrollFrame.DetailFrame:SetStyle("Frame", "Blackout")
+    QuestScrollFrame.DetailFrame:SetStyle("Frame", "Blackout")
+    
+    WorldMapFrame.BorderFrame.NineSlice:RemoveTextures(true);
+    WorldMapFrameCloseButton:SetFrameLevel(999)
 
-  WorldMapFrameCloseButton:SetFrameLevel(999)
+    SV.API:Set("CloseButton", WorldMapFrameCloseButton)
+    SV.API:Set("DropDown", WorldMapLevelDropDown)
+    SV.API:Set("DropDown", WorldMapZoneMinimapDropDown)
+    SV.API:Set("DropDown", WorldMapContinentDropDown)
+    SV.API:Set("DropDown", WorldMapZoneDropDown)
+    SV.API:Set("DropDown", WorldMapShowDropDown)
+    --print('test WorldMapStyle 3')
+    StripQuestMapFrame()
 
-  SV.API:Set("CloseButton", WorldMapFrameCloseButton)
-  SV.API:Set("DropDown", WorldMapLevelDropDown)
-  SV.API:Set("DropDown", WorldMapZoneMinimapDropDown)
-  SV.API:Set("DropDown", WorldMapContinentDropDown)
-  SV.API:Set("DropDown", WorldMapZoneDropDown)
-  SV.API:Set("DropDown", WorldMapShowDropDown)
-  --print('test WorldMapStyle 3')
-  StripQuestMapFrame()
-
-  -- Movable Window
-  WorldMapFrame:SetMovable(true)
-  WorldMapFrame:EnableMouse(true)
-  WorldMapFrame:RegisterForDrag("LeftButton")
-  WorldMapFrame:SetScript("OnDragStart", WorldMapFrame.StartMoving)
-  WorldMapFrame:SetScript("OnDragStop", WorldMapFrame.StopMovingOrSizing)
-  
+    -- Movable Window
+    WorldMapFrame:SetMovable(true)
+    WorldMapFrame:EnableMouse(true)
+    WorldMapFrame:RegisterForDrag("LeftButton")
+    WorldMapFrame:SetScript("OnDragStart", WorldMapFrame.StartMoving)
+    WorldMapFrame:SetScript("OnDragStop", WorldMapFrame.StopMovingOrSizing)
 end
 --[[
 ##########################################################
