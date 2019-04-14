@@ -151,7 +151,6 @@ local function LFDFrameStyle()
 
     PVEFrameLeftInset:RemoveTextures()
     RaidFinderQueueFrame:RemoveTextures(true)
-    PVEFrame.NineSlice:RemoveTextures(true);
     PVEFrameBg:Hide()
     PVEFrame.TitleBg:Hide()
     PVEFrameTRCorner:Hide()

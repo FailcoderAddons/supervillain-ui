@@ -130,7 +130,6 @@ local function TalentFrameStyle()
 	PlayerTalentFramePetSpecializationTutorialButton:Die()
 
 	PlayerTalentFrame.Panel:SetPoint("BOTTOMRIGHT", PlayerTalentFrame, "BOTTOMRIGHT", 0, -5)
-    PlayerTalentFrame.NineSlice:RemoveTextures(true);
 
 	PlayerTalentFrameTalents:SetStyle("!_Frame", "Inset")
 	PlayerTalentFrameSpecialization:SetStyle("Frame", "Inset")

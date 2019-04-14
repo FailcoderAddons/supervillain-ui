@@ -287,21 +287,6 @@ local function CharacterFrameStyle()
 	SlotListener:SetScript("OnEvent", StyleCharacterSlots)
 	CharacterFrame:HookScript("OnShow", StyleCharacterSlots)
 
-	--[[
-	CharacterFrameExpandButton:RemoveTextures(true)
-	SV.API:Set("!_PageButton", CharacterFrameExpandButton)
-
-	hooksecurefunc('CharacterFrame_Collapse', function()
-		SV.API:Set("!_PageButton", CharacterFrameExpandButton)
-		SquareButton_SetIcon(CharacterFrameExpandButton, 'RIGHT')
-	end)
-
-	hooksecurefunc('CharacterFrame_Expand', function()
-		SV.API:Set("!_PageButton", CharacterFrameExpandButton)
-		SquareButton_SetIcon(CharacterFrameExpandButton, 'LEFT')
-	end)
-	CharacterFrameExpandButton:SetFrameLevel(CharacterModelFrame:GetFrameLevel() + 5)
-	]]--
 	SV.API:Set("CloseButton", ReputationDetailCloseButton)
 	SV.API:Set("Window", ReputationDetailFrame)
 	SV.API:Set("Tooltip", ReputationParagonTooltip)
@@ -346,9 +331,7 @@ local function CharacterFrameStyle()
 	CharacterModelFrameBackgroundBotRight:SetTexture("")
 
 	CharacterModelFrame:SetStyle("!_Frame", "Model")
-    
-    CharacterFrame.NineSlice:RemoveTextures(true);
-    
+        
 	for i = 1, 4 do
 		 SV.API:Set("Tab", _G["CharacterFrameTab"..i])
 	end
