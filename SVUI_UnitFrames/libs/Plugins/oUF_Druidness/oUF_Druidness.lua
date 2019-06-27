@@ -119,8 +119,8 @@ local UpdatePower = function(self, event, unit, powerType)
 		elseif(mana.colorClass and UnitIsPlayer(unit)) or
 			(mana.colorClassNPC and not UnitIsPlayer(unit)) or
 			(mana.colorClassPet and UnitPlayerControlled(unit) and not UnitIsPlayer(unit)) then
-				local _, class = UnitClass(unit)
-				t = self.colors.class[class]
+			local _, class = UnitClass(unit)
+			t = self.colors.class[class]
 		elseif(mana.colorReaction and UnitReaction(unit, 'player')) then
 			t = self.colors.reaction[UnitReaction(unit, "player")]
 		elseif(mana.colorSmooth) then

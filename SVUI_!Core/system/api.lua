@@ -1620,11 +1620,13 @@ MOD.Concepts["Window"] = function(self, adjustable, frame, altStyle, fullStrip, 
         frame:SetFrameLevel(1)
     end
     RemoveTextures(frame, fullStrip)
-    local name = frame:GetName()
     if(name and _G[name.."BtnCornerLeft"]) then
-      _G[name.."BtnCornerLeft"]:SetTexture("");
-		  _G[name.."BtnCornerRight"]:SetTexture("");
-		  _G[name.."ButtonBottomBorder"]:SetTexture("");
+        _G[name.."BtnCornerLeft"]:SetTexture("");
+		_G[name.."BtnCornerRight"]:SetTexture("");
+        _G[name.."ButtonBottomBorder"]:SetTexture("");
+    end
+    if (frame.NineSlice) then
+        frame.NineSlice:RemoveTextures(true);
     end
     self.Methods["Frame"](self, frame, (not adjustable), template, false, padding, xOffset, yOffset)
     if(frame.Inset) then

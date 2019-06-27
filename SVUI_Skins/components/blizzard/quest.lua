@@ -119,7 +119,7 @@ local function QuestFrameStyle()
 
 	SV.API:Set("Window", QuestLogPopupDetailFrame, true, true)
 	SV.API:Set("Window", QuestFrame, true, true)
-
+    
 	QuestLogPopupDetailFrameScrollFrameScrollBar:RemoveTextures(true)
 	QuestProgressScrollFrameScrollBar:RemoveTextures(true)
 	QuestDetailScrollFrameScrollBar:RemoveTextures(true)

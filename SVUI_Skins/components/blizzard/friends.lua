@@ -50,17 +50,7 @@ local FriendsFrameList1 = {
 	"QuickJoinScrollFrame",
 	"QuickJoinRoleSelectionFrame"
 };
--- local FriendsFrameList2 = {
--- 	"FriendsFrameBroadcastInputLeft",
--- 	"FriendsFrameBroadcastInputRight",
--- 	"FriendsFrameBroadcastInputMiddle",
--- 	"ChannelFrameDaughterFrameChannelNameLeft",
--- 	"ChannelFrameDaughterFrameChannelNameRight",
--- 	"ChannelFrameDaughterFrameChannelNameMiddle",
--- 	"ChannelFrameDaughterFrameChannelPasswordLeft",
--- 	"ChannelFrameDaughterFrameChannelPasswordRight",
--- 	"ChannelFrameDaughterFrameChannelPasswordMiddle"
--- };
+
 local FriendsFrameButtons = {
 	"FriendsFrameAddFriendButton",
 	"FriendsFrameSendMessageButton",

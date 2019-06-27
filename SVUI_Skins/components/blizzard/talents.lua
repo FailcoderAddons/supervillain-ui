@@ -27,6 +27,25 @@ local SpecButtonList = {
 	"PlayerTalentFramePetSpecializationLearnButton"
 };
 
+local scrollButtons = {
+    "PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollUpButton.Normal",
+    "PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollUpButton.Pushed",
+    "PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollUpButton.Disabled",
+    "PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollUpButton.Highlight",
+    "PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollDownButton.Normal",
+    "PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollDownButton.Pushed",
+    "PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollDownButton.Disabled",
+    "PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollDownButton.Highlight",
+    "PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollUpButton.Normal",
+    "PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollUpButton.Pushed",
+    "PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollUpButton.Disabled",
+    "PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollUpButton.Highlight",
+    "PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollDownButton.Normal",
+    "PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollDownButton.Pushed",
+    "PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollDownButton.Disabled",
+    "PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollDownButton.Highlight"
+};
+
 local function Tab_OnEnter(this)
 	this.backdrop:SetPanelColor("highlight")
 	this.backdrop:SetBackdropBorderColor(0.1, 0.8, 0.8, 1)
@@ -121,13 +140,28 @@ local function TalentFrameStyle()
 	PlayerTalentFramePetSpecialization.Panel:SetPoint("BOTTOMRIGHT", PlayerTalentFramePetSpecialization, "BOTTOMRIGHT", 3, 0)
 
 	SV.API:Set("CloseButton", PlayerTalentFrameCloseButton)
-	SV.API:Set("ScrollBar", PlayerTalentFrameSpecializationSpellScrollFrame)
-	SV.API:Set("ScrollBar", PlayerTalentFramePetSpecializationSpellScrollFrame)
+	--SV.API:Set("ScrollBar", PlayerTalentFrameSpecializationSpellScrollFrame)
+	--SV.API:Set("ScrollBar", PlayerTalentFramePetSpecializationSpellScrollFrame)
 	for i = 1, 4 do
 		SV.API:Set("Tab", _G["PlayerTalentFrameTab"..i])
 	end
-
-	for _,name in pairs(SpecButtonList)do
+    
+    PlayerTalentFrameSpecializationSpellScrollFrameScrollBar:RemoveTextures(true);
+    PlayerTalentFramePetSpecializationSpellScrollFrameScrollBar:RemoveTextures(true);
+    PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollUpButton:RemoveTextures(true);
+    PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollDownButton:RemoveTextures(true);
+    PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollUpButton:RemoveTextures(true);
+    PlayerTalentFramePetSpecializationSpellScrollFrameScrollBarScrollDownButton:RemoveTextures(true);
+    PlayerTalentFrameSpecializationSpellScrollFrameScrollBarScrollDownButton.Normal:SetTexture(""); -- must be manually removed
+    for _,name in pairs(scrollButtons) do
+        local remove = _G[name];
+        if (remove) then
+            remove:SetTexture("");
+            remove:Hide();
+        end
+    end
+    
+	for _,name in pairs(SpecButtonList) do
 		local button = _G[name];
 		if(button) then
 			button:RemoveTextures()
@@ -176,46 +210,6 @@ local function TalentFrameStyle()
 			end
 		end
 	end)
-
-	--[[ PVP TALENTS ]]--
-	--[[PlayerTalentFramePVPTalents:RemoveTextures()
-	PlayerTalentFramePVPTalents.Talents:RemoveTextures()
-	PlayerTalentFramePVPTalents.Talents:SetStyle("!_Frame", "Inset")
-	for i = 1, 6 do
-		local rowFrame = PlayerTalentFramePVPTalents.Talents[("Tier%d"):format(i)]
-		if(rowFrame) then
-			if(rowFrame.Bg) then rowFrame.Bg:Hide() end
-
-			--rowFrame:DisableDrawLayer("BORDER")
-			rowFrame:RemoveTextures()
-			rowFrame.TopLine:SetPoint("TOP", 0, 4)
-			rowFrame.BottomLine:SetPoint("BOTTOM", 0, -4)
-
-			for z = 1, 3 do
-				local talentItem = rowFrame[("Talent%d"):format(z)]
-				if(talentItem) then
-					SV.API:Set("ItemButton", talentItem)
-					talentItem.Cover:SetColorTexture(0,0,0,0.4)
-				end
-			end
-		end
-	end
-
-	hooksecurefunc("PVPTalentFrame_Update", function()
-		for i = 1, 6 do
-			local rowFrame = PlayerTalentFramePVPTalents.Talents[("Tier%d"):format(i)]
-			for z = 1, 3 do
-				local talentItem = rowFrame[("Talent%d"):format(z)]
-				if(talentItem) then
-					if talentItem.knownSelection:IsShown() then
-						talentItem:SetBackdropBorderColor(0, 1, 0)
-					else
-			 			talentItem:SetBackdropBorderColor(0, 0, 0)
-					end
-				end
-			end
-		end
-	end)--]]
 end
 --[[
 ##########################################################
