@@ -470,7 +470,7 @@ function lib:RandomSlide(frame, raised)
     else
         frame:SetFrameLevel(20)
     end
-    frame:SetPoint("CENTER", UIParent, "CENTER", 0, -150)
+    --frame:SetPoint("CENTER", UIParent, "CENTER", 0, -150)
 
     frame.anim = frame:CreateAnimationGroup("RandomSlide")
     frame.anim.parent = frame;

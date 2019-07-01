@@ -415,7 +415,7 @@ function MOD.SetThemedBackdrop(frame, forceTop)
 	frame.UpdateBackdrop = UpdateBackdrop;
 end
 
-function SV:AdjustTopDockBar(size) 
+function SV:AdjustTopDockBar(size)
 	MOD.Top:ClearAllPoints()
 	if (not size) then
 		MOD.Top:SetPoint("TOPLEFT", 0, 0);
@@ -1515,6 +1515,7 @@ DOCKS
 ##########################################################
 ]]--
 MOD.Top = _G["SVUI_DockBarTop"];
+--MOD.Top:SetParent(SV.Screen)
 MOD.Bottom = _G["SVUI_DockBarBottom"];
 MOD.TopCenter = _G["SVUI_DockTopCenter"];
 MOD.BottomCenter = _G["SVUI_DockBottomCenter"];
