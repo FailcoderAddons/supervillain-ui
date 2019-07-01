@@ -527,13 +527,13 @@ _G.ToggleSuperDockLeft = function(self, button)
 			MOD.BottomLeft:FadeIn(0.2, MOD.BottomLeft:GetAlpha(), 1)
 			MOD.BottomLeft.Bar:FadeIn(0.2, MOD.BottomLeft.Bar:GetAlpha(), 1)
 			SV.Events:Trigger("DOCK_FADE_IN", "BottomLeft", activeDock);
-			PlaySoundFile([[sound\doodad\be_scryingorb_explode.ogg]])
+			PlaySoundFile(565875)
 		else
 			MOD.private.LeftFaded = true;
 			MOD.BottomLeft:FadeOut(0.2, MOD.BottomLeft:GetAlpha(), 0)
 			MOD.BottomLeft.Bar:FadeOut(0.2, MOD.BottomLeft.Bar:GetAlpha(), 0)
 			SV.Events:Trigger("DOCK_FADE_OUT", "BottomLeft", activeDock);
-			PlaySoundFile([[sound\doodad\be_scryingorb_explode.ogg]])
+			PlaySoundFile(565875)
 		end
 	end
 end
@@ -567,13 +567,13 @@ _G.ToggleSuperDockRight = function(self, button)
 			MOD.BottomRight:FadeIn(0.2, MOD.BottomRight:GetAlpha(), 1)
 			MOD.BottomRight.Bar:FadeIn(0.2, MOD.BottomRight.Bar:GetAlpha(), 1)
 			SV.Events:Trigger("DOCK_FADE_IN", "BottomRight", activeDock);
-			PlaySoundFile([[sound\doodad\be_scryingorb_explode.ogg]])
+			PlaySoundFile(565875)
 		else
 			MOD.private.RightFaded = true;
 			MOD.BottomRight:FadeOut(0.2, MOD.BottomRight:GetAlpha(), 0)
 			MOD.BottomRight.Bar:FadeOut(0.2, MOD.BottomRight.Bar:GetAlpha(), 0)
 			SV.Events:Trigger("DOCK_FADE_OUT", "BottomRight", activeDock);
-			PlaySoundFile([[sound\doodad\be_scryingorb_explode.ogg]])
+			PlaySoundFile(565875)
 		end
 	end
 end
@@ -589,7 +589,7 @@ _G.ToggleSuperDocks = function()
 		MOD.BottomRight:FadeIn(0.2, MOD.BottomRight:GetAlpha(), 1)
 		MOD.BottomRight.Bar:FadeIn(0.2, MOD.BottomRight.Bar:GetAlpha(), 1)
 		SV.Events:Trigger("DOCK_FADE_IN", "BottomRight", MOD.private.Active.BottomRight);
-		PlaySoundFile([[sound\doodad\be_scryingorb_explode.ogg]])
+		PlaySoundFile(565875)
 	else
 		MOD.private.AllFaded = true;
 		MOD.private.LeftFaded = true;
@@ -600,7 +600,7 @@ _G.ToggleSuperDocks = function()
 		MOD.BottomRight:FadeOut(0.2, MOD.BottomRight:GetAlpha(), 0)
 		MOD.BottomRight.Bar:FadeOut(0.2, MOD.BottomRight.Bar:GetAlpha(), 0)
 		SV.Events:Trigger("DOCK_FADE_OUT", "BottomRight");
-		PlaySoundFile([[sound\doodad\be_scryingorb_explode.ogg]])
+		PlaySoundFile(565875)
 	end
 end
 
