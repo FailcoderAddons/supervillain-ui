@@ -739,8 +739,8 @@ local function MiscStyles()
 		TradeHighlightRecipientEnchant:SetFrameStrata("HIGH")
 	end
 
-	if(SV.db.Skins.blizzard.bgscore) then
-		WorldStateScoreScrollFrameScrollBar:RemoveTextures()
+	--[[if(SV.db.Skins.blizzard.bgscore) then
+		--WorldStateScoreScrollFrameScrollBar:RemoveTextures()
 		WorldStateScoreFrame:RemoveTextures()
 		WorldStateScoreFrame:SetStyle("Frame", "Window")
 		SV.API:Set("CloseButton", WorldStateScoreFrameCloseButton)
@@ -750,7 +750,7 @@ local function MiscStyles()
 		SV.API:Set("Tab", _G["WorldStateScoreFrameTab1"])
 		SV.API:Set("Tab", _G["WorldStateScoreFrameTab2"])
 		SV.API:Set("Tab", _G["WorldStateScoreFrameTab3"])
-	end
+	end]]
 
 	if(SV.db.Skins.blizzard.talkingHead) then
 		--TalkingHeadFrame:RemoveTextures()

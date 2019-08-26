@@ -84,6 +84,7 @@ end
 local Hook_QuestNPCModel = function(self, _, _, _, _, x, y)
 	_G.QuestNPCModel:ClearAllPoints()
 	_G.QuestNPCModel:SetPoint("TOPLEFT", self, "TOPRIGHT", x + 18, y)
+	QuestNPCModelTextFrame.SetParent(QuestNPCModel)
 end
 
 local _hook_DetailScrollShow = function(self)
@@ -219,7 +220,6 @@ local function QuestFrameStyle()
 	end
 
 	QuestNPCModel:RemoveTextures()
-	--QuestNPCModel:SetStyle("Frame", "Model")
 	QuestNPCModel:SetStyle("Model", "Frame")
 
 	QuestNPCModelTextFrame:RemoveTextures()
