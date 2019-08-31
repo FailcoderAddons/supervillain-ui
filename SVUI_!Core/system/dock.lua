@@ -429,6 +429,7 @@ function SV:AdjustTopDockBar(size)
 end
 
 function MOD:SetBorderTheme()
+	self.Top:ClearAllPoints()
 	self.Top:SetPoint("TOPLEFT", SV.Screen, "TOPLEFT", -1, 1)
 	self.Top:SetPoint("TOPRIGHT", SV.Screen, "TOPRIGHT", 1, 1)
 	self.Top:SetHeight(10)
@@ -448,7 +449,7 @@ function MOD:SetBorderTheme()
 		self:SetFrameLevel(0)
 		self:SetFrameStrata('BACKGROUND')
 	end)
-
+	self.Bottom:ClearAllPoints()
 	self.Bottom:SetPoint("BOTTOMLEFT", SV.Screen, "BOTTOMLEFT", -1, -1)
 	self.Bottom:SetPoint("BOTTOMRIGHT", SV.Screen, "BOTTOMRIGHT", 1, -1)
 	self.Bottom:SetHeight(10)

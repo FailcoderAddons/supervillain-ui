@@ -740,13 +740,14 @@ local function MiscStyles()
 	end
 
 	if(SV.db.Skins.blizzard.bgscore) then
-		WorldStateScoreScrollFrameScrollBar:RemoveTextures()
-		WorldStateScoreFrame:RemoveTextures()
-		WorldStateScoreFrame:SetStyle("Frame", "Window")
+		-- These lines were causing errors on start, possibly due to functionality removed in  last update.
+		--WorldStateScoreScrollFrameScrollBar:RemoveTextures()
+		--WorldStateScoreFrame:RemoveTextures()
+		--WorldStateScoreFrame:SetStyle("Frame", "Window")
 		SV.API:Set("CloseButton", WorldStateScoreFrameCloseButton)
 		SV.API:Set("ScrollBar", WorldStateScoreScrollFrame)
-		WorldStateScoreFrameInset:SetAlpha(0)
-		WorldStateScoreFrameLeaveButton:SetStyle("Button")
+		--WorldStateScoreFrameInset:SetAlpha(0)
+		--WorldStateScoreFrameLeaveButton:SetStyle("Button")
 		SV.API:Set("Tab", _G["WorldStateScoreFrameTab1"])
 		SV.API:Set("Tab", _G["WorldStateScoreFrameTab2"])
 		SV.API:Set("Tab", _G["WorldStateScoreFrameTab3"])
