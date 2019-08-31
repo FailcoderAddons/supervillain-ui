@@ -58,4 +58,7 @@
 
     <Script file="system\credits.lua"/>
     <Include file="filtering\_load.xml"/>
+	
+	<!-- added for Blizzard UI Parent changes-->
+	<Frame name="SVUI_ScriptError" parent="UIParent"/>
 </Ui>

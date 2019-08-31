@@ -979,7 +979,7 @@ function SV:SavedPopup()
 	alert.bg.trans:Play()
 	alert.fg.trans:Play()
 
-	PlaySoundFile("Sound\\Interface\\uCharacterSheetOpen.wav")
+	PlaySoundFile(567507)
 end
 
 local AlertButton_OnClick = function(self)

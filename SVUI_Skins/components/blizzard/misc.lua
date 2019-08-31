@@ -739,6 +739,7 @@ local function MiscStyles()
 		TradeHighlightRecipientEnchant:SetFrameStrata("HIGH")
 	end
 
+
 	if(SV.db.Skins.blizzard.bgscore) then
 		-- These lines were causing errors on start, possibly due to functionality removed in  last update.
 		--WorldStateScoreScrollFrameScrollBar:RemoveTextures()

@@ -1,5 +1,5 @@
 ﻿<Ui xmlns="http://www.blizzard.com/wow/ui/">
-    <Frame name="SVUI_DockBarBottom" frameStrata="BACKGROUND">
+    <Frame name="SVUI_DockBarBottom" frameStrata="BACKGROUND" parent="UIParent">
         <Size y="10"/>
         <Anchors>
             <Anchor point="BOTTOMLEFT" />
@@ -7,7 +7,7 @@
         </Anchors>
     </Frame>
 
-    <Frame name="SVUI_DockBarTop" frameStrata="BACKGROUND">
+    <Frame name="SVUI_DockBarTop" frameStrata="BACKGROUND" parent="UIParent">
         <Size y="10"/>
         <Anchors>
             <Anchor point="TOPLEFT" />

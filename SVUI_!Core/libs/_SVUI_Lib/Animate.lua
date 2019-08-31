@@ -470,6 +470,7 @@ function lib:RandomSlide(frame, raised)
     else
         frame:SetFrameLevel(20)
     end
+  
     frame:ClearAllPoints()
     frame:SetPoint("CENTER", UIParent, "CENTER", 0, -150)
 

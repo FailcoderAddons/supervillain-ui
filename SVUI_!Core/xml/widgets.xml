@@ -589,7 +589,7 @@
         </Frames>
     </Frame>
 
-    <Frame name="SVUI_ScriptError" movable="true" hidden="true" frameStrata="DIALOG">
+    <Frame name="SVUI_ScriptError" movable="true" hidden="true" frameStrata="DIALOG" parent="UIParent">
         <Size x="484" y="550"/>
         <Anchors>
             <Anchor point="TOPLEFT" x="80" y="-80"/>

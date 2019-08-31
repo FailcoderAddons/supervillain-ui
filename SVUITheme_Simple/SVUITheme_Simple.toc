@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 80200
 ## Author: Failcoder
 ## Version: 1.5.3
 ## Title: |cffFF9900SVUI Theme: |r|cff00EFFFSimple|r

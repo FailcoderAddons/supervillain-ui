@@ -1,4 +1,4 @@
-## Interface: 80000
+## Interface: 80200
 ## Author: Failcoder, Azilroka, Sortokk
 ## Version: 1.5.3
 ## Title: |cffFF9900SuperVillain UI: |r|cffFFEF00Skins|r
